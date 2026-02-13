@@ -1,6 +1,6 @@
 # How to add an Altcoin
 
-Bitcoin is the only focus of the BTCPay Server project and its core developers. However, opt-in integrations are available for several altcoins.
+Bitcoin is the only focus of the BTCPay Server project and its core developers. However, opt-in integrations are available for several altcoins. For more information check the [Altcoin FAQ page](../FAQ/Altcoin.md).
 
 ## Overview
 
