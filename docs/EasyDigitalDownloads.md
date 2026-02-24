@@ -10,7 +10,7 @@ Please ensure that you meet the following requirements before installing this pl
 
 - PHP version 8.0 or newer
 - The cURL, gd, intl, json, and mbstring PHP extensions are available
-- A WordPress site with Easy Digital Downloads (EDD) installed ([Installation instructions](https://easydigitaldownloads.com/docs/quickstart-guide/)
+- A WordPress site with Easy Digital Downloads (EDD) installed ([installation instructions](https://easydigitaldownloads.com/docs/quickstart-guide/))
   Note: you don't need the Pro version of EDD to get started
 - You have a BTCPay Server version 2.0.0 or later, either [self-hosted](/Deployment/README.md) or [hosted by a third-party](/Deployment/ThirdPartyHosting.md)
 - [You've a registered account on the instance](./RegisterAccount.md)
@@ -39,7 +39,7 @@ There are three ways to install the plugin:
 
 Alternatively, you can download the plugin from GitHub and install it manually:
 
-1. [Go to the plugin repository](https://github.com/btcpayserver/givewp/releases).
+1. [Go to the plugin repository](https://github.com/Coinsnap/Coinsnap-for-EasyDigitalDownloads).
 2. Download the .zip by clicking on _Code_ -> _Download ZIP_.
 3. On WordPress admin dashboard click on _Plugins_ -> _Add Plugin_.
 4. Click on _Upload Plugin_ button and select the .zip file you just downloaded.
