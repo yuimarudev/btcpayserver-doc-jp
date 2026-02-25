@@ -2,7 +2,7 @@
 
 ## What is BTCPay Server?
 
-BTCPay Server is a free, open-source & self-hosted bitcoin payment gateway that allows self-sovereign individuals and businesses to accept bitcoin payments online or in person without any fees.
+BTCPay Server is a free, open-source, and self-hosted bitcoin payment gateway that allows self-sovereign individuals and businesses to accept bitcoin payments online or in person without any fees.
 
 ![BTCPay Server](./img/BTCPayServerScreenshot.png 'BTCPay Server screenshot')
 
