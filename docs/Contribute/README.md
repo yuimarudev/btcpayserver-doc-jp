@@ -2,7 +2,7 @@
 
 BTCPay Server is built and maintained entirely by volunteer contributors around the internet.
 
-We welcome, appreciate and encourage new contributions.
+We welcome, appreciate, and encourage new contributions.
 
 Depending on your skills and interest, you can help in a number of ways:
 
