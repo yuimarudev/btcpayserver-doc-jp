@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>拡張手動セットアップ | BTCPay Server</title>
+    <meta name="generator" content="VuePress 1.9.10">
+    <link rel="stylesheet" href="/styles/btcpayserver-variables.css">
+    <meta name="description" content="BTCPay Server Official Documentation">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    
+    <link rel="preload" href="/assets/css/0.styles.5d7f2299.css" as="style"><link rel="preload" href="/assets/js/app.41d43a50.js" as="script"><link rel="preload" href="/assets/js/2.d89b9797.js" as="script"><link rel="preload" href="/assets/js/127.a998232b.js" as="script"><link rel="prefetch" href="/assets/js/1.6a40f62e.js"><link rel="prefetch" href="/assets/js/100.ca4cc1f9.js"><link rel="prefetch" href="/assets/js/101.50420f65.js"><link rel="prefetch" href="/assets/js/102.147b17f9.js"><link rel="prefetch" href="/assets/js/103.11ace39f.js"><link rel="prefetch" href="/assets/js/104.8b07fc7a.js"><link rel="prefetch" href="/assets/js/105.e2552678.js"><link rel="prefetch" href="/assets/js/106.4da2526f.js"><link rel="prefetch" href="/assets/js/107.a83f8dca.js"><link rel="prefetch" href="/assets/js/108.112074ca.js"><link rel="prefetch" href="/assets/js/109.d57342ff.js"><link rel="prefetch" href="/assets/js/110.2447313d.js"><link rel="prefetch" href="/assets/js/111.967f5f5b.js"><link rel="prefetch" href="/assets/js/112.4c616b5f.js"><link rel="prefetch" href="/assets/js/113.13543aa2.js"><link rel="prefetch" href="/assets/js/114.84450202.js"><link rel="prefetch" href="/assets/js/115.0c5400eb.js"><link rel="prefetch" href="/assets/js/116.12cd0a77.js"><link rel="prefetch" href="/assets/js/117.79661e15.js"><link rel="prefetch" href="/assets/js/118.3e2367e4.js"><link rel="prefetch" href="/assets/js/119.e974af82.js"><link rel="prefetch" href="/assets/js/12.9066faf5.js"><link rel="prefetch" href="/assets/js/120.fa26fa7d.js"><link rel="prefetch" href="/assets/js/121.266cb757.js"><link rel="prefetch" href="/assets/js/122.fd97cbaf.js"><link rel="prefetch" href="/assets/js/123.8eb917c3.js"><link rel="prefetch" href="/assets/js/124.ad7488ef.js"><link rel="prefetch" href="/assets/js/125.1669308a.js"><link rel="prefetch" href="/assets/js/126.2842d750.js"><link rel="prefetch" href="/assets/js/128.1503aa5d.js"><link rel="prefetch" href="/assets/js/129.b9a346f8.js"><link rel="prefetch" href="/assets/js/13.1ca96bef.js"><link rel="prefetch" href="/assets/js/130.980fd89e.js"><link rel="prefetch" href="/assets/js/131.126d8781.js"><link rel="prefetch" href="/assets/js/132.c1aa6921.js"><link rel="prefetch" href="/assets/js/133.51f50033.js"><link rel="prefetch" href="/assets/js/134.92038745.js"><link rel="prefetch" href="/assets/js/135.801c25aa.js"><link rel="prefetch" href="/assets/js/136.7e4c0fb3.js"><link rel="prefetch" href="/assets/js/137.c84d6de4.js"><link rel="prefetch" href="/assets/js/138.f4d32967.js"><link rel="prefetch" href="/assets/js/139.f57bba53.js"><link rel="prefetch" href="/assets/js/14.b2386b42.js"><link rel="prefetch" href="/assets/js/140.83753326.js"><link rel="prefetch" href="/assets/js/141.20d019fe.js"><link rel="prefetch" href="/assets/js/142.99d96e76.js"><link rel="prefetch" href="/assets/js/143.fed27056.js"><link rel="prefetch" href="/assets/js/144.7b0a11ba.js"><link rel="prefetch" href="/assets/js/145.1180b284.js"><link rel="prefetch" href="/assets/js/146.9cf0e7a1.js"><link rel="prefetch" href="/assets/js/147.1327e83a.js"><link rel="prefetch" href="/assets/js/148.808e1371.js"><link rel="prefetch" href="/assets/js/149.0103ddf3.js"><link rel="prefetch" href="/assets/js/15.be760fe0.js"><link rel="prefetch" href="/assets/js/150.ddf290f4.js"><link rel="prefetch" href="/assets/js/151.c41f3b39.js"><link rel="prefetch" href="/assets/js/152.7231098c.js"><link rel="prefetch" href="/assets/js/153.cd57ef46.js"><link rel="prefetch" href="/assets/js/154.5f3aa682.js"><link rel="prefetch" href="/assets/js/155.3d88dd7d.js"><link rel="prefetch" href="/assets/js/156.9ae1558a.js"><link rel="prefetch" href="/assets/js/157.0df5a481.js"><link rel="prefetch" href="/assets/js/158.8c2cdbb4.js"><link rel="prefetch" href="/assets/js/159.7bf3afb9.js"><link rel="prefetch" href="/assets/js/16.25059ae3.js"><link rel="prefetch" href="/assets/js/160.782528d5.js"><link rel="prefetch" href="/assets/js/161.5851ee84.js"><link rel="prefetch" href="/assets/js/162.5b67db91.js"><link rel="prefetch" href="/assets/js/163.bd9d8099.js"><link rel="prefetch" href="/assets/js/164.ee5a5f0f.js"><link rel="prefetch" href="/assets/js/165.01807449.js"><link rel="prefetch" href="/assets/js/166.8b74c99a.js"><link rel="prefetch" href="/assets/js/167.2b9275ec.js"><link rel="prefetch" href="/assets/js/168.266cdade.js"><link rel="prefetch" href="/assets/js/169.9b2d39cf.js"><link rel="prefetch" href="/assets/js/17.d6de4168.js"><link rel="prefetch" href="/assets/js/170.13d94d19.js"><link rel="prefetch" href="/assets/js/171.1297eabe.js"><link rel="prefetch" href="/assets/js/172.f7def8fc.js"><link rel="prefetch" href="/assets/js/173.a2f907c2.js"><link rel="prefetch" href="/assets/js/174.b179db69.js"><link rel="prefetch" href="/assets/js/175.77b58bf0.js"><link rel="prefetch" href="/assets/js/176.53de02a9.js"><link rel="prefetch" href="/assets/js/177.147a784b.js"><link rel="prefetch" href="/assets/js/178.2eab7627.js"><link rel="prefetch" href="/assets/js/179.743de899.js"><link rel="prefetch" href="/assets/js/18.bf7be781.js"><link rel="prefetch" href="/assets/js/180.65eabc1d.js"><link rel="prefetch" href="/assets/js/181.05c37cc7.js"><link rel="prefetch" href="/assets/js/19.8d0bb424.js"><link rel="prefetch" href="/assets/js/20.2b439dba.js"><link rel="prefetch" href="/assets/js/21.b0857fc9.js"><link rel="prefetch" href="/assets/js/22.e160c374.js"><link rel="prefetch" href="/assets/js/23.5a3d1cea.js"><link rel="prefetch" href="/assets/js/24.a911bc55.js"><link rel="prefetch" href="/assets/js/25.f1011e7f.js"><link rel="prefetch" href="/assets/js/26.909e9156.js"><link rel="prefetch" href="/assets/js/27.169f2946.js"><link rel="prefetch" href="/assets/js/28.a28bcef5.js"><link rel="prefetch" href="/assets/js/29.67d4d255.js"><link rel="prefetch" href="/assets/js/3.4421db0f.js"><link rel="prefetch" href="/assets/js/30.920112c6.js"><link rel="prefetch" href="/assets/js/31.a2ce1bf8.js"><link rel="prefetch" href="/assets/js/32.7bd06d89.js"><link rel="prefetch" href="/assets/js/33.8c03ee2c.js"><link rel="prefetch" href="/assets/js/34.f3604d73.js"><link rel="prefetch" href="/assets/js/35.a1c47bcc.js"><link rel="prefetch" href="/assets/js/36.5e9a8a38.js"><link rel="prefetch" href="/assets/js/37.1f423f7f.js"><link rel="prefetch" href="/assets/js/38.bf1dca52.js"><link rel="prefetch" href="/assets/js/39.fe1ae875.js"><link rel="prefetch" href="/assets/js/4.487f4581.js"><link rel="prefetch" href="/assets/js/40.35c40ae6.js"><link rel="prefetch" href="/assets/js/41.b92534c4.js"><link rel="prefetch" href="/assets/js/42.f6b301d5.js"><link rel="prefetch" href="/assets/js/43.78edc318.js"><link rel="prefetch" href="/assets/js/44.aa45aeb3.js"><link rel="prefetch" href="/assets/js/45.d27022b4.js"><link rel="prefetch" href="/assets/js/46.be0190d3.js"><link rel="prefetch" href="/assets/js/47.fdd2f33e.js"><link rel="prefetch" href="/assets/js/48.2c35deb2.js"><link rel="prefetch" href="/assets/js/49.86a31a70.js"><link rel="prefetch" href="/assets/js/5.b571b42d.js"><link rel="prefetch" href="/assets/js/50.8a0855d3.js"><link rel="prefetch" href="/assets/js/51.e363eee4.js"><link rel="prefetch" href="/assets/js/52.3bcdd544.js"><link rel="prefetch" href="/assets/js/53.31fb9c8f.js"><link rel="prefetch" href="/assets/js/54.66970633.js"><link rel="prefetch" href="/assets/js/55.f44b58de.js"><link rel="prefetch" href="/assets/js/56.f13b7920.js"><link rel="prefetch" href="/assets/js/57.ee25fa70.js"><link rel="prefetch" href="/assets/js/58.41179f1d.js"><link rel="prefetch" href="/assets/js/59.6b66e701.js"><link rel="prefetch" href="/assets/js/6.9b4960f6.js"><link rel="prefetch" href="/assets/js/60.1fe3680e.js"><link rel="prefetch" href="/assets/js/61.1146d45b.js"><link rel="prefetch" href="/assets/js/62.3d30c935.js"><link rel="prefetch" href="/assets/js/63.5e61ca29.js"><link rel="prefetch" href="/assets/js/64.0a33316c.js"><link rel="prefetch" href="/assets/js/65.5ae1d398.js"><link rel="prefetch" href="/assets/js/66.3b1f8e2e.js"><link rel="prefetch" href="/assets/js/67.141000a1.js"><link rel="prefetch" href="/assets/js/68.095e54de.js"><link rel="prefetch" href="/assets/js/69.0c792005.js"><link rel="prefetch" href="/assets/js/7.b10858a7.js"><link rel="prefetch" href="/assets/js/70.4ebcf2ad.js"><link rel="prefetch" href="/assets/js/71.02b553f0.js"><link rel="prefetch" href="/assets/js/72.628b592c.js"><link rel="prefetch" href="/assets/js/73.a20763f1.js"><link rel="prefetch" href="/assets/js/74.b8a8bb63.js"><link rel="prefetch" href="/assets/js/75.7334c723.js"><link rel="prefetch" href="/assets/js/76.90c92ba6.js"><link rel="prefetch" href="/assets/js/77.5b927e9b.js"><link rel="prefetch" href="/assets/js/78.98976747.js"><link rel="prefetch" href="/assets/js/79.69be6175.js"><link rel="prefetch" href="/assets/js/8.d887e242.js"><link rel="prefetch" href="/assets/js/80.fcbd3d02.js"><link rel="prefetch" href="/assets/js/81.7c45643d.js"><link rel="prefetch" href="/assets/js/82.9adb1f33.js"><link rel="prefetch" href="/assets/js/83.138bcb7e.js"><link rel="prefetch" href="/assets/js/84.f8c31bb4.js"><link rel="prefetch" href="/assets/js/85.04898a05.js"><link rel="prefetch" href="/assets/js/86.9ae5f263.js"><link rel="prefetch" href="/assets/js/87.d9fb57b7.js"><link rel="prefetch" href="/assets/js/88.f99c22d3.js"><link rel="prefetch" href="/assets/js/89.7ba5b4f9.js"><link rel="prefetch" href="/assets/js/9.db25f738.js"><link rel="prefetch" href="/assets/js/90.e9c848ba.js"><link rel="prefetch" href="/assets/js/91.6701c7fc.js"><link rel="prefetch" href="/assets/js/92.f406f9ed.js"><link rel="prefetch" href="/assets/js/93.1ef3465f.js"><link rel="prefetch" href="/assets/js/94.e932756a.js"><link rel="prefetch" href="/assets/js/95.5f23461b.js"><link rel="prefetch" href="/assets/js/96.3ca29c2e.js"><link rel="prefetch" href="/assets/js/97.30b76563.js"><link rel="prefetch" href="/assets/js/98.49afb185.js"><link rel="prefetch" href="/assets/js/99.11dd3481.js"><link rel="prefetch" href="/assets/js/vendors~docsearch.26b7afdb.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.5d7f2299.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/img/btcpay-logo.svg" alt="BTCPay Server" class="logo"> <span class="site-name can-hide">BTCPay Server</span></a> <nav class="nav-links can-hide"><div class="nav-item"><a href="/Guide/" class="nav-link">
+  User Guide
+</a></div><div class="nav-item"><a href="/Deployment/" class="nav-link router-link-active">
+  Deployment
+</a></div><div class="nav-item"><a href="/Development/" class="nav-link">
+  Developers
+</a></div><div class="nav-item"><a href="/Contribute/" class="nav-link">
+  Contribute
+</a></div><div class="nav-item"><a href="/FAQ/" class="nav-link">
+  FAQ
+</a></div> <a href="https://github.com/btcpayserver/btcpayserver-doc" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide social"><div class="nav-item"><a href="https://btcpayserver.org/" target="_blank" rel="noopener noreferrer website" class="nav-link external">
+  Website
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div><div class="nav-item"><a href="https://chat.btcpayserver.org/" target="_blank" rel="noopener noreferrer chat" class="nav-link external">
+  Chat
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div><div class="nav-item"><a href="https://github.com/btcpayserver/" target="_blank" rel="noopener noreferrer github" class="nav-link external">
+  GitHub
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div><div class="nav-item"><a href="https://twitter.com/BtcpayServer" target="_blank" rel="noopener noreferrer twitter" class="nav-link external">
+  Twitter
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <a href="https://github.com/btcpayserver/btcpayserver-doc" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav> <button type="button" class="btcpay-theme-switch"><svg viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg"><path transform="translate(1 1)" d="M2.72 0A3.988 3.988 0 000 3.78c0 2.21 1.79 4 4 4 1.76 0 3.25-1.14 3.78-2.72-.4.13-.83.22-1.28.22-2.21 0-4-1.79-4-4 0-.45.08-.88.22-1.28z" class="btcpay-theme-switch-dark"></path><path transform="translate(1 1)" d="M4 0c-.28 0-.5.22-.5.5s.22.5.5.5.5-.22.5-.5S4.28 0 4 0zM1.5 1c-.28 0-.5.22-.5.5s.22.5.5.5.5-.22.5-.5-.22-.5-.5-.5zm5 0c-.28 0-.5.22-.5.5s.22.5.5.5.5-.22.5-.5-.22-.5-.5-.5zM4 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zM.5 3.5c-.28 0-.5.22-.5.5s.22.5.5.5.5-.22.5-.5-.22-.5-.5-.5zm7 0c-.28 0-.5.22-.5.5s.22.5.5.5.5-.22.5-.5-.22-.5-.5-.5zM1.5 6c-.28 0-.5.22-.5.5s.22.5.5.5.5-.22.5-.5-.22-.5-.5-.5zm5 0c-.28 0-.5.22-.5.5s.22.5.5.5.5-.22.5-.5-.22-.5-.5-.5zM4 7c-.28 0-.5.22-.5.5s.22.5.5.5.5-.22.5-.5S4.28 7 4 7z" class="btcpay-theme-switch-light"></path></svg></button></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links social"><div class="nav-item"><a href="https://btcpayserver.org/" target="_blank" rel="noopener noreferrer website" class="nav-link external">
+  Website
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div><div class="nav-item"><a href="https://chat.btcpayserver.org/" target="_blank" rel="noopener noreferrer chat" class="nav-link external">
+  Chat
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div><div class="nav-item"><a href="https://github.com/btcpayserver/" target="_blank" rel="noopener noreferrer github" class="nav-link external">
+  GitHub
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div><div class="nav-item"><a href="https://twitter.com/BtcpayServer" target="_blank" rel="noopener noreferrer twitter" class="nav-link external">
+  Twitter
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <a href="https://github.com/btcpayserver/btcpayserver-doc" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav> <nav class="nav-links"><div class="nav-item"><a href="/Guide/" class="nav-link">
+  User Guide
+</a></div><div class="nav-item"><a href="/Deployment/" class="nav-link router-link-active">
+  Deployment
+</a></div><div class="nav-item"><a href="/Development/" class="nav-link">
+  Developers
+</a></div><div class="nav-item"><a href="/Contribute/" class="nav-link">
+  Contribute
+</a></div><div class="nav-item"><a href="/FAQ/" class="nav-link">
+  FAQ
+</a></div> <a href="https://github.com/btcpayserver/btcpayserver-doc" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Deployment</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/Deployment/" aria-current="page" class="sidebar-link">デプロイ方法の選び方</a></li><li><a href="/Deployment/ThirdPartyHosting/" class="sidebar-link">/Deployment/ThirdPartyHosting/</a></li><li><a href="/Configurator/" class="sidebar-link">Deploy BTCPay with Configurator</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Docker</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/Docker/" class="sidebar-link">Introduction</a></li><li><section class="sidebar-group is-sub-group depth-1"><a href="/Deployment/webdeployment" class="sidebar-heading clickable"><span>Web/Cloud Deployment</span> <!----></a> <ul class="sidebar-links sidebar-group-items"><li><a href="/Deployment/LunaNode/" class="sidebar-link">Luna Node</a></li><li><a href="/Deployment/voltagecloud/" class="sidebar-link">Voltage Cloud</a></li><li><a href="/Deployment/Clovyr/" class="sidebar-link">Clovyr</a></li><li><section class="sidebar-group collapsable is-sub-group depth-2"><a href="/Deployment/Azure" class="sidebar-heading clickable"><span>Azure</span> <span class="arrow right"></span></a> <!----></section></li><li><a href="/Deployment/GoogleCloud/" class="sidebar-link">Google Cloud</a></li></ul></section></li><li><section class="sidebar-group is-sub-group depth-1"><a href="/Deployment/Hardware" class="sidebar-heading clickable"><span>Hardware Deployment</span> <!----></a> <ul class="sidebar-links sidebar-group-items"><li><a href="/Deployment/RaspberryPi4/" class="sidebar-link">Raspberry Pi Deployment</a></li><li><a href="/Deployment/Hack0/" class="sidebar-link">Hack0 Deployment</a></li><li><a href="/Deployment/LightningInABox/" class="sidebar-link">LightningInABox Deployment</a></li><li><a href="/Deployment/DynamicDNS/" class="sidebar-link">Dynamic DNS</a></li><li><a href="/Docker/cloudflare-tunnel/" class="sidebar-link">Exposing on clearnet with Cloudflare</a></li><li><a href="/Deployment/ReverseSSHtunnel/" class="sidebar-link">Exposing on clearnet with a reverse SSH Tunnel</a></li><li><a href="/Deployment/ReverseProxyToTor/" class="sidebar-link">Exposing on Tor</a></li><li><a href="/Deployment/HardwareAsAService/" class="sidebar-link">Hardware As A Service</a></li></ul></section></li><li><section class="sidebar-group collapsable is-sub-group depth-1"><p class="sidebar-heading"><span>Docker Plugins</span> <span class="arrow right"></span></p> <!----></section></li><li><a href="/Docker/fastsync/" class="sidebar-link">FastSync</a></li><li><a href="/Docker/backup-restore/" class="sidebar-link">Backup &amp; Restore</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Manual Deployment</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/Deployment/ManualDeployment/" class="sidebar-link">/Deployment/ManualDeployment/</a></li><li><a href="/Deployment/ManualDeploymentExtended/" aria-current="page" class="active sidebar-link">拡張手動セットアップ</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="拡張手動セットアップ"><a href="#拡張手動セットアップ" class="header-anchor">#</a> 拡張手動セットアップ</h1> <p>このドキュメントでは、<strong>BTCPay Server を手動でデプロイ</strong>する手順と、関連する追加コンポーネントを説明します。これらの手順には長時間かかる可能性があります。より短く実践的な方法として、<a href="https://github.com/btcpayserver/btcpayserver-docker" target="_blank" rel="noopener noreferrer">Docker ベースのデプロイ<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>を利用できます。</p> <p>この手順では、アプリケーションの全コンポーネントをソースからビルドします。これは、特定の監査やセキュリティ要件の場面で利点になることがあります。</p> <div class="custom-block danger"><p class="custom-block-title">DANGER</p> <h4 id="本番利用には非推奨"><a href="#本番利用には非推奨" class="header-anchor">#</a> 本番利用には非推奨</h4> <p>手動インストールは、OS 運用と Bitcoin セキュリティに関する十分な知識と経験がない限り、本番利用には推奨されません。不安がある場合は、Docker デプロイ、または他の<a href="/Deployment/" class="router-link-active">デプロイオプション</a>を利用してください。</p> <h4 id="技術的な素養があり、問題を自力で解決できることが必要です。このデプロイ方法に対してコミュニティから手厚いサポートは提供されません。"><a href="#技術的な素養があり、問題を自力で解決できることが必要です。このデプロイ方法に対してコミュニティから手厚いサポートは提供されません。" class="header-anchor">#</a> 技術的な素養があり、問題を自力で解決できることが必要です。このデプロイ方法に対してコミュニティから手厚いサポートは提供されません。</h4></div> <h2 id="インストール手順の概要"><a href="#インストール手順の概要" class="header-anchor">#</a> インストール手順の概要</h2> <p>このページの手順は Ubuntu 20.04 で検証されています。他の Linux ディストリビューションにも適用できるはずです。また、すべてのコンポーネントを同一ホストまたは仮想マシン上に配置する前提になっています。コンポーネントを複数ホストに分離することも可能ですが、この手順では扱いません。</p> <p>ここではホスト名の例として <code>mainnet.demo.btcpayserver.org</code> を使用しています。実際には、あなたの BTCPay Server で使用するホスト名に置き換えてください。</p> <h3 id="セキュリティ"><a href="#セキュリティ" class="header-anchor">#</a> セキュリティ</h3> <p>この手順で Bitcoin メインネットに接続する BTCPay Server を構築する場合、最低限ウォレットの仕組みを理解しておく必要があります。以下の 2 つの記事を読み、不明点があれば質問することを強く推奨します。</p> <ul><li><a href="/FAQ/Wallet/">BTCPay ウォレット FAQ</a></li> <li><a href="/LightningNetwork/">Lightning Network と BTCPay（最初のセクション）</a></li></ul> <p>補足として、開放が必要なすべてのポートを含む想定の <code>iptables</code> ルールと手順を以下に示します。<strong>無保証</strong>です。<strong>自身を締め出してしまうリスクを含め</strong>、自己責任で利用してください。</p> <div class="language-bash extra-class"><pre class="language-bash"><code>~$ <span class="token function">vi</span> iptables.txt
+</code></pre></div><div class="language- extra-class"><pre class="language-text"><code># Generated by iptables-save v1.6.1 on Mon May 27 18:48:11 2019
+*filter
+:INPUT ACCEPT [0:0]
+:FORWARD ACCEPT [0:0]
+:OUTPUT ACCEPT [0:0]
+-A INPUT -i lo -j ACCEPT
+-A INPUT -p tcp -m tcp --dport 22 -j ACCEPT     # SSH
+-A INPUT -p tcp -m tcp --dport 80 -j ACCEPT     # BTCPay HTTP
+-A INPUT -p tcp -m tcp --dport 443 -j ACCEPT    # BTCPay HTTPS
+-A INPUT -p tcp -m tcp --dport 8333 -j ACCEPT   # Bitcoind P2P
+-A INPUT -p tcp -m tcp --dport 9735 -j ACCEPT   # Lightning P2P
+-A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+COMMIT
+# Completed on Mon May 27 18:48:11 2019
+</code></pre></div><div class="language-bash extra-class"><pre class="language-bash"><code>~$ <span class="token function">sudo</span> iptables-restore <span class="token operator">&lt;</span> iptables.txt
+</code></pre></div><p>この時点で SSH セッションが維持されていれば良い兆候です。もし切断されても、ルールは一時的なため、利用可能な手段でサーバーをリモート再起動して再試行できます。</p> <p>ルールはここまでで一時適用されています。サーバー起動時に毎回自動適用するには <code>iptables-persistent</code> パッケージを使用します。</p> <div class="language-bash extra-class"><pre class="language-bash"><code>~$ <span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> iptables-persistent
+</code></pre></div><p>後で <code>iptables</code> ルールを変更し、再起動後も保持したい場合は次のコマンドを使います。</p> <div class="language-bash extra-class"><pre class="language-bash"><code>~$ <span class="token function">sudo</span> netfilter-persistent save
+</code></pre></div><h2 id="非特権ユーザー"><a href="#非特権ユーザー" class="header-anchor">#</a> 非特権ユーザー</h2> <p>この手順では、すべてを <code>admin</code> という<strong>非特権ユーザー</strong>で実行するように構成します。先にこのユーザーを作成してください。</p> <div class="language-bash extra-class"><pre class="language-bash"><code>~$ <span class="token function">sudo</span> <span class="token function">useradd</span> <span class="token parameter variable">-M</span> admin <span class="token operator">&amp;&amp;</span> <span class="token function">sudo</span> <span class="token function">usermod</span> <span class="token parameter variable">-L</span> admin
+</code></pre></div><h3 id="前提条件"><a href="#前提条件" class="header-anchor">#</a> 前提条件</h3> <ul><li>Postgresql</li> <li>Tor</li> <li>NGINX と Let's Encrypt</li></ul> <h3 id="アプリケーションコンポーネント"><a href="#アプリケーションコンポーネント" class="header-anchor">#</a> アプリケーションコンポーネント</h3> <ul><li>Bitcoin Core<sup>1,2</sup></li> <li>NBXplorer<sup>1,2</sup></li> <li>BTCPay Server<sup>1,2</sup></li> <li>Lightning Network Daemon (LND)<sup>2</sup></li> <li>Ride The Lightning (RTL)<sup>2</sup></li></ul> <p><sup>1</sup> BTCPay Server の最小構成インストールでは、これらだけが必要です。最小構成では機能が制限されます: Lightning 支払い不可、TLS 証明書の自動更新なし、データストアの信頼性低下、NAT 対応力の低下など。</p> <p><sup>2</sup> ソースコードからビルド。</p> <h2 id="postgresql"><a href="#postgresql" class="header-anchor">#</a> Postgresql</h2> <p>BTCPay Server では、既定の SQLite ファイルベースストレージの代わりに <strong>Postgresql</strong> を使用できます。MySQL を使用することも可能です。</p> <h5 id="インストール"><a href="#インストール" class="header-anchor">#</a> インストール</h5> <div class="language-bash extra-class"><pre class="language-bash"><code>~$ <span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> postgresql postgresql-contrib
+</code></pre></div><h5 id="設定"><a href="#設定" class="header-anchor">#</a> 設定</h5> <p>BTCPay Server の設定セクションで扱います。</p> <h5 id="確認"><a href="#確認" class="header-anchor">#</a> 確認</h5> <div class="language-bash extra-class"><pre class="language-bash"><code>~$ psql <span class="token parameter variable">--version</span>
+psql <span class="token punctuation">(</span>PostgreSQL<span class="token punctuation">)</span> <span class="token number">12.2</span> <span class="token punctuation">(</span>Ubuntu <span class="token number">12.2</span>-4<span class="token punctuation">)</span>
+~$ <span class="token function">sudo</span> systemctl status postgresql
+~$ <span class="token function">sudo</span> <span class="token parameter variable">-u</span> postgres psql
+psql <span class="token punctuation">(</span><span class="token number">12.2</span> <span class="token punctuation">(</span>Ubuntu <span class="token number">12.2</span>-4<span class="token punctuation">))</span>
+Type <span class="token string">&quot;help&quot;</span> <span class="token keyword">for</span> help.
+
+<span class="token assign-left variable">postgres</span><span class="token operator">=</span><span class="token comment"># \q</span>
+</code></pre></div><h2 id="tor"><a href="#tor" class="header-anchor">#</a> Tor</h2> <p><strong>Tor</strong> は、プライバシー強化や NAT 越えの補助のために、以下のコンポーネントで利用できます。</p> <ul><li>Bitcoin Core デーモン</li> <li>Lightning Network Daemon (LND)</li></ul> <p>Bitcoin Core を Tor サポート付きで実行するための追加情報は<a href="https://github.com/bitcoin/bitcoin/blob/master/doc/tor.md" target="_blank" rel="noopener noreferrer">こちら<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>です。</p> <h5 id="インストール-2"><a href="#インストール-2" class="header-anchor">#</a> インストール</h5> <div class="language-bash extra-class"><pre class="language-bash"><code>~$ <span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> tor
+</code></pre></div><h5 id="設定-2"><a href="#設定-2" class="header-anchor">#</a> 設定</h5> <div class="language-bash extra-class"><pre class="language-bash"><code>~$ <span class="token function">sudo</span> <span class="token function">vi</span> /etc/tor/torrc  <span class="token comment"># (and uncomment two lines below)</span>
+ControlPort <span class="token number">9051</span>
+CookieAuthentication <span class="token number">1</span>
+~$ <span class="token function">sudo</span> systemctl restart tor
+</code></pre></div><p>詳細は Bitcoin セクションおよび Lightning Network Daemon セクションで説明します。</p> <h5 id="確認-2"><a href="#確認-2" class="header-anchor">#</a> 確認</h5> <div class="language-bash extra-class"><pre class="language-bash"><code>~$ tor <span class="token parameter variable">--version</span>
+Tor version <span class="token number">0.4</span>.2.7
+~$ <span class="token function">sudo</span> <span class="token function">netstat</span> <span class="token parameter variable">-tlnp</span> <span class="token operator">|</span> <span class="token function">grep</span> tor <span class="token comment"># (lines below correspond to the tor control port and SOCKS proxy)</span>
+tcp        <span class="token number">0</span>      <span class="token number">0</span> <span class="token number">127.0</span>.0.1:9050          <span class="token number">0.0</span>.0.0:*               LISTEN      <span class="token number">1376</span>/tor
+tcp        <span class="token number">0</span>      <span class="token number">0</span> <span class="token number">127.0</span>.0.1:9051          <span class="token number">0.0</span>.0.0:*               LISTEN      <span class="token number">1376</span>/tor
+</code></pre></div><h2 id="nginx-と-lets-encrypt"><a href="#nginx-と-lets-encrypt" class="header-anchor">#</a> NGINX と Let's Encrypt</h2> <p><strong>NGINX</strong> は、BTCPay Server と Ride The Lightning への HTTP リクエストを処理する Web サーバーとして使用します。<strong>Let's Encrypt</strong> と組み合わせることで、BTCPay Server インスタンス向け TLS 証明書の取得と更新をシームレスに行えます。</p> <p>Let's Encrypt は TLS 証明書の取得と更新を行う無料サービスです。処理全体を自動管理するためのスクリプトも提供されています。</p> <h5 id="インストール-3"><a href="#インストール-3" class="header-anchor">#</a> インストール</h5> <h5 id="1-nginx-をインストール"><a href="#1-nginx-をインストール" class="header-anchor">#</a> 1. NGINX をインストール</h5> <div class="language-bash extra-class"><pre class="language-bash"><code>~$ <span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> nginx
+</code></pre></div><h5 id="2-lets-encrypt-をインストール"><a href="#2-lets-encrypt-をインストール" class="header-anchor">#</a> 2. Let's Encrypt をインストール</h5> <div class="language-bash extra-class"><pre class="language-bash"><code>~$ <span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> certbot python3-certbot-nginx
+</code></pre></div><h5 id="設定-3"><a href="#設定-3" class="header-anchor">#</a> 設定</h5> <h5 id="1-lets-encrypt-tls-証明書"><a href="#1-lets-encrypt-tls-証明書" class="header-anchor">#</a> 1. Let's Encrypt TLS 証明書</h5> <p><strong>&lt;your domain name&gt;</strong> について、サーバーインスタンスの IP アドレスを指す A または AAAA レコードを作成する必要があります。
+サーバーが NAT 配下にある場合は、ポート 80 をインスタンスへフォワードする必要があります。</p> <p><strong>certbot</strong> スクリプトは、要求したドメインをホストしている Web サーバー上に特定のファイルが存在するかを確認して動作します。ファイルを取得できない場合、TLS 証明書は発行されません。初回の試行に失敗した場合は定期的に再試行されるか、手動でコマンドを再実行できます。</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">sudo</span> certbot <span class="token parameter variable">--nginx</span> <span class="token parameter variable">-d</span> <span class="token operator">&lt;</span>your domain name<span class="token operator">&gt;</span> <span class="token comment"># (e.g: sudo certbot --nginx -d mainnet.demo.btcpayserver.org)</span>
+</code></pre></div><h5 id="2-nginx-設定ファイルを追加"><a href="#2-nginx-設定ファイルを追加" class="header-anchor">#</a> 2. NGINX 設定ファイルを追加</h5> <p>以下の設定ファイルは、BTCPay Server の Docker インストールからコピーしたものです。</p> <p><code>mainnet.demo.btcpayserver.org</code> を検索し、あなた自身のドメイン名に置き換えてください。</p> <div class="language-bash extra-class"><pre class="language-bash"><code>~$ <span class="token function">vi</span> /etc/nginx/conf.d/default.conf
+</code></pre></div><div class="language- extra-class"><pre class="language-text"><code># If we receive X-Forwarded-Proto, pass it through; otherwise, pass along the
+# scheme used to connect to this server
+map $http_x_forwarded_proto $proxy_x_forwarded_proto {
+  default $http_x_forwarded_proto;
+  ''      $scheme;
+}
+# If we receive X-Forwarded-Port, pass it through; otherwise, pass along the
+# server port the client connected to
+map $http_x_forwarded_port $proxy_x_forwarded_port {
+  default $http_x_forwarded_port;
+  ''      $server_port;
+}
+# If we receive Upgrade, set Connection to &quot;upgrade&quot;; otherwise, delete any
+# Connection header that may have been passed to this server
+map $http_upgrade $proxy_connection {
+  default upgrade;
+  '' close;
+}
+# Apply fix for very long server names
+server_names_hash_bucket_size 128;
+# Prevent Nginx Information Disclosure
+server_tokens off;
+# Default dhparam
+# Set appropriate X-Forwarded-Ssl header
+map $scheme $proxy_x_forwarded_ssl {
+  default off;
+  https on;
+}
+
+gzip_types text/plain text/css application/javascript application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript;
+log_format vhost '$host $remote_addr - $remote_user [$time_local] '
+                 '&quot;$request&quot; $status $body_bytes_sent '
+                 '&quot;$http_referer&quot; &quot;$http_user_agent&quot;';
+access_log off;
+# HTTP 1.1 support
+proxy_http_version 1.1;
+proxy_buffering off;
+proxy_set_header Host $http_host;
+proxy_set_header Upgrade $http_upgrade;
+proxy_set_header Connection $proxy_connection;
+proxy_set_header X-Real-IP $remote_addr;
+proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+proxy_set_header X-Forwarded-Proto $proxy_x_forwarded_proto;
+proxy_set_header X-Forwarded-Ssl $proxy_x_forwarded_ssl;
+proxy_set_header X-Forwarded-Port $proxy_x_forwarded_port;
+proxy_buffer_size          128k;
+proxy_buffers              4 256k;
+proxy_busy_buffers_size    256k;
+client_header_buffer_size 500k;
+large_client_header_buffers 4 500k;
+# Mitigate httpoxy attack (see README for details)
+proxy_set_header Proxy &quot;&quot;;
+
+server {
+        server_name mainnet.demo.btcpayserver.org;
+        listen 80;
+        access_log /var/log/nginx/access.log vhost;
+        return 301 https://$host$request_uri;
+}
+server {
+        client_max_body_size 100M;
+        server_name mainnet.demo.btcpayserver.org;
+        listen 443 ssl http2 ;
+        access_log /var/log/nginx/access.log vhost;
+        ssl_protocols TLSv1.2;
+        ssl_ciphers 'ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA256';
+        ssl_prefer_server_ciphers on;
+        ssl_session_timeout 5m;
+        ssl_session_cache shared:SSL:50m;
+        ssl_session_tickets off;
+        ssl_certificate /etc/letsencrypt/live/mainnet.demo.btcpayserver.org/fullchain.pem;
+        ssl_certificate_key /etc/letsencrypt/live/mainnet.demo.btcpayserver.org/privkey.pem;
+        ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+        ssl_stapling on;
+        ssl_stapling_verify on;
+                ssl_trusted_certificate /etc/letsencrypt/live/mainnet.demo.btcpayserver.org/fullchain.pem;
+        add_header Strict-Transport-Security &quot;max-age=31536000&quot; always;
+        #include /etc/nginx/vhost.d/default;
+
+        # Here is the main BTCPay Server application
+        location / {
+                proxy_pass http://127.0.0.1:23000;
+        }
+
+        # Include the next two stanzas if and only if you want to expose your lightning gRPC &amp; RPC interfaces to the internet
+        location /lnrpc.Lightning {
+                grpc_pass grpcs://127.0.0.1:10009;
+        }
+
+        location /lnd-rest/btc/ {
+                rewrite ^/lnd-rest/btc/(.*) /$1 break;
+                proxy_pass https://127.0.0.1:8080/;
+        }
+
+        # Include this stanza if you are planning to set up Ride The Lightning (RTL)
+        location /rtl/ {
+                proxy_pass http://127.0.0.1:3000/rtl/;
+        }
+}
+</code></pre></div><div class="language-bash extra-class"><pre class="language-bash"><code>~$ <span class="token function">sudo</span> systemctl restart nginx
+~$ <span class="token function">sudo</span> systemctl status nginx
+</code></pre></div><p><code>nginx</code> の再起動でエラーが出る場合は、次を試してください。</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">sudo</span> journalctl <span class="token parameter variable">-xe</span> <span class="token parameter variable">--unit</span> nginx
+</code></pre></div><h5 id="確認-3"><a href="#確認-3" class="header-anchor">#</a> 確認</h5> <h5 id="1-lets-encrypt-を確認"><a href="#1-lets-encrypt-を確認" class="header-anchor">#</a> 1. Let's Encrypt を確認</h5> <p>Let's Encrypt のスクリプトが正しく動作するように設定を整えるのは少し難しい場合があります。トラブルシューティングに役立つ追加コマンドを以下に示します。</p> <div class="language-bash extra-class"><pre class="language-bash"><code>~$ <span class="token function">sudo</span> certbot certificates
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Found the following certs:
+  Certificate Name: mainnet.demo.btcpayserver.org
+    Domains: mainnet.demo.btcpayserver.org
+    Expiry Date: <span class="token number">2019</span>-08-10 <span class="token number">18</span>:00:31+00:00 <span class="token punctuation">(</span>VALID: <span class="token number">79</span> days<span class="token punctuation">)</span>
+    Certificate Path: /etc/letsencrypt/live/mainnet.demo.btcpayserver.org/fullchain.pem
+    Private Key Path: /etc/letsencrypt/live/mainnet.demo.btcpayserver.org/privkey.pem
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+</code></pre></div><div class="language-bash extra-class"><pre class="language-bash"><code>~$ <span class="token function">cat</span> /etc/cron.d/certbot <span class="token comment"># (check the cron job exists)</span>
+<span class="token number">0</span> */12 * * * root <span class="token builtin class-name">test</span> <span class="token parameter variable">-x</span> /usr/bin/certbot <span class="token parameter variable">-a</span> <span class="token punctuation">\</span><span class="token operator">!</span> <span class="token parameter variable">-d</span> /run/systemd/system <span class="token operator">&amp;&amp;</span> perl <span class="token parameter variable">-e</span> <span class="token string">'sleep int(rand(43200))'</span> <span class="token operator">&amp;&amp;</span> certbot <span class="token parameter variable">-q</span> renew
+</code></pre></div><div class="language-bash extra-class"><pre class="language-bash"><code>~$ <span class="token function">sudo</span> <span class="token function">tail</span> /var/log/letsencrypt/letsencrypt.log <span class="token comment"># (check for problems)</span>
+<span class="token number">2019</span>-05-22 <span class="token number">19</span>:36:36,062:DEBUG:certbot.main:certbot version: <span class="token number">0.31</span>.0
+</code></pre></div><div class="language-bash extra-class"><pre class="language-bash"><code>~$ <span class="token function">sudo</span> certbot renew --dry-run <span class="token comment"># (test renewal)</span>
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+** DRY RUN: simulating <span class="token string">'certbot renew'</span> close to cert expiry
+**          <span class="token punctuation">(</span>The <span class="token builtin class-name">test</span> certificates below have not been saved.<span class="token punctuation">)</span>
+
+Congratulations, all renewals succeeded. The following certs have been renewed:
+  /etc/letsencrypt/live/mainnet.demo.btcpayserver.org/fullchain.pem <span class="token punctuation">(</span>success<span class="token punctuation">)</span>
+** DRY RUN: simulating <span class="token string">'certbot renew'</span> close to cert expiry
+**          <span class="token punctuation">(</span>The <span class="token builtin class-name">test</span> certificates above have not been saved.<span class="token punctuation">)</span>
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+</code></pre></div><h5 id="2-nginx-を確認"><a href="#2-nginx-を確認" class="header-anchor">#</a> 2. NGINX を確認</h5> <div class="language-bash extra-class"><pre class="language-bash"><code>~$ <span class="token function">sudo</span> nginx <span class="token parameter variable">-v</span>
+nginx version: nginx/1.18.0 <span class="token punctuation">(</span>Ubuntu<span class="token punctuation">)</span>
+</code></pre></div><div class="language-bash extra-class"><pre class="language-bash"><code>~$ <span class="token function">sudo</span> <span class="token function">netstat</span> <span class="token parameter variable">-tlnp</span> <span class="token operator">|</span> <span class="token function">grep</span> nginx
+tcp        <span class="token number">0</span>      <span class="token number">0</span> <span class="token number">0.0</span>.0.0:443             <span class="token number">0.0</span>.0.0:*               LISTEN      <span class="token number">266275</span>/nginx: maste
+tcp        <span class="token number">0</span>      <span class="token number">0</span> <span class="token number">0.0</span>.0.0:80              <span class="token number">0.0</span>.0.0:*               LISTEN      <span class="token number">266275</span>/nginx: maste
+tcp6       <span class="token number">0</span>      <span class="token number">0</span> :::443                  :::*                    LISTEN      <span class="token number">266275</span>/nginx: maste
+tcp6       <span class="token number">0</span>      <span class="token number">0</span> :::80                   :::*                    LISTEN      <span class="token number">266275</span>/nginx: maste
+</code></pre></div><div class="language-bash extra-class"><pre class="language-bash"><code>~$ <span class="token function">sudo</span> journalctl <span class="token parameter variable">-xe</span> <span class="token parameter variable">--unit</span> nginx <span class="token parameter variable">--follow</span>
+--
+-- A start job <span class="token keyword">for</span> unit nginx.service has finished successfully.
+--
+-- The job identifier is <span class="token number">19471</span>.
+</code></pre></div><p>ブラウザで Web サイトを開いてみてください。この時点では <code>502 Bad Gateway</code> エラーが発生する想定です。接続試行を受信したかどうかは <code>nginx</code> ログで確認できます。</p> <div class="language-bash extra-class"><pre class="language-bash"><code>~$ <span class="token function">tail</span> /var/log/nginx/access.log
+mainnet.demo.btcpayserver.org <span class="token number">127.0</span>.0.1 - - <span class="token punctuation">[</span><span class="token number">27</span>/Jul/2020:12:19:57 +0100<span class="token punctuation">]</span> <span class="token string">&quot;GET / HTTP/2.0&quot;</span> <span class="token number">502</span> <span class="token number">552</span> <span class="token string">&quot;-&quot;</span> <span class="token string">&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36&quot;</span>
+</code></pre></div><p>問題がある場合は、<code>nginx</code> のエラーログも確認してください。</p> <div class="language-bash extra-class"><pre class="language-bash"><code>~$ <span class="token function">tail</span> /var/log/nginx/error.log
+</code></pre></div><h2 id="bitcoin-core"><a href="#bitcoin-core" class="header-anchor">#</a> Bitcoin Core</h2> <p>BTCPay Server の各コンポーネントが Bitcoin ネットワークに接続するためのゲートウェイです。</p> <h5 id="インストール-4"><a href="#インストール-4" class="header-anchor">#</a> インストール</h5> <p><strong>Bitcoin Core をソースからビルド</strong>する完全な手順は<a href="https://github.com/bitcoin/bitcoin/blob/master/doc/build-unix.md" target="_blank" rel="noopener noreferrer">こちら<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>です。</p> <p>ソースからビルドしない場合は、署名済みバイナリ配布物を <a href="https://bitcoincore.org/en/download/" target="_blank" rel="noopener noreferrer">https://bitcoincore.org/en/download/<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> からダウンロードできます。</p> <div class="language-bash extra-class"><pre class="language-bash"><code>~$ <span class="token function">wget</span> https://bitcoincore.org/bin/bitcoin-core-0.20.0/bitcoin-0.20.0-x86_64-linux-gnu.tar.gz
+~$ <span class="token function">wget</span> https://bitcoincore.org/bin/bitcoin-core-0.20.0/SHA256SUMS.asc
+</code></pre></div><h5 id="1-前提パッケージと依存関係をインストール"><a href="#1-前提パッケージと依存関係をインストール" class="header-anchor">#</a> 1. 前提パッケージと依存関係をインストール</h5> <p>この手順では、<code>BTCPay Server</code> に不要なため Bitcoin Core の GUI コンポーネントはビルドしません。</p> <div class="language-bash extra-class"><pre class="language-bash"><code>~$ <span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> build-essential libtool autotools-dev automake pkg-config bsdmainutils python3
+~$ <span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> libevent-dev libboost-system-dev libboost-filesystem-dev libboost-test-dev libboost-thread-dev libminiupnpc-dev libzmq3-dev
+</code></pre></div><h5 id="2-ソースを取得してビルド"><a href="#2-ソースを取得してビルド" class="header-anchor">#</a> 2. ソースを取得してビルド</h5> <p><code>Bitcoin Core</code> リポジトリをクローンする前に、最新の安定版を確認してください。簡単な方法は、GitHub リポジトリの「Releases」欄で最新版を確認することです。執筆時点の安定版は <code>0.20.0</code> です。下記 <code>git clone</code> コマンドのタグを、ビルドしたい安定版に合わせて調整してください。</p> <div class="language-bash extra-class"><pre class="language-bash"><code>~$ <span class="token builtin class-name">cd</span> src
+~/src$ <span class="token function">git</span> clone <span class="token parameter variable">--depth</span> <span class="token number">1</span> <span class="token parameter variable">--branch</span> v0.20.0 https://github.com/bitcoin/bitcoin.git
+~/src$ <span class="token builtin class-name">cd</span> bitcoin
+</code></pre></div><p>Berkeley DB 依存関係の特定バージョンをインストールする必要があります。</p> <div class="language-bash extra-class"><pre class="language-bash"><code>~/src/bitcoin$ ./contrib/install_db4.sh <span class="token variable"><span class="token variable">`</span><span class="token builtin class-name">pwd</span><span class="token variable">`</span></span>
+</code></pre></div><p><code>autoconf</code> スクリプトで make ファイルを生成し、その後ビルドします。</p> <div class="language-bash extra-class"><pre class="language-bash"><code>~/src/bitcoin$ ./autogen.sh
+~/src/bitcoin$ <span class="token builtin class-name">export</span> <span class="token assign-left variable">BDB_PREFIX</span><span class="token operator">=</span><span class="token string">'/home/admin/src/bitcoin/db4'</span>
+~/src/bitcoin$ ./configure <span class="token assign-left variable">BDB_LIBS</span><span class="token operator">=</span><span class="token string">&quot;-L<span class="token variable">${BDB_PREFIX}</span>/lib -ldb_cxx-4.8&quot;</span> <span class="token assign-left variable">BDB_CFLAGS</span><span class="token operator">=</span><span class="token string">&quot;-I<span class="token variable">${BDB_PREFIX}</span>/include&quot;</span>
+~/src/bitcoin$ <span class="token function">make</span>
+~/src/bitcoin$ <span class="token function">sudo</span> <span class="token function">make</span> <span class="token function">install</span>
+~/src/bitcoin$ bitcoind <span class="token parameter variable">-version</span>
+Bitcoin Core version v0.20.0
+</code></pre></div><h5 id="3-設定ファイルを作成"><a href="#3-設定ファイルを作成" class="header-anchor">#</a> 3. 設定ファイルを作成</h5> <p><strong>設定ファイル</strong>の例は、Bitcoin Core リポジトリの https://github.com/bitcoin/bitcoin/blob/master/share/examples/bitcoin.conf で参照できます。</p> <p>用途に合わせて <strong>bitcoin.conf ファイル</strong>を作成してください。BTCPay Server に適した例を以下に示します。この設定ではブロックの pruned を行わないため、2019 年 5 月時点で Bitcoin ブロックチェーン用に 235 GB が必要です。</p> <div class="language-bash extra-class"><pre class="language-bash"><code>~$ <span class="token function">vi</span> bitcoin.conf
+</code></pre></div><div class="language- extra-class"><pre class="language-text"><code>server=1                              # need RPC for btcpay.
+rpcbind=127.0.0.1                     # loopback is default for 0.18.0 but no harm making sure.
+whitelist=127.0.0.1                   # for nbxplorer.
+rpcallowip=127.0.0.1/32               # loopback is default but again no harm.
+zmqpubrawblock=tcp://127.0.0.1:28332  # needed for lightning.
+zmqpubrawtx=tcp://127.0.0.1:28333     # needed for lightning.
+#prune=5000                           # Recommended if not enough disk space for full 600+GB blockchain.
+</code></pre></div><p>ファイルを systemd サービスファイルで指定したディレクトリにコピーし、すべてのユーザーに読み取り権限を付与します。</p> <div class="language-bash extra-class"><pre class="language-bash"><code>~$ <span class="token function">sudo</span> <span class="token function">mkdir</span> <span class="token parameter variable">-p</span> /etc/bitcoin
+~$ <span class="token function">sudo</span> <span class="token function">cp</span> bitcoin.conf /etc/bitcoin
+~$ <span class="token function">sudo</span> <span class="token function">chmod</span> <span class="token number">644</span> /etc/bitcoin/bitcoin.conf
+</code></pre></div><h5 id="5-systemd-サービスを作成"><a href="#5-systemd-サービスを作成" class="header-anchor">#</a> 5. systemd サービスを作成</h5> <p><strong>systemd サービス</strong>ファイルの例は、Bitcoin Core リポジトリの https://raw.githubusercontent.com/bitcoin/bitcoin/master/contrib/init/bitcoind.service にあります。</p> <p>必要に応じてサービスファイルを編集してください。</p> <p>以下の例では、新しい <code>bitcoin</code> ユーザーを作成せずに済むよう、<strong>User</strong> と <strong>Group</strong> を <code>admin</code> ユーザーに変更しています。システム上の <code>admin</code> ユーザーを <code>BTCPayServer</code> 実行用として使う想定であれば妥当な選択です。そうでない場合は、専用の <code>bitcoin</code> ユーザー作成を検討してください。</p> <div class="language-bash extra-class"><pre class="language-bash"><code>~$ <span class="token function">vi</span> bitcoind.service
+</code></pre></div><div class="language- extra-class"><pre class="language-text"><code>[Unit]
+Description=Bitcoin daemon
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/bitcoind -daemon \
+                            -pid=/run/bitcoind/bitcoind.pid \
+                            -conf=/etc/bitcoin/bitcoin.conf \
+                            -datadir=/var/lib/bitcoind
+
+# Make sure the config directory is readable by the service user
+PermissionsStartOnly=true
+ExecStartPre=/bin/chgrp admin /etc/bitcoin
+
+# Process management
+####################
+
+Type=forking
+PIDFile=/run/bitcoind/bitcoind.pid
+Restart=on-failure
+TimeoutStopSec=600
+
+# Run as admin:admin
+User=admin
+Group=admin
+
+# /run/bitcoind
+RuntimeDirectory=bitcoind
+RuntimeDirectoryMode=0710
+
+# /etc/bitcoin
+ConfigurationDirectory=bitcoin
+ConfigurationDirectoryMode=0710
+
+# /var/lib/bitcoind
+StateDirectory=bitcoind
+StateDirectoryMode=0710
+
+# Hardening measures
+####################
+# Provide a private /tmp and /var/tmp.
+PrivateTmp=true
+
+# Deny access to /home, /root and /run/user
+ProtectHome=true
+
+# Mount /usr, /boot/ and /etc read-only for the process.
+ProtectSystem=full
+
+# Disallow the process and all of its children to gain
+# new privileges through execve().
+NoNewPrivileges=true
+
+# Use a new /dev namespace only populated with API pseudo devices
+# such as /dev/null, /dev/zero and /dev/random.
+PrivateDevices=true
+
+# Deny the creation of writable and executable memory mappings.
+MemoryDenyWriteExecute=true
+
+[Install]
+WantedBy=multi-user.target
+</code></pre></div><p>サービスファイルの準備ができたら、以下のコマンドを実行します。</p> <div class="language-bash extra-class"><pre class="language-bash"><code>~$ <span class="token function">sudo</span> <span class="token function">cp</span> bitcoind.service /etc/systemd/system
+~$ <span class="token function">sudo</span> systemctl <span class="token builtin class-name">enable</span> <span class="token parameter variable">--now</span> bitcoind
+~$ <span class="token function">sudo</span> systemctl status bitcoind
+<span class="token punctuation">..</span>.
+Jul <span class="token number">26</span> <span class="token number">21</span>:51:52 ubuntu systemd<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>: Started Bitcoin daemon.
+</code></pre></div><p>起動時にエラーメッセージが表示された場合は、次でログを確認します。</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">sudo</span> journalctl <span class="token parameter variable">-xe</span> <span class="token parameter variable">--unit</span> bitcoind
+</code></pre></div><h5 id="6-bitcoind-cookie-ファイルへのシンボリックリンクを作成"><a href="#6-bitcoind-cookie-ファイルへのシンボリックリンクを作成" class="header-anchor">#</a> 6. bitcoind cookie ファイルへのシンボリックリンクを作成</h5> <p><code>bitcoin-cli</code> クライアントが RPC 呼び出しを行うには <code>bitcoind</code> への認証が必要です。最も簡単な方法は、cookie ファイルへのシンボリックリンクを作成することです。</p> <div class="language-bash extra-class"><pre class="language-bash"><code>~$ <span class="token builtin class-name">cd</span> ~
+~$ <span class="token function">ln</span> <span class="token parameter variable">-s</span> /var/lib/bitcoind/.cookie .bitcoin/.cookie
+</code></pre></div><p>この手順は必須ではありませんが、実施しない場合は以下のように <code>bitcoin-cli</code> コマンドごとに cookie ファイルのパス指定が必要になります。</p> <div class="language-bash extra-class"><pre class="language-bash"><code>~$ bitcoin-cli <span class="token parameter variable">-rpccookiefile</span><span class="token operator">=</span>/var/lib/bitcoind/.cookie getblockchaininfo
+</code></pre></div><h5 id="確認-4"><a href="#確認-4" class="header-anchor">#</a> 確認</h5> <p>Bitcoin のブロックチェーン同期には、数時間から数日かかる場合があります。状態確認には以下のコマンドを必要に応じて使用してください。</p> <div class="language-bash extra-class"><pre class="language-bash"><code>~$ <span class="token function">sudo</span> systemctl status bitcoind
+Active: active <span class="token punctuation">(</span>running<span class="token punctuation">)</span> since Sun <span class="token number">2020</span>-07-26 <span class="token number">21</span>:51:52 IST<span class="token punctuation">;</span> 2min 47s ago
+</code></pre></div><div class="language-bash extra-class"><pre class="language-bash"><code>~$ <span class="token function">tail</span> /var/lib/bitcoind/debug.log <span class="token parameter variable">-f</span>
+<span class="token punctuation">..</span>.
+<span class="token number">2020</span>-07-26T20:55:09Z UpdateTip: new <span class="token assign-left variable">best</span><span class="token operator">=</span>0000000000000361c37dfb6fa905ef967b95411fa96f7dcb4eca5dd4434d9e59 <span class="token assign-left variable">height</span><span class="token operator">=</span><span class="token number">126732</span> <span class="token assign-left variable">version</span><span class="token operator">=</span>0x00000001 <span class="token assign-left variable">log2_work</span><span class="token operator">=</span><span class="token number">62.952182</span> <span class="token assign-left variable">tx</span><span class="token operator">=</span><span class="token number">560114</span> <span class="token assign-left variable">date</span><span class="token operator">=</span><span class="token string">'2011-05-25T21:26:08Z'</span> <span class="token assign-left variable">progress</span><span class="token operator">=</span><span class="token number">0.001018</span> <span class="token assign-left variable">cache</span><span class="token operator">=</span><span class="token number">43</span>.6MiB<span class="token punctuation">(</span>291168txo<span class="token punctuation">)</span>
+<span class="token punctuation">..</span>.
+</code></pre></div><div class="language-bash extra-class"><pre class="language-bash"><code>~$ bitcoin-cli getblockchaininfo
+<span class="token punctuation">{</span>
+  <span class="token string">&quot;chain&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;main&quot;</span>,
+  <span class="token string">&quot;blocks&quot;</span><span class="token builtin class-name">:</span> <span class="token number">133015</span>,
+  <span class="token string">&quot;headers&quot;</span><span class="token builtin class-name">:</span> <span class="token number">640929</span>,
+  <span class="token string">&quot;bestblockhash&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;0000000000000e81b67de8d61eab726f40585bed954b1dd59f86ab10e4e55398&quot;</span>,
+  <span class="token string">&quot;difficulty&quot;</span><span class="token builtin class-name">:</span> <span class="token number">876954.4935135372</span>,
+  <span class="token string">&quot;mediantime&quot;</span><span class="token builtin class-name">:</span> <span class="token number">1308897947</span>,
+  <span class="token string">&quot;verificationprogress&quot;</span><span class="token builtin class-name">:</span> <span class="token number">0.001530462018729556</span>,
+  <span class="token punctuation">..</span>.
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>verificationprogress</code> が <code>0.99..</code> または <code>1.0</code> になれば、ノードの同期は完了しています。念のため、<a href="https://blockstream.info/" target="_blank" rel="noopener noreferrer">https://blockstream.info/<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> のような公開ブロックエクスプローラーで最新の <code>Bitcoin</code> ブロックを確認し、<code>bitcoin-cli getblockchaininfo</code> の <code>blocks</code> 値と比較することもできます。</p> <h5 id="tor-と-bitcoin-の確認"><a href="#tor-と-bitcoin-の確認" class="header-anchor">#</a> Tor と Bitcoin の確認</h5> <p>Bitcoin Daemon より先に Tor をインストールしていれば、自動的に登録されて torv2 onion アドレスで待ち受けを開始しているはずです（torv3 onion アドレス対応は<a href="https://github.com/bitcoin/bitcoin/issues/18884" target="_blank" rel="noopener noreferrer">進行中<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>です）。</p> <p>Bitcoin Daemon の torv2 アドレスを確認する最も簡単な方法は <code>bitcoin-cli</code> を使うことです。</p> <div class="language-bash extra-class"><pre class="language-bash"><code>bitcoin-cli getnetworkinfo
+<span class="token punctuation">{</span>
+  <span class="token string">&quot;version&quot;</span><span class="token builtin class-name">:</span> <span class="token number">200100</span>,
+  <span class="token string">&quot;subversion&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;/Satoshi:0.20.1/&quot;</span>,
+  <span class="token string">&quot;protocolversion&quot;</span><span class="token builtin class-name">:</span> <span class="token number">70015</span>,
+  <span class="token string">&quot;localservices&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;0000000000000409&quot;</span>,
+  <span class="token punctuation">..</span>.
+    <span class="token string">&quot;localaddresses&quot;</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+      <span class="token string">&quot;address&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;192.168.11.4&quot;</span>,
+      <span class="token string">&quot;port&quot;</span><span class="token builtin class-name">:</span> <span class="token number">8333</span>,
+      <span class="token string">&quot;score&quot;</span><span class="token builtin class-name">:</span> <span class="token number">1</span>
+    <span class="token punctuation">}</span>,
+    <span class="token punctuation">{</span>
+      <span class="token string">&quot;address&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;v5j6hfz4xafmeckf.onion&quot;</span>,
+      <span class="token string">&quot;port&quot;</span><span class="token builtin class-name">:</span> <span class="token number">8333</span>,
+      <span class="token string">&quot;score&quot;</span><span class="token builtin class-name">:</span> <span class="token number">156</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">]</span>,
+  <span class="token string">&quot;warnings&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;&quot;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>別の方法として、Bitcoin daemon のログファイルを検索することもできます。</p> <div class="language-bash extra-class"><pre class="language-bash"><code>~$ <span class="token function">cat</span> /var/lib/bitcoind/debug.log <span class="token operator">|</span> <span class="token function">grep</span> onion
+<span class="token number">2019</span>-05-23T18:24:22Z tor: Got <span class="token function">service</span> ID 4d4al7v4hj5p7bb6, advertising <span class="token function">service</span> 4d4al7v4hj5p7bb6.onion:8333
+<span class="token number">2019</span>-05-23T18:24:22Z AddLocal<span class="token punctuation">(</span>4d4al7v4hj5p7bb6.onion:8333,4<span class="token punctuation">)</span>
+</code></pre></div><p>問題があり、ログファイル内に onion アドレスが見つからない場合は、Tor 関連のエラーメッセージを確認してください。</p> <div class="language-bash extra-class"><pre class="language-bash"><code>~$ <span class="token function">cat</span> /var/lib/bitcoind/debug.log <span class="token operator">|</span> <span class="token function">grep</span> tor
+<span class="token number">2020</span>-07-27T08:03:28Z torcontrol thread start
+<span class="token number">2020</span>-07-27T08:03:28Z tor: Authentication cookie /run/tor/control.authcookie could not be opened <span class="token punctuation">(</span>check permissions<span class="token punctuation">)</span>
+</code></pre></div><p>上記のエラーメッセージは、Bitcoin サービス実行ユーザーが Tor の認証 cookie ファイルを読み取れない場合に発生することがあります（詳細は<a href="https://github.com/bitcoin/bitcoin/blob/master/doc/tor.md#3-automatically-listen-on-tor" target="_blank" rel="noopener noreferrer">こちら<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>）。このエラーを解消するには、対象ユーザーを <code>debian-tor</code> グループに追加してください。</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">sudo</span> <span class="token function">usermod</span> <span class="token parameter variable">-a</span> <span class="token parameter variable">-G</span> debian-tor admin
+</code></pre></div><p>onion アドレスを変更するには:</p> <div class="language-bash extra-class"><pre class="language-bash"><code>~$ <span class="token function">rm</span> /var/lib/bitcoind/onion_private_key
+~$ <span class="token function">sudo</span> systemctl restart bitcoind
+~$ bitcoin-cli getnetworkinfo <span class="token operator">|</span> <span class="token function">grep</span> onion
+      <span class="token string">&quot;name&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;onion&quot;</span>,
+      <span class="token string">&quot;address&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;qud5iwbntqxlfwjv.onion&quot;</span>,
+</code></pre></div><p>Tor をインストールしたリモートホストから onion アドレスを確認するには:</p> <div class="language-bash extra-class"><pre class="language-bash"><code>~$ torsocks <span class="token parameter variable">--shell</span>
+~$ telnet 4d4al7v4hj5p7bb6.onion <span class="token number">8333</span>
+ Trying <span class="token number">127.42</span>.42.0<span class="token punctuation">..</span>.
+ Connected to <span class="token number">127.42</span>.42.0.
+ Escape character is <span class="token string">'^]'</span><span class="token builtin class-name">.</span>
+~$ <span class="token builtin class-name">exit</span>
+</code></pre></div><p>別の <code>bitcoind</code> インスタンスを新しいノードへ接続するには:</p> <div class="language-bash extra-class"><pre class="language-bash"><code>~$ bitcoin-cli addnode <span class="token string">&quot;4d4al7v4hj5p7bb6.onion&quot;</span> <span class="token string">&quot;add&quot;</span>
+~$ bitcoin-cli getaddednodeinfo
+<span class="token punctuation">{</span>
+   <span class="token string">&quot;addednode&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;4d4al7v4hj5p7bb6.onion&quot;</span>,
+   <span class="token string">&quot;connected&quot;</span><span class="token builtin class-name">:</span> true,
+   <span class="token string">&quot;addresses&quot;</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span>
+     <span class="token punctuation">{</span>
+       <span class="token string">&quot;address&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;4d4al7v4hj5p7bb6.onion:8333&quot;</span>,
+       <span class="token string">&quot;connected&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;outbound&quot;</span>
+     <span class="token punctuation">}</span>
+   <span class="token punctuation">]</span>
+ <span class="token punctuation">}</span>
+</code></pre></div><h2 id="nbxplorer"><a href="#nbxplorer" class="header-anchor">#</a> NBXplorer</h2> <p><strong>NBXplorer</strong> は、BTCPay Server に関連するトランザクションを Bitcoin ブロックチェーン上で監視する dotnet core アプリケーションです。</p> <h5 id="インストール-5"><a href="#インストール-5" class="header-anchor">#</a> インストール</h5> <h5 id="1-net-80-sdk-をインストール"><a href="#1-net-80-sdk-をインストール" class="header-anchor">#</a> 1. .NET 8.0 SDK をインストール</h5> <p><a href="https://docs.microsoft.com/en-us/dotnet/core/install/linux-ubuntu#2004-" target="_blank" rel="noopener noreferrer">インストール手順に従ってください<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>。</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># Add Microsoft package repository</span>
+<span class="token function">wget</span> https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb <span class="token parameter variable">-O</span> packages-microsoft-prod.deb
+<span class="token function">sudo</span> dpkg <span class="token parameter variable">-i</span> packages-microsoft-prod.deb
+<span class="token function">rm</span> packages-microsoft-prod.deb
+
+<span class="token comment"># Install the SDK</span>
+<span class="token function">sudo</span> <span class="token function">apt-get</span> update
+<span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> <span class="token parameter variable">-y</span> apt-transport-https
+<span class="token function">sudo</span> <span class="token function">apt-get</span> update
+<span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> <span class="token parameter variable">-y</span> dotnet-sdk-8.0
+
+<span class="token comment">## Check</span>
+dotnet <span class="token parameter variable">--version</span>
+</code></pre></div><h5 id="2-nbxplorer-をビルド"><a href="#2-nbxplorer-をビルド" class="header-anchor">#</a> 2. NBXplorer をビルド</h5> <div class="language-bash extra-class"><pre class="language-bash"><code>~$ <span class="token builtin class-name">cd</span> ~<span class="token punctuation">;</span> <span class="token function">mkdir</span> <span class="token parameter variable">-p</span> src<span class="token punctuation">;</span> <span class="token builtin class-name">cd</span> src
+~/src$ <span class="token function">git</span> clone https://github.com/dgarage/NBXplorer
+~/src$ <span class="token builtin class-name">cd</span> NBXplorer
+~/src/NBXplorer$ <span class="token function">git</span> checkout <span class="token variable"><span class="token variable">$(</span><span class="token function">git</span> tag <span class="token parameter variable">--sort</span> <span class="token parameter variable">-version:refname</span> <span class="token operator">|</span> <span class="token function">awk</span> <span class="token string">'match($0, /^v[0-9]+\./)'</span> <span class="token operator">|</span> <span class="token function">head</span> <span class="token parameter variable">-n</span> <span class="token number">1</span><span class="token variable">)</span></span>
+~/src/NBXplorer$ ./build.sh
+</code></pre></div><h5 id="3-postgresql-データベースを作成"><a href="#3-postgresql-データベースを作成" class="header-anchor">#</a> 3. Postgresql データベースを作成</h5> <p>NBXplorer は <code>--dbtrie</code> によるローカルデータベース保存にも対応していますが、これは非推奨です。ここでは <strong>Postgresql</strong> で NBXplorer 用のデータベースとユーザーを作成する方法を示します。</p> <div class="language-bash extra-class"><pre class="language-bash"><code>~$ <span class="token function">sudo</span> <span class="token parameter variable">-u</span> postgres psql
+</code></pre></div><p>次を実行します。</p> <div class="language-SQL extra-class"><pre class="language-sql"><code><span class="token keyword">CREATE</span> <span class="token keyword">DATABASE</span> nbxplorer TEMPLATE <span class="token string">'template0'</span> LC_CTYPE <span class="token string">'C'</span> LC_COLLATE <span class="token string">'C'</span> ENCODING <span class="token string">'UTF8'</span><span class="token punctuation">;</span>
+<span class="token keyword">CREATE</span> <span class="token keyword">USER</span> nbxplorer <span class="token keyword">WITH</span> ENCRYPTED PASSWORD <span class="token string">'urpassword'</span><span class="token punctuation">;</span>
+<span class="token keyword">GRANT</span> <span class="token keyword">ALL</span> <span class="token keyword">PRIVILEGES</span> <span class="token keyword">ON</span> <span class="token keyword">DATABASE</span> nbxplorer <span class="token keyword">TO</span> nbxplorer<span class="token punctuation">;</span>
+</code></pre></div><p>終了します。</p> <div class="language- extra-class"><pre class="language-text"><code>postgres=#\q
+</code></pre></div><h5 id="4-設定ファイルを作成"><a href="#4-設定ファイルを作成" class="header-anchor">#</a> 4. 設定ファイルを作成</h5> <div class="language-bash extra-class"><pre class="language-bash"><code>$ <span class="token function">vi</span> nbxplorer.config
+</code></pre></div><div class="language- extra-class"><pre class="language-text"><code>### Database ###
+postgres=User ID=nbxplorer;Password=urpassword;Application Name=nbxplorer;MaxPoolSize=20;Host=localhost;Port=5432;Database=nbxplorer;
+</code></pre></div><div class="language-bash extra-class"><pre class="language-bash"><code>~$ <span class="token function">sudo</span> <span class="token function">mkdir</span> /etc/nbxplorer
+~$ <span class="token function">sudo</span> <span class="token function">cp</span> nbxplorer.config /etc/nbxplorer
+~$ <span class="token function">sudo</span> <span class="token function">chmod</span> <span class="token number">644</span> /etc/nbxplorer/nbxplorer.config
+</code></pre></div><p>注: 以前 NBXplorer で <code>dbtrie</code> バックエンドを使っていて postgres に切り替えたい場合は、<a href="https://github.com/dgarage/NBXplorer/blob/master/docs/Postgres-Migration.md" target="_blank" rel="noopener noreferrer">このドキュメント<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>を参照してください。</p> <h5 id="5-systemd-サービスを作成-2"><a href="#5-systemd-サービスを作成-2" class="header-anchor">#</a> 5. systemd サービスを作成</h5> <p>以下に <strong>systemd サービス</strong>ファイルの例を示します。パス、User、Group は環境に合わせて調整してください。</p> <div class="language-bash extra-class"><pre class="language-bash"><code>~$ <span class="token function">vi</span> nbxplorer.service
+</code></pre></div><div class="language- extra-class"><pre class="language-text"><code>[Unit]
+Description=NBXplorer daemon
+Requires=bitcoind.service
+After=bitcoind.service
+
+[Service]
+WorkingDirectory=/home/admin/src/NBXplorer
+ExecStart=/home/admin/src/NBXplorer/run.sh --conf=/etc/nbxplorer/nbxplorer.config
+User=admin
+Group=admin
+Type=simple
+PIDFile=/run/nbxplorer/nbxplorer.pid
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+</code></pre></div><div class="language-bash extra-class"><pre class="language-bash"><code>~$ <span class="token function">sudo</span> <span class="token function">cp</span> nbxplorer.service /etc/systemd/system
+~$ <span class="token function">sudo</span> systemctl <span class="token builtin class-name">enable</span> <span class="token parameter variable">--now</span> nbxplorer
+</code></pre></div><h5 id="確認-5"><a href="#確認-5" class="header-anchor">#</a> 確認</h5> <div class="language-bash extra-class"><pre class="language-bash"><code>~$ <span class="token function">sudo</span> journalctl <span class="token parameter variable">-xe</span> <span class="token parameter variable">--unit</span> nbxplorer <span class="token parameter variable">--follow</span>
+May <span class="token number">23</span> <span class="token number">19</span>:13:35 btc run.sh<span class="token punctuation">[</span><span class="token number">8065</span><span class="token punctuation">]</span>: info: Configuration:  Data Directory: /home/admin/.nbxplorer/Main
+May <span class="token number">23</span> <span class="token number">19</span>:13:35 btc run.sh<span class="token punctuation">[</span><span class="token number">8065</span><span class="token punctuation">]</span>: info: Configuration:  Configuration File: /home/admin/.nbxplorer/Main/settings.config
+May <span class="token number">23</span> <span class="token number">19</span>:13:35 btc run.sh<span class="token punctuation">[</span><span class="token number">8065</span><span class="token punctuation">]</span>: info: Configuration:  Network: Mainnet
+<span class="token punctuation">..</span>.
+May <span class="token number">23</span> <span class="token number">19</span>:20:04 btc run.sh<span class="token punctuation">[</span><span class="token number">8065</span><span class="token punctuation">]</span>: info: Events:         BTC: New block 0000000000000000000c405ba5df5f5533359a4393247a0c52d26c458d4dd989 <span class="token punctuation">(</span><span class="token number">577449</span><span class="token punctuation">)</span>
+</code></pre></div><p>正しく起動しない場合はサービスを停止し、アプリケーションを直接実行してエラーメッセージを確認します。</p> <div class="language-bash extra-class"><pre class="language-bash"><code>~$ <span class="token function">sudo</span> systemctl stop nbxplorer
+~$ <span class="token builtin class-name">cd</span> ~<span class="token punctuation">;</span> <span class="token function">pushd</span> ./src/NBXplorer<span class="token punctuation">;</span> ./run.sh<span class="token punctuation">;</span> <span class="token function">popd</span>
+</code></pre></div><h5 id="更新"><a href="#更新" class="header-anchor">#</a> 更新</h5> <p>更新によって不具合が起こる可能性があります。本番稼働中のシステムでは注意してください。</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># Stop the service</span>
+~$ <span class="token function">sudo</span> systemctl stop nbxplorer
+<span class="token comment"># Checkout and build latest tag</span>
+~$ <span class="token builtin class-name">cd</span> ~<span class="token punctuation">;</span> <span class="token function">pushd</span> ~/src/NBXplorer<span class="token punctuation">;</span> <span class="token function">git</span> fetch <span class="token parameter variable">--tags</span> <span class="token operator">&amp;&amp;</span> <span class="token function">git</span> checkout <span class="token variable"><span class="token variable">$(</span><span class="token function">git</span> tag <span class="token parameter variable">--sort</span> <span class="token parameter variable">-version:refname</span> <span class="token operator">|</span> <span class="token function">awk</span> <span class="token string">'match($0, /^v[0-9]+\./)'</span> <span class="token operator">|</span> <span class="token function">head</span> <span class="token parameter variable">-n</span> <span class="token number">1</span><span class="token variable">)</span></span> <span class="token operator">&amp;&amp;</span> ./build.sh<span class="token punctuation">;</span> <span class="token function">popd</span><span class="token punctuation">;</span>
+<span class="token comment"># Restart the service</span>
+~$ <span class="token function">sudo</span> systemctl start nbxplorer
+</code></pre></div><h2 id="btcpay-server"><a href="#btcpay-server" class="header-anchor">#</a> BTCPay Server</h2> <p>NBXplorer と同様に、BTCPay Server も .NET Core アプリケーションです。以下のインストール手順は .NET Core が事前にインストール済みである前提です。</p> <h5 id="インストール-6"><a href="#インストール-6" class="header-anchor">#</a> インストール</h5> <h5 id="1-btcpay-server-をビルド"><a href="#1-btcpay-server-をビルド" class="header-anchor">#</a> 1. BTCPay Server をビルド</h5> <div class="language-bash extra-class"><pre class="language-bash"><code>~$ <span class="token builtin class-name">cd</span> ~<span class="token punctuation">;</span> <span class="token function">mkdir</span> <span class="token parameter variable">-p</span> src<span class="token punctuation">;</span> <span class="token builtin class-name">cd</span> src
+<span class="token comment"># Clone the repository</span>
+~/src$ <span class="token function">git</span> clone https://github.com/btcpayserver/btcpayserver.git
+~/src$ <span class="token builtin class-name">cd</span> btcpayserver
+<span class="token comment"># Checkout latest tag</span>
+~$ <span class="token function">git</span> checkout <span class="token variable"><span class="token variable">$(</span><span class="token function">git</span> tag <span class="token parameter variable">--sort</span> <span class="token parameter variable">-version:refname</span> <span class="token operator">|</span> <span class="token function">awk</span> <span class="token string">'match($0, /^v[0-9]+\.[0-9]+\.[0-9]+$/)'</span> <span class="token operator">|</span> <span class="token function">head</span> <span class="token parameter variable">-n</span> <span class="token number">1</span><span class="token variable">)</span></span>
+<span class="token comment"># Build the app</span>
+~/src/btcpayserver$ ./build.sh
+</code></pre></div><h5 id="2-postgresql-データベースを作成"><a href="#2-postgresql-データベースを作成" class="header-anchor">#</a> 2. Postgresql データベースを作成</h5> <p>BTCPay Server は既定で 1 つの SQLite ファイルにデータを保存します。より堅牢な選択肢として <strong>Postgresql</strong> を使う場合は、対応するデータベースとユーザーを作成する必要があります。</p> <div class="language-bash extra-class"><pre class="language-bash"><code>~$ <span class="token function">sudo</span> <span class="token parameter variable">-u</span> postgres psql
+</code></pre></div><p>次を実行します。</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">CREATE</span> <span class="token keyword">DATABASE</span> btcpay TEMPLATE <span class="token string">'template0'</span> LC_CTYPE <span class="token string">'C'</span> LC_COLLATE <span class="token string">'C'</span> ENCODING <span class="token string">'UTF8'</span><span class="token punctuation">;</span>
+<span class="token keyword">CREATE</span> <span class="token keyword">USER</span> btcpay <span class="token keyword">WITH</span> ENCRYPTED PASSWORD <span class="token string">'urpassword'</span><span class="token punctuation">;</span>
+<span class="token keyword">GRANT</span> <span class="token keyword">ALL</span> <span class="token keyword">PRIVILEGES</span> <span class="token keyword">ON</span> <span class="token keyword">DATABASE</span> btcpay <span class="token keyword">TO</span> btcpay<span class="token punctuation">;</span>
+</code></pre></div><p>終了します。</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token assign-left variable">postgres</span><span class="token operator">=</span><span class="token comment">#\q</span>
+</code></pre></div><h5 id="3-設定ファイルを作成-2"><a href="#3-設定ファイルを作成-2" class="header-anchor">#</a> 3. 設定ファイルを作成</h5> <div class="language-bash extra-class"><pre class="language-bash"><code>$ <span class="token function">vi</span> btcpay.config
+</code></pre></div><div class="language- extra-class"><pre class="language-text"><code>### Database ###
+postgres=User ID=btcpay;Password=urpassword;Application Name=btcpayserver;Host=localhost;Port=5432;Database=btcpay;
+explorer.postgres=User ID=nbxplorer;Password=urpassword;Application Name=nbxplorer;MaxPoolSize=20;Host=localhost;Port=5432;Database=nbxplorer;
+</code></pre></div><div class="language-bash extra-class"><pre class="language-bash"><code>~$ <span class="token function">sudo</span> <span class="token function">mkdir</span> /etc/btcpay
+~$ <span class="token function">sudo</span> <span class="token function">cp</span> btcpay.config /etc/btcpay
+~$ <span class="token function">sudo</span> <span class="token function">chmod</span> <span class="token number">644</span> /etc/btcpay/btcpay.config
+</code></pre></div><p>代替として、設定ファイル、環境変数（<code>BTCPAY_EXPLORERPOSTGRES</code> と <code>BTCPAY_POSTGRES</code>）、またはコマンドライン引数（<code>--explorerpostgres</code> と <code>--postgres</code>）で BTCPay Server を起動することもできます。</p> <h5 id="4-systemd-サービスを作成"><a href="#4-systemd-サービスを作成" class="header-anchor">#</a> 4. systemd サービスを作成</h5> <p>以下に <strong>systemd サービス</strong>ファイルの例を示します。パス、User、Group は環境に合わせて調整してください。</p> <div class="language-bash extra-class"><pre class="language-bash"><code>~$ <span class="token function">vi</span> btcpay.service
+</code></pre></div><div class="language- extra-class"><pre class="language-text"><code>[Unit]
+Description=BTCPay Server
+Requires=nbxplorer.service
+After=nbxplorer.service
+
+[Service]
+WorkingDirectory=/home/admin/src/btcpayserver
+Environment=BTCPAY_BTCEXTERNALRTL=&quot;server=https://mainnet.demo.btcpayserver.org/rtl;cookiefile=/var/lib/rtl/.cookie&quot;
+ExecStart=/home/admin/src/btcpayserver/run.sh --conf=/etc/btcpay/btcpay.config
+User=admin
+Group=admin
+Type=simple
+PIDFile=/run/btcpayserver/btcpayserver.pid
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+</code></pre></div><div class="language-bash extra-class"><pre class="language-bash"><code>~$ <span class="token function">sudo</span> <span class="token function">cp</span> btcpay.service /etc/systemd/system
+~$ <span class="token function">sudo</span> systemctl <span class="token builtin class-name">enable</span> <span class="token parameter variable">--now</span> btcpay
+</code></pre></div><h5 id="確認-6"><a href="#確認-6" class="header-anchor">#</a> 確認</h5> <div class="language-bash extra-class"><pre class="language-bash"><code>~$ <span class="token function">sudo</span> journalctl <span class="token parameter variable">-xe</span> <span class="token parameter variable">--unit</span> btcpay <span class="token parameter variable">--follow</span>
+-- The start-up result is RESULT.
+May <span class="token number">23</span> <span class="token number">20</span>:01:25 btc run.sh<span class="token punctuation">[</span><span class="token number">10263</span><span class="token punctuation">]</span>: info: Configuration:  Data Directory: /home/admin/.btcpayserver/Main
+May <span class="token number">23</span> <span class="token number">20</span>:01:25 btc run.sh<span class="token punctuation">[</span><span class="token number">10263</span><span class="token punctuation">]</span>: info: Configuration:  Configuration File: /etc/btcpay/btcpay.config
+May <span class="token number">23</span> <span class="token number">20</span>:01:25 btc run.sh<span class="token punctuation">[</span><span class="token number">10263</span><span class="token punctuation">]</span>: info: Configuration:  Network: Mainnet
+</code></pre></div><p>正しく起動しない場合はサービスを停止し、アプリケーションを直接実行してエラーメッセージを確認します。</p> <div class="language-bash extra-class"><pre class="language-bash"><code>~$ <span class="token function">sudo</span> systemctl stop btcpay
+~$ <span class="token builtin class-name">cd</span> ~<span class="token punctuation">;</span> <span class="token function">pushd</span> ~/src/btcpayserver<span class="token punctuation">;</span> ./run.sh <span class="token parameter variable">--conf</span><span class="token operator">=</span>/etc/btcpay/btcpay.config<span class="token punctuation">;</span> <span class="token function">popd</span><span class="token punctuation">;</span>
+</code></pre></div><p>データベース内の情報を確認する例です。</p> <div class="language-bash extra-class"><pre class="language-bash"><code>~$ <span class="token function">sudo</span> <span class="token parameter variable">-u</span> postgres psql
+<span class="token assign-left variable">postgres</span><span class="token operator">=</span><span class="token comment"># \connect btcpay;</span>
+<span class="token assign-left variable">btcpay</span><span class="token operator">=</span><span class="token comment"># \dt</span>
+<span class="token assign-left variable">btcpay</span><span class="token operator">=</span><span class="token comment"># select * from &quot;Invoices&quot;;</span>
+<span class="token assign-left variable">btcpay</span><span class="token operator">=</span><span class="token comment"># \q</span>
+</code></pre></div><p>この時点でブラウザから BTCPay Server のドメインを開くと、「Welcome to your BTCPay Server」ページが表示されるはずです。
+Lightning Node を使用しない場合は、ここでインストール完了です。</p> <h5 id="更新-2"><a href="#更新-2" class="header-anchor">#</a> 更新</h5> <p>更新によって不具合が起こる可能性があります。本番稼働中のシステムでは注意してください。</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># Stop the service</span>
+~$ <span class="token function">sudo</span> systemctl stop btcpay
+<span class="token comment"># Checkout and build latest tag</span>
+~$ <span class="token builtin class-name">cd</span> ~<span class="token punctuation">;</span> <span class="token function">pushd</span> ~/src/btcpayserver<span class="token punctuation">;</span> <span class="token function">git</span> fetch <span class="token parameter variable">--tags</span> <span class="token operator">&amp;&amp;</span> <span class="token function">git</span> checkout <span class="token variable"><span class="token variable">$(</span><span class="token function">git</span> tag <span class="token parameter variable">--sort</span> <span class="token parameter variable">-version:refname</span> <span class="token operator">|</span> <span class="token function">awk</span> <span class="token string">'match($0, /^v[0-9]+\.[0-9]+\.[0-9]+$/)'</span> <span class="token operator">|</span> <span class="token function">head</span> <span class="token parameter variable">-n</span> <span class="token number">1</span><span class="token variable">)</span></span> <span class="token operator">&amp;&amp;</span> ./build.sh<span class="token punctuation">;</span> <span class="token function">popd</span><span class="token punctuation">;</span>
+<span class="token comment"># Restart the service</span>
+~$ <span class="token function">sudo</span> systemctl start btcpay
+</code></pre></div><h2 id="lightning-network-daemon-lnd"><a href="#lightning-network-daemon-lnd" class="header-anchor">#</a> Lightning Network Daemon (LND)</h2> <h5 id="インストール-7"><a href="#インストール-7" class="header-anchor">#</a> インストール</h5> <p>完全な<a href="https://github.com/lightningnetwork/lnd/blob/master/docs/INSTALL.md" target="_blank" rel="noopener noreferrer">手順<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>はリンク先を参照してください。</p> <h5 id="1-go-をインストール"><a href="#1-go-をインストール" class="header-anchor">#</a> 1. Go をインストール</h5> <div class="language-bash extra-class"><pre class="language-bash"><code>~$ <span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> <span class="token function">make</span>
+~$ <span class="token function">wget</span> https://dl.google.com/go/go1.13.linux-amd64.tar.gz
+~$ sha256sum go1.13.linux-amd64.tar.gz
+68a2297eb099d1a76097905a2ce334e3155004ec08cdea85f24527be3c48e856  go1.13.linux-amd64.tar.gz
+~$ <span class="token function">sudo</span> <span class="token function">tar</span> <span class="token parameter variable">-C</span> /usr/local <span class="token parameter variable">-xzf</span> go1.13.linux-amd64.tar.gz
+~$ <span class="token builtin class-name">export</span> <span class="token assign-left variable"><span class="token environment constant">PATH</span></span><span class="token operator">=</span><span class="token environment constant">$PATH</span>:/usr/local/go/bin
+~$ <span class="token builtin class-name">export</span> <span class="token assign-left variable">GOPATH</span><span class="token operator">=~</span>/gocode
+~$ <span class="token builtin class-name">export</span> <span class="token assign-left variable"><span class="token environment constant">PATH</span></span><span class="token operator">=</span><span class="token environment constant">$PATH</span><span class="token builtin class-name">:</span><span class="token variable">$GOPATH</span>/bin
+~$ go version
+go version go1.13 linux/amd64
+</code></pre></div><h5 id="2-lnd-をビルドしてインストール"><a href="#2-lnd-をビルドしてインストール" class="header-anchor">#</a> 2. LND をビルドしてインストール</h5> <div class="language-bash extra-class"><pre class="language-bash"><code>~$ <span class="token builtin class-name">cd</span> ~<span class="token punctuation">;</span> <span class="token function">mkdir</span> <span class="token parameter variable">-p</span> src<span class="token punctuation">;</span> <span class="token builtin class-name">cd</span> src
+~$ <span class="token function">git</span> clone https://github.com/lightningnetwork/lnd
+~$ <span class="token builtin class-name">cd</span> lnd
+~$ <span class="token function">make</span>
+~$ <span class="token function">make</span> <span class="token function">install</span> <span class="token comment"># installs to a directory in $GOPATH/bin</span>
+~$ <span class="token function">sudo</span> <span class="token function">cp</span> <span class="token variable">$GOPATH</span>/bin/lnd <span class="token variable">$GOPATH</span>/bin/lncli /usr/bin
+~$ lnd <span class="token parameter variable">--version</span>
+lnd version <span class="token number">0.10</span>.99-beta <span class="token assign-left variable">commit</span><span class="token operator">=</span>clock/v1.0.0-229-ge64e71d86dc1ac716c30a80f85a22e8fb544697f
+</code></pre></div><h5 id="3-bitcoin-設定ファイルへのシンボリックリンクを作成"><a href="#3-bitcoin-設定ファイルへのシンボリックリンクを作成" class="header-anchor">#</a> 3. Bitcoin 設定ファイルへのシンボリックリンクを作成</h5> <p>lnd は必要な RPC と zeromq の情報を取得するため、特定の場所にある <code>bitcoin.conf</code> を参照します。</p> <div class="language-bash extra-class"><pre class="language-bash"><code>~$ <span class="token function">ln</span> <span class="token parameter variable">-s</span> ~/.bitcoin/bitcoin.conf /etc/bitcoin/bitcoin.conf
+</code></pre></div><h5 id="4-設定ファイルを作成-2"><a href="#4-設定ファイルを作成-2" class="header-anchor">#</a> 4. 設定ファイルを作成</h5> <div class="language-bash extra-class"><pre class="language-bash"><code>~$ <span class="token function">vi</span> lnd.conf
+</code></pre></div><div class="language- extra-class"><pre class="language-text"><code>[Application Options]
+datadir=/var/lib/lnd/data
+tlscertpath=/var/lib/lnd/tls.cert
+tlskeypath=/var/lib/lnd/tls.key
+logdir=/var/lib/lnd/logs
+maxlogfiles=3
+maxlogfilesize=10
+#externalip=1.1.1.1 # change to your public IP address if required.
+alias=i_luv_btcpay
+listen=0.0.0.0:9735
+
+[Bitcoin]
+bitcoin.active=1
+bitcoin.node=bitcoind
+bitcoin.mainnet=true
+
+[tor]
+tor.active=true
+tor.v3=true
+</code></pre></div><div class="language-bash extra-class"><pre class="language-bash"><code>~$ <span class="token function">sudo</span> <span class="token function">mkdir</span> <span class="token parameter variable">-p</span> /etc/lnd
+~$ <span class="token function">sudo</span> <span class="token function">mkdir</span> <span class="token parameter variable">-p</span> /var/lib/lnd
+~$ <span class="token function">sudo</span> <span class="token function">chown</span> admin:admin <span class="token parameter variable">-R</span> /var/lib/lnd
+~$ <span class="token function">sudo</span> <span class="token function">cp</span> lnd.conf /etc/lnd
+~$ <span class="token function">sudo</span> <span class="token function">chmod</span> <span class="token number">644</span> /etc/lnd/lnd.conf
+</code></pre></div><h5 id="5-systemd-サービスを作成-3"><a href="#5-systemd-サービスを作成-3" class="header-anchor">#</a> 5. systemd サービスを作成</h5> <p>以下に <strong>systemd サービス</strong>ファイルの例を示します。パス、User、Group は環境に合わせて調整してください。</p> <div class="language-bash extra-class"><pre class="language-bash"><code>~$ <span class="token function">vi</span> lnd.service
+</code></pre></div><div class="language- extra-class"><pre class="language-text"><code>[Unit]
+Description=LND Lightning Network Daemon
+Requires=bitcoind.service
+After=bitcoind.service
+
+[Service]
+ExecStart=/usr/bin/lnd --configfile=/etc/lnd/lnd.conf
+ExecStop=/usr/bin/lncli --lnddir /var/lib/lnd stop
+PIDFile= /run/lnd/lnd.pid
+
+User=admin
+Group=admin
+
+Type=simple
+KillMode=process
+TimeoutStartSec=60
+TimeoutStopSec=60
+Restart=always
+RestartSec=60
+
+[Install]
+WantedBy=multi-user.target
+</code></pre></div><div class="language-bash extra-class"><pre class="language-bash"><code>~$ <span class="token function">sudo</span> <span class="token function">cp</span> lnd.service /etc/systemd/system
+~$ <span class="token function">sudo</span> systemctl <span class="token builtin class-name">enable</span> <span class="token parameter variable">--now</span> lnd
+</code></pre></div><h5 id="設定-4"><a href="#設定-4" class="header-anchor">#</a> 設定</h5> <div class="custom-block danger"><p class="custom-block-title">DANGER</p> <p><strong>Bitcoin Lightning daemon の実行には、BTCPay Server 上のホットウォレットが必要です。</strong></p></div> <p>Bitcoin ではプロトコルの進化により、決定的鍵導出によってウォレット鍵を BTCPay Server とは別の場所に保管できます。Lightning daemon にはこの仕組みがありません。Lightning チャネルにコミットまたは受け取った Bitcoin は、BTCPay Server 上にある秘密鍵で管理されます。</p> <h5 id="1-lnd-データディレクトリへのシンボリックリンクを作成"><a href="#1-lnd-データディレクトリへのシンボリックリンクを作成" class="header-anchor">#</a> 1. lnd データディレクトリへのシンボリックリンクを作成</h5> <p>上記のインストール手順では、既定の <code>/home/user/.lnd</code> ではなく <code>/var/lib/lnd</code> をデータディレクトリとして使用しています。<code>lncli</code> クライアント利用時の入力を減らすため、ディレクトリへのシンボリックリンクを作成しておくと便利です。</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">ln</span> <span class="token parameter variable">-s</span> /var/lib/lnd .lnd
+</code></pre></div><h5 id="2-lightning-ウォレットを作成"><a href="#2-lightning-ウォレットを作成" class="header-anchor">#</a> 2. Lightning ウォレットを作成</h5> <p>lnd を初めて起動するときは、新しいウォレットを作成し、バックアップ用シードを安全に記録する必要があります（シードを第三者に知られると資金を盗まれる可能性があるため、安全に保管してください）。</p> <div class="language-bash extra-class"><pre class="language-bash"><code>~$ lncli create
+Input wallet password:
+Confirm password:
+
+Do you have an existing cipher seed mnemonic you want to use? <span class="token punctuation">(</span>Enter y/n<span class="token punctuation">)</span>: n
+
+Your cipher seed can optionally be encrypted.
+Input your passphrase <span class="token keyword">if</span> you wish to encrypt it <span class="token punctuation">(</span>or press enter to proceed without a cipher seed passphrase<span class="token punctuation">)</span>:
+
+Generating fresh cipher seed<span class="token punctuation">..</span>.
+
+<span class="token operator">!</span><span class="token operator">!</span><span class="token operator">!</span>YOU MUST WRITE DOWN THIS SEED TO BE ABLE TO RESTORE THE WALLET<span class="token operator">!</span><span class="token operator">!</span><span class="token operator">!</span>
+---------------BEGIN LND CIPHER SEED---------------
+ <span class="token number">1</span>. above      <span class="token number">2</span>. catch    <span class="token number">3</span>. start     <span class="token number">4</span>. tape
+ <span class="token number">5</span>. sound      <span class="token number">6</span>. friend   <span class="token number">7</span>. water     <span class="token number">8</span>. royal
+ <span class="token number">9</span>. solid     <span class="token number">10</span>. poet    <span class="token number">11</span>. wisdom   <span class="token number">12</span>. match
+<span class="token number">13</span>. virtual   <span class="token number">14</span>. zero    <span class="token number">15</span>. slender  <span class="token number">16</span>. thrive
+<span class="token number">17</span>. idle      <span class="token number">18</span>. catch   <span class="token number">19</span>. robot    <span class="token number">20</span>. clay
+<span class="token number">21</span>. resemble  <span class="token number">22</span>. angry   <span class="token number">23</span>. work     <span class="token number">24</span>. <span class="token keyword">until</span>
+---------------END LND CIPHER SEED-----------------
+
+<span class="token operator">!</span><span class="token operator">!</span><span class="token operator">!</span>YOU MUST WRITE DOWN THIS SEED TO BE ABLE TO RESTORE THE WALLET<span class="token operator">!</span><span class="token operator">!</span><span class="token operator">!</span>
+
+lnd successfully initialized<span class="token operator">!</span>
+</code></pre></div><p>前の手順でシンボリックディレクトリリンクを<strong>作成していない</strong>場合は、次のコマンドを使用します。</p> <div class="language-bash extra-class"><pre class="language-bash"><code>lncli <span class="token parameter variable">--lnddir</span> /var/lib/lnd create
+</code></pre></div><h5 id="3-ウォレットをアンロック"><a href="#3-ウォレットをアンロック" class="header-anchor">#</a> 3. ウォレットをアンロック</h5> <p>lnd を再起動するたびに、ウォレットの<strong>アンロックが必要</strong>です。無人運用を想定した BTCPay Server には理想的ではありませんが、Lightning はまだ発展途上です。</p> <div class="language-bash extra-class"><pre class="language-bash"><code>~$ lncli unlock
+</code></pre></div><h5 id="確認-7"><a href="#確認-7" class="header-anchor">#</a> 確認</h5> <div class="language-bash extra-class"><pre class="language-bash"><code>~$ lncli getinfo
+<span class="token punctuation">{</span>
+    <span class="token string">&quot;version&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;0.10.99-beta commit=clock/v1.0.0-229-ge64e71d86dc1ac716c30a80f85a22e8fb544697f&quot;</span>,
+    <span class="token string">&quot;commit_hash&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;e64e71d86dc1ac716c30a80f85a22e8fb544697f&quot;</span>,
+   <span class="token punctuation">..</span>.
+ <span class="token punctuation">}</span>
+</code></pre></div><p>サービスを確認します。</p> <div class="language-bash extra-class"><pre class="language-bash"><code>~$ <span class="token function">sudo</span> journalctl <span class="token parameter variable">-xe</span> <span class="token parameter variable">--unit</span> lnd <span class="token parameter variable">--follow</span>
+<span class="token punctuation">..</span>.
+Jul <span class="token number">27</span> <span class="token number">15</span>:46:29 ubuntu lnd<span class="token punctuation">[</span><span class="token number">654474</span><span class="token punctuation">]</span>: <span class="token number">2020</span>-07-27 <span class="token number">15</span>:46:29.909 <span class="token punctuation">[</span>INF<span class="token punctuation">]</span> DISC: Attempting to bootstrap with: BOLT-0010 DNS Seed: <span class="token punctuation">[</span><span class="token punctuation">[</span>nodes.lightning.directory soa.nodes.lightning.directory<span class="token punctuation">]</span> <span class="token punctuation">[</span>lseed.bitcoinstats.com <span class="token punctuation">]</span><span class="token punctuation">]</span>
+Jul <span class="token number">27</span> <span class="token number">15</span>:49:41 ubuntu lnd<span class="token punctuation">[</span><span class="token number">654474</span><span class="token punctuation">]</span>: <span class="token number">2020</span>-07-27 <span class="token number">15</span>:49:41.939 <span class="token punctuation">[</span>INF<span class="token punctuation">]</span> DISC: Attempting to bootstrap with: Authenticated Channel Graph
+Jul <span class="token number">27</span> <span class="token number">15</span>:49:41 ubuntu lnd<span class="token punctuation">[</span><span class="token number">654474</span><span class="token punctuation">]</span>: <span class="token number">2020</span>-07-27 <span class="token number">15</span>:49:41.940 <span class="token punctuation">[</span>ERR<span class="token punctuation">]</span> SRVR: Unable to retrieve initial bootstrap peers: no addresses found
+</code></pre></div><p><code>BTCPay Server</code> で使用する <strong>Lightning Node 接続文字列</strong> は次のとおりです。</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token assign-left variable">type</span><span class="token operator">=</span>lnd-rest<span class="token punctuation">;</span><span class="token assign-left variable">server</span><span class="token operator">=</span>https://127.0.0.1:8080/<span class="token punctuation">;</span><span class="token assign-left variable">macaroonfilepath</span><span class="token operator">=</span>/home/admin/.lnd/data/chain/bitcoin/mainnet/admin.macaroon<span class="token punctuation">;</span><span class="token assign-left variable">allowinsecure</span><span class="token operator">=</span>true
+</code></pre></div><h5 id="lnd-を内部ノードとして追加"><a href="#lnd-を内部ノードとして追加" class="header-anchor">#</a> LND を内部ノードとして追加</h5> <p>LND を内部ノードとして追加するには、<code>btcpay.config</code> ファイルを編集します。</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token builtin class-name">cd</span> /etc/btcpay
+<span class="token function">vi</span> btcpay.config
+</code></pre></div><p>データベース設定の直下に、<code>BTC.lightning</code> 設定を追加します。</p> <div class="language- extra-class"><pre class="language-text"><code>### Lightning ###
+BTC.lightning=type=lnd-rest;server=https://127.0.0.1:8080/;macaroonfilepath=/home/admin/.lnd/data/chain/bitcoin/mainnet/admin.macaroon;allowinsecure=true
+</code></pre></div><p>接続文字列の詳細は、BTCPay Server の Lightning ノード接続設定画面にある「Use custom node」ビューを参照してください。</p> <p>設定変更を反映するには、BTCPay Server を再起動する必要があります。</p> <div class="language-bash extra-class"><pre class="language-bash"><code>~$ <span class="token function">sudo</span> systemctl restart btcpay
+</code></pre></div><h5 id="tor-と-lnd-の確認"><a href="#tor-と-lnd-の確認" class="header-anchor">#</a> Tor と LND の確認</h5> <p>Bitcoin daemon と同様に、Tor がインストール済みで設定ファイルで有効化されていれば（上記設定では有効）、<code>lnd</code> は自動的に onion アドレスを登録します。lnd では torv3 アドレスに対応しています。</p> <p>以下の torv3 onion アドレスは、Bitcoin daemon セクションの torv2 よりかなり長くなります（16 文字に対して 56 文字）。</p> <div class="language-bash extra-class"><pre class="language-bash"><code>~$ lncli getinfo <span class="token operator">|</span> <span class="token function">grep</span> onion
+<span class="token string">&quot;029b0e3c05595074afcffdca0fb22fb68a95a9c4698dd20962f647de4891eceabd@liyuvwbbycrvvuzcrsd5rq7svwckabejlsymcxiwzkj3smvlwcsqpjyd.onion:9735&quot;</span>
+</code></pre></div><p>lnd が作成した Tor アドレスは、Tor ネットワーク上の他の Lightning ピアへの接続に使用できます。この Tor アドレスは IPv4 または IPv6 アドレスと並行して利用できます。IPv4/IPv6 を登録する場合は、lnd 設定ファイルで <code>externalip</code> が設定されていることを確認してください。</p> <h5 id="更新-3"><a href="#更新-3" class="header-anchor">#</a> 更新</h5> <p>更新によって不具合が起こる可能性があります。本番稼働中のシステムでは注意してください。</p> <div class="language-bash extra-class"><pre class="language-bash"><code>~$ <span class="token function">sudo</span> systemctl stop lnd
+~$ <span class="token builtin class-name">export</span> <span class="token assign-left variable"><span class="token environment constant">PATH</span></span><span class="token operator">=</span><span class="token environment constant">$PATH</span>:/usr/local/go/bin
+~$ <span class="token builtin class-name">export</span> <span class="token assign-left variable">GOPATH</span><span class="token operator">=~</span>/gocode
+~$ <span class="token builtin class-name">export</span> <span class="token assign-left variable"><span class="token environment constant">PATH</span></span><span class="token operator">=</span><span class="token environment constant">$PATH</span><span class="token builtin class-name">:</span><span class="token variable">$GOPATH</span>/bin
+~$ <span class="token builtin class-name">cd</span> ~/src/lnd
+~$ <span class="token function">git</span> pull
+~$ <span class="token function">make</span>
+~$ <span class="token function">make</span> <span class="token function">install</span> <span class="token comment"># installs to a directory in $GOPATH/bin</span>
+~$ <span class="token function">sudo</span> <span class="token function">cp</span> <span class="token variable">$GOPATH</span>/bin/lnd <span class="token variable">$GOPATH</span>/bin/lncli /usr/bin
+~$ lnd <span class="token parameter variable">--version</span>
+lnd version <span class="token number">0.10</span>.99-beta <span class="token assign-left variable">commit</span><span class="token operator">=</span>clock/v1.0.0-229-ge64e71d86dc1ac716c30a80f85a22e8fb544697f
+~$ <span class="token function">sudo</span> systemctl start lnd
+</code></pre></div><p>daemon を再起動した後は、ウォレットをアンロックする必要があります。</p> <div class="language-bash extra-class"><pre class="language-bash"><code>~$ lncli unlock
+</code></pre></div><p><code>Ride The Lightning (RTL)</code> をインストールしている場合（次セクション参照）、lnd 停止時に RTL も停止している可能性があるため、あわせて再起動が必要です。</p> <div class="language-bash extra-class"><pre class="language-bash"><code>~$ <span class="token function">sudo</span> systemctl start rtl
+</code></pre></div><h2 id="ride-the-lightning-rtl"><a href="#ride-the-lightning-rtl" class="header-anchor">#</a> Ride The Lightning (RTL)</h2> <p><strong>Ride the Lightning</strong> は、Lightning のピア、チャネル、ウォレットなどを管理する Node.js アプリケーションです。</p> <p>BTCPay Server 側の統合作業により、RTL の Web ページは BTCPay サイトと同じ方法で制御・アクセスできます。</p> <h5 id="インストール-8"><a href="#インストール-8" class="header-anchor">#</a> インストール</h5> <h5 id="1-依存関係をインストール"><a href="#1-依存関係をインストール" class="header-anchor">#</a> 1. 依存関係をインストール</h5> <div class="language-bash extra-class"><pre class="language-bash"><code>~$ <span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> nodejs build-essential <span class="token function">npm</span>
+</code></pre></div><h5 id="2-rtl-をビルド"><a href="#2-rtl-をビルド" class="header-anchor">#</a> 2. RTL をビルド</h5> <div class="language-bash extra-class"><pre class="language-bash"><code>~$ <span class="token builtin class-name">cd</span> ~/src
+~$ <span class="token function">git</span> clone https://github.com/Ride-The-Lightning/RTL.git
+~$ <span class="token builtin class-name">cd</span> RTL
+~$ <span class="token function">npm</span> <span class="token function">install</span> <span class="token parameter variable">--only</span><span class="token operator">=</span>prod
+</code></pre></div><h5 id="3-設定ファイルを作成-3"><a href="#3-設定ファイルを作成-3" class="header-anchor">#</a> 3. 設定ファイルを作成</h5> <p><code>sample-RTL-Config.json</code> からサンプル設定ファイルをコピーし、環境に合わせて調整します。このドキュメント内の他の手順と整合する例を以下に示します。</p> <div class="language-bash extra-class"><pre class="language-bash"><code>~$ <span class="token function">cp</span> src/RTL/sample-RTL-Config.json RTL-Config.json
+~$ <span class="token function">vi</span> RTL-Config.json
+</code></pre></div><div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+  <span class="token property">&quot;port&quot;</span><span class="token operator">:</span> <span class="token string">&quot;3000&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;defaultNodeIndex&quot;</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;SSO&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;rtlSSO&quot;</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;rtlCookiePath&quot;</span><span class="token operator">:</span> <span class="token string">&quot;/var/lib/rtl/.cookie&quot;</span><span class="token punctuation">,</span>  # Needs to match the value in BTCPay systemd settings.
+    <span class="token property">&quot;logoutRedirectLink&quot;</span><span class="token operator">:</span> <span class="token string">&quot;https://mainnet.demo.btcpayserver.org/login&quot;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;nodes&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">&quot;index&quot;</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;lnNode&quot;</span><span class="token operator">:</span> <span class="token string">&quot;Node 1&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;lnImplementation&quot;</span><span class="token operator">:</span> <span class="token string">&quot;LND&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;Authentication&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">&quot;macaroonPath&quot;</span><span class="token operator">:</span> <span class="token string">&quot;/var/lib/lnd/data/chain/bitcoin/mainnet&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;configPath&quot;</span><span class="token operator">:</span> <span class="token string">&quot;/etc/lnd/lnd.conf&quot;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;Settings&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">&quot;userPersona&quot;</span><span class="token operator">:</span> <span class="token string">&quot;MERCHANT&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;themeMode&quot;</span><span class="token operator">:</span> <span class="token string">&quot;DAY&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;themeColor&quot;</span><span class="token operator">:</span> <span class="token string">&quot;PURPLE&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;channelBackupPath&quot;</span><span class="token operator">:</span> <span class="token string">&quot;/home/admin/rtl/backup/node-1&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;enableLogging&quot;</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;lnServerUrl&quot;</span><span class="token operator">:</span> <span class="token string">&quot;https://localhost:8080/v1&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;swapServerUrl&quot;</span><span class="token operator">:</span> <span class="token string">&quot;http://localhost:8081/v1&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;fiatConversion&quot;</span><span class="token operator">:</span> <span class="token boolean">false</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>RTL は、この手順で説明している他サービスとは挙動と要件が異なります。主な点は次のとおりです。</p> <ol><li>設定ファイルは RTL のデータディレクトリに配置する必要があります。</li> <li>RTL プロセスが設定ファイルを書き換えることがあります。</li></ol> <div class="language-bash extra-class"><pre class="language-bash"><code>~$ <span class="token function">sudo</span> <span class="token function">mkdir</span> <span class="token parameter variable">-p</span> /var/lib/rtl
+~$ <span class="token function">sudo</span> <span class="token function">cp</span> ~/RTL-Config.json /var/lib/rtl
+~$ <span class="token function">sudo</span> <span class="token function">chown</span> admin:admin <span class="token parameter variable">-R</span> /var/lib/rtl
+~$ <span class="token function">sudo</span> <span class="token function">chmod</span> <span class="token number">644</span> /var/lib/rtl/RTL-Config.json
+</code></pre></div><h5 id="4-systemd-サービスを作成-2"><a href="#4-systemd-サービスを作成-2" class="header-anchor">#</a> 4. systemd サービスを作成</h5> <div class="language-bash extra-class"><pre class="language-bash"><code>~$ <span class="token function">vi</span> rtl.service
+</code></pre></div><div class="language- extra-class"><pre class="language-text"><code>[Unit]
+Description=Ride The Lightning
+Requires=lnd.service
+After=lnd.service
+
+[Service]
+Environment=&quot;RTL_CONFIG_PATH=/var/lib/rtl&quot;
+WorkingDirectory=/var/lib/rtl
+ExecStart=/usr/bin/node /home/admin/src/RTL/rtl
+User=admin
+Group=admin
+Type=simple
+PIDFile=/run/rtl/rtl.pid
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+</code></pre></div><div class="language-bash extra-class"><pre class="language-bash"><code>~$ <span class="token function">sudo</span> <span class="token function">cp</span> rtl.service /etc/systemd/system
+~$ <span class="token function">sudo</span> systemctl <span class="token builtin class-name">enable</span> <span class="token parameter variable">--now</span> rtl
+</code></pre></div><h5 id="確認-8"><a href="#確認-8" class="header-anchor">#</a> 確認</h5> <p>サービスを確認します。</p> <div class="language-bash extra-class"><pre class="language-bash"><code>~$ <span class="token function">sudo</span> journalctl <span class="token parameter variable">-xe</span> <span class="token parameter variable">--unit</span> rtl <span class="token parameter variable">--follow</span>
+<span class="token punctuation">..</span>.
+Jul <span class="token number">27</span> <span class="token number">18</span>:27:52 ubuntu node<span class="token punctuation">[</span><span class="token number">988638</span><span class="token punctuation">]</span>: Server is up and running, please <span class="token function">open</span> the UI at http://localhost:3000
+</code></pre></div><p>正しく起動しない場合はサービスを停止し、アプリケーションを直接実行してエラーメッセージを確認します。</p> <div class="language-bash extra-class"><pre class="language-bash"><code>~$ <span class="token function">sudo</span> systemctl stop rtl
+~$ <span class="token builtin class-name">export</span> <span class="token assign-left variable">RTL_CONFIG_PATH</span><span class="token operator">=</span>/var/lib/rtl<span class="token punctuation">;</span> <span class="token function">pushd</span> ~/src/RTL<span class="token punctuation">;</span> <span class="token function">node</span> rtl<span class="token punctuation">;</span> <span class="token function">popd</span><span class="token punctuation">;</span>
+Server is up and running, please <span class="token function">open</span> the UI at http://localhost:3000
+</code></pre></div><p><code>BTCPay Server</code> の Web ページでは、<code>Server Settings-&gt;Services</code> の「Crypto services exposed by your server」配下から <code>RTL</code> インターフェースにアクセスできるはずです。</p> <h5 id="更新-4"><a href="#更新-4" class="header-anchor">#</a> 更新</h5> <p>更新によって不具合が起こる可能性があります。本番稼働中のシステムでは注意してください。</p> <div class="language-bash extra-class"><pre class="language-bash"><code>~$ <span class="token function">sudo</span> systemctl stop rtl
+~$ <span class="token builtin class-name">cd</span> ~<span class="token punctuation">;</span> <span class="token function">pushd</span> ~/src/RTL<span class="token punctuation">;</span> <span class="token function">git</span> pull<span class="token punctuation">;</span> <span class="token function">npm</span> <span class="token function">install</span><span class="token punctuation">;</span> <span class="token function">popd</span><span class="token punctuation">;</span>
+~$ <span class="token function">sudo</span> systemctl start rtl
+</code></pre></div><h2 id="おわりに"><a href="#おわりに" class="header-anchor">#</a> おわりに</h2> <h3 id="質問"><a href="#質問" class="header-anchor">#</a> 質問</h3> <p><a href="https://mattermost.com/download/" target="_blank" rel="noopener noreferrer">Mattermost アプリ<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>をダウンロードして Mattermost の<a href="https://chat.btcpayserver.org/" target="_blank" rel="noopener noreferrer">コミュニティチャット<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>に参加するか、<a href="https://t.me/btcpayserver" target="_blank" rel="noopener noreferrer">Telegram<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> に参加してください。追加のサポートが必要な場合や、同じ関心を持つ人たちと交流したい場合に役立ちます。</p></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/btcpayserver/btcpayserver-doc/edit/master/docs/Deployment/ManualDeploymentExtended.md" target="_blank" rel="noopener noreferrer">Edit this page</a> <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></div> <div class="edit-link"><a href="https://github.com/btcpayserver/btcpayserver-doc/issues/new?title=Improve%20%E6%8B%A1%E5%BC%B5%E6%89%8B%E5%8B%95%E3%82%BB%E3%83%83%E3%83%88%E3%82%A2%E3%83%83%E3%83%97&amp;body=I%20could%20not%20find%20the%20information%20I%20was%20looking%20for%20on%20the%20%22%E6%8B%A1%E5%BC%B5%E6%89%8B%E5%8B%95%E3%82%BB%E3%83%83%E3%83%88%E3%82%A2%E3%83%83%E3%83%97%22%20page%20(%60%2FDeployment%2FManualDeploymentExtended%2F%60).%0A%0A%5BPLEASE%20DESCRIBE%20HOW%20THE%20PAGE%20CAN%20BE%20IMPROVED%5D&amp;labels=question" target="_blank" rel="noopener noreferrer">Didn't find an answer?</a> <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/Deployment/ManualDeployment/" class="prev">
+        /Deployment/ManualDeployment/
+      </a></span> <!----></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.41d43a50.js" defer></script><script src="/assets/js/2.d89b9797.js" defer></script><script src="/assets/js/127.a998232b.js" defer></script>
+  </body>
+</html>
