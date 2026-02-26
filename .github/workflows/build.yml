@@ -47,5 +47,6 @@ jobs:
         with:
           publish_dir: ./docs/.vuepress/dist
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          cname: btcpayserver-doc-jp.yuimaru.dev
           user_name: 'github-actions[bot]'
           user_email: 'github-actions[bot]@users.noreply.github.com'
