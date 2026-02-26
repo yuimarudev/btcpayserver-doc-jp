@@ -23,14 +23,14 @@ BTCPay Server のイベントを監視するための通知は、いくつかの
 
 メールは BTCPay のサーバーレベルから送信できます。これらは [ユーザーメール](#user-emails) です。管理者は次の場所でサーバー SMTP を設定できます:
 
-Server Settings > Email server > [Setup](#smtp-email-setup)
+Server Settings > Email server > [設定](#smtp-email-setup)
 
 <a id="store-emails"></a>
 ## ストアメール
 
 メールは BTCPay のストアレベルから送信できます。これらのメールは請求書など、ストア関連イベント向けです。ユーザーは次の場所でストア SMTP を設定できます:
 
-Store Settings > General Settings > Services > Email > [Setup](#smtp-email-setup)
+Store Settings > General Settings > Services > Email > [設定](#smtp-email-setup)
 
 <a id="smtp-email-setup"></a>
 ### SMTP メール設定

@@ -51,7 +51,7 @@ tags:
 
 ### 1.1 WordPress 管理ダッシュボードからプラグインをインストール（推奨）
 
-1. WordPress > Plugins > Add New。
+1. WordPress > Plugins > Add New（新規追加）。
 2. 検索欄に「BTCPay V2」と入力。
 3. インストールして有効化。
 
@@ -68,7 +68,7 @@ tags:
 BTCPay for WooCommerce V2 プラグインは、**BTCPay Server（決済プロセッサ）と e コマースストアをつなぐブリッジ**です。
 セルフホストでもサードパーティホストでも、接続手順は同じです。
 
-通知リンクの「**please configure the plugin here**」（以下のスクリーンショット参照）をクリックするか、次の手順で開けます。
+通知リンクの「**please configure the plugin here**（ここでプラグインを設定してください）」（以下のスクリーンショット参照）をクリックするか、次の手順で開けます。
 
 - ストアのダッシュボードへ移動
 - WooCommerce > Settings
@@ -146,23 +146,23 @@ BTCPay for WooCommerce V2 プラグインは、**BTCPay Server（決済プロセ
 
 プロトコルを含む BTCPay Server インスタンスの URL。例: `https://btcpay.yourdomain.com`。
 
-**BTCPay API Key**
+**BTCPay API Key（BTCPay APIキー）**
 
-あなたの API Key（前の手順で自動生成されたもの）。
+あなたの APIキー（前の手順で自動生成されたもの）。
 
-**Store ID**
+**Store ID（ストアID）**
 
-BTCPay Server ストアの store ID。ストア設定ページで確認できます。
+BTCPay Server ストアの Store ID。ストア設定ページで確認できます。
 
-**Default Customer Message**
+**Default Customer Message（既定の顧客メッセージ）**
 
 チェックアウトで BTCPay 決済ゲートウェイを選択した後に表示される顧客メッセージをここでカスタマイズできます。「Separate payment gateways」オプションを使う場合は、各ゲートウェイ設定で上書きできます。
 
-**Invoice pass to "Settled" state after**
+**Invoice pass to "Settled" state after（"Settled" とみなすまでの承認数）**
 
 支払いを完全入金（settled）とみなす承認数を設定します。デフォルトでは BTCPay ストア設定の値が使用されます。
 
-**BTCPay Order Statuses**
+**BTCPay Order Statuses（BTCPay 注文ステータス）**
 
 ビジネスモデルやストア設定に応じて、注文ステータスの調整が必要になる場合があります。
 BTCPay が WooCommerce の特定の注文ステータスを自動でトリガーするよう設定できます。
@@ -184,19 +184,19 @@ BTCPay が WooCommerce の特定の注文ステータスを自動でトリガー
 
 最適な設定を見つけるには時間がかかるため、本番運用前に十分テストすることを推奨します。
 
-**Modal checkout**
+**Modal checkout（モーダルチェックアウト）**
 
 このオプションを有効にすると、BTCPay Server の請求書がチェックアウトページに直接表示されます（BTCPay Server インスタンスへ顧客をリダイレクトしません）。
 
-**Separate Payment Gateways**
+**Separate Payment Gateways（決済ゲートウェイ分離）**
 
 このオプションを有効にすると、BTCPay Server でサポートされる決済手段ごとに個別の決済ゲートウェイが生成されます。例えば、BTCPay Server ストアで BTC、LightningNetwork、Liquid Assets が有効なら、それぞれ個別ゲートウェイとして利用できます。これにより、ゲートウェイ別割引や国別制限など多くの新しいユースケースに対応できます。詳細は[こちら](./FAQ/Integrations.md#how-to-configure-additional-token-support)。
 
-**Send customer data to BTCPayServer**
+**Send customer data to BTCPayServer（顧客データ送信）**
 
 デフォルトでは、メールアドレス以外の顧客データは BTCPay Server に送信されません。顧客住所データも送信したい場合は、ここで有効化できます。
 
-**Debug Log**
+**Debug Log（デバッグログ）**
 
 問題が発生して詳細情報が必要な場合に役立ちます。ログは WooCommerce -> Status -> Log で確認できます。デバッグ後は必ず無効化してください。無効化しないとログが増え続け、ファイルシステムを圧迫します。
 
@@ -206,14 +206,14 @@ BTCPay が WooCommerce の特定の注文ステータスを自動でトリガー
 
 すべての決済ゲートウェイで以下のオプションを設定できます。
 
-**Title**
+**Title（タイトル）**
 チェックアウトページに表示される決済ゲートウェイ名。デフォルトは「BTCPay (Bitcoin, Lightning Network, ...)」。
 
-**Customer Message**
+**Customer Message（顧客向けメッセージ）**
 
 BTCPay 決済ゲートウェイ選択後に表示されるメッセージをカスタマイズできます。
 
-**Gateway Icon**
+**Gateway Icon（ゲートウェイアイコン）**
 
 チェックアウト中に決済ゲートウェイの横へ表示するカスタムアイコンをアップロードまたは選択できます。デフォルトは BTCPay ロゴです。
 
@@ -221,7 +221,7 @@ BTCPay 決済ゲートウェイ選択後に表示されるメッセージをカ�
 
 デフォルト決済ゲートウェイでのみ使える追加オプション:
 
-**Enforce payment tokens**
+**Enforce payment tokens（paymentトークンのみに限定）**
 
 BTCPay Settings で「Separate Payment Gateways」を有効化している場合、このオプションで payment トークンのみを強制できます。つまり、作成される請求書には「payment」タイプのトークンのみが含まれ、「promotion」タイプは含まれません。トークンタイプの違いは[こちら](./FAQ/Integrations.md#how-to-configure-additional-token-support#token-types)を参照してください。
 
@@ -229,7 +229,7 @@ BTCPay Settings で「Separate Payment Gateways」を有効化している場合
 
 個別決済ゲートウェイでのみ使える追加オプション（この機能が有効な場合）:
 
-**Token Type**
+**Token Type（トークンタイプ）**
 
 デフォルトでは「payment」タイプが選択されます。ただし、独自発行アセット/トークン（例: バウチャー用途）を含む Liquid Assets を使う場合は、ここで「promotion」を選択できます。これらは通常の payment トークンとは異なる方法で処理されます。詳細は[こちら](./FAQ/Integrations.md#how-to-configure-additional-token-support#promotional-tokens-100-discount)で確認できます。
 

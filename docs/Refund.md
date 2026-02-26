@@ -1,10 +1,10 @@
-# Refunds
+# 返金
 
 :::tip
 加盟店から返金を受ける手順を知りたい場合は、この [FAQ](./FAQ/General.md#what-if-i-have-a-problem-with-a-paid-invoice) を参照してください。
 :::
 
-**Refunds** は [Pull Payments](./PullPayments.md) 機能を基盤にしたアプリケーションの 1 つです。
+**返金** は [プルペイメント](./PullPayments.md) 機能を基盤にしたアプリケーションの 1 つです。
 
 このページでは、返金を発行する手順を説明します。  
 顧客向け返金を作成するには、いくつかの短い手順があります。
@@ -13,23 +13,23 @@
 
 1. 請求書を返金するには、`Invoices` ページで対象請求書の `Details` をクリックします。
 
-![BTCPay Server refund feature](./img/refunds/invoices-details.jpg)
+![BTCPay Server 返金機能](./img/refunds/invoices-details.jpg)
 
-2. `Issue a refund` をクリックします。
+2. `Issue a refund`（返金を発行）をクリックします。
 
-![BTCPay Server refund feature](./img/refunds/issue-refund.jpg)
+![BTCPay Server 返金機能](./img/refunds/issue-refund.jpg)
 
 3. 返金の支払い方法を選択します。
 
-![BTCPay Server refund feature](./img/refunds/issue-refund-payment-option.jpg)
+![BTCPay Server 返金機能](./img/refunds/issue-refund-payment-option.jpg)
 
-4. 返金する `amount` を選択します。
+4. 返金する金額（`amount`）を選択します。
 
-![BTCPay Server refund feature](./img/refunds/issue-refund-amount.jpg)
+![BTCPay Server 返金機能](./img/refunds/issue-refund-amount.jpg)
 
 5. このページのリンクを顧客に共有します。
 
-![BTCPay Server refund feature](./img/refunds/claimingside.jpg)
+![BTCPay Server 返金機能](./img/refunds/claimingside.jpg)
 
 ## 返金を処理する
 
@@ -37,24 +37,24 @@
 
 1. サイドバーの `Payouts` タブへ移動します。
 
-![BTCPay Server Payouts tab](./img/refunds/payouts-status3-options-appr.jpg)
+![BTCPay Server ペイアウトタブ](./img/refunds/payouts-status3-options-appr.jpg)
 
-2. 処理したい Payouts を選択し、actions から `Approve and send` を選びます。
+2. 処理したい `Payouts` を選択し、`actions` から `Approve and send` を選びます。
 
-![BTCPay Server Payouts tab](./img/refunds/payouts-status3-options-appr.jpg)
+![BTCPay Server ペイアウトタブ](./img/refunds/payouts-status3-options-appr.jpg)
 
 3. トランザクションに署名してブロードキャストします。
 
-![BTCPay Server Payouts tab](./img/refunds/payouts-status4-options-sign3-adv.jpg)
+![BTCPay Server ペイアウトタブ](./img/refunds/payouts-status4-options-sign3-adv.jpg)
 
-4. payout は署名済みとなり、ブロックチェーン上の確認待ちになります。この状態は申請者側の画面にも反映されます。
+4. ペイアウトは署名済みとなり、ブロックチェーン上の確認待ちになります。この状態は申請者側の画面にも反映されます。
 
-![BTCPay Server Payouts tab](./img/refunds/payout-status-succesfull.jpg)
+![BTCPay Server ペイアウトタブ](./img/refunds/payout-status-succesfull.jpg)
 
-5. トランザクションがブロックチェーンで承認されると、payout のステータスは `completed` になります。
+5. トランザクションがブロックチェーンで承認されると、ペイアウトのステータスは `completed` になります。
 
-![BTCPay Server Payouts tab](./img/refunds/payouts-status5-completed1.jpg)
+![BTCPay Server ペイアウトタブ](./img/refunds/payouts-status5-completed1.jpg)
 
 返金処理が成功した後の顧客側画面。
 
-![BTCPay Server Payouts tab](./img/refunds/claiment-completed1.jpg)
+![BTCPay Server ペイアウトタブ](./img/refunds/claiment-completed1.jpg)

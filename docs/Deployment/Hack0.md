@@ -20,13 +20,13 @@ Hack0 の部品を自分で購入・組み立て・インストールして自�
 
 Hack0 の動作に推奨されるパーツは次のとおりです。
 
-- RockPro64 4GB ([Link](https://store.pine64.org/?product=rockpro64-4gb-single-board-computer)) `79.99$`
-- EMMC Module 用 USB アダプター ([Link](https://pine64.com/product/usb-adapter-for-emmc-module/)) `4.99$`
-- EMMC 32GB ([Link](https://pine64.com/product/32gb-emmc-module/)) `24.95$`
-- ROCKPro64 20mm Mid Profile Heatsink 用ファン ([Link](https://pine64.com/product/fan-for-rockpro64-20mm-mid-profile-heatsink/)) `2.99$`
-- ROCKPro64 20mm Mid Profile Heatsink ([Link](https://pine64.com/product/rockpro64-20mm-mid-profile-heatsink/)) `3.29$`
-- SSD 500GB PCIe NVMe ([Link](https://www.crucial.com/ssd/p2/CT500P2SSD8)) `66.99$`
-- M.2 to PCIe アダプター ([Link](https://www.silverstonetek.com/en/product/info/expansion-cards/ECM25/)) `25$`
+- RockPro64 4GB ([リンク](https://store.pine64.org/?product=rockpro64-4gb-single-board-computer)) `79.99$`
+- EMMC Module 用 USB アダプター ([リンク](https://pine64.com/product/usb-adapter-for-emmc-module/)) `4.99$`
+- EMMC 32GB ([リンク](https://pine64.com/product/32gb-emmc-module/)) `24.95$`
+- ROCKPro64 20mm Mid Profile Heatsink 用ファン ([リンク](https://pine64.com/product/fan-for-rockpro64-20mm-mid-profile-heatsink/)) `2.99$`
+- ROCKPro64 20mm Mid Profile Heatsink ([リンク](https://pine64.com/product/rockpro64-20mm-mid-profile-heatsink/)) `3.29$`
+- SSD 500GB PCIe NVMe ([リンク](https://www.crucial.com/ssd/p2/CT500P2SSD8)) `66.99$`
+- M.2 to PCIe アダプター ([リンク](https://www.silverstonetek.com/en/product/info/expansion-cards/ECM25/)) `25$`
 
 合計: `188.2$`
 

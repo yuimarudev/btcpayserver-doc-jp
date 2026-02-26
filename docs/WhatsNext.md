@@ -6,23 +6,23 @@
 
 # (4) 次は？
 
-ウォレットを BTCPay に接続したら、ソフトウェア内蔵のさまざまなツールを試せます。Use Cases の全一覧は [here](./UseCase.md) を参照してください。
+ウォレットを BTCPay に接続したら、ソフトウェア内蔵のさまざまなツールを試せます。ユースケースの全一覧は [こちら](./UseCase.md) を参照してください。
 
-## Point of Sale アプリの作成
+## POS（Point of Sale）アプリの作成
 
-BTCPay には、顧客からの支払いや寄付の受け取りに使える PoS アプリがあります。**POS アプリを作成**するには、BTCPay にストアが作成済みである必要があります。PoS の手順は [here](./Apps.md#point-of-sale-app) を参照してください。
+BTCPay には、顧客からの支払いや寄付の受け取りに使える PoS アプリがあります。**POS アプリを作成**するには、BTCPay にストアが作成済みである必要があります。PoS の手順は [こちら](./Apps.md#point-of-sale-app) を参照してください。
 
-## Crowdfund アプリの作成
+## クラウドファンドアプリの作成
 
-**BTCPay を使ったクラウドファンディングキャンペーン**を作成できます。従来のクラウドファンディングプラットフォームと異なり、キャンペーン作成者自身がプラットフォームの所有者です。資金は手数料なしで作成者のウォレットへ直接送られます。Crowdfund の手順は [here](./Apps.md#crowdfunding-app) を参照してください。
+**BTCPay を使ったクラウドファンディングキャンペーン**を作成できます。従来のクラウドファンディングプラットフォームと異なり、キャンペーン作成者自身がプラットフォームの所有者です。資金は手数料なしで作成者のウォレットへ直接送られます。クラウドファンドの手順は [こちら](./Apps.md#crowdfunding-app) を参照してください。
 
-## Payment Request の作成
+## 支払いリクエストの作成
 
-支払いリクエストへのリンクを送ることで、**他者と共有できるカスタム請求書**を作成できます。ユーザーは好きなタイミングで支払えます。BTCPay は支払い時点の BTC 為替レートを自動更新します。Payment Request の手順は [here](./PaymentRequests.md) を参照してください。
+支払いリクエストへのリンクを送ることで、**他者と共有できるカスタム請求書**を作成できます。ユーザーは好きなタイミングで支払えます。BTCPay は支払い時点の BTC 為替レートを自動更新します。支払いリクエストの手順は [こちら](./PaymentRequests.md) を参照してください。
 
-## Pay Button の作成
+## 支払いボタンの作成
 
-**Pay button** は、商品や寄付の金額が固定の場合に便利です。ボタンは簡単に HTML に埋め込めます。顧客や訪問者がボタンをクリックすると、BTCPay はチェックアウトページと請求書を表示します。Pay Button の手順は [here](./Apps.md#payment-button) を参照してください。
+**支払いボタン** は、商品や寄付の金額が固定の場合に便利です。ボタンは簡単に HTML に埋め込めます。顧客や訪問者がボタンをクリックすると、BTCPay はチェックアウトページと請求書を表示します。支払いボタンの手順は [こちら](./Apps.md#payment-button) を参照してください。
 
 ## BTCPay ストアを e コマースプラットフォームへ接続する
 
@@ -33,12 +33,12 @@ BTCPay には、顧客からの支払いや寄付の受け取りに使える PoS
 - [Drupal](./Drupal/)
 - [Magneto](./Magento.md)
 - [PrestaShop](./PrestaShop.md)
-- [Custom integration](./CustomIntegration.md)
+- [カスタム連携](./CustomIntegration.md)
 - [Wix](./Wix/)
 - [Odoo](./Odoo/)
 - [Big Commerce](./BigCommerce/)
 - [Invoice Ninja](./InvoiceNinja.md)
-e.t.c
+など
 
 ## BTCPay Server の拡張: プラグイン
 
@@ -53,6 +53,6 @@ BTCPay Server は単なる決済プロセッサーではありません。好み
 
 BTCPay Server は企業ではなく、オープンソースプロジェクトです。多数のユースケースに対するサポートは、多様なコントリビューターとユーザーのネットワークに支えられています。BTCPay の改善、学習、構築にぜひ参加してください。
 
-質問がある場合は、まず [FAQ Section](./FAQ/) を検索するか、[BTCPay Community](./Community.md) に参加して質問や改善アイデアを共有してください。
+質問がある場合は、まず [FAQ セクション](./FAQ/) を検索するか、[BTCPay コミュニティ](./Community.md) に参加して質問や改善アイデアを共有してください。
 
-開発者の方は [Local Development](./Development/LocalDevelopment.md) ガイドを確認し、Github の [open issues](https://github.com/btcpayserver/btcpayserver/issues) への対応に協力してください。ほかの形で貢献したい場合は、[Contribution Guide](./Contribute/) を参照してください。
+開発者の方は [ローカル開発](./Development/LocalDevelopment.md) ガイドを確認し、GitHub の [未解決 issue](https://github.com/btcpayserver/btcpayserver/issues) への対応に協力してください。ほかの形で貢献したい場合は、[貢献ガイド](./Contribute/) を参照してください。

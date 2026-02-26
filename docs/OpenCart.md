@@ -2,8 +2,8 @@
 description: OpenCart ストアに BTCPay Server を統合する方法。
 tags:
   - OpenCart
-  - Plugin
-  - eCommerce
+  - プラグイン
+  - eコマース
 ---
 
 # OpenCart で Bitcoin 決済を受け付ける

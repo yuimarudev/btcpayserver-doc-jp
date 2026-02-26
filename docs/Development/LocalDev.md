@@ -134,10 +134,10 @@ dotnet dev-certs https --trust
 
 詳細は次の動画を参照してください。
 
-- [How to contribute to BTCPay Server Development (Windows)](https://youtube.com/watch?v=ZePbMPSIvHM) by Nicolas Dorier
-- [Setting up BTCPayServer development environment on Linux (Ubuntu)](https://youtube.com/watch?v=j486T_Rk-yw) by RockStarDev
-- [BTCPay Server Development - Testing pull request, payments (MacOS)](https://youtube.com/watch?v=GWR_CcMsEV0) by Pavlenex
+- [BTCPay Server 開発への貢献方法（Windows）](https://youtube.com/watch?v=ZePbMPSIvHM) by Nicolas Dorier
+- [Linux（Ubuntu）で BTCPayServer 開発環境を構築する](https://youtube.com/watch?v=j486T_Rk-yw) by RockStarDev
+- [BTCPay Server 開発 - Pull Request と支払いのテスト（MacOS）](https://youtube.com/watch?v=GWR_CcMsEV0) by Pavlenex
 
 あわせて次のノートも参照してください。
 
-- [How to get started with development](https://github.com/btcpayserver/btcpayserver/blob/master/BTCPayServer.Tests/README.md) by Nicolas Dorier (covering relevant docker commands, paying regtest invoices)
+- [開発の始め方](https://github.com/btcpayserver/btcpayserver/blob/master/BTCPayServer.Tests/README.md) by Nicolas Dorier（関連する Docker コマンドと regtest 請求書の支払い手順を解説）

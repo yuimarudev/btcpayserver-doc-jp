@@ -87,8 +87,8 @@ COMMIT
 - Bitcoin Core<sup>1,2</sup>
 - NBXplorer<sup>1,2</sup>
 - BTCPay Server<sup>1,2</sup>
-- Lightning Network Daemon (LND)<sup>2</sup>
-- Ride The Lightning (RTL)<sup>2</sup>
+- Lightning Network Daemon (LND)（Lightning デーモン）<sup>2</sup>
+- Ride The Lightning (RTL)（Lightning 管理UI）<sup>2</sup>
 
 <sup>1</sup> BTCPay Server の最小構成インストールでは、これらだけが必要です。最小構成では機能が制限されます: Lightning 支払い不可、TLS 証明書の自動更新なし、データストアの信頼性低下、NAT 対応力の低下など。
 
@@ -126,7 +126,7 @@ postgres=# \q
 **Tor** は、プライバシー強化や NAT 越えの補助のために、以下のコンポーネントで利用できます。
 
 - Bitcoin Core デーモン
-- Lightning Network Daemon (LND)
+- Lightning Network Daemon (LND)（Lightning デーモン）
 
 Bitcoin Core を Tor サポート付きで実行するための追加情報は[こちら](https://github.com/bitcoin/bitcoin/blob/master/doc/tor.md)です。
 
@@ -446,7 +446,7 @@ Bitcoin Core version v0.20.0
 
 **設定ファイル**の例は、Bitcoin Core リポジトリの https://github.com/bitcoin/bitcoin/blob/master/share/examples/bitcoin.conf で参照できます。
 
-用途に合わせて **bitcoin.conf ファイル**を作成してください。BTCPay Server に適した例を以下に示します。この設定ではブロックの pruned を行わないため、2019 年 5 月時点で Bitcoin ブロックチェーン用に 235 GB が必要です。
+用途に合わせて **bitcoin.conf ファイル**を作成してください。BTCPay Server に適した例を以下に示します。この設定ではブロックのプルーニングを行わないため、2019 年 5 月時点で Bitcoin ブロックチェーン用に 235 GB が必要です。
 
 ```bash
 ~$ vi bitcoin.conf
@@ -612,9 +612,9 @@ Active: active (running) since Sun 2020-07-26 21:51:52 IST; 2min 47s ago
 
 ##### Tor と Bitcoin の確認
 
-Bitcoin Daemon より先に Tor をインストールしていれば、自動的に登録されて torv2 onion アドレスで待ち受けを開始しているはずです（torv3 onion アドレス対応は[進行中](https://github.com/bitcoin/bitcoin/issues/18884)です）。
+Bitcoin デーモンより先に Tor をインストールしていれば、自動的に登録されて torv2 onion アドレスで待ち受けを開始しているはずです（torv3 onion アドレス対応は[進行中](https://github.com/bitcoin/bitcoin/issues/18884)です）。
 
-Bitcoin Daemon の torv2 アドレスを確認する最も簡単な方法は `bitcoin-cli` を使うことです。
+Bitcoin デーモンの torv2 アドレスを確認する最も簡単な方法は `bitcoin-cli` を使うことです。
 
 ```bash
 bitcoin-cli getnetworkinfo
@@ -640,7 +640,7 @@ bitcoin-cli getnetworkinfo
 }
 ```
 
-別の方法として、Bitcoin daemon のログファイルを検索することもできます。
+別の方法として、Bitcoin デーモンのログファイルを検索することもできます。
 
 ```bash
 ~$ cat /var/lib/bitcoind/debug.log | grep onion
@@ -702,7 +702,7 @@ Tor をインストールしたリモートホストから onion アドレスを
 
 ## NBXplorer
 
-**NBXplorer** は、BTCPay Server に関連するトランザクションを Bitcoin ブロックチェーン上で監視する dotnet core アプリケーションです。
+**NBXplorer** は、BTCPay Server に関連するトランザクションを Bitcoin ブロックチェーン上で監視する .NET Core アプリケーションです。
 
 ##### インストール
 
@@ -977,7 +977,7 @@ Lightning Node を使用しない場合は、ここでインストール完了�
 ~$ sudo systemctl start btcpay
 ```
 
-## Lightning Network Daemon (LND)
+## Lightning Network Daemon (LND)（Lightning デーモン）
 
 ##### インストール
 
@@ -1096,10 +1096,10 @@ WantedBy=multi-user.target
 ##### 設定
 
 :::danger
-**Bitcoin Lightning daemon の実行には、BTCPay Server 上のホットウォレットが必要です。**
+**Bitcoin Lightning デーモンの実行には、BTCPay Server 上のホットウォレットが必要です。**
 :::
 
-Bitcoin ではプロトコルの進化により、決定的鍵導出によってウォレット鍵を BTCPay Server とは別の場所に保管できます。Lightning daemon にはこの仕組みがありません。Lightning チャネルにコミットまたは受け取った Bitcoin は、BTCPay Server 上にある秘密鍵で管理されます。
+Bitcoin ではプロトコルの進化により、決定的鍵導出によってウォレット鍵を BTCPay Server とは別の場所に保管できます。Lightning デーモンにはこの仕組みがありません。Lightning チャネルにコミットまたは受け取った Bitcoin は、BTCPay Server 上にある秘密鍵で管理されます。
 
 ##### 1. lnd データディレクトリへのシンボリックリンクを作成
 
@@ -1207,9 +1207,9 @@ BTC.lightning=type=lnd-rest;server=https://127.0.0.1:8080/;macaroonfilepath=/hom
 
 ##### Tor と LND の確認
 
-Bitcoin daemon と同様に、Tor がインストール済みで設定ファイルで有効化されていれば（上記設定では有効）、`lnd` は自動的に onion アドレスを登録します。lnd では torv3 アドレスに対応しています。
+Bitcoin デーモンと同様に、Tor がインストール済みで設定ファイルで有効化されていれば（上記設定では有効）、`lnd` は自動的に onion アドレスを登録します。lnd では torv3 アドレスに対応しています。
 
-以下の torv3 onion アドレスは、Bitcoin daemon セクションの torv2 よりかなり長くなります（16 文字に対して 56 文字）。
+以下の torv3 onion アドレスは、Bitcoin デーモンセクションの torv2 よりかなり長くなります（16 文字に対して 56 文字）。
 
 ```bash
 ~$ lncli getinfo | grep onion
@@ -1237,7 +1237,7 @@ lnd version 0.10.99-beta commit=clock/v1.0.0-229-ge64e71d86dc1ac716c30a80f85a22e
 ~$ sudo systemctl start lnd
 ```
 
-daemon を再起動した後は、ウォレットをアンロックする必要があります。
+デーモンを再起動した後は、ウォレットをアンロックする必要があります。
 
 ```bash
 ~$ lncli unlock
@@ -1249,7 +1249,7 @@ daemon を再起動した後は、ウォレットをアンロックする必要�
 ~$ sudo systemctl start rtl
 ```
 
-## Ride The Lightning (RTL)
+## Ride The Lightning (RTL)（Lightning 管理UI）
 
 **Ride the Lightning** は、Lightning のピア、チャネル、ウォレットなどを管理する Node.js アプリケーションです。
 

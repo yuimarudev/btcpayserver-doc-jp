@@ -18,7 +18,7 @@ BTCPay Server UI の `Account` -> `Manage account` -> `API keys` で新しい AP
 - Modify invoices
 - Modify stores webhooks
 - View your stores
-- Create non-approved pull payments
+- 未承認の Pull Payment を作成
 
 利用可能な権限の一覧は [API documentation](https://docs.btcpayserver.org/API/Greenfield/v1/#section/Authentication/API_Key)、または各エンドポイントに記載された権限情報を参照してください。
 

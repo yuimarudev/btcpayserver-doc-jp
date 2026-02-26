@@ -3,8 +3,8 @@ description: BTCPay Server を Joomla VirtueMart ストアに統合する方法
 tags:
   - VirtueMart
   - Joomla
-  - Plugin
-  - eCommerce
+  - プラグイン
+  - eコマース
 ---
 
 # Joomla VirtueMart 統合

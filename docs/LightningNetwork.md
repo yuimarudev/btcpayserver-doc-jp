@@ -34,7 +34,7 @@ BTCPay Server で内部 Lightning Node を運用する場合は、次の点を�
 6. **off-chain** の復旧メカニズムは現在も研究・開発中です。BTCPay Server の消去や安全でない運用（例: ファイルシステム破損、鍵の漏えい）は、**恒久的な資金損失**につながる可能性があります。
 
 技術が成熟するにつれ、適切なバックアップ機構は BTCPay Server でより実装しやすくなります。
-[v1.0.3.138](https://blog.btcpayserver.org/btcpay-lnd-migration/) 時点では、BTCPay Server で [lightning seed backups](./FAQ/LightningNetwork.md#where-can-i-find-recovery-seed-backup-for-my-lightning-network-wallet-in-btcpay-server) が可能なのは LND のみです。
+[v1.0.3.138](https://blog.btcpayserver.org/btcpay-lnd-migration/) 時点では、BTCPay Server で [Lightning シードバックアップ](./FAQ/LightningNetwork.md#where-can-i-find-recovery-seed-backup-for-my-lightning-network-wallet-in-btcpay-server) が可能なのは LND のみです。
 
 ## Lightning Network 実装の選択
 
@@ -42,8 +42,8 @@ BTCPay Server で内部 Lightning Node を運用する場合は、次の点を�
 
 インストール時に実装を選択できます。
 
-[web-interface installations](/Deployment/LunaNode.md) の場合は、ドロップダウンメニューから実装を選ぶだけです。
-それ以外の [docker](https://github.com/btcpayserver/btcpayserver-docker) ベースの [deployment methods](/Deployment/README.md) では次を実行します。
+[Web インターフェースでのインストール](/Deployment/LunaNode.md) の場合は、ドロップダウンメニューから実装を選ぶだけです。
+それ以外の [docker](https://github.com/btcpayserver/btcpayserver-docker) ベースの [デプロイ方法](/Deployment/README.md) では次を実行します。
 
 ```bash
 sudo su -
@@ -96,7 +96,7 @@ BTCPay Server で RTL を開始するには、Server Settings > Services > Ride 
 
 ### Zap で LND を操作する
 
-iOS や PC から LND ノードをリモート利用する場合は、[Zap wallet integration](https://github.com/LN-Zap/zap-tutorials/blob/master/docs/desktop/btcpay-server.mdx) を利用できます。
+iOS や PC から LND ノードをリモート利用する場合は、[Zap ウォレット連携](https://github.com/LN-Zap/zap-tutorials/blob/master/docs/desktop/btcpay-server.mdx) を利用できます。
 \
 [![LND BTCPay](https://img.youtube.com/vi/CWhTOunTb2Q/mqdefault.jpg)](https://www.youtube.com/watch?v=CWhTOunTb2Q)
 \
@@ -121,7 +121,7 @@ cd btcpayserver-docker
 ./bitcoin-lncli.sh getinfo #show info about the node
 ```
 
-`./bitcoin-lncli.sh --help` を実行するとコマンド一覧を表示できます。詳細は [API documentation](https://api.lightning.community/) も参照してください。
+`./bitcoin-lncli.sh --help` を実行するとコマンド一覧を表示できます。詳細は [API ドキュメント](https://api.lightning.community/) も参照してください。
 
 ## BTCPay Server と Core Lightning (CLN) の開始手順
 
@@ -144,7 +144,7 @@ cd btcpayserver-docker
 ./bitcoin-lightning-cli.sh getinfo #show info about the node
 ```
 
-`./bitcoin-lightning-cli.sh help` を実行するとコマンド一覧を表示できます。詳細は [API documentation](https://lightning.readthedocs.io/) を参照してください。
+`./bitcoin-lightning-cli.sh help` を実行するとコマンド一覧を表示できます。詳細は [API ドキュメント](https://lightning.readthedocs.io/) を参照してください。
 
 ## Lightning ノードのバックアップ
 
@@ -158,7 +158,7 @@ cd btcpayserver-docker
 
 **off-chain** payment channel バックアップの制約と関連リスクを理解してください。
 \
-Docker で BTCPay Server を運用している場合は [backup FAQ](https://docs.btcpayserver.org/Docker/backup-restore/#lightning-channel-backup) も参照してください。
+Docker で BTCPay Server を運用している場合は [バックアップ FAQ](https://docs.btcpayserver.org/Docker/backup-restore/#lightning-channel-backup) も参照してください。
 
 ### on-chain ウォレットへ資金を入れる
 
@@ -187,8 +187,8 @@ cd btcpayserver-docker
 
 on-chain lightning ノードへの資金投入が完了したら、ネットワーク上の他ノードへ接続して payment channel を開く段階です。
 \
-payment channel の開設、流動性管理などの推奨事項は [Payment channels](./LightningNetwork_PaymentChannels.md) を参照してください。
+payment channel の開設、流動性管理などの推奨事項は [Payment channels（支払いチャネル）](./LightningNetwork_PaymentChannels.md) を参照してください。
 
-## Alby Extension
+## Alby 拡張機能
 
-[Alby](https://getalby.com/) は、Bitcoin Lightning Network 上で通常のブラウザから簡単に Bitcoin 決済を送受信できる、無料で高速かつシンプルな手段です。BTCPay ウォレットを Alby アカウントへ直接接続できます。詳細は [how to connect your BTCPay wallet to Alby](https://guides.getalby.com/user-guide/v/alby-account-and-browser-extension/alby-lightning-account/connect-your-alby-lightning-account-to-other-apps/connect-to-btcpay-server) を参照してください。
+[Alby](https://getalby.com/) は、Bitcoin Lightning Network 上で通常のブラウザから簡単に Bitcoin 決済を送受信できる、無料で高速かつシンプルな手段です。BTCPay ウォレットを Alby アカウントへ直接接続できます。詳細は [BTCPay ウォレットを Alby に接続する方法](https://guides.getalby.com/user-guide/v/alby-account-and-browser-extension/alby-lightning-account/connect-your-alby-lightning-account-to-other-apps/connect-to-btcpay-server) を参照してください。

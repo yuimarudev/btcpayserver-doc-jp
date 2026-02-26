@@ -19,7 +19,7 @@
 - Modify invoices
 - Modify stores webhooks
 - View your stores
-- Create non-approved pull payments
+- 未承認の Pull Payment を作成
 
 利用可能な権限の概要は [API documentation](https://docs.btcpayserver.org/API/Greenfield/v1/#section/Authentication/API_Key) または各エンドポイントの権限説明を参照してください。
 

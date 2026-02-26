@@ -28,15 +28,15 @@ OS と Bitcoin セキュリティに十分な専門知識と自信がない限�
 
 **手動インストール** は本番環境には推奨されません。学習目的でのみ使用してください。
 
-代わりに [docker deployment](https://github.com/btcpayserver/btcpayserver-docker) を使用してください。
+代わりに [Docker デプロイ](https://github.com/btcpayserver/btcpayserver-docker) を使用してください。
 
-docker deployment では、簡単な更新方式が提供され、すべての構成要素が技術的な知識なしでも正しく連携されます。HTTPS も自動で設定されます。
+Docker デプロイでは、簡単な更新方式が提供され、すべての構成要素が技術的な知識なしでも正しく連携されます。HTTPS も自動で設定されます。
 
 ## 一般的な手動インストール
 
 以下の手順は Ubuntu 18.04 で実施したものです。ご自身の環境に合わせて調整してください。
 
-Testnet 向けのデプロイについては、Bitcoin、.NET Core、NBXplorer、BTCPayServer のインストール後に [Commands for Running in Testnet Mode](#testnet-specific-deployments) を参照してください。
+Testnet 向けのデプロイについては、Bitcoin、.NET Core、NBXplorer、BTCPayServer のインストール後に [Testnet モードで実行するコマンド](#testnet-specific-deployments) を参照してください。
 
 ### 1) Bitcoin Core 0.19.1 をインストール
 
@@ -56,7 +56,7 @@ rm bitcoin.tar.gz
 
 ### 2) .NET 8.0 SDK をインストール
 
-私の Ubuntu 20.04 での例です（他の OS は [these instructions](https://docs.microsoft.com/en-us/dotnet/core/install/linux-ubuntu#2004-) または [here](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) を参照）。
+私の Ubuntu 20.04 での例です（他の OS は [公式手順](https://docs.microsoft.com/en-us/dotnet/core/install/linux-ubuntu#2004-) または [こちら](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) を参照）。
 
 ```bash
 # Add Microsoft package repository
@@ -108,7 +108,7 @@ cd ~/NBXplorer
 ```
 
 `--dbtrie` バックエンドは簡単に使える一方で、NBXplorer では非推奨です。
-[Extended Manual Deployment](./ManualDeploymentExtended.md) にある通り、postgresql バックエンドの利用を推奨します。
+[拡張手動デプロイ](./ManualDeploymentExtended.md) にある通り、postgresql バックエンドの利用を推奨します。
 
 ### 7) BTCPay Server を実行
 
@@ -120,7 +120,7 @@ cd ~/btcpayserver
 これでポート 8080 でサーバーにアクセスできます。
 
 デフォルトでは BTCPay Server は SQLite をバックエンドとして使用しますが、これは簡単な反面非推奨です。
-[Extended Manual Deployment](./ManualDeploymentExtended.md) にある通り、postgresql バックエンドの利用を推奨します。
+[拡張手動デプロイ](./ManualDeploymentExtended.md) にある通り、postgresql バックエンドの利用を推奨します。
 
 ## Testnet 向けデプロイ
 
@@ -150,5 +150,5 @@ cd ~/btcpayserver
 
 ## 追加リンク
 
-- [Extended Manual Deployment](./ManualDeploymentExtended.md)
+- [拡張手動デプロイ](./ManualDeploymentExtended.md)
 - freedomnode.com の [How to Setup BTC and Lightning Payment Gateway with BTCPayServer on Linux [Manual Install]](https://freedomnode.com/blog/114/how-to-setup-btc-and-lightning-payment-gateway-with-btcpayserver-on-linux-manual-install)

@@ -8,17 +8,17 @@ BTCPay Server は、Bitcoin とその他の暗号通貨向けのオープンソ�
 
 BTCPay Server の利用で問題がある場合は、コミュニティメンバーからサポートを受けるために、[公式サイトに掲載されているコミュニティ](https://btcpayserver.org/#communityCTA)への参加を検討してください。
 
-ほかのチャネルで解決できない技術的な問題、またはコミュニティの他メンバーと検証済みの機能要望のみを [Github issue](https://github.com/btcpayserver/btcpayserver/issues) に提出してください。
+ほかのチャネルで解決できない技術的な問題、またはコミュニティの他メンバーと検証済みの機能要望のみを [GitHub issue](https://github.com/btcpayserver/btcpayserver/issues) に提出してください。
 
 詳細は、[公式サイト](https://btcpayserver.org/)、[完全なドキュメント](https://docs.btcpayserver.org/)、および [FAQ](https://docs.btcpayserver.org/FAQ/) をご確認ください。
 
 ## 貢献
 
-Pull request は歓迎されており、高く評価されます。BTCPay Server に貢献する前に、まず [contributing guidelines](docs/Contribute/README.md) を確認してください。
+プルリクエストは歓迎されており、高く評価されます。BTCPay Server に貢献する前に、まず [貢献ガイドライン](docs/Contribute/README.md) を確認してください。
 
 初心者の方は、以下の BTCPay Server ドキュメントへの貢献手順ガイドを確認してください。
 
-[![Contributing to Documentation](https://img.youtube.com/vi/bSDROcdSSWw/mqdefault.jpg)](https://www.youtube.com/watch?v=bSDROcdSSWw)
+[![ドキュメントへの貢献方法](https://img.youtube.com/vi/bSDROcdSSWw/mqdefault.jpg)](https://www.youtube.com/watch?v=bSDROcdSSWw)
 
 ### ドキュメントをローカルでビルドする
 
@@ -68,9 +68,9 @@ bar
 
 ### SEO の改善
 
-サイト全体と各ページに関連するメタタグを追加するために、[Vuepress SEO plugin](https://www.npmjs.com/package/vuepress-plugin-seo) を使用しています。
+サイト全体と各ページに関連するメタタグを追加するために、[VuePress SEO プラグイン](https://www.npmjs.com/package/vuepress-plugin-seo) を使用しています。
 
-特定ページのメタ属性を改善するには、次のように YAML frontmatter を追加できます（例として WooCommerce ページを参照してください）。
+特定ページのメタ属性を改善するには、次のように YAML フロントマターを追加できます（例として WooCommerce ページを参照してください）。
 
 ```text
 ---
@@ -131,4 +131,4 @@ BTCPay Server プロジェクトは、[BTCPay Server Foundation](https://foundat
 [![IVPN](https://raw.githubusercontent.com/btcpayserver/btcpayserver/master/BTCPayServer/wwwroot/img/readme/supporter_ivpn.svg)](https://ivpn.net/)
 [![Unbank](https://raw.githubusercontent.com/btcpayserver/btcpayserver/master/BTCPayServer/wwwroot/img/readme/supporter_unbank.svg)](https://unbank.com/)
 
-プロジェクトを支援したい場合は、[donation page](https://btcpayserver.org/donate/) をご覧ください。
+プロジェクトを支援したい場合は、[寄付ページ](https://btcpayserver.org/donate/) をご覧ください。

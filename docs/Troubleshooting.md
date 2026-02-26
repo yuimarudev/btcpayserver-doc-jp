@@ -88,7 +88,7 @@ docker logs --tail 100 generated_btcpayserver_1
 
 Lightning Network で問題がある場合は、以下を利用してください。
 
-### 2.2.1 - Lightning Network LND - Docker
+### 2.2.1 - Lightning Network LND（Docker）
 
 Docker 利用時に LND ログへアクセスする方法はいくつかあります。
 まず root としてログインします。
@@ -129,7 +129,7 @@ Docker 利用時に LND ログへアクセスする方法はいくつかあり�
 
 上記でうまくいかない場合は、先に gzip をインストールする必要があるかもしれません: `sudo apt-get install gzip`
 
-### 2.2.2 - Lightning Network Core Lightning (CLN) - Docker
+### 2.2.2 - Lightning Network Core Lightning (CLN)（Docker）
 
 `sudo su -`
 
@@ -137,7 +137,7 @@ Docker 利用時に LND ログへアクセスする方法はいくつかあり�
 
 Core Lightning (CLN) コンテナ ID を見つけます。
 
-docker logs 'add your container ID here'
+`docker logs 'your container ID をここに入力'`
 
 または、次のコマンドを使います。
 

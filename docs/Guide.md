@@ -36,19 +36,19 @@ BTCPay Server は無料で利用でき、完全なオープンソースです。
 - 埋め込みやすい決済ボタン
 - POS アプリ
 - クラウドファンディングアプリ
-- Payment Requests
+- 支払いリクエスト
 - [ハードウェアウォレット連携](./HardwareWalletIntegration.md) に対応した内部フルノード依存ウォレット
-- [Payjoin Support](./Payjoin.md)
+- [Payjoin サポート](./Payjoin.md)
 
 ## はじめに
 
-BTCPay Server の利用を始めるには、まず [導入方法を選択](/Deployment/) します。セルフホストを選ぶ場合は、まず導入ドキュメントを確認してください。推奨は [Docker deployment](/Docker/) です。サードパーティホスティングを選ぶ場合は [third-party host docs](/Deployment/ThirdPartyHosting.md) を参照してください。
+BTCPay Server の利用を始めるには、まず [導入方法を選択](/Deployment/) します。セルフホストを選ぶ場合は、まず導入ドキュメントを確認してください。推奨は [Docker デプロイ](/Docker/) です。サードパーティホスティングを選ぶ場合は [サードパーティホスト向けドキュメント](/Deployment/ThirdPartyHosting.md) を参照してください。
 
 [![How BTCPay Server Features Overview](https://img.youtube.com/vi/R-yaXk4NvEs/mqdefault.jpg)](https://www.youtube.com/watch?v=R-yaXk4NvEs)
 
 ## 参加する
 
-オープンソースプロジェクトへの貢献は、学習・ネットワーク形成・実績作りに非常に有効です。BTCPay Server はインターネット上のボランティアにより維持されています。開発に貢献したい場合は [contributing guidelines](/Contribute/) を確認してください。
+オープンソースプロジェクトへの貢献は、学習・ネットワーク形成・実績作りに非常に有効です。BTCPay Server はインターネット上のボランティアにより維持されています。開発に貢献したい場合は [貢献ガイドライン](/Contribute/) を確認してください。
 
 ドキュメント支援に関心がある場合は、以下の動画も参照してください。
 
@@ -58,7 +58,7 @@ BTCPay Server の利用を始めるには、まず [導入方法を選択](/Depl
 
 BTCPay Server の利用で問題がある場合は、[公式サイトに掲載されているコミュニティ](https://btcpayserver.org/#communityCTA) で BTCPay コミュニティメンバーに相談することを検討してください。
 
-他チャネルで解決できない技術的問題や、コミュニティメンバーと検証済みの機能要望についてのみ [Github issue](https://github.com/btcpayserver/btcpayserver/issues) を作成してください。
+他チャネルで解決できない技術的問題や、コミュニティメンバーと検証済みの機能要望についてのみ [GitHub issue](https://github.com/btcpayserver/btcpayserver/issues) を作成してください。
 
 詳細は [公式サイト](https://btcpayserver.org/) と [FAQ](./FAQ/README.md#btcpay-frequently-asked-questions-and-common-issues) を参照してください。
 

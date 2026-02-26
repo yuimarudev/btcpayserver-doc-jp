@@ -56,11 +56,11 @@ Raspberry PI のコア温度が 70°C に達すると、CPU がサーマルス�
 
 次のオプションを選択します。
 
-- Operating System: Raspberry Pi OS Lite (64-bit)
+- Operating System（OS）: Raspberry Pi OS Lite (64-bit) を選択
   - "Raspberry Pi OS (Other)" から選択
-- Storage: SD カードを選択
+- Storage（ストレージ）: SD カードを選択
 
-右下のボタンから Advanced Settings を開きます。
+右下のボタンから Advanced Settings（詳細設定）を開きます。
 
 ![Raspberry Pi Imager Advanced Settings](../img/raspberry-pi/rpi-imager-advanced-settings.png)
 

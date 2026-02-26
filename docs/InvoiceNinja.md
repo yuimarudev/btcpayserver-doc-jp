@@ -14,11 +14,11 @@
 ## 要件
 
 - InvoiceNinja（ホスト版またはセルフホスト版）
-- BTCPay Server（[self-hosted](https://docs.btcpayserver.org/Deployment/) または [third-party provider](https://docs.btcpayserver.org/Deployment/ThirdPartyHosting/) によるホスト）
+- BTCPay Server（[セルフホスト](https://docs.btcpayserver.org/Deployment/) または [サードパーティホスト](https://docs.btcpayserver.org/Deployment/ThirdPartyHosting/)）
 - BTCPay Server 上で [ストア作成済み](https://docs.btcpayserver.org/CreateStore/)
 - BTCPay Server 上で [ウォレット接続済み](https://docs.btcpayserver.org/WalletSetup/)
 
-## 1. Payment Gateway の設定
+## 1. 決済ゲートウェイの設定
 
 Invoice Ninja で BTCPay を設定するには、次の手順に従ってください。
 
@@ -26,13 +26,13 @@ Invoice Ninja で BTCPay を設定するには、次の手順に従ってくだ�
 2. Settings > **Payment Settings** に移動します。
 3. 右上の **Add payment gateway** をクリックします。
 4. ドロップダウンをスクロールして **BTCPay** をクリックします。
-5. 次に BTCPay 設定ページが表示されます。**認証情報を入力する前に**、まず **Save をクリックして payment gateway を作成することが重要です**。
+5. 次に BTCPay 設定ページが表示されます。**認証情報を入力する前に**、まず **Save をクリックして決済ゲートウェイを作成することが重要です**。
 
 ![BTCPay Server Invoice](./img/InvoiceNinja/InvoiceNinja1.png)
 
 ![BTCPay Server Invoice](./img/InvoiceNinja/InvoiceNinja2.png)
 
-payment gateway を作成したら、手順 2 に進み、BTCPay Server と Invoice Ninja をペアリングします。
+決済ゲートウェイを作成したら、手順 2 に進み、BTCPay Server と Invoice Ninja をペアリングします。
 
 ## 2. BTCPay Server をペアリングする
 
@@ -40,7 +40,7 @@ payment gateway を作成したら、手順 2 に進み、BTCPay Server と Invo
 
 ### 2.1 BTCPay URL
 
-`BTCPay URL` フィールドには、セルフホストサーバーの URL か [third-party provider](https://directory.btcpayserver.org/filter/hosts) の URL をそのまま入力します。
+`BTCPay URL` フィールドには、セルフホストサーバーの URL か [サードパーティホスト](https://directory.btcpayserver.org/filter/hosts) の URL をそのまま入力します。
 *例: https://mainnet.demo.btcpayserver.org*
 
 ### 2.2 BTCPay Store ID
@@ -56,9 +56,9 @@ BTCPay API キーを作成するには、サイドバー下部の Account をク
     - View invoices
     - Create an invoice
     - Modify invoices
-    - Modify selected stores' webhooks
-    - View your stores
-    - Create non-approved pull payments in selected stores
+    - 選択したストアの webhook を変更
+    - 自分のストアを表示
+    - 選択したストアで未承認の Pull Payment を作成
 4. 必要に応じて、複数の BTCPay ストアがある場合は権限を適用するストアを選択します。
 5. **API キーを表示してコピー**し、Invoice Ninja の `API Key` フィールドに**貼り付け**ます。
 

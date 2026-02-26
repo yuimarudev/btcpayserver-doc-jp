@@ -9,9 +9,9 @@
 
 セットアップを始める前に、以下を準備してください。
 
-- [Cal.com account](https://cal.com/)
-- BTCPay Server - [self-hosted](/Deployment/) または [third-party host](/Deployment/ThirdPartyHosting.md) で稼働
-- [Created BTCPay Server store](CreateStore.md) と [wallet set up](WalletSetup.md)
+- [Cal.com アカウント](https://cal.com/)
+- BTCPay Server - [セルフホスト](/Deployment/) または [サードパーティホスト](/Deployment/ThirdPartyHosting.md) で稼働
+- [BTCPay Server ストア作成済み](CreateStore.md) かつ [ウォレット設定済み](WalletSetup.md)
 
 
 ## Cal.com を BTCPay Server と接続する
@@ -31,25 +31,25 @@ Cal.com アカウントにログインし、`Apps` > `App store` > `Payments app
 
 **BTCPay Server URL**: BTCPay インスタンスの URL（例: https://example.btcpay.com）
 
-**BTCPay Store Id**: Cal.com に接続したいストアです。BTCPay Server インスタンスで対象ストアを選び、左側ナビゲーションの `Settings` をクリックすると `storeId` が表示されます。
+**BTCPay Store ID**: Cal.com に接続したいストアです。BTCPay Server インスタンスで対象ストアを選び、左側ナビゲーションの `Settings` をクリックすると `storeId` が表示されます。
 
-Store Id をコピーして、Cal.com の BTCPay Server インストールフォームに入力します。
+Store ID をコピーして、Cal.com の BTCPay Server インストールフォームに入力します。
 
 **API Key**: BTCPay で `Account` > `Manage Account` > `API Keys` に移動します。
 
 `Generate Key` をクリックして新しい API キーを作成します。ラベル欄には例として `BTCPay-Calcom` などの名前を付けてください。
 
 権限は次を選択してください:
-- View Invoice (btcpay.store.canviewinvoices)
-- Create Invoice (btcpay.store.cancreateinvoice)
-- Modify store webhook (btcpay.store.webhooks.canmodifywebhooks)
+- 請求書の表示 (btcpay.store.canviewinvoices)
+- 請求書の作成 (btcpay.store.cancreateinvoice)
+- ストア Webhook の変更 (btcpay.store.webhooks.canmodifywebhooks)
 
 完了したら `Save` をクリックします。API キーをコピーし、Cal.com のインストール画面でフォーム入力を完了してください。
 
-3 つの項目をすべて入力したら、connect ボタンをクリックしてインストールを完了します。すべての値が検証されると、
+3 つの項目をすべて入力したら、`Connect` ボタンをクリックしてインストールを完了します。すべての値が検証されると、
 キーが保存され、Cal.com ページへリダイレクトされます。
 
-**注記** このインストール手順では、BTCPay Server に webhook が作成されます。
+**注記** このインストール手順では、BTCPay Server に Webhook が作成されます。
 
 
 ![Cal.com: image 3](./img/calcom/3_installation_step_two.png)
@@ -60,15 +60,15 @@ Store Id をコピーして、Cal.com の BTCPay Server インストールフォ
 
 ## デモ
 
-イベントタイプページで任意の予約を選択し、Edit をクリックします。
+イベントタイプページで任意の予約を選択し、`Edit` をクリックします。
 
 Cal.com ではイベントごとに個別設定されるため、すべてのイベントで Bitcoin 決済を受け付けたい場合は、各イベントで手動で有効化する必要があります。
 
 ![Cal.com: image 6](./img/calcom/6_event_types_booking.png)
 
-編集ページでメニューから Apps を選択し、BTCPay Server アプリケーションを見つけて有効化します。
+編集ページでメニューから `Apps` を選択し、BTCPay Server アプリケーションを見つけて有効化します。
 
-希望する通貨を選び、金額を指定します。完了したら save をクリックします。
+希望する通貨を選び、金額を指定します。完了したら `Save` をクリックします。
 
 ![Cal.com: image 7](./img/calcom/7_event_payment_booking_setup.png)
 

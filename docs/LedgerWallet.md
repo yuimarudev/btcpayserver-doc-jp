@@ -47,7 +47,7 @@ Ledger に 20 を超えるアカウントがある場合、選択リストの最
 1. [Ledger live app](https://shop.ledger.com/pages/ledger-live) を開く
 2. Accounts -> 対象アカウントを選択
 3. 右上のツールアイコンから Edit Account
-4. Edit Account -> ADVANCED LOGS
+4. Edit Account -> ADVANCED LOGS（詳細ログ）
 5. 拡張公開鍵文字列をコピー
 6. "DerivationScheme" テキストフィールドに手動で貼り付け
 7. [上記クイックセットアップの手順7](#quick-setup) 以降を続行

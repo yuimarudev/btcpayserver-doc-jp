@@ -2,17 +2,17 @@
 <span id="approve-and-pay-a-payout"></span>
 <!-- /legacy-anchor-aliases -->
 
-# Pull payments
+# プルペイメント
 
 ## はじめに
 
 従来、Bitcoin 支払いを行うには、受取人が自分の bitcoin アドレスを共有し、送金者が後でそのアドレスに送金します。  
-この仕組みは、受取人が不在でも送金者が支払いを開始して受取人へ支払いを `push` するため、`Push payment` と呼ばれます。
+この仕組みは、受取人が不在でも送金者が支払いを開始して受取人へ支払いを `push` するため、`Push payment`（プッシュペイメント）と呼ばれます。
 
 では、役割を逆にするとどうなるでしょうか。
 
 送金者が支払いを `push` する代わりに、受取人が都合のよいタイミングで支払いを `pull` できるようにしたらどうでしょうか。  
-これが `Pull payment` の考え方です。これにより、次のような新しい用途が生まれます。
+これが `Pull payment`（プルペイメント）の考え方です。これにより、次のような新しい用途が生まれます。
 
 - サブスクリプションサービス（購読者が、サービス側に一定間隔で資金を引き出すことを許可する）
 - 返金（加盟店が、顧客が都合のよい時にウォレットへ返金を引き出せるようにする）
@@ -33,19 +33,19 @@
 - 終了日（任意）
 - 期間（任意）
 - 上限額
-- 単位（USD、BTC、Hours など）
+- 単位（USD、BTC、時間など）
 - 利用可能な支払い方法
 
-その後、送金者はリンクを使って**pull payment を共有**でき、受取人は `create a payout` を実行できます。  
-受取人は payout について次を選択します。
+その後、送金者はリンクを使って**プルペイメントを共有**でき、受取人は `create a payout`（ペイアウト作成）を実行できます。  
+受取人はペイアウトについて次を選択します。
 
 - 使用する支払い方法
 - 送金先
 
-payout が作成されると、現在の `period` における `pull payment's limit` に計上されます。  
-その後、送金者は payout を送る際の `rate` を設定して payout を承認し、支払いを進めます。
+ペイアウトが作成されると、現在の `period` における `pull payment` の `limit` に計上されます。  
+その後、送金者はペイアウトを送る際の `rate` を設定して承認し、支払いを進めます。
 
-送金者向けには、[BTCPay Internal Wallet](./Wallet.md) から複数 payout をまとめて支払える、使いやすい方法を提供しています。
+送金者向けには、[BTCPay 内部ウォレット](./Wallet.md) から複数のペイアウトをまとめて支払える、使いやすい方法を提供しています。
 
 ```
 
@@ -81,47 +81,47 @@ payout が作成されると、現在の `period` における `pull payment's l
       v                            v
 ```
 
-BTCPay Server は payout を自動で承認・支払いしない点に注意してください。将来のリリースでは、適切な条件下で自動支払いされる payout を検討予定です。  
-代わりに送金者へ通知が表示され、送金者が payout を承認して支払うかを選択します。
+BTCPay Server はペイアウトを自動で承認・支払いしない点に注意してください。将来のリリースでは、適切な条件下で自動支払いされるペイアウトを検討予定です。  
+代わりに送金者へ通知が表示され、送金者がペイアウトを承認して支払うかを選択します。
 
 ## Greenfield API
 
-送金者と受取人の両方に対して、インスタンスの `/docs` ページ（または [public link](https://docs.btcpayserver.org/API/Greenfield/v1/)）で確認できる完全な API を提供しています。
+送金者と受取人の両方に対して、インスタンスの `/docs` ページ（または [公開リンク](https://docs.btcpayserver.org/API/Greenfield/v1/)）で確認できる完全な API を提供しています。
 
-この API は pull payment の全機能を公開しているため、送金者は自身の用途に合わせて支払いを自動化できます。
+この API はプルペイメントの全機能を公開しているため、送金者は自身の用途に合わせて支払いを自動化できます。
 
 ## ユーザーインターフェース
 
 ユーザーインターフェースでは、可能な機能の一部のみを操作できます。
 
-### pull payment を作成する
+### プルペイメントを作成する
 
-1. ウォレットページ / pull payments に移動します
+1. ウォレットページ / `Pull Payments` に移動します
    ![BTCPay Server Pull Payment](./img/pull-payments/1.jpg)
-2. `Create a new pull payment` をクリックします
+2. `Create a new pull payment`（新しいプルペイメントを作成）をクリックします
    ![BTCPay Server Pull Payment](./img/pull-payments/2.jpg)
-3. pull payment 情報を入力し、`Create` をクリックします
+3. プルペイメント情報を入力し、`Create` をクリックします
    ![BTCPay Server Pull Payment](./img/pull-payments/3.jpg)
-4. `View` をクリックして pull payment ページに移動します
+4. `View` をクリックしてプルペイメントページに移動します
 5. このページを支払いの受取人に共有します
    ![BTCPay Server Pull Payment](./img/pull-payments/4.png)
 6. 受取人として、請求する `USD` 金額と送金先アドレスを入力します。
    ![BTCPay Server Pull Payment](./img/pull-payments/5.png)
 
-### payout を承認して支払う
+### ペイアウトを承認して支払う
 
 1. 受取人が資金を引き出すと、送金者に通知が届きます
    ![6](./img/pull-payments/6.jpg)
-2. 通知をクリックすると、未処理 payout の一覧ページに移動します
+2. 通知をクリックすると、未処理ペイアウトの一覧ページに移動します
    ![7](./img/pull-payments/7.jpg)
-3. 承認して支払う payout を選択し、確認します
+3. 承認して支払うペイアウトを選択し、確認します
    ![8](./img/pull-payments/8.jpg)
 4. その後、BTCPay Server の通常のウォレット UI に移動します
 
 :::warning
-Confirm selected payouts をクリックすると、ウォレットのストア設定にある現在の為替レートが使用されます。このレートは、支払いを完了しなくても固定されます。後で行う支払いでも、この以前に確定したレートが使われます。
+`Confirm selected payouts` をクリックすると、ウォレットのストア設定にある現在の為替レートが使用されます。このレートは、支払いを完了しなくても固定されます。後で行う支払いでも、この以前に確定したレートが使われます。
 :::
 
-## Pull Payments 機能の追加ユースケース
+## プルペイメント機能の追加ユースケース
 
-**Pull Payment 機能**は複数の用途で利用でき、その 1 つが [Refunds](./Refund.md) です。
+**プルペイメント機能**は複数の用途で利用でき、その 1 つが [返金](./Refund.md) です。

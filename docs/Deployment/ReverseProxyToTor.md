@@ -228,7 +228,7 @@ export BTCPAY_ADDITIONAL_HOSTS="btcpayserver.mydomain.com"
 
 :::
 
-## Do all this in a Docker container
+## これをすべて Docker コンテナで実行する
 
 準備済みの [Docker image](https://hub.docker.com/r/cloudgenius/socator)（[Code](https://github.com/beacloudgenius/socator)）
 
@@ -251,13 +251,13 @@ export BTCPAY_ADDITIONAL_HOSTS="btcpayserver.mydomain.com"
 
 ---
 
-#### Build
+#### ビルド
 
 ```sh
 docker build -t cloudgenius/socator .
 ```
 
-#### Push
+#### プッシュ
 
 ```sh
 docker push cloudgenius/socator

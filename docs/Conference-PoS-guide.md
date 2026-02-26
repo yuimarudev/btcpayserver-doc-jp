@@ -25,8 +25,8 @@ Lightning Network 部分は Blink プラグイン経由で [Blink.sv](https://bl
 
 
 **サーバー起動後、次のプラグインをインストールします:**
-- Blink plugin
-- Bolt Cards plugin
+- Blink プラグイン
+- Bolt Cards プラグイン
 
 その後、BTCPay Server を再起動します（UI から、または SSH で `docker restart generated_btcpayserver_1`）
 
@@ -50,8 +50,8 @@ Lightning Network 部分は Blink プラグイン経由で [Blink.sv](https://bl
   - **Preferred Price Source**: USD/EUR なら Kraken 推奨、HKD なら Coingecko。よりマイナーな通貨は Coingecko を試すか、ドロップダウンでローカル取引所があるか確認
 - "**Create store**" ボタンをクリック
 ### 2. Lightning Network ウォレット設定
-出店者の Blink アカウントへ接続する Lightning ウォレットを設定します。[Blink docs の手順](https://dev.blink.sv/examples/btcpayserver-plugin#how-to-connect)に従ってください。
-（代替として、出店者が法定通貨で受け取りたい場合は、カンファレンス側の Blink アカウントを設定し、後で fiat ramps 経由で分配する運用も可能です）
+出店者の Blink アカウントへ接続する Lightning ウォレットを設定します。[Blink ドキュメントの手順](https://dev.blink.sv/examples/btcpayserver-plugin#how-to-connect)に従ってください。
+（代替として、出店者が法定通貨で受け取りたい場合は、カンファレンス側の Blink アカウントを設定し、後で fiat ランプ経由で分配する運用も可能です）
 
 ### 3. スプレッド設定とサウンド有効化
 - "**Settings**" -> "**Rates**" をクリック
@@ -107,7 +107,7 @@ Lightning Network 部分は Blink プラグイン経由で [Blink.sv](https://bl
 
 デフォルトでは、`create invoice` エンドポイントは public リクエストに対して IP ごとに 1 分あたり 4 リクエストに制限されています。複数の POS 端末で同一 IP を共有していると、負荷テスト時に同時に 4 件を超える請求書を作成できないことがあります。
 
-[2024年11月の PR](https://github.com/btcpayserver/btcpayserver/pull/6415) で、ログイン済みユーザーにはこの制限を適用しないようになりました。したがって **Step 6** を実施済みならこの問題は起きません。各端末でログインさせない運用にしたい場合は、次のように制限を引き上げられます。
+[2024年11月の PR](https://github.com/btcpayserver/btcpayserver/pull/6415) で、ログイン済みユーザーにはこの制限を適用しないようになりました。したがって **ステップ 6** を実施済みならこの問題は起きません。各端末でログインさせない運用にしたい場合は、次のように制限を引き上げられます。
 
 1. BTCPay Server の **Manage Plugins** で Kukks 作成の **Dynamic Rate Limit** プラグインをインストール。
 2. `/plugins/dynamicrateslimiter`（**Server Settings -> Dynamic Reports -> Rate Limits**）へ移動。
@@ -115,14 +115,14 @@ Lightning Network 部分は Blink プラグイン経由で [Blink.sv](https://bl
 
 ![Rate Limiting configuration setup for zone=publicinvoices](./img/conference-pos-guide/rate-limiting.png)
 
-この変更により、任意の IP から 1 分あたり最大 9999 件まで請求書作成が可能になります。そのため、推奨アプローチは **Step 6**（端末でのユーザーログイン）です。
+この変更により、任意の IP から 1 分あたり最大 9999 件まで請求書作成が可能になります。そのため、推奨アプローチは **ステップ 6**（端末でのユーザーログイン）です。
 
 ## Bolt Cards プロバイダのセットアップ
 
 Bolt Cards プロバイダ専用の別ストアを作成します。ストア一覧で見つけやすいよう、ストア名の先頭に "z" を付けると便利です（例: "z - Bolt Cards Provider"）。
 
 この特別ストアでは Blink アカウントを接続しますが、出店者向け Blink アカウントとは次の点が異なります:
-- API key に **write permission** も必要（ないと Bolt Cards が資金を引き出せません）
+- API キーに **write 権限** も必要（ないと Bolt Cards が資金を引き出せません）
 - **Bitcoin wallet** を接続すること（*StableSats USD* ではない）
 
 ### 1. ストア作成
@@ -130,8 +130,8 @@ Bolt Cards プロバイダ専用の別ストアを作成します。ストア一
 
 ### 2. Lightning Network ウォレット設定
 
-[Blink docs の手順](https://dev.blink.sv/examples/btcpayserver-plugin#how-to-connect)に沿って、Blink アカウントへ接続する Lightning ウォレットを設定します。以下を必ず確認:
-- API key に "Read"、"Receive"、"Write" 権限があること（ないと Bolt Cards が資金を引き出せません）
+[Blink ドキュメントの手順](https://dev.blink.sv/examples/btcpayserver-plugin#how-to-connect)に沿って、Blink アカウントへ接続する Lightning ウォレットを設定します。以下を必ず確認:
+- API キーに "Read"、"Receive"、"Write" 権限があること（ないと Bolt Cards が資金を引き出せません）
 - **Bitcoin wallet** に接続していること（*StableSats USD* ではない）
 
 ### 3. 自動払い出し設定
@@ -145,7 +145,7 @@ Bolt Cards への無操作トップアップを可能にするため、払い出
 
 ### 4. Bolt Cards Factory 設定
 
-#### Bolt Card factory を設定
+#### Bolt Card Factory を設定
 
 - 左サイドバーで "**Boltcard Factories**" へ移動
 - "**App Name**": "Your conference" のような名前を入力（カード読み取り時に表示されます）

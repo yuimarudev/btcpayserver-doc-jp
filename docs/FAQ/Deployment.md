@@ -197,7 +197,7 @@ cat /var/lib/docker/volumes/generated_tor_servicesdir/_data/BTC-P2P/hostname
 
 bitcoind の P2P ポート 8333 を安全性を下げて公開する必要がある場合（例: Bisq、DOJO、Esplora などで P2P が必要な場合）で、Docker デプロイを使用しているなら、追加フラグメント [opt-unsafe-expose](https://docs.btcpayserver.org/Docker/#generated-docker-compose) を利用できます。
 
-:::danger WARNING
+:::danger 警告
 信頼できる LAN 上、または特定ホストのみを許可するファイアウォールのホワイトリスト設定と併用する場合にのみ使用してください
 :::
 
@@ -367,7 +367,7 @@ changedomain.sh tothemoon.btcpayserver.com
 
 ### BTCPay を自宅のコンピューターで実行できますか？
 
-Web サイトをホストする要件と同様に、BTCPay Server インスタンスには Web サーバーが必要です。BTCPay Server をローカル PC で動かすこと自体は可能ですが、最小要件を満たし、サービス中断を避けるため 24 時間 365 日稼働させる必要があります。また、BTCPay Server の支払い関連アクティビティに関して自宅 IP アドレスを公開したくない場合も多いでしょう。これらの理由から、ローカルホスティングはテスト用途には適していますが、本番用途には現実的ではありません。一般的には、これらの問題を解決するために Virtual Private Server (VPS) が使用されます。
+Web サイトをホストする要件と同様に、BTCPay Server インスタンスには Web サーバーが必要です。BTCPay Server をローカル PC で動かすこと自体は可能ですが、最小要件を満たし、サービス中断を避けるため 24 時間 365 日稼働させる必要があります。また、BTCPay Server の支払い関連アクティビティに関して自宅 IP アドレスを公開したくない場合も多いでしょう。これらの理由から、ローカルホスティングはテスト用途には適していますが、本番用途には現実的ではありません。一般的には、これらの問題を解決するために仮想専用サーバー（VPS）が使用されます。
 
 ### LunaNode Web デプロイ
 

@@ -1,18 +1,18 @@
 # Easy Digital Downloads (EDD) 統合
 
 :::warning
-この統合は BTCPay Server チームによって保守されていない点に注意してください。機能要望やバグ報告は、[coinsnap repository](https://github.com/Coinsnap/Coinsnap-for-EasyDigitalDownloads) に直接投稿してください。
+この統合は BTCPay Server チームによって保守されていない点に注意してください。機能要望やバグ報告は、[Coinsnap リポジトリ](https://github.com/Coinsnap/Coinsnap-for-EasyDigitalDownloads) に直接投稿してください。
 :::
 [![Easy Digital Downloads Bitcoin](https://img.youtube.com/vi/qAenGKJYM8I/mqdefault.jpg)](https://www.youtube.com/watch?v= qAenGKJYM8I)
 ## 要件
 
 このプラグインをインストールする前に、次の要件を満たしていることを確認してください。
 
-- PHP version 8.0 or newer
-- The cURL, gd, intl, json, and mbstring PHP extensions are available
-- Easy Digital Downloads (EDD) がインストールされた WordPress サイト（[installation instructions](https://easydigitaldownloads.com/docs/quickstart-guide/)）
+- PHP バージョン 8.0 以上
+- cURL、gd、intl、json、mbstring の PHP 拡張が利用可能
+- Easy Digital Downloads (EDD) がインストールされた WordPress サイト（[インストール手順](https://easydigitaldownloads.com/docs/quickstart-guide/)）
   注: 開始に EDD の Pro 版は不要です
-- [self-hosted](/Deployment/README.md) または [hosted by a third-party](/Deployment/ThirdPartyHosting.md) の BTCPay Server バージョン 2.0.0 以降を利用していること
+- [セルフホスト](/Deployment/README.md) または [サードパーティホスト](/Deployment/ThirdPartyHosting.md) の BTCPay Server バージョン 2.0.0 以降を利用していること
 - [インスタンスに登録済みアカウントがあること](./RegisterAccount.md)
 - [インスタンス上に BTCPay ストアがあること](./CreateStore.md)
 - [ストアにウォレットが接続されていること](./WalletSetup.md)
@@ -23,14 +23,14 @@
 
 プラグインのインストール方法は3つあります。
 
-- WordPress の Admin Dashboard からインストール（推奨、以下参照）
-- [WordPress plugin directory](https://wordpress.org/plugins/coinsnap-for-easy-digital-downloads/)
-- [GitHub Repository](https://github.com/Coinsnap/Coinsnap-for-EasyDigitalDownloads)
+- WordPress の管理ダッシュボードからインストール（推奨、以下参照）
+- [WordPress プラグインディレクトリ](https://wordpress.org/plugins/coinsnap-for-easy-digital-downloads/)
+- [GitHub リポジトリ](https://github.com/Coinsnap/Coinsnap-for-EasyDigitalDownloads)
 
-### 1.1 WordPress Admin Dashboard からインストール（推奨）
+### 1.1 WordPress 管理ダッシュボードからインストール（推奨）
 
 1. 左サイドバーで _Plugins_ -> _Add New_ をクリックします。
-2. Search に「easy digital downloads btcpay」と入力します。
+2. 検索欄に「easy digital downloads btcpay」と入力します。
 3. _Install now_ をクリックし、その後 _Activate_ をクリックします。
 
 ![Bitcoin for EDD: Plugin installation](./img/edd/edd-search-and-install-plugin.png)
@@ -41,19 +41,19 @@
 
 1. [プラグインリポジトリを開きます](https://github.com/Coinsnap/Coinsnap-for-EasyDigitalDownloads)。
 2. _Code_ -> _Download ZIP_ をクリックして .zip をダウンロードします。
-3. WordPress admin dashboard で _Plugins_ -> _Add Plugin_ をクリックします。
+3. WordPress 管理ダッシュボードで _Plugins_ -> _Add Plugin_ をクリックします。
 4. _Upload Plugin_ ボタンをクリックし、先ほどダウンロードした .zip ファイルを選択します。
 5. _Install Now_ をクリックし、その後 _Activate_ をクリックします。
 
 ## 2. EDD と BTCPay Server を接続
 
 Bitcoin for EDD プラグインは、**BTCPay Server（決済プロセッサ）と EDD ストアをつなぐブリッジ**です。
-self-hosted でも第三者ホスティングでも、接続手順は同じです。
+セルフホストでも第三者ホスティングでも、接続手順は同じです。
 
 ### 2.1 EDD で Bitcoin サポートを有効化
 
 :::info
-上記インストール後、EDD の payment gateways に「Coinsnap」として表示されます。
+上記インストール後、EDD の決済ゲートウェイに「Coinsnap」として表示されます。
 :::
 
 1. WordPress 管理 UI で、左サイドバーの EDD（Downloads）セクション内にある _[Settings]_ をクリックします。
@@ -93,10 +93,10 @@ BTCPay Server インスタンスで次を実施します。
 ストアで少額のテスト決済を行うと安心です。
 本番公開前に、すべてが正しく設定されていることを必ず確認してください。
 
-Checkout で注文を作成します。
+チェックアウトで注文を作成します。
 ![Bitcoin for EDD: Test purchase](./img/edd/edd-checkout.png)
 
-BTCPay Server にリダイレクトされ、請求書の qr-code が表示されます。
+BTCPay Server にリダイレクトされ、請求書の QR コードが表示されます。
 ![Bitcoin for EDD: Test purchase invoice](./img/edd/edd-checkout-invoice.png)
 
 請求書を支払った後、サイトへ戻れます。
@@ -109,4 +109,4 @@ BTCPay Server にリダイレクトされ、請求書の qr-code が表示され
 ![Bitcoin for EDD: Test purchase redirect order confirmation](./img/edd/edd-admin-order-completed.png)
 
 ## サポート
-[Coinsnap Github repository](https://github.com/Coinsnap/Coinsnap-for-EasyDigitalDownloads) で issue を作成するか、[Telegram](https://t.me/btcpayserver) または [Mattermost chat](http://chat.btcpayserver.org/) で連絡できます。
+[Coinsnap GitHub リポジトリ](https://github.com/Coinsnap/Coinsnap-for-EasyDigitalDownloads) で issue を作成するか、[Telegram](https://t.me/btcpayserver) または [Mattermost チャット](http://chat.btcpayserver.org/) で連絡できます。

@@ -200,13 +200,11 @@ Gmail アカウントで 2 段階認証を使っている場合は、[こちら�
 
 BTCPay のテストメール機能で、メール送信が正常か確認してください。業務用途でより信頼性の高い SMTP を求める場合は、Mailgun のような専用メールサービスの利用を検討してください。
 
-Maintenance feature requires access to SSH properly configured in BTCPayServer configuration
-
-### Error: Maintenance feature requires access to SSH properly configured in BTCPayServer configuration
+### エラー: `Maintenance feature requires access to SSH properly configured in BTCPayServer configuration`
 
 Docker の問題により、BTCPay Server のメンテナンス機能設定が一時的に壊れる場合があります。通常は BTCPay Server を再起動すると解消します。ただしこのエラーが UI に表示されると再起動ボタンが無効になります。解決には [ssh で再起動](#how-to-restart-btcpay-server) してください。
 
-### Error: Your local changes to the following files would be overwritten by merge
+### エラー: `Your local changes to the following files would be overwritten by merge`
 
 誤ってファイルを編集してしまうと、次のエラーで更新機構が壊れる場合があります。
 
@@ -222,7 +220,7 @@ cd btcpayserver-docker
 git reset --hard origin/master
 ```
 
-### Error: BTCPAY_SSHKEYFILE is not set when running the docker install, or unable to update through Server Settings / Maintenance
+### エラー: `BTCPAY_SSHKEYFILE is not set when running the docker install, or unable to update through Server Settings / Maintenance`
 
 `docker-compose` 実行時（`btcpay-up.sh` または `btcpay-setup.sh`）に、次のようなメッセージが表示されることがあります。
 

@@ -29,7 +29,7 @@
 ## BTCPay プラグインをインストールする
 
 1. [最新の BTCPay Server プラグインをダウンロード](https://github.com/btcpayserver/prestashop-plugin/releases)
-2. PrestaShop > Modules > Module Manager > Upload a module
+2. PrestaShop > Modules > Module Manager > モジュールをアップロード
 3. 先ほどダウンロードした `.zip` ファイルをアップロード
 4. `configure` をクリックしてモジュールを設定
 

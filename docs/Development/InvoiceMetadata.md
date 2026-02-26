@@ -22,14 +22,14 @@
 | `.buyerZip`         | 請求書詳細ビューおよび BitPay API 互換エンドポイントで表示されます。                                                                                                                                                                                           |
 | `.buyerCountry`     | 請求書詳細ビューおよび BitPay API 互換エンドポイントで表示されます。                                                                                                                                                                                           |
 | `.buyerPhone`       | 請求書詳細ビューおよび BitPay API 互換エンドポイントで表示されます。                                                                                                                                                                                           |
-| `.itemDesc`         | Point of Sale（keypad / cart view を除く）使用時に、購入商品の説明がこのフィールドへ設定されます。この情報は CSV 請求書エクスポート機能に含まれ、請求書詳細ビューにも表示されます。                                                                          |
-| `.itemCode`         | Point of Sale（keypad / cart view を除く）使用時に、購入商品の商品コードがこのフィールドへ設定されます。この情報は CSV 請求書エクスポート機能に含まれ、請求書詳細ビューにも表示されます。                                                                    |
+| `.itemDesc`         | Point of Sale（キーパッド/カート表示を除く）使用時に、購入商品の説明がこのフィールドへ設定されます。この情報は CSV 請求書エクスポート機能に含まれ、請求書詳細ビューにも表示されます。                                                                          |
+| `.itemCode`         | Point of Sale（キーパッド/カート表示を除く）使用時に、購入商品の商品コードがこのフィールドへ設定されます。この情報は CSV 請求書エクスポート機能に含まれ、請求書詳細ビューにも表示されます。                                                                    |
 | `.physical`         | 物理商品かどうかを示す Boolean 値です。請求書詳細ビューおよび BitPay API 互換エンドポイントで表示されます。                                                                                                                                                  |
 | `.taxIncluded`      | 請求書通貨での税額を表す数値です。この情報は請求書詳細ビューに表示されます。請求書作成時には有効桁へ自動丸めされ、請求書価格を超えないことが保証されます。                                                                                                  |
 
 ## 例
 
-Point of sale invoice（Product list view）:
+Point of sale 請求書（商品一覧表示）:
 
 ```json
 {
@@ -44,7 +44,7 @@ Point of sale invoice（Product list view）:
 }
 ```
 
-Point of sale invoice（Cart view）:
+Point of sale 請求書（カート表示）:
 
 ```json
 {
@@ -95,7 +95,7 @@ Point of sale invoice（Cart view）:
 }
 ```
 
-Point of sale invoice（Keypad view）:
+Point of sale 請求書（キーパッド表示）:
 
 ```json
 {
