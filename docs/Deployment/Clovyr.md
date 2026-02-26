@@ -1,50 +1,50 @@
-# Clovyr BTCPay Server web deployment.
+# Clovyr BTCPay Server Web デプロイ
 
-In this guide, we will walk you through the initial setup of your Clovyr BTCPay Server web deployment.
-Clovyr offers a quick and easy deployment of a variety of services, including BTCPay Server. They allow deploying either to their own servers, or to a variety of other VPS providers, such as Digital Ocean, AWS, and Linode.
+このガイドでは、Clovyr BTCPay Server Web デプロイの初期セットアップを順に説明します。
+Clovyr は、BTCPay Server を含むさまざまなサービスを素早く簡単にデプロイできます。デプロイ先として、Clovyr 自身のサーバーだけでなく、Digital Ocean、AWS、Linode など複数の VPS プロバイダーも選択できます。
 
-## 1. Visit the Clovyer BTCPay Server launch page
+## 1. Clovyr BTCPay Server 起動画面にアクセス
 
-Go to [the Clovyer BTCPay Server launch page](https://clovyr.app/apps/btcpayserver/launch)
+[Clovyr BTCPay Server launch page](https://clovyr.app/apps/btcpayserver/launch) にアクセスします。
 
 ![Clovyr Launch](../img/Clovyr/1.png)
 
-Next, pick where you would like to host. We'll go ahead and go with the default option, their own servers.
-Click Review, and then Launch.
+次に、ホスティング先を選択します。ここではデフォルトの Clovyr 自社サーバーを選びます。
+Review をクリックし、その後 Launch をクリックします。
 
-## 2. Account creation
+## 2. アカウント作成
 
-You should now be greeted with a success screen inside the Clovyr dashboard.
+Clovyr ダッシュボード内に成功画面が表示されます。
 
 ![Clovyr Dashboard](../img/Clovyr/2.png)
 
-Click on Create account, and fill in your details.
+Create account をクリックして、必要情報を入力します。
 
 ![Clovyr Dashboard](../img/Clovyr/3.png)
-It will now ask you to save a recovery kit, which allows you to restore your account if you forget or lose your password.
+パスワードを忘れたり失ったりした場合にアカウントを復元できる Recovery kit の保存を求められます。
 
 ![Clovyr Dashboard](../img/Clovyr/4.png)
 
-## 3. Accessing BTCPay Server
+## 3. BTCPay Server へアクセス
 
-Once back on the Clovyr dashboard, click on the "Open" button under App Essentials, and BTCPay Server will open in a new tab.
+Clovyr ダッシュボードに戻ったら、App Essentials の下にある "Open" ボタンをクリックすると、BTCPay Server が新しいタブで開きます。
 
-## 4. Start your first store.
+## 4. 最初のストアを始める
 
-You will be prompted to create the first account on your new BTCPay Server. Make sure to have the Administrator account checked.
+新しい BTCPay Server で最初のアカウント作成を求められます。Administrator account にチェックが入っていることを確認してください。
 
-You are now ready to set up your first store!
-To follow more on setting up your store, follow along in this [Guide](../RegisterAccount.md).
+これで最初のストアをセットアップする準備ができました。
+ストア設定の詳細は、この [Guide](../RegisterAccount.md) を参照してください。
 
-## 5. Welcome to your BTCPay Server dashboard
+## 5. BTCPay Server ダッシュボードへようこそ
 
-You are now inside your new BTCPay Server.
-The bitcoin wallet is still missing. You can follow along in [this wallet setup guide](../WalletSetup.md)
+新しい BTCPay Server にログインできました。
+まだ bitcoin ウォレットは設定されていません。[このウォレットセットアップガイド](../WalletSetup.md)を参照してください。
 
 :::tip
-If there are questions about your node, the deployment, or updates, please reach out to the support of Clovyr, using their Feedback tab.
+ノード、デプロイ、アップデートについて質問がある場合は、Clovyr の Feedback タブから Clovyr サポートにお問い合わせください。
 :::
 
-## 6. Billing
+## 6. 請求
 
-You will have a 7 day free trial to try out the service. After that, you will be billed $20 per month and will need to configure this through the Clovyr dashboard by clicking on "Upgrade now".
+サービスは 7 日間の無料トライアルがあります。その後は月額 $20 が課金され、Clovyr ダッシュボードで "Upgrade now" をクリックして設定が必要です。

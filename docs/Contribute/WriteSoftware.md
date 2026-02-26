@@ -1,57 +1,57 @@
-# Contribute to the software stack
+# ソフトウェアスタックへの貢献
 
 ::: tip
-If you have trouble finding a string or contributing to the software stack, ask the [community](../Community.md)
+文字列の場所が見つからない場合やソフトウェアスタックへの貢献で困った場合は、[コミュニティ](../Community.md)に相談してください。
 
-If your textual change is significant [open an issue on GitHub](https://github.com/btcpayserver/btcpayserver/issues/new/choose) and explain what you'd like to change and why.
+テキストの変更が大きい場合は、[GitHub で issue を作成](https://github.com/btcpayserver/btcpayserver/issues/new/choose)し、何をどのような理由で変更したいのかを説明してください。
 :::
 
-## **Step 1**
+## **ステップ 1**
 
-Fork/Clone the main repository ([BTCPay Server](https://github.com/btcpayserver/btcpayserver/)) using Github and publish it.
+Github を使ってメインリポジトリ（[BTCPay Server](https://github.com/btcpayserver/btcpayserver/)）を fork/clone し、公開します。
 
 ![ContributeCloneRepo](../img/Contribute/ContributeCloneRepo.jpg)
 
 ![ContributeCloneRepo2](../img/Contribute/ContributeCloneRepo2.jpg)
 
-## **Step 2**
+## **ステップ 2**
 
-Create a branch and name it (for example what file you're working on).
+ブランチを作成し、名前を付けます（例: 作業対象ファイル名）。
 
 ![ContributeCreateBranch](../img/Contribute/ContributeCreateBranch.jpg)
 
 ![ContributeCreateBranch2](../img/Contribute/ContributeCreateBranch2.jpg)
 
-## **Step 3**
+## **ステップ 3**
 
-Now open your branch in your file explorer.
+次に、ファイルエクスプローラーであなたのブランチを開きます。
 
 ![ContributeFindFile](../img/Contribute/ContributeFindFile.jpg)
 
-You're all set!
-Open the file you wish to edit and work on it.
-Once finished, save it.
+準備完了です。
+編集したいファイルを開いて作業します。
+作業が終わったら保存します。
 
-## **Step 4**
+## **ステップ 4**
 
-Once your changes are saved, return to Github Desktop.
-See your changes on the right hand side.
+変更を保存したら、Github Desktop に戻ります。
+右側で変更内容を確認できます。
 
-Name your contribution and describe it.
-Click the `Commit` button in the bottom left.
+貢献内容に名前を付け、説明を書きます。
+左下の `Commit` ボタンをクリックします。
 
 ![ContributeCommit](../img/Contribute/ContributeCommit.jpg)
 
 ![ContributeCommit2](../img/Contribute/ContributeCommit2.jpg)
 
-## **Step 5**
+## **ステップ 5**
 
-Next, create a `Pull Request` by clicking the `Create Pull Request` button on the right to open a browser page.
+次に、右側の `Create Pull Request` ボタンをクリックしてブラウザページを開き、`Pull Request` を作成します。
 
 ![ContributeCreatePR](../img/Contribute/ContributeCreatePR.jpg)
 
-Then describe what your `Pull Request` changes, give it a title, and click `Create Pull Request`.
+その後、`Pull Request` で何が変わるかを説明し、タイトルを付けて `Create Pull Request` をクリックします。
 
 ![ContributeOpenPR](../img/Contribute/ContributeOpenPR.jpg)
 
-Once your pull request is submitted, it has to be reviewed by the maintainers and contributors. If it gets accepted - congratulations, you've made your first contribution.
+pull request を送信した後は、メンテナーや貢献者によるレビューが必要です。承認されれば、あなたの最初の貢献は完了です。

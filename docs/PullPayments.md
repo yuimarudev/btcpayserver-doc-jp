@@ -1,47 +1,51 @@
+<!-- legacy-anchor-aliases -->
+<span id="approve-and-pay-a-payout"></span>
+<!-- /legacy-anchor-aliases -->
+
 # Pull payments
 
-## Introduction
+## はじめに
 
-Traditionally, to make a Bitcoin payment, a receiver shares their bitcoin address and the sender later sends money to this address.
-Such system is called `Push payment` as the sender initiates the payment while the receiver may be unavailable, in effect `pushing` the payment to the receiver.
+従来、Bitcoin 支払いを行うには、受取人が自分の bitcoin アドレスを共有し、送金者が後でそのアドレスに送金します。  
+この仕組みは、受取人が不在でも送金者が支払いを開始して受取人へ支払いを `push` するため、`Push payment` と呼ばれます。
 
-However, what about reversing the role?
+では、役割を逆にするとどうなるでしょうか。
 
-What if, instead of a sender `pushing` the payment, the sender allows the receiver to `pull` the payment at a time the receiver seems fit?
-This is the concept of `Pull payment`. This allows several new applications such as:
+送金者が支払いを `push` する代わりに、受取人が都合のよいタイミングで支払いを `pull` できるようにしたらどうでしょうか。  
+これが `Pull payment` の考え方です。これにより、次のような新しい用途が生まれます。
 
-- A subscription service (where the subscriber allows the service to pull money every x amount of time)
-- Refunds (where the merchant allows the customer to pull the refund money to his wallet when it seems fit)
-- Time-based billing for freelancers (where the person hiring allows the freelancer to pull money to his wallet as time gets reported)
-- Patronage (where the patron allows the recipient to pull money every month to continue supporting their work)
-- Automatic selling (where a customer of an exchange would allow an exchange to pull money from their wallet to automatically sell every month)
-- Balance withdraw system (where a high-volume service allows users to request withdrawals from their balance, the service can then easily batch all the payouts to many users, at fixed intervals)
+- サブスクリプションサービス（購読者が、サービス側に一定間隔で資金を引き出すことを許可する）
+- 返金（加盟店が、顧客が都合のよい時にウォレットへ返金を引き出せるようにする）
+- フリーランサー向け時間課金（雇用側が、稼働報告に応じてフリーランサーがウォレットへ引き出せるようにする）
+- パトロネージ（支援者が、受取人の活動継続のため毎月引き出せるようにする）
+- 自動売却（取引所の顧客が、毎月自動売却するために取引所へ資金引き出しを許可する）
+- 残高出金システム（大量トランザクションを扱うサービスが、ユーザーの出金要求を受け、固定間隔で多数の支払いをまとめて処理できる）
 
-You can also follow this video:
+次の動画も参考にしてください。
 
 [![What is a pull payment](https://img.youtube.com/vi/-e8lPd9NtPs/mqdefault.jpg)](https://www.youtube.com/watch?v=-e8lPd9NtPs)
 
-## Concept
+## 概念
 
-When a sender configures a `Pull payment`, they can configure a number of properties:
+送金者が `Pull payment` を設定する際、次のプロパティを設定できます。
 
-- Start date
-- End date (optional)
-- A period (optional)
-- A limit amount
-- A unit (such as USD, BTC, Hours)
-- Available payment methods
+- 開始日
+- 終了日（任意）
+- 期間（任意）
+- 上限額
+- 単位（USD、BTC、Hours など）
+- 利用可能な支払い方法
 
-After this, the sender can **share the pull payment** using a link with the receiver, allowing the receiver to `create a payout`.
-The receiver will choose for their payout:
+その後、送金者はリンクを使って**pull payment を共有**でき、受取人は `create a payout` を実行できます。  
+受取人は payout について次を選択します。
 
-- Which payment method to use
-- Where to send the money
+- 使用する支払い方法
+- 送金先
 
-Once a payout is created, it will count toward the `pull payment's limit` for the current `period`.
-The sender will then approve the payout by setting the `rate` in which the payout will be sent, and proceed with payment.
+payout が作成されると、現在の `period` における `pull payment's limit` に計上されます。  
+その後、送金者は payout を送る際の `rate` を設定して payout を承認し、支払いを進めます。
 
-For the sender, we provide an easy to use way to batch the payment of several payouts from the [BTCPay Internal Wallet](./Wallet.md).
+送金者向けには、[BTCPay Internal Wallet](./Wallet.md) から複数 payout をまとめて支払える、使いやすい方法を提供しています。
 
 ```
 
@@ -77,47 +81,47 @@ For the sender, we provide an easy to use way to batch the payment of several pa
       v                            v
 ```
 
-Note that BTCPay Server does not approve and pay a payout automatically. In future releases, we will look into payouts which are approved to be paid out automatically under the correct conditions.
-Instead, a notification will appear for the sender, giving the sender the choice to approve and pay the payouts.
+BTCPay Server は payout を自動で承認・支払いしない点に注意してください。将来のリリースでは、適切な条件下で自動支払いされる payout を検討予定です。  
+代わりに送金者へ通知が表示され、送金者が payout を承認して支払うかを選択します。
 
 ## Greenfield API
 
-We provide a full API to both the sender and receiver that is documented in the `/docs` page of your instance. (or on our [public link](https://docs.btcpayserver.org/API/Greenfield/v1/) page)
+送金者と受取人の両方に対して、インスタンスの `/docs` ページ（または [public link](https://docs.btcpayserver.org/API/Greenfield/v1/)）で確認できる完全な API を提供しています。
 
-Since our API exposes the full capability of pull payments, a sender can automate payments for his own need.
+この API は pull payment の全機能を公開しているため、送金者は自身の用途に合わせて支払いを自動化できます。
 
-## User interface
+## ユーザーインターフェース
 
-The user interface only allows a subset of what is possible.
+ユーザーインターフェースでは、可能な機能の一部のみを操作できます。
 
-### Create a pull payment
+### pull payment を作成する
 
-1. Go to your wallet page / pull payments
+1. ウォレットページ / pull payments に移動します
    ![BTCPay Server Pull Payment](./img/pull-payments/1.jpg)
-2. Click on `Create a new pull payment`
+2. `Create a new pull payment` をクリックします
    ![BTCPay Server Pull Payment](./img/pull-payments/2.jpg)
-3. Fill out the pull payment information, click `Create`
+3. pull payment 情報を入力し、`Create` をクリックします
    ![BTCPay Server Pull Payment](./img/pull-payments/3.jpg)
-4. Go to the pull payment page by clicking on `View`
-5. Share this page with the payment receiver
+4. `View` をクリックして pull payment ページに移動します
+5. このページを支払いの受取人に共有します
    ![BTCPay Server Pull Payment](./img/pull-payments/4.png)
-6. As the receiver, fill out how much `USD` you claim, and to which address the money should be sent.
+6. 受取人として、請求する `USD` 金額と送金先アドレスを入力します。
    ![BTCPay Server Pull Payment](./img/pull-payments/5.png)
 
-### Approve and pay a payout
+### payout を承認して支払う
 
-1. The sender gets notified when the receiver is pulling money
+1. 受取人が資金を引き出すと、送金者に通知が届きます
    ![6](./img/pull-payments/6.jpg)
-2. Clicking on the notification brings the sender to a page listing all outstanding payouts
+2. 通知をクリックすると、未処理 payout の一覧ページに移動します
    ![7](./img/pull-payments/7.jpg)
-3. Check the payout to approve, pay and confirm
+3. 承認して支払う payout を選択し、確認します
    ![8](./img/pull-payments/8.jpg)
-4. You are then brought to the normal wallet user interface of BTCPay Server
+4. その後、BTCPay Server の通常のウォレット UI に移動します
 
 :::warning
-Clicking on Confirm selected payouts will use the current exchange rate of your wallet's store settings. The rate is then fixed, even if you don't complete the payment. Payments made at a later time will use this previously confirmed rate.
+Confirm selected payouts をクリックすると、ウォレットのストア設定にある現在の為替レートが使用されます。このレートは、支払いを完了しなくても固定されます。後で行う支払いでも、この以前に確定したレートが使われます。
 :::
 
-## Additional use cases for the Pull Payments feature
+## Pull Payments 機能の追加ユースケース
 
-The **Pull Payment feature** can be used in multiple applications, the first one being [Refunds](./Refund.md).
+**Pull Payment 機能**は複数の用途で利用でき、その 1 つが [Refunds](./Refund.md) です。

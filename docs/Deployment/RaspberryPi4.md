@@ -1,110 +1,110 @@
-# Raspberry Pi Deployment
+# Raspberry Pi デプロイ
 
-This document guides you step by step on **how to run BTCPay Server on a Raspberry Pi 4**.
+このドキュメントでは、**Raspberry Pi 4 で BTCPay Server を実行する方法**をステップごとに案内します。
 
-The **Raspberry Pi 4** is currently the best low-cost single-board computer available.
-You can **use a Raspberry Pi 4 to run your BTCPay Server** at home for around $150 worth of parts, described below.
+現在入手できる低価格のシングルボードコンピューターの中では、**Raspberry Pi 4** が最も優れています。
+以下で説明するパーツをそろえれば、約150ドルで **Raspberry Pi 4 を使って自宅で BTCPay Server を運用**できます。
 
-Already have a Raspberry Pi 4 with the following specs?
+すでに次の仕様の Raspberry Pi 4 をお持ちですか？
 
-- 4GB memory
+- 4GB メモリ
 - 1TB USB 3.0 SSD
-- 16GB or greater SD card
+- 16GB 以上の SD カード
 
-If so, you can go straight to the [quickstart instructions](#quickstart).
-Otherwise, here's what you need …
+お持ちであれば、すぐに [quickstart instructions](#quickstart) に進めます。
+そうでなければ、必要なものは次のとおりです…
 
-## Required Hardware
+## 必要なハードウェア
 
 ### Raspberry Pi 4
 
-- [Raspberry Pi 4 with **4GB RAM**](https://www.canakit.com/raspberry-pi-4-4gb.html) (~$65)
+- [**4GB RAM** 搭載 Raspberry Pi 4](https://www.canakit.com/raspberry-pi-4-4gb.html) (~$65)
 - [Sandisk 16GB SD Card](https://www.amazon.com/dp/B073K14CVB/) (~$10)
 
-Don’t settle for only 1GB or 2GB of RAM. The **4GB RAM** version is harder to find than the other versions, but you absolutely want that **4GB of RAM** for a few extra bucks, and it’s totally worth spending a few extra minutes searching on the Internet to find a vendor that has the 4GB RAM version in stock. You’ll also need an **SD card reader** if you don’t already have one.
+RAM が 1GB や 2GB のモデルで妥協しないでください。**4GB RAM** 版は他の版より見つけにくいことがありますが、数ドルの差で **4GB RAM** を選ぶ価値は十分あります。4GB RAM 版の在庫がある販売店を見つけるために、少し時間をかけて探すことを強くおすすめします。まだ持っていない場合は **SD カードリーダー** も必要です。
 
-### Data Storage options
+### データ保存オプション
 
 - [Samsung SSD T7 1TB](https://www.amazon.com/dp/B0874XN4D8/) (~$100)
 - [SanDisk Ultra 3D 1TB](https://www.amazon.com/dp/B071KGRXRG/) (~$100)
 
-A 1TB SSD allows you to keep a full copy of the Bitcoin blockchain.
-You can also use BTCPay Server without a full copy of the Bitcoin blockchain by using the [pruning option](/Docker/#how-i-can-prune-my-nodes).
+1TB の SSD があれば、Bitcoin ブロックチェーンの完全なコピーを保持できます。
+また、[pruning option](/Docker/#how-i-can-prune-my-nodes) を使えば、Bitcoin ブロックチェーンの完全コピーがなくても BTCPay Server を利用できます。
 
-### Power Adapter options
+### 電源アダプターのオプション
 
 - [Official Raspberry Pi 4 USB-C Power Adapter 5.1V/3A for US](https://shop.pimoroni.com/products/raspberry-pi-official-usb-c-power-supply-us?variant=29391144648787) ($10)
 - [Official Raspberry Pi 4 USB-C Power Adapter 5.1V/3A for EU](https://shop.pimoroni.com/products/raspberry-pi-official-usb-c-power-supply-eu?variant=29391130624083) ($10)
 - [Official Raspberry Pi 4 USB-C Power Adapter 5.1V/3A for AU](https://shop.pimoroni.com/products/raspberry-pi-official-usb-c-power-supply-au?variant=29391160737875) ($10)
 
-Don’t waste your time with random cheap power adapters from Amazon, or expect that the existing ones you have at home are going to work fine. The Raspberry Pi 4 has issues with unofficial adapters, and for only $10 it’s better to just **get an official adapter** instead of learning this the hard way.
+Amazon の安価な無名アダプターに時間を使ったり、家にある既存のアダプターで問題ないと考えたりしないでください。Raspberry Pi 4 は非公式アダプターで問題が出ることがあり、10ドル程度なら、痛い目を見る前に **公式アダプターを購入**するほうが確実です。
 
-### Case and Cooling options
+### ケースと冷却オプション
 
 - [Flirc Heatsink Case](https://www.amazon.com/dp/B07WG4DW52/) (~$15)
 - [Passive cooling aluminum case](https://www.amazon.com/dp/B07VQRYTPR/) (~$15)
 
-Of course, using a case is totally optional, but we recommend one to protect your Raspberry Pi over the long-term.
-Strictly speaking, you don’t actually need a cooling solution, but you certainly **want** at least passive cooling.
-Once the Raspberry PI core temperature reaches 70°C, it will throttle down the CPU.
+もちろんケースの使用は完全に任意ですが、Raspberry Pi を長期的に保護するために推奨します。
+厳密には冷却機構が必須というわけではありませんが、少なくとも受動冷却は **あったほうがよい**です。
+Raspberry PI のコア温度が 70°C に達すると、CPU がサーマルスロットリングされます。
 
 ## Quickstart
 
-Download and open the latest [Raspberry Pi Imager](https://www.raspberrypi.com/software/).
+最新の [Raspberry Pi Imager](https://www.raspberrypi.com/software/) をダウンロードして起動します。
 
 ![Raspberry Pi Imager](../img/raspberry-pi/rpi-imager.png)
 
-Choose the following options:
+次のオプションを選択します。
 
 - Operating System: Raspberry Pi OS Lite (64-bit)
-  - Find it via "Raspberry Pi OS (Other)"
-- Storage: Select your SD card
+  - "Raspberry Pi OS (Other)" から選択
+- Storage: SD カードを選択
 
-Open the Advanced Settings via the button in the bottom right corner.
+右下のボタンから Advanced Settings を開きます。
 
 ![Raspberry Pi Imager Advanced Settings](../img/raspberry-pi/rpi-imager-advanced-settings.png)
 
 Advanced Settings:
 
-- Set the hostname to what you like, this guide assumes `btcpay.local`.
-- Enabled SSH
-- Set username and password, this guide assumes `btcpay` as username.
+- ホスト名を設定します。このガイドでは `btcpay.local` を想定します。
+- SSH を有効化
+- ユーザー名とパスワードを設定します。このガイドではユーザー名を `btcpay` と想定します。
 
-Other settings are optional, you do not need to configure wireless LAN.
+その他の設定は任意です。無線 LAN を設定する必要はありません。
 
-Close the Advanced Settings and click the "Write" button.
+Advanced Settings を閉じて、"Write" ボタンをクリックします。
 
-### Setting up the Raspberry Pi
+### Raspberry Pi のセットアップ
 
-Once the image is written to the SD card, you can eject it and insert it into the Raspberry Pi.
-Connect the SSD and network cable to the Raspberry Pi.
-At last, connect the power cable ­— this starts the boot process.
-It should boot up and get an IP address using DHCP.
+イメージの書き込みが SD カードに完了したら、SD カードを取り外して Raspberry Pi に挿入します。
+Raspberry Pi に SSD とネットワークケーブルを接続します。
+最後に電源ケーブルを接続すると、起動プロセスが始まります。
+起動後、DHCP により IP アドレスが割り当てられるはずです。
 
-Login to the Raspberry Pi using the credentials you configured in the Raspberry Pi Imager:
+Raspberry Pi Imager で設定した認証情報で Raspberry Pi にログインします。
 
 ```bash
 ssh btcpay@btcpay.local
 ```
 
-Confirm the `Are you sure you want to continue connecting?` question with `yes`
+`Are you sure you want to continue connecting?` と聞かれたら `yes` を入力します。
 
-If your Raspberry Pi cannot be found by the `btcpay.local` address, you will need to login to your router to find its IP address.
-The IP address that my Raspberry Pi got was `192.168.1.5`.
+`btcpay.local` で Raspberry Pi が見つからない場合は、ルーターにログインして IP アドレスを確認する必要があります。
+私の Raspberry Pi では `192.168.1.5` が割り当てられました。
 
 ```bash
 ssh btcpay@192.168.1.5
 ```
 
-Switch to the `root` user:
+`root` ユーザーに切り替えます。
 
 ```bash
 sudo su -
 ```
 
-Afterwards, you can choose between [LND](https://github.com/lightningnetwork/lnd) and [Core Lightning](https://github.com/ElementsProject/lightning) for your Lightning node.
+その後、Lightning ノードとして [LND](https://github.com/lightningnetwork/lnd) か [Core Lightning](https://github.com/ElementsProject/lightning) のどちらかを選べます。
 
-**Required:** Choose one of the following …
+**必須:** 次のどちらかを選択してください…
 
 ```bash
 # Core Lightning
@@ -114,7 +114,7 @@ export BTCPAYGEN_LIGHTNING="clightning"
 export BTCPAYGEN_LIGHTNING="lnd"
 ```
 
-**Optional:** You can also configure [additional settings](/Docker/#environment-variables) …
+**任意:** [additional settings](/Docker/#environment-variables) も設定できます…
 
 ```bash
 # optional, this is just an example for runing a pruned node on a public domain
@@ -122,7 +122,7 @@ export BTCPAYGEN_ADDITIONAL_FRAGMENTS="opt-save-storage"
 export BTCPAY_ADDITIONAL_HOSTS="btcpay.YourDomain.com"
 ```
 
-Download and run the install script:
+インストールスクリプトをダウンロードして実行します。
 
 ```bash
 wget -O btcpayserver-install.sh https://raw.githubusercontent.com/btcpayserver/btcpayserver-doc/master/scripts/btcpayserver-rpi4-install.sh
@@ -130,21 +130,21 @@ chmod +x btcpayserver-install.sh
 . btcpayserver-install.sh
 ```
 
-After the initial setup is complete open a browser on another computer and go to `btcpay.local`.
+初期セットアップが完了したら、別のコンピューターのブラウザーで `btcpay.local` にアクセスします。
 
 :::tip
-Your installation is done and your node should have started synching.
-For a Bitcoin full node the initial block download takes approximately 40 hours after install.
+インストールは完了しており、ノードの同期が開始されているはずです。
+Bitcoin フルノードの場合、インストール後の初回ブロックダウンロードにはおおよそ 40 時間かかります。
 :::
 
-If you are curious, here are the details of what the installation scripts above do …
+参考までに、上記のインストールスクリプトが実行している内容の詳細を以下に示します…
 
-## Detailed Step by Step Instructions
+## 詳細なステップバイステップ手順
 
-These are the steps that follow after the general setup process outlined in the [quickstart instructions](#quickstart).
+以下は [quickstart instructions](#quickstart) で示した一般的なセットアップの後に行う手順です。
 
 :::tip NOTE
-The following steps require you to be the root user.
+以下の手順では `root` ユーザーである必要があります。
 
 ```bash
 sudo su -
@@ -152,15 +152,15 @@ sudo su -
 
 :::
 
-### Upgrade the OS packages to latest
+### OS パッケージを最新化
 
 ```bash
 apt update && apt upgrade -y && apt autoremove
 ```
 
-### Configuring the storage
+### ストレージ設定
 
-We recommend to disable swap to prevent burning out your SD card:
+SD カードの消耗を防ぐため、swap を無効化することを推奨します。
 
 ```bash
 dphys-swapfile swapoff
@@ -169,7 +169,7 @@ update-rc.d dphys-swapfile remove
 systemctl disable dphys-swapfile
 ```
 
-Partition your SSD:
+SSD をパーティション分割します。
 
 ```bash
 fdisk /dev/sda
@@ -179,13 +179,13 @@ fdisk /dev/sda
 # type 'w' to write the new partition table and exit fdisk
 ```
 
-Format the new partition on your SSD:
+SSD 上の新しいパーティションをフォーマットします。
 
 ```bash
 mkfs.ext4 /dev/sda1
 ```
 
-Configure the SSD partition to auto-mount at bootup:
+起動時に SSD パーティションが自動マウントされるよう設定します。
 
 ```bash
 mkfs.ext4 /dev/sda1
@@ -195,14 +195,14 @@ echo "UUID=$UUID /mnt/usb ext4 defaults,noatime,nofail 0 0" | sudo tee -a /etc/f
 mount -a
 ```
 
-While you’re editing `/etc/fstab` add a RAM filesystem for logs (optional).
-This is also to prevent burning out your SD card too quickly:
+`/etc/fstab` を編集するついでに、ログ用 RAM ファイルシステムを追加できます（任意）。
+これも SD カードの早期消耗を防ぐためです。
 
 ```bash
 echo 'none /var/log tmpfs size=10M,noatime 0 0' >> /etc/fstab
 ```
 
-### Install Docker
+### Docker のインストール
 
 ```bash
 apt install apt-transport-https ca-certificates curl gnupg lsb-release -y
@@ -213,7 +213,7 @@ apt update
 apt -y install docker-ce docker-ce-cli containerd.io
 ```
 
-### Create mount for Docker volumes
+### Docker ボリューム用マウントの作成
 
 ```bash
 rm -rf /var/lib/docker
@@ -223,9 +223,9 @@ echo "/mnt/usb /var/lib/docker none bind,nobootwait 0 2" >> /etc/fstab
 systemctl restart docker
 ```
 
-### Configuring the firewall
+### ファイアウォール設定
 
-Install a firewall and allow SSH, HTTP, HTTPS, Bitcoin, and Lightning:
+ファイアウォールをインストールし、SSH、HTTP、HTTPS、Bitcoin、Lightning を許可します。
 
 ```bash
 apt install -y ufw
@@ -233,7 +233,7 @@ ufw default deny incoming
 ufw default allow outgoing
 ```
 
-This command allows SSH connections from internal networks only:
+次のコマンドは、内部ネットワークからの SSH 接続のみを許可します。
 
 ```bash
 ufw allow from 10.0.0.0/8 to any port 22 proto tcp
@@ -245,7 +245,7 @@ ufw allow from fe80::/10 to any port 22 proto tcp
 ufw allow from ff00::/8 to any port 22 proto tcp
 ```
 
-These ports need to be accessible from anywhere (The default subnet is 'any' unless you specify one):
+次のポートはどこからでもアクセス可能にする必要があります（サブネットを指定しない場合、既定は `any` です）。
 
 ```bash
 ufw allow 80/tcp
@@ -260,9 +260,9 @@ ufw enable
 ufw status
 ```
 
-### Setup BTCPay Server
+### BTCPay Server のセットアップ
 
-Download BTCPay Server from GitHub:
+GitHub から BTCPay Server をダウンロードします。
 
 ```bash
 cd # ensure we are in root home
@@ -271,7 +271,7 @@ git clone https://github.com/btcpayserver/btcpayserver-docker
 cd btcpayserver-docker
 ```
 
-Configure BTCPay by setting some [environment variables](https://github.com/btcpayserver/btcpayserver-docker#environment-variables):
+いくつかの [environment variables](https://github.com/btcpayserver/btcpayserver-docker#environment-variables) を設定して BTCPay を構成します。
 
 ```bash
 export BTCPAY_HOST="btcpay.local"
@@ -284,30 +284,30 @@ export BTCPAYGEN_ADDITIONAL_FRAGMENTS="opt-more-memory"
 export BTCPAY_ENABLE_SSH=true
 ```
 
-If you want to use multiple hostnames, add them via the optional `BTCPAY_ADDITIONAL_HOSTS` variable:
+複数のホスト名を使いたい場合は、任意の `BTCPAY_ADDITIONAL_HOSTS` 変数で追加します。
 
 ```bash
 export BTCPAY_ADDITIONAL_HOSTS="btcpay.YourDomain.com"
 ```
 
-In case you want to restrict access to your local network only, please note that you need to use a `.local` domain.
+ローカルネットワークのみにアクセスを制限したい場合は、`.local` ドメインを使う必要がある点に注意してください。
 
-Run the BTCPay installation:
+BTCPay のインストールを実行します。
 
 ```bash
 . ./btcpay-setup.sh -i
 ```
 
-It should be up and running within a few minutes. Try opening http://btcpay.local in your web browser. If everything is correct, you will see BTCPay Server front page.
+数分以内に起動するはずです。ブラウザーで http://btcpay.local を開いてみてください。すべて正しく設定されていれば、BTCPay Server のトップページが表示されます。
 
-Now, you just need to wait a day or so for the Bitcoin blockchain to [sync and full verify](../FAQ/Synchronization.md). The bottom of the BTCPay Server web GUI will show a pop-up dialog box to monitor the progress.
+あとは Bitcoin ブロックチェーンが [sync and full verify](../FAQ/Synchronization.md) されるまで、1日程度待つだけです。BTCPay Server の Web GUI 下部に進捗確認用のポップアップが表示されます。
 
-### FastSync (optional)
+### FastSync（任意）
 
-Please read very carefully to understand what [FastSync](/Docker/fastsync.md) is and why it is important to verify the UTXO set yourself.
+[FastSync](/Docker/fastsync.md) が何か、また UTXO セットを自分で検証することがなぜ重要かを、注意深く読んで理解してください。
 
-By using FastSync, you are exposing yourself to attacks if a [malicious UTXO set snapshot](https://github.com/btcpayserver/btcpayserver-docker/blob/master/contrib/FastSync/README.md#what-are-the-downsides-of-fast-sync) is sent to you.
-If you have another trusted node somewhere else, you can check the validity of the UTXO set gathered by FastSync by following [these instructions](https://github.com/btcpayserver/btcpayserver-docker/blob/master/contrib/FastSync/README.md#dont-trust-verify).
+FastSync を利用すると、[悪意ある UTXO set snapshot](https://github.com/btcpayserver/btcpayserver-docker/blob/master/contrib/FastSync/README.md#what-are-the-downsides-of-fast-sync) を受け取った場合に攻撃へさらされます。
+別の場所に信頼できるノードがある場合は、[these instructions](https://github.com/btcpayserver/btcpayserver-docker/blob/master/contrib/FastSync/README.md#dont-trust-verify) に従って FastSync で取得した UTXO セットの妥当性を確認できます。
 
 ```bash
 # Stop BTCPay Server
@@ -319,8 +319,8 @@ cd contrib/FastSync
 ./load-utxo-set.sh
 ```
 
-FastSync currently takes about 30 minutes on a high-speed internet connection.
-After FastSync finishes, run the following command to restart BTCPay Server:
+FastSync は高速回線で現在およそ 30 分かかります。
+FastSync 完了後、次のコマンドで BTCPay Server を再起動します。
 
 ```bash
 cd ../..

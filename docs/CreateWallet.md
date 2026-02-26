@@ -1,98 +1,102 @@
-# Create a new wallet
+<!-- legacy-anchor-aliases -->
+<span id="security-implications"></span>
+<!-- /legacy-anchor-aliases -->
 
-- [Hot Wallet](#hot-wallet)
-- [Watch-only wallet](#watch-only-wallet)
+# 新しいウォレットを作成する
 
-### Hot Wallet
+- [ホットウォレット](#hot-wallet)
+- [ウォッチ専用ウォレット](#watch-only-wallet)
 
-If you do not have an existing wallet, you can generate a new one within your BTCPay Server. Whether you have an existing wallet or not, the quickest way to get a wallet connected to your store is to create a new wallet. You can always replace it with an alternative wallet after receiving a few small payments to your server, if you just want to get your store ready quickly.
+### ホットウォレット <a name="hot-wallet"></a>
 
-This type of wallet is also necessary to use features such as [Payjoin](./Payjoin.md) and [Liquid](https://github.com/btcpayserver/btcpayserver/issues/1282).
+既存のウォレットがない場合は、BTCPay Server 内で新しく生成できます。既存ウォレットの有無にかかわらず、ストアに最短でウォレットを接続する方法は新しいウォレットの作成です。ストアをすぐに準備したい場合は、サーバーで少額決済をいくつか受け取った後で、いつでも別のウォレットに置き換えられます。
 
-After creating a store, you'll be able to attach a wallet by first navigating to the sidebar or slide-out menu and clicking/tapping the **Bitcoin** button under the **Wallets** header. Alternatively, you can find the option to **Set up a wallet** on the Dashboard.
+このタイプのウォレットは、[Payjoin](./Payjoin.md) や [Liquid](https://github.com/btcpayserver/btcpayserver/issues/1282) のような機能を使うためにも必要です。
+
+ストアを作成した後、まずサイドバーまたはスライドアウトメニューに移動し、**Wallets** 見出しの下にある **Bitcoin** ボタンをクリック/タップすることでウォレットを紐づけられます。あるいは、Dashboard で **Set up a wallet** のオプションを見つけることもできます。
 
 ![Main Menu](./img/FirstStoreCreation.png)
 
-You'll focus on the **I don't have a wallet** section for a hot wallet and click the **Create a new wallet** button.
+ホットウォレットの場合は **I don't have a wallet** セクションを使い、**Create a new wallet** ボタンをクリックします。
 
 ![New Wallet](./img/hotwallet/CreateNewWallet.png)
 
-There will be two options on the proceeding page, and in this case, we'll select the **Hot wallet** button.
+次のページには 2 つの選択肢が表示され、この場合は **Hot wallet** ボタンを選びます。
 
 ![Create Wallet](./img/hotwallet/HotWallet.png)
 
-For most people, the default options, including **Address Type** (Segwit), should work well for most applications, and it's recommended not to change it unless you're sure of what you're doing. The **Payjoin** feature is optional, and you can learn more about it at the link [above](#hot-wallet).
+ほとんどのユーザーにとって、**Address Type**（Segwit）を含むデフォルト設定で問題ありません。何をしているか確信がある場合を除き、変更しないことを推奨します。**Payjoin** 機能は任意で、詳細は[上記](#hot-wallet)のリンクで確認できます。
 
 ![Wallet Settings](./img/hotwallet/WalletSettings.png)
 
 
-#### Advanced Settings
+#### 詳細設定
 
-- Optional [BIP39](https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki#from-mnemonic-to-seed) passphrase
+- 任意の [BIP39](https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki#from-mnemonic-to-seed) パスフレーズ
 
-  - You can add a passphrase for your hot wallet's mnemonic for an additional layer of security.
+  - ホットウォレットのニーモニックにパスフレーズを追加すると、セキュリティを一段強化できます。
 
-- Import keys to RPC
+- RPC へキーをインポート
 
-  - This is for more advanced applications of BTCPay Server. Importing your keys to RPC will allow users to leverage [bitcoind Wallet RPCs](https://developer.bitcoin.org/reference/rpc/index.html#wallet-rpcs) on the imported wallet.
+  - これは BTCPay Server のより高度な用途向けです。キーを RPC にインポートすると、インポート済みウォレットで [bitcoind Wallet RPCs](https://developer.bitcoin.org/reference/rpc/index.html#wallet-rpcs) を活用できます。
 
 ![Advanced Settings](./img/hotwallet/AdvancedSettings.png)
 
 
-#### Recovery Seed
+#### リカバリーシード
 
-The final step in creating a hot wallet is to document your recovery seed. It's crucial to understand that anyone with access to your recovery seed can access and steal all your funds, both current and future, because a private key is derived from the recovery seed. Securely back up your seed by writing it down and keep it in a safe place. Do not photograph it or store it in a digital format. Do not rely solely on your server for storing your recovery seed, always keep a backup copy. 
+ホットウォレット作成の最終ステップは、リカバリーシードを記録することです。リカバリーシードにアクセスできる人は、そこから秘密鍵を導出して現在および将来のすべての資金にアクセスし、盗むことができるため、非常に重要です。シードは紙などに書いて安全な場所に保管してください。写真撮影やデジタル保存は避けてください。リカバリーシードの保管をサーバーだけに依存せず、必ずバックアップを保持してください。
 
-After you've done so, tick the checkbox that says _I have written down my recovery phrase and stored it in a secure location_ and click the **Done** button.
+記録が完了したら、_I have written down my recovery phrase and stored it in a secure location_ のチェックボックスにチェックを入れ、**Done** ボタンをクリックします。
 
-#### Requirements to create wallets
+#### ウォレット作成の要件
 
-If are using a [third-party host](/Deployment/ThirdPartyHosting.md), this option must be explicitly enabled by the server admin. Generating a new wallet in an environment you are not sure is trustworthy, is discouraged.
+[第三者ホスト](/Deployment/ThirdPartyHosting.md)を使用している場合、このオプションはサーバー管理者が明示的に有効化する必要があります。信頼できるか不明な環境で新しいウォレットを生成することは推奨されません。
 
-By default, only server admins can use the create wallet feature. This is because server admins are able to extract the private key easily. However, if you want other trusted individuals to create and manage their stores, you can enable the hot wallet feature for non-admins. To do this, go to Server Settings > Policies > "Allow non-admins to create hot wallets for their stores".
+デフォルトでは、ウォレット作成機能を使えるのはサーバー管理者のみです。これは、サーバー管理者が秘密鍵を容易に抽出できるためです。ただし、信頼できる他のメンバーにもストア作成と管理を任せたい場合は、非管理者向けにホットウォレット機能を有効化できます。設定は Server Settings > Policies > "Allow non-admins to create hot wallets for their stores" です。
 
 ![BTCPay Server settings](./img/hotwallet/ServerSettings.png)
 
 :::warning
-When a new wallet is generated, BTCPay Server will show you a twelve word recovery seed. After the initial display, the recovery seed is wiped from the server, unless a the hot wallet option is enabled.
+新しいウォレットが生成されると、BTCPay Server は 12 語のリカバリーシードを表示します。初回表示後、ホットウォレットオプションが有効な場合を除き、リカバリーシードはサーバーから消去されます。
 :::
 
-#### Spending funds with BTCPay Hot Wallet
+#### BTCPay ホットウォレットで資金を使う
 
-Once you've received funds to your wallet and decide to spend them, you can automatically sign the transaction inside BTCPay Server.
+ウォレットで資金を受け取った後、支出したい場合は BTCPay Server 内でトランザクションに自動署名できます。
 
-1. In BTCPay Server, go to > Wallets > Bitcoin > Send
-2. Fill in the Destination address and the Amount
-3. Adjust the transaction settings, including fee rate, confirmation time preference, and if you'd like transaction fees to be subtracted from the amount you're sending
-4. Sign the transaction
-5. Review the transaction
-6. Broadcast the transaction
+1. BTCPay Server で > Wallets > Bitcoin > Send に移動
+2. 送金先アドレスと金額を入力
+3. 手数料率、希望承認時間、送金額から手数料を差し引くかどうかなど、トランザクション設定を調整
+4. トランザクションに署名
+5. トランザクションを確認
+6. トランザクションをブロードキャスト
 
 ![BTCPay Server Send page](./img/hotwallet/WalletSend.png)
 ![BTCPay Server Transaction Review and Broadcast page](./img/hotwallet/BroadcastConfirm.png)
 
-#### Security Implications
+#### セキュリティ上の影響
 
-Storing private keys on a public server comes with risks. This is similar to the risks of running and using the [Lightning Network](./LightningNetwork.md) (except that you can recover funds with a backup).
-**Please, ALWAYS be sure to back up any seed that is generated by this feature and to never leave money you cannot afford to lose spendable by those private keys**.
+公開サーバーに秘密鍵を保存することにはリスクがあります。これは [Lightning Network](./LightningNetwork.md) の運用・利用リスクと類似しています（ただしバックアップで資金復元は可能です）。
+**この機能で生成されたシードは必ずバックアップし、失っても問題ない額を超える資金を、それらの秘密鍵でいつでも使える状態にしないでください**。
 
-#### Reducing risk
+#### リスクを下げる
 
-As mentioned above, the create wallet functionality includes the risk of funds being stolen if the server or account is compromised. To mitigate this risk, we advise you to:
+前述のとおり、ウォレット作成機能には、サーバーまたはアカウントが侵害された場合に資金が盗まれるリスクがあります。このリスクを軽減するため、次を推奨します。
 
-- Enable two factor or U2F authentication
-- Occasionally move funds to your cold storage
+- 二要素認証または U2F 認証を有効化する
+- 定期的に資金をコールドストレージへ移す
 
 :::danger
-Do not give anyone else access to your server's SSH keys or server account credentials when using a hot wallet. Anyone with access to your account can spend the funds from your hot wallet. If you need to allow account access to employees, developers, etc. use an [existing wallet](ConnectWallet.md#connect-an-existing-wallet) instead.
+ホットウォレットを使用している場合、他人にサーバーの SSH キーやサーバーアカウント認証情報を渡さないでください。アカウントにアクセスできる人は、ホットウォレットの資金を使用できます。従業員・開発者などにアカウントアクセスを許可する必要がある場合は、代わりに[既存ウォレット](ConnectWallet.md#connect-an-existing-wallet)を使用してください。
 :::
 
-### Watch-only wallet
+### ウォッチ専用ウォレット <a name="watch-only-wallet"></a>
 
-Like the hot wallet, the watch-only wallet can instantly get your store connected to a wallet. In contrast, this option does not store the private keys on the server. As a result, the wallet becomes "watch-only" for any received funds.
+ホットウォレットと同様に、ウォッチ専用ウォレットでもストアを即座にウォレットへ接続できます。対照的に、この方式では秘密鍵をサーバーに保存しません。その結果、このウォレットは受け取った資金に対して「watch-only」となります。
 
-There are several routes you can take to spend funds with this type of wallet including importing the seed words into a hardware wallet to sign your transactions using the [BTCPay Server Vault application](https://docs.btcpayserver.org/Vault/), [PSBT](https://docs.btcpayserver.org/Wallet/#psbt), or the least recommended manually providing your seed words every time.
+このタイプのウォレットで資金を使う方法はいくつかあります。たとえばシード語をハードウェアウォレットへインポートして [BTCPay Server Vault application](https://docs.btcpayserver.org/Vault/)、[PSBT](https://docs.btcpayserver.org/Wallet/#psbt) で署名する方法や、推奨度は低いですが毎回シード語を手動入力する方法があります。
 
 ![BTCPay Server Transaction Signing Options](./img/hotwallet/SignTransaction.png)
 
-Alternatively, you can spend funds in another external wallet where you have imported your BTCPay Server-produced seed words. If you import your seed words into an external wallet, you can also use a PSBT to spend the funds, assuming the wallet supports it. This option will be available on the wallet's send page. Be sure to consider the [gap limit issue](./FAQ/Wallet.md#missing-payments-in-my-software-or-hardware-wallet) if you're using an external wallet with your watch-only wallet.
+あるいは、BTCPay Server が生成したシード語をインポートした別の外部ウォレットで資金を使うこともできます。外部ウォレットが対応していれば、PSBT を使って資金を使うことも可能です。このオプションはウォレットの送金ページで利用できます。ウォッチ専用ウォレットを外部ウォレットと使う場合は、[ギャップリミットの問題](./FAQ/Wallet.md#missing-payments-in-my-software-or-hardware-wallet)に注意してください。

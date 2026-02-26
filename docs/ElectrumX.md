@@ -1,53 +1,53 @@
 # ElectrumX
 
-This document explains how to **connect Electrum Wallet to an ElectrumX Server**.
+このドキュメントでは、**Electrum Wallet を ElectrumX Server に接続する方法**を説明します。
 
-**Note:** the [docker version of BTCPay Server](https://github.com/btcpayserver/btcpayserver-docker) (since Nov 7th 2019, version 1.0.3.137) supports full integration with [ElectrumX](https://electrumx.readthedocs.io/en/latest/features.html) is the most widely implemented software used for Electrum public servers that your local Electrum wallet relies upon to get all the details of, or broadcast transactions to the bitcoin blockchain. Skip to Section 2 below, to read more on what this all means, and how to set it up on your BTCPay stack.
+**注:** [BTCPay Server の Docker 版](https://github.com/btcpayserver/btcpayserver-docker)（2019年11月7日以降、version 1.0.3.137）は [ElectrumX](https://electrumx.readthedocs.io/en/latest/features.html) との完全統合をサポートしています。ElectrumX は、ローカルの Electrum ウォレットが Bitcoin ブロックチェーンの詳細取得やトランザクションのブロードキャストに使う公開 Electrum サーバーで最も広く利用される実装です。意味とセットアップ方法は以下の Section 2 を参照してください。
 
-## How to integrate ElectrumX into your BTCPay Server and connect your Electrum Wallet to it for your complete privacy
+## ElectrumX を BTCPay Server に統合し、Electrum Wallet を接続してプライバシーを高める
 
-### (only available in BTCPay docker version)
+### （BTCPay の Docker 版のみ対応）
 
-Before we proceed, it is important to understand how your Electrum wallet on your PC/Mac functions so well/fast, without having its own bitcoin full node. In actual fact, Electrum Wallet relies on a community effort to maintain a bunch of servers all around the world with a bitcoin full node that do this job for you! They are called Electrum Servers, and you can be a part of that community to make that network even stronger, lets see how.
+進める前に、PC/Mac 上の Electrum ウォレットが、独自の Bitcoin フルノードなしで高速に動作する仕組みを理解しておくことが重要です。実際には、Electrum Wallet は世界中のコミュニティ運営サーバー（Bitcoin フルノード付き）に依存しています。これらは Electrum Servers と呼ばれます。あなたもそのネットワークを強化する側に回れます。
 
-When you click the little traffic light at the bottom of your Electrum Wallet here:
+Electrum Wallet の下部にある小さな信号アイコンをクリックすると:
 
 ![ElectrumWalletMainScreenLight](https://user-images.githubusercontent.com/1388507/68437133-5636c500-01c0-11ea-822c-6e72bd6d60ea.png)
 
-You will see this screen with a list of all the available Electrum servers that your wallet can connect to, normally with "Select Server Automatically" already checked:
+通常は `Select Server Automatically` が有効になっており、接続可能な Electrum サーバー一覧が表示されます:
 
 ![ElectrumWalletServerList](https://user-images.githubusercontent.com/1388507/68437521-8a5eb580-01c1-11ea-9ece-0666353a6742.png)
 
-While using Electrum Wallet with "Select Server Automatically" on is the easiest, every transaction that you make/browse/broadcast in your Electrum Wallet will be done via someone else's server - this is a privacy risk, that will be mitigated by setting up and using your own ElectrumX Server.
+`Select Server Automatically` を有効にしたまま使うのが最も簡単ですが、Electrum Wallet で行う取引の閲覧やブロードキャストは他者のサーバー経由になります。これはプライバシー上のリスクであり、独自の ElectrumX Server を運用することで軽減できます。
 
-## Section 2.1 Enable Your Own ElectrumX Server (fully integrated with your BTCPay Server's full bitcoin node)
+## Section 2.1 独自 ElectrumX Server を有効化する（BTCPay Server の Bitcoin フルノードと完全統合）
 
-### Prerequisites (mandatory):
+### 前提条件（必須）
 
-1. Docker only: Only the [Docker version of BTCPay Server](https://docs.btcpayserver.org/Docker/) is supported.
-2. Unpruned BTCPay node: Make sure your BTCPay implementation is NOT [pruned](./FAQ/Synchronization.md#can-i-skip-the-synchronization) (i.e. you have synched and stored from genesis block. Check that you do NOT use the opt-save-storage [Environment Variable](https://docs.btcpayserver.org/Docker/#generated-docker-compose))
-3. Drive space: At least 400GB of drive space on the device where your docker volumes are stored is required (as at the writing of this documentation on 9th Nov 2019, the total hard drive space used is 333GB - with full node and ElectrumX enabled - and of course this will grow further over time).
-4. Additional Fragments: You are familiar with how to use BTCPay's [Additional Fragment](https://docs.btcpayserver.org/Docker/#environment-variables) feature as part of your environment variable setup.
-5. Server architecture: The (official) [ElectrumX docker](https://github.com/lukechilds/docker-electrumx) used here is only tested on a BTCPay Server running on x86_64 architecture. So far it is tested extensively on Ubuntu 18.04 and Debian Buster. Unless it is overhauled and tested well on Raspberry Pi (and other architectures) it likely will not work.
-6. Basic Linux command line knowledge: is assumed.
+1. Docker のみ: 対応するのは [BTCPay Server の Docker 版](https://docs.btcpayserver.org/Docker/)のみです。
+2. 非プルーニングの BTCPay ノード: BTCPay 実装が [pruned](./FAQ/Synchronization.md#can-i-skip-the-synchronization) でないことを確認してください（つまり genesis block から同期・保存されていること）。`opt-save-storage` の [Environment Variable](https://docs.btcpayserver.org/Docker/#generated-docker-compose) を使っていないことを確認してください。
+3. ディスク容量: Docker ボリューム保存先のデバイスに最低 400GB が必要です（このドキュメント執筆時点の2019年11月9日で、フルノード + ElectrumX 有効時に 333GB 使用。今後さらに増加します）。
+4. Additional Fragments: 環境変数設定で使う BTCPay の [Additional Fragment](https://docs.btcpayserver.org/Docker/#environment-variables) 機能を理解していること。
+5. サーバーアーキテクチャ: ここで使用する（公式）[ElectrumX docker](https://github.com/lukechilds/docker-electrumx) は、x86_64 で動作する BTCPay Server でのみテストされています。現時点では Ubuntu 18.04 と Debian Buster で広く検証済みです。Raspberry Pi（および他アーキテクチャ）向けには十分な検証が行われるまで動作しない可能性があります。
+6. Linux コマンドラインの基本知識があること。
 
-### How will enabling ElectrumX Server affect an existing BTCPay implementation?:
+### ElectrumX Server の有効化は既存の BTCPay 実装にどう影響するか
 
-Fundamentally, setting up ElectrumX in BTCPay server is simple, and will not affect the rest of your implementation. The only pre-requisites are as above. The [ElectrumX official docker release](https://github.com/lukechilds/docker-electrumx) is enabled in BTCPay by activating the [additional fragment](https://docs.btcpayserver.org/Docker/#generated-docker-compose) called [`opt-add-electumx`](https://github.com/btcpayserver/btcpayserver-docker/blob/master/docker-compose-generator/docker-fragments/opt-add-electrumx.yml). This fragment will not only enable and start the ElectrumX server, it will also enable `txindex=1` in your bitcoin full node. `txindex=1` (Transaction Index=ON) is a bitcoin core feature required for ElectrumX to be able to serve your Electrum Wallet detailed transaction data for any transaction, directly from the blockchain, without getting it from any third party server.
+基本的に、BTCPay Server で ElectrumX を設定する作業はシンプルで、他の実装部分には影響しません。必要条件は上記のみです。[ElectrumX 公式 docker リリース](https://github.com/lukechilds/docker-electrumx) は、[`opt-add-electumx`](https://github.com/btcpayserver/btcpayserver-docker/blob/master/docker-compose-generator/docker-fragments/opt-add-electrumx.yml) という [additional fragment](https://docs.btcpayserver.org/Docker/#generated-docker-compose) を有効化することで BTCPay で動作します。この fragment は ElectrumX サーバーを有効化・起動するだけでなく、Bitcoin フルノードで `txindex=1` も有効化します。`txindex=1`（Transaction Index=ON）は、ElectrumX が任意の取引の詳細データをサードパーティ経由なしでブロックチェーンから直接提供するために必要な Bitcoin Core の機能です。
 
-If you have been running your BTCPay Server for a while but haven't had `txindex=1` set until now, then it might take a few hours to build the index, this is no issue and it should not involve downtime of more than a few hours - better to set this to run overnight though when nobody will be using your node. Note: If you want to rebuild the index from scratch, launch bitcoind once with the `reindex=1` option (warning: this reindex option may take a VERY long time, and is not enabled out of the box as you likely dont need it, and hence is not in scope of this document).
+すでに BTCPay Server を運用していて、これまで `txindex=1` を有効にしていなかった場合、インデックス構築に数時間かかることがあります。通常これは問題なく、ダウンタイムも数時間以内で済むはずですが、ノード利用者が少ない夜間に実行することを推奨します。注: インデックスを最初から再構築したい場合は、`reindex=1` オプション付きで bitcoind を一度起動してください（警告: `reindex` は非常に長時間かかる可能性があり、通常は不要なためデフォルトでは有効化されておらず、このドキュメントの対象外です）。
 
-### Steps to enable ElectrumX Server in BTCPay:
+### BTCPay で ElectrumX Server を有効化する手順
 
-Here are all the steps to **enable ElectrumX Server in your BTCPay node** (read carefully as you may need to adjust for your specific setup, especially if you use other custom or conflicting "fragments" (pruning, less-memory etc. To reiterate, you should NOT proceed further here if you run a pruned BTCPay node.
+以下は **BTCPay ノードで ElectrumX Server を有効化する手順**です。特に、他のカスタムまたは競合する "fragments"（pruning、less-memory など）を使っている場合は、環境に合わせて調整が必要です。繰り返しになりますが、pruned な BTCPay ノードを使用している場合はこの先に進まないでください。
 
-1. ElectrumX Server is accessible for Electrum Wallets via TCP port 50002. You need to open this port up fully at least to be available within your own network to any PC or Android device running Electrum Wallet, and turn on port forwarding (you can also port forward 50002 from your Internet/WAN, to enable other Electrum Wallet users from the Internet to query your server).
+1. ElectrumX Server は TCP ポート 50002 経由で Electrum Wallet からアクセスされます。少なくともローカルネットワーク内の Electrum Wallet（PC または Android）から利用できるよう、このポートを開放してください。必要であればインターネット/WAN 側からの 50002 ポートフォワーディングも設定できます（外部ユーザーがあなたのサーバーを参照可能になります）。
 
-2. Enable the Docker Additional Fragment on your BTCPay node by running the following commands (this is assuming a brand new BTCPay installation with LND and ElectrumX, please tweak accordingly using the [relevant documentation](https://docs.btcpayserver.org/Docker/#generated-docker-compose):
+2. 次のコマンドで BTCPay ノードの Docker Additional Fragment を有効化します（以下は LND と ElectrumX を含む新規 BTCPay インストールを想定。必要に応じて [関連ドキュメント](https://docs.btcpayserver.org/Docker/#generated-docker-compose) を参照して調整してください）。
 
-3. Follow the [normal setup and install of BTCPay Server](https://github.com/btcpayserver/btcpayserver-docker#full-installation-for-technical-users), then after this command `cd btcpayserver-docker`, follow the below instructions instead of those in the link. If you already have a BTCPay Server running, then just follow from the next step.
+3. まず [通常の BTCPay Server セットアップ手順](https://github.com/btcpayserver/btcpayserver-docker#full-installation-for-technical-users) に従って進め、`cd btcpayserver-docker` 実行後はリンク先の続きではなく以下の手順を実施してください。すでに BTCPay Server を運用中なら次のステップからで構いません。
 
-4. Set your environment variables:
+4. 環境変数を設定します:
 
 ```bash
 export BTCPAY_HOST="YOURHOST.com"
@@ -60,71 +60,71 @@ export LETSENCRYPT_EMAIL="you@example.com"
 export BTCPAYGEN_ADDITIONAL_FRAGMENTS="opt-add-electrumx;opt-more-memory"
 ```
 
-You can run all of that as one command after you tweak it to your needs. The main part for our purposes in this guide of course is `BTCPAYGEN_ADDITIONAL_FRAGMENTS="opt-add-electrumx"`. Note: `opt-more-memory` can be removed if you like, but I really recommend it if your system has more than 1GB of RAM/memory that you can assign to BTCPay server, it will speed synching your node and the general performance of ElectrumX up drastically.
+必要に合わせて調整すれば、上記は1コマンドとしてまとめて実行できます。このガイドで最重要なのは `BTCPAYGEN_ADDITIONAL_FRAGMENTS="opt-add-electrumx"` です。注: `opt-more-memory` は削除可能ですが、BTCPay Server に 1GB 超の RAM を割り当てられる環境なら有効化を強く推奨します。ノード同期と ElectrumX の全体パフォーマンスが大きく向上します。
 
-5. Set up or reconfigure BTCPay Server with ElectrumX:
+5. ElectrumX 付きで BTCPay Server をセットアップまたは再設定します:
 
    `cd ~/BTCPayServer/btcpayserver-docker && . ./btcpay-setup.sh -i`
 
-   This will setup (or re-setup) your server with everything needed including ElectrumX, and it all should "just work". But, it will trigger at least a couple of hours of syncing the `txindex`, and if it is a new server, could be a couple of days depending on your hardware.
+   これで ElectrumX を含む必要な構成がセットアップ（または再セットアップ）され、通常はそのまま動作します。ただし `txindex` の同期に最低でも数時間かかります。新規サーバーの場合はハードウェア次第で数日かかることもあります。
 
-6. WAIT for your node to fully sync:
-   You can check the status of bitcoin core sync by going to your domain for BTCPay server, and it will show you on the front page. Or, you can check from the command line as well, using these commands:
+6. ノードの完全同期を待ちます:
+   Bitcoin Core 同期状態は BTCPay のドメイン先フロントページで確認できます。コマンドラインでは次を使います。
 
-   `docker logs btcpayserver_bitcoind` - this will show you the bitcoin core blockchain sync status (and ALL other info about your node, including any errors)
+   `docker logs btcpayserver_bitcoind` - Bitcoin Core のブロックチェーン同期状態（およびエラーを含むノード情報全体）を表示します。
 
-   `docker logs generated_electrumx_1` - this will show you the ElectrumX sync status. Note: ElectrumX will NOT start syncing until bitcoin full node has finished syncing, you will see errors until that is finished and these can be ignored.
+   `docker logs generated_electrumx_1` - ElectrumX の同期状態を表示します。注: ElectrumX は Bitcoin フルノードの同期完了まで同期を開始しません。完了前のエラー表示は無視できます。
 
-Once all syncing for both bitcoin and ElectrumX has finished you can proceed to the next step. (Note: Electrum wallets will not connect to an Electrum server that has not finished synching)
+Bitcoin と ElectrumX の双方の同期が完了したら次のステップへ進みます。（注: 同期未完了の Electrum サーバーには Electrum Wallet は接続できません）
 
-## Section 2.2 Connect your Electrum Wallet (Desktop or Android) to your ElectrumX Server
+## Section 2.2 Electrum Wallet（Desktop または Android）を ElectrumX Server に接続する
 
-### Connect to ElectrumX from Electrum Wallet on your Mac/PC/Linux Machine:
+### Mac/PC/Linux の Electrum Wallet から ElectrumX に接続する
 
-Read all of this first before proceeding. You may wish to do just the "Protip" below instead of the manual steps in the Electrum Wallet GUI.
+先に全体を読んでから進めてください。Electrum Wallet GUI で手動設定する代わりに、以下の "Protip" だけ実施しても構いません。
 
-Open Electrum Wallet. When you click the traffic light at the bottom of your Electrum Wallet:
+Electrum Wallet を開き、下部の信号アイコンをクリックします:
 
 ![ElectrumWalletMainScreenLight](https://user-images.githubusercontent.com/1388507/68437133-5636c500-01c0-11ea-822c-6e72bd6d60ea.png)
 
-You will see this screen with a list of all the available Electrum servers that your wallet can connect to, normally with `Select Server Automatically` already checked:
+通常は `Select Server Automatically` が有効になっており、接続可能な Electrum サーバー一覧が表示されます:
 
 ![ElectrumWalletServerList](https://user-images.githubusercontent.com/1388507/68437521-8a5eb580-01c1-11ea-9ece-0666353a6742.png)
 
-Now is the time to UNCHECK that `Select Server Automatically` setting, which will enable you to enter the IP address or domain or hostname of your ElectrumX Server. In the case below, the ElectrumX server is on the local network at `192.168.1.3` so we enter that manually (leave port as 50002) and press `close`.
+ここで `Select Server Automatically` をオフにすると、ElectrumX Server の IP アドレス、ドメイン、またはホスト名を入力できるようになります。以下の例ではローカルネットワーク上の ElectrumX サーバー `192.168.1.3` を手動入力し（ポートは 50002 のまま）、`close` を押します。
 
 ![EnterElectrumXServerIP](https://user-images.githubusercontent.com/1388507/68496320-4e276580-0252-11ea-8caf-facc8a246d70.png)
 
-If all of the above worked well, and your node is healthy, you will get a green traffic light down the bottom right of the wallet interface as pictured here - that means success!:
+上記が正しく完了し、ノード状態が正常であれば、画像のようにウォレット画面右下の信号が緑になります。これで成功です。
 
 ![ElectrumWalletMainScreenLight](https://user-images.githubusercontent.com/1388507/68437133-5636c500-01c0-11ea-822c-6e72bd6d60ea.png)
 
-#### Protip - optionally perform the above steps directly in Electrum Wallet config file before even opening the wallet GUI:
+#### Protip - Wallet GUI を開く前に Electrum Wallet の config ファイルを直接設定する方法
 
-If you prefer to avoid connecting to other servers from the outset when you open Electrum Wallet, do the following before you open Electrum Wallet GUI.
+Electrum Wallet 起動直後に他サーバーへ接続したくない場合は、GUI を開く前に次を実施してください。
 
-In the Electrum Wallet folder ([see here](https://electrum.readthedocs.io/en/latest/faq.html#where-is-my-wallet-file-located) if you don't know where that is), open and edit the `config` file like this:
+Electrum Wallet フォルダ（場所が不明な場合は[こちら](https://electrum.readthedocs.io/en/latest/faq.html#where-is-my-wallet-file-located)）で、`config` ファイルを開いて以下のように編集します。
 
-1. Find line: `"auto_connect": true,` and switch it to: `"auto_connect": false,` - this will prevent your Electrum Wallet from auto-connecting to other 3rd party Electrum Servers at launch time (to obtain block headers and transaction information).
+1. `"auto_connect": true,` を `"auto_connect": false,` に変更します。これにより起動時にサードパーティの Electrum サーバーへ自動接続しなくなります（ブロックヘッダーや取引情報取得のための接続を防止）。
 
-2. Find line: `"oneserver": false,` and switch it to: `"oneserver": true,` - ensures that all data is obtained from just one server.
+2. `"oneserver": false,` を `"oneserver": true,` に変更します。すべてのデータ取得を単一サーバーに固定できます。
 
-3. Find or add line: `"server": "SOMEIPADDRESS:50002:s",`and switch it to your own ElectrumX Server's IP address, in the example above this would be: `"server": "192.168.1.3:50002:s",`- hard code your IP address as the default upon opening the Wallet.
+3. `"server": "SOMEIPADDRESS:50002:s",` を探すか追加し、自分の ElectrumX Server の IP に変更します。上記例なら `"server": "192.168.1.3:50002:s",` です。Wallet 起動時のデフォルト接続先として固定されます。
 
-These 3 steps optional but recommended for full privacy by locking down Electrum Wallet to one single connection with your private server ([Reference](https://github.com/chris-belcher/electrum-personal-server#how-to)).
+この3ステップは任意ですが、Electrum Wallet の接続先を自分のプライベートサーバー1台に固定して完全なプライバシーを得るために推奨されます（[Reference](https://github.com/chris-belcher/electrum-personal-server#how-to)）。
 
-### Reflection on what has been achieved:
+### 達成できたこと
 
-You are now running your very **own private ElectrumX Server**. All Electrum Wallet related data transfer happens directly between your ElectrumX Server and the bitcoin blockchain, without going over any other 3rd party servers. You have attained full bitcoin transaction privacy (at least from the perspective of your blockchain queries and transactions, payment/receive addresses etc - nobody except you and the blockchain can see what you are doing).
+これで **自分専用のプライベート ElectrumX Server** を運用しています。Electrum Wallet 関連のデータ転送は、他のサードパーティサーバーを経由せず、ElectrumX Server と Bitcoin ブロックチェーンの間で直接行われます。少なくともブロックチェーンクエリ、取引、受取/支払アドレスの観点で、Bitcoin トランザクションのプライバシーを高いレベルで確保できます。
 
-### Troubleshooting:
+### トラブルシューティング
 
-So there is one thing you may encounter, where even after you did everything correctly, you still get a red traffic light (which means not connected to any server) in the steps above. Any other troubleshooting tips that people encounter can be added, I would suggest to make a PR to this document directly.
+手順どおりに設定しても、上記ステップで赤信号（どのサーバーにも未接続）になる場合があります。ほかの有用なトラブルシュート情報があれば、このドキュメントに PR を出す形で追加してください。
 
-- If you get a red traffic light, shutdown Electrum Wallet completely, then go to your Electrum Wallet folder ([see here](https://electrum.readthedocs.io/en/latest/faq.html#where-is-my-wallet-file-located) if you don't know where that is).
+- 赤信号のままの場合は Electrum Wallet を完全終了し、Electrum Wallet フォルダへ移動します（場所が不明な場合は[こちら](https://electrum.readthedocs.io/en/latest/faq.html#where-is-my-wallet-file-located)）。
 
-Inside the Electrum Wallet folder (in this case below, it is what it looks like on a Mac) locate the `certs` directory and delete the certificate for the server you are trying to connect to, in this case `192.168.1.3`, by dragging it to the Trash.
+Electrum Wallet フォルダ内（以下は Mac の例）で `certs` ディレクトリを開き、接続先サーバーの証明書（この例では `192.168.1.3`）を見つけてゴミ箱へ移動し削除します。
 
 ![Certs](https://user-images.githubusercontent.com/1388507/68497330-9a73a500-0254-11ea-9349-71bdb3bd9511.png)
 
-Start up Electrum Wallet again, and connect to your ElectrumX server. If it is fully synched, it will now likely show a green traffic light, and you are good to go.
+Electrum Wallet を再起動して ElectrumX サーバーに接続します。サーバー同期が完了していれば、信号は緑になり利用可能です。

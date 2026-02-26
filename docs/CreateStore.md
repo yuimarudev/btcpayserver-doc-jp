@@ -1,23 +1,22 @@
-# (2) Create a store
+# (2) ストアを作成
 
-## Creating a Store in BTCPay Server
+## BTCPay Server でストアを作成する
 
-BTCPay Server allows you to create an unlimited number of stores. Each store needs to be [connected to a wallet](./WalletSetup.md), can have apps (Point of Sale, Payment Buttons and Crowdfunding) attached to it, or be paired with external e-commerce software through one of many available integrations.
+BTCPay Server では、無制限の数のストアを作成できます。各ストアは [ウォレットに接続](./WalletSetup.md)する必要があり、アプリ（Point of Sale、Payment Buttons、Crowdfunding）を紐づけたり、利用可能な多数の連携機能を通じて外部の e コマースソフトウェアと連携したりできます。
 
-To **create a store**, make sure you're logged in into your account, 
+**ストアを作成**するには、アカウントにログインしていることを確認し、次を実行します。
 
-- Navigate to **Stores** in the upper navigation menu.
-- Click on the **Create Store** button.
-- Enter your store name in the text field, and select your default currency and its corresponding provider.
-- Click the `Create` button, and you have sucessfully created a new store. 
+- 上部ナビゲーションメニューの **Stores** に移動します。
+- **Create Store** ボタンをクリックします。
+- テキストフィールドにストア名を入力し、デフォルト通貨と対応するプロバイダーを選択します。
+- `Create` ボタンをクリックすると、新しいストアの作成が完了します。
 
-To create more stores on your instance, you can follow the same guide as described above. 
- 
+同じ手順で、このインスタンスにさらにストアを作成できます。
 
 ![BTCPayRegister2](./img/BTCPayGettingStartedStoreRegistration1.png)
 
-## Customizing your BTCPay Store Settings
+## BTCPay ストア設定をカスタマイズする
 
-Store > Settings provides basic control over the individual store settings. Modify the confirmations, invoice expiry and more. For more information, check [Stores FAQ](./FAQ/Stores.md).
+Store > Settings では、各ストア設定を基本的に制御できます。承認数、請求書の有効期限などを変更できます。詳細は [Stores FAQ](./FAQ/Stores.md) を確認してください。
 
-**_Proceed to the next step - [Connecting a Wallet](./WalletSetup.md)._**
+**_次のステップへ進む - [ウォレットを接続する](./WalletSetup.md)。_**

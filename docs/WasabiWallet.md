@@ -1,126 +1,130 @@
-# Connecting Wasabi Wallet to BTCPay Server
+<!-- legacy-anchor-aliases -->
+<span id="configuring-the-gap-limit-in-wasabi"></span>
+<!-- /legacy-anchor-aliases -->
 
-This document shows how to **connect [Wasabi Wallet](https://wasabiwallet.io/) to BTCPay Server**.
+# Wasabi Wallet を BTCPay Server に接続する
 
-1. Create a Store in BTCPay Server
-2. [Download Wasabi Wallet](https://wasabiwallet.io/#download)
-3. [Install Wasabi Wallet](https://docs.wasabiwallet.io/using-wasabi/InstallPackage.html)
+このドキュメントでは、**[Wasabi Wallet](https://wasabiwallet.io/) を BTCPay Server に接続する方法**を説明します。
 
-## Wasabi Wallet Setup
+1. BTCPay Server で Store を作成する
+2. [Wasabi Wallet をダウンロード](https://wasabiwallet.io/#download)
+3. [Wasabi Wallet をインストール](https://docs.wasabiwallet.io/using-wasabi/InstallPackage.html)
 
-After installation, open the Wasabi Wallet by clicking on the icon on your desktop.
+## Wasabi Wallet セットアップ
 
-## Quick Setup
+インストール後、デスクトップのアイコンをクリックして Wasabi Wallet を開きます。
 
-1. Create a new wallet in Wasabi
-2. In Wasabi, copy the **Extended Account Public Key** at `Wallet Info`.
-3. In BTCPay Server, Store > Settings > Wallet > Setup > Connect an existing wallet > Enter extended public key
-4. In Wasabi, generate a new address at `Receive`.
-5. Confirm that the addresses in Wasabi and BTCPay Server match.
+## クイックセットアップ
 
-## Step by Step
+1. Wasabi で新しいウォレットを作成する
+2. Wasabi の `Wallet Info` で **Extended Account Public Key** をコピーする
+3. BTCPay Server で Store > Settings > Wallet > Setup > Connect an existing wallet > Enter extended public key に進む
+4. Wasabi の `Receive` で新しいアドレスを生成する
+5. Wasabi と BTCPay Server のアドレスが一致することを確認する
 
-At the first launch of Wasabi, the `Add wallet` dialog will be opened automatically.
-Select `Create new wallet` to generate a new wallet.
+## 手順詳細
+
+Wasabi の初回起動時には、`Add wallet` ダイアログが自動的に開きます。
+`Create new wallet` を選択して新しいウォレットを生成します。
 
 ![Wasabi Add Wallet](./img/Wasabi/WasabiAddWallet.png)
 
-Give your wallet a name, for example `BTCPay Server Wallet`.
+ウォレット名を付けます。例: `BTCPay Server Wallet`。
 
 ![Wasabi Add Wallet Name](./img/Wasabi/WasabiAddWalletWalletName.png)
 
-Write down the Recovery Words in the correct order.
+Recovery Words を正しい順序で書き留めてください。
 
 ![Wasabi Add Wallet Recovery Words](./img/Wasabi/WasabiAddWalletRecoveryWords.png)
 
-Confirm 3 of the 12 recovery words.
-This is a quick test to make sure that you have written them down.
+12 個のリカバリーワードのうち 3 つを確認します。
+これは正しく書き留めたことを確認するための簡易テストです。
 
 ![Wasabi Add Wallet Confirm Recovery Words](./img/Wasabi/WasabiAddWalletConfirmRecoveryWords.png)
 
-Add a password.
-The password is used as a passphrase and it cannot be changed later on.
+パスワードを追加します。
+このパスワードはパスフレーズとして使われ、後から変更できません。
 
-:::danger Both The Recovery words AND the password are needed to recover this wallet
-Make sure to have a backup of the recovery words and the password.
+:::danger リカバリーワードとパスワードの両方が、このウォレットの復元に必要です
+リカバリーワードとパスワードのバックアップを必ず保管してください。
 :::
 
 ![Wasabi Add Wallet Add Password](./img/Wasabi/WasabiAddWalletAddPassword.png)
 
-**IMPORTANT NOTE:** Write down your recovery words in the order you see them on the screen. Write them down a piece of paper and store them somewhere secure. Take your time and triple-check each word. Do not store your seed in a digital format (photograph, text document). Whoever has access to your seed and your password can access your funds. Make sure you have a proper backup of the Recovery Words and the Password.
+**重要:** 画面に表示される順序どおりにリカバリーワードを書き留めてください。紙に書いて安全な場所に保管してください。時間をかけて各単語を三重に確認してください。シードをデジタル形式（写真、テキストファイル）で保存しないでください。シードとパスワードにアクセスできる人は誰でも資金へアクセスできます。Recovery Words と Password は必ず適切にバックアップしてください。
 
-Select a Coinjoin Strategy.
-Wasabi automatically coinjoins all your funds.
-If you don't want to coinjoin your funds, you can disable coinjoin later by disabling `Automatically start coinjoin` in the Coinjoin Settings.
-For more info about coinjoins and the related settings, please refer to the [Wasabi Documentation](https://docs.wasabiwallet.io/).
+Coinjoin Strategy を選択します。
+Wasabi は既定で資金全体を自動的に coinjoin します。
+資金を coinjoin したくない場合は、後で Coinjoin Settings の `Automatically start coinjoin` を無効化してください。
+coinjoin と関連設定の詳細は [Wasabi Documentation](https://docs.wasabiwallet.io/) を参照してください。
 
 ![Wasabi Coinjoin Strategy](./img/Wasabi/WasabiCoinjoinStrategy.png)
 
-The wallet has been successfully created!
+ウォレットの作成が完了しました。
 
 ![Wasabi Add Wallet Success](./img/Wasabi/WasabiAddWalletSuccess.png)
 
-Open the new wallet by entering the password.
+パスワードを入力して新しいウォレットを開きます。
 
 ![Wasabi Open Wallet](./img/Wasabi/WasabiOpenWallet.png)
 
-The wallet will load (it might take some time).
-After the loading is done and the wallet is opened, click on the 3 dots at the top right corner to go to `Wallet Info` .
+ウォレットが読み込まれます（時間がかかることがあります）。
+読み込み完了後、右上の 3 点メニューをクリックして `Wallet Info` に移動します。
 
 ![Wasabi Find Wallet Info](./img/Wasabi/WasabiFindWalletInfo.png)
 
-Select and **copy** the `Extended Account Public Key`. This is the **public** key from which BTCPay will derive addresses. This cannot be used to derive private keys and spend the bitcoin.
+`Extended Account Public Key` を選択して**コピー**します。これは BTCPay がアドレス導出に使う**公開鍵**です。これを使って秘密鍵を導出したり、bitcoin を使用したりすることはできません。
 
 ![Wasabi Extended Account Public Key](./img/Wasabi/WasabiExtendedAccountPublicKey.png)
 
-## Setup store wallet
+## ストアウォレットの設定
 
-1. Assuming you created a store and are now in the Dashboard. Click on `Set up a wallet`
+1. ストアを作成済みで Dashboard にいる前提で、`Set up a wallet` をクリックします。
 
 ![Connect Wasabi Wallet to BTCPay Server](./img/createwallet/storedashboard-create.jpg)
 
-2. As you did the above steps in wasabi, Click `Connect an existing wallet`
+2. 上記の手順を wasabi 側で実施したら、`Connect an existing wallet` をクリックします。
 
 ![Connect Wasabi Wallet to BTCPay Server](./img/createwallet/storedashboard-connect.jpg)
 
-3. Choose `Enter extended public key`
+3. `Enter extended public key` を選択します。
 
 ![Connect Wasabi Wallet to BTCPay Server](./img/createwallet/select-xpub.jpg)
 
-4. Paste the `Extended Account Public Key` into derivation scheme field as it is, without adding anything else and click `Continue`
+4. `Extended Account Public Key` を derivation scheme フィールドへそのまま貼り付け、何も追加せず `Continue` をクリックします。
 
 ![Connect Wasabi Wallet to BTCPay Server](./img/createwallet/xpub-form.jpg)
 
-5. Return to the Wasabi Wallet. Click the `Receive` button and generate a new address.
+5. Wasabi Wallet に戻り、`Receive` ボタンをクリックして新しいアドレスを生成します。
 
 ![Wasabi Receive](./img/Wasabi/WasabiReceive.png)
 
-6. Compare the address you see in Wasabi Wallet to addresses shown in BTCPay Server. Find a match, `continue`.
+6. Wasabi Wallet に表示されるアドレスと BTCPay Server に表示されるアドレスを比較し、一致を見つけたら `continue` します。
 
 ![Connect Wasabi Wallet to BTCPay Server](./img/createwallet/compare-address.jpg)
 
-7. When you found a match, your wallet is now connected to the store.
+7. 一致が見つかれば、ウォレットはストアに接続されています。
 
 ![Connect Wasabi Wallet to BTCPay Server](./img/createwallet/wallet-connected.jpg)
 
-### Connecting Wasabi to BTCPay Server Full Node (If you're self-hosting BTCPay)
+### Wasabi を BTCPay Server フルノードに接続する（BTCPay をセルフホストしている場合）
 
-After the wallets are connected, it is highly recommended to **connect Wasabi Wallet to your full node in BTCPay**. The process is easy but can only be done if you self-host BTCPay and are logged in as `Admin`. Tor has to be enabled in BTCPay (it is enabled by default). This process enhances privacy even further.
+ウォレット接続後は、**Wasabi Wallet を BTCPay のフルノードへ接続する**ことを強く推奨します。手順は簡単ですが、BTCPay をセルフホストし `Admin` でログインしている場合のみ実行できます。BTCPay で Tor を有効化しておく必要があります（既定で有効）。この設定により、さらにプライバシーが向上します。
 
-In BTCPay, go Server Settings > Services > **Full node P2P > See Information**.
-On the BTCP-P2P page, click on the `Show Confidential QR Code`. Bellow the QR Code, there's a link `See QR Code information by clicking here`, so click on the link to reveal your string. Copy the string but remove `bitcoin-p2p://` part.
+BTCPay で Server Settings > Services > **Full node P2P > See Information** に進みます。
+BTCP-P2P ページで `Show Confidential QR Code` をクリックします。QR Code の下に `See QR Code information by clicking here` というリンクがあるのでクリックして文字列を表示します。文字列をコピーし、`bitcoin-p2p://` の部分を削除します。
 
-In Wasabi, go to the Bitcoin tab at `Settings` and paste the endpoint in `Bitcoin P2P Endpoint`.
+Wasabi では `Settings` の Bitcoin タブに移動し、`Bitcoin P2P Endpoint` へそのエンドポイントを貼り付けます。
 
-Restart Wasabi to apply the changes.
+変更を適用するため、Wasabi を再起動します。
 
-### Configuring the Gap Limit in Wasabi
+### Wasabi の Gap Limit を設定する
 
-At the search bar on top, click on `Wallet Folder`. Shortly the `json` file will be shown in a sub-folder. Open that file with a text editor like notepad.
-Find the line `"MinGapLimit": 21,` and change it to `"MinGapLimit": 100,` and save the file.
+上部の検索バーで `Wallet Folder` をクリックします。しばらくするとサブフォルダ内に `json` ファイルが表示されます。notepad などのテキストエディタでそのファイルを開きます。
+`"MinGapLimit": 21,` の行を探し、`"MinGapLimit": 100,` に変更して保存します。
 
-There's no good answer to how much you should set the gap limit to. Most merchants set 100-200. If you're a big merchant with high transaction volume, you can try with even a higher gap limit.
+Gap Limit をいくつにすべきかに唯一の正解はありません。多くの加盟店は 100〜200 を設定します。取引量が多い大規模加盟店の場合は、さらに高い値を試せます。
 
-For more details about the [Gap Limit, check the FAQ](./FAQ/Wallet.md#missing-payments-in-my-software-or-hardware-wallet).
+詳細は [Gap Limit, check the FAQ](./FAQ/Wallet.md#missing-payments-in-my-software-or-hardware-wallet) を参照してください。
 
-**Wasabi Wallet and BTCPay Server are now connected**. Any payments received to your BTCPay will be visible in Wasabi, where you can further spend or mix them.
+**Wasabi Wallet と BTCPay Server の接続が完了しました**。BTCPay で受け取った支払いは Wasabi で確認でき、そこで送金や mix を続けて行えます。

@@ -1,12 +1,12 @@
-# Reporting in BTCPay
+# BTCPay のレポート
 
-BTCPay Server offers several tools that make **cryptocurrency bookkeeping** easier.
-Reporting will allow you to visualize and export CSV data of your store.
+BTCPay Server には、**暗号資産の記帳**を簡単にするための複数のツールがあります。  
+レポート機能では、ストアの CSV データを可視化してエクスポートできます。
 
-A report consist of table of tabular data along with some useful aggregates.
+レポートは、表形式データのテーブルと、いくつかの有用な集計で構成されます。
 
-You can find the following reports:
+利用可能なレポートは次のとおりです。
 
-* On-Chain Wallets: Each line show you the on-chain transactions affecting your wallet.
-* Products Sold: Each line represents a quantity of item sold. This is useful if you are using Point of Sale or Crowdfunding.
-* Payments: Each line represents an accounted payment to an invoice.
+* On-Chain Wallets: 各行は、あなたのウォレットに影響するオンチェーントランザクションを示します。
+* Products Sold: 各行は、販売された商品の数量を表します。Point of Sale や Crowdfunding を利用している場合に有用です。
+* Payments: 各行は、請求書に対して計上された支払いを表します。

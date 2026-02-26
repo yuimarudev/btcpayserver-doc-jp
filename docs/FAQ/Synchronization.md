@@ -1,22 +1,34 @@
-# Synchronization FAQ
+<!-- legacy-anchor-aliases -->
+<span id="btcpay-server-keeps-showing-that-my-node-is-always-starting"></span>
+<span id="btcpay-server-takes-forever-to-synchronize"></span>
+<span id="can-i-skip-the-synchronization"></span>
+<span id="how-can-i-check-the-block-height-of-my-bitcoin-node"></span>
+<span id="how-do-i-know-that-btcpay-synced-completely"></span>
+<span id="how-to-disable-bitcoin-node-pruning"></span>
+<span id="how-to-enable-bitcoin-node-pruning"></span>
+<span id="im-running-a-full-node-and-have-a-synched-blockchain-can-btcpay-use-it-so-that-it-doesnt-have-to-do-a-full-sync"></span>
+<span id="why-does-btcpay-sync"></span>
+<!-- /legacy-anchor-aliases -->
 
-This document covers the most common questions and issues that may occur during BTCPay sync.
+# 同期 FAQ
+
+このドキュメントでは、BTCPay の同期中に発生しうる一般的な質問と問題をまとめています。
 
 [[toc]]
 
-## Why does BTCPay sync?
+## BTCPay が同期するのはなぜですか？
 
-After deployment, your BTCPay Server needs to sync the entire blockchain and validate all the consensus rules. Depending on your machine specifications, bandwidth and number of altcoins you added, this process may take between 1-5 days.
+デプロイ後、BTCPay Server はブロックチェーン全体を同期し、すべてのコンセンサスルールを検証する必要があります。マシンスペック、帯域幅、追加したアルトコイン数によって、このプロセスは 1〜5 日かかることがあります。
 
-It may seem tedious, but it's a critical step of running your own full node and not having to trust or rely on anyone. Your node will not only download ~300GB of data (less if you're using a pruned node) but also validate all the rules of the consensus. You can find more information about the importance of blockchain synchronization in [this video](https://www.youtube.com/watch?v=OrYDehC-8TU).
+手間に感じるかもしれませんが、誰にも依存せず信頼せずに自分のフルノードを運用するうえで重要なステップです。ノードは約 300GB のデータ（pruned node を使う場合はこれより少ない）をダウンロードするだけでなく、コンセンサスルールをすべて検証します。ブロックチェーン同期の重要性は [この動画](https://www.youtube.com/watch?v=OrYDehC-8TU) で詳しく説明されています。
 
-If you are only interested in learning about BTCPay Server i.e. simply [trying it out](../TryItOut.md) without deploying your own instance, you can avoid sync by using a [Third-Party host](../Deployment/ThirdPartyHosting.md).
+BTCPay Server を学ぶことだけが目的で、独自インスタンスをデプロイせず単に [試したい](../TryItOut.md) 場合は、[Third-Party host](../Deployment/ThirdPartyHosting.md) を使えば同期を回避できます。
 
-## Can I skip the synchronization?
+## 同期をスキップできますか？
 
-You can't skip synchronization if you are deploying a BTCPay Server, but you can drastically decrease the time it takes. If you're comfortable with using the command line, you can use FastSync to synchronize your node faster. Be sure to [read this FastSync document](https://github.com/btcpayserver/btcpayserver-docker/tree/master/contrib/FastSync) to understand the potential trust issues involved with this feature.
+BTCPay Server をデプロイする場合、同期はスキップできません。ただし、所要時間を大幅に短縮することはできます。コマンドライン操作に慣れているなら、FastSync を使ってノードをより高速に同期できます。この機能には信頼モデル上の注意点があるため、必ず [FastSync ドキュメント](https://github.com/btcpayserver/btcpayserver-docker/tree/master/contrib/FastSync) を確認してください。
 
-To use FastSync, make sure your deployment has a [pruning option enabled](#how-to-enable-bitcoin-node-pruning) by using an `opt-save-storage` environment variable, otherwise bitcoind will not be able to sync. First step is to [ssh into](./ServerSettings.md#how-to-ssh-into-my-btcpay-running-on-vps) your BTCPayServer instance and run the following commands:
+FastSync を使うには、`opt-save-storage` 環境変数で [pruning を有効化](#how-to-enable-bitcoin-node-pruning) している必要があります。そうでないと bitcoind は同期できません。まず BTCPayServer インスタンスに [ssh 接続](./ServerSettings.md#how-to-ssh-into-my-btcpay-running-on-vps) し、次のコマンドを実行します。
 
 ```bash
 sudo su -
@@ -28,72 +40,72 @@ cd contrib/FastSync
 btcpay-up.sh
 ```
 
-After FastSync is complete and you have brought back up your instance, refresh your BTCPay domain and wait for remaining blockchain synchronization. You can also follow [this video](https://youtube.com/watch?v=VNMnd-dX9Q8?t=1730).
+FastSync 完了後にインスタンスを再起動したら、BTCPay ドメインを更新して残りのブロックチェーン同期を待ちます。[この動画](https://youtube.com/watch?v=VNMnd-dX9Q8?t=1730) も参考になります。
 
-If your FastSync returns `You need to delete your Bitcoin Core wallet` after you load the uxto set, or you find this error: `Last wallet synchronisation goes beyond pruned data`, see the cause of [BTCPay Server keeps showing that my node is always starting](#btcpay-server-keeps-showing-that-my-node-is-always-starting).
+FastSync 実行後に `You need to delete your Bitcoin Core wallet` が表示される場合、または `Last wallet synchronisation goes beyond pruned data` エラーが出る場合は、[BTCPay Server keeps showing that my node is always starting](#btcpay-server-keeps-showing-that-my-node-is-always-starting) の項目を参照してください。
 
-## How do I know that BTCPay synced completely?
+## BTCPay が完全に同期されたことを確認する方法は？
 
-When you do not see a pop-up message in the bottom right corner, which shows the sync progress, that means that your server is fully synced and you can [begin using it](../RegisterAccount.md).
+右下に同期進捗ポップアップが表示されなくなれば、サーバーは完全同期済みで [利用開始](../RegisterAccount.md) できます。
 
-If you want to check that your BTCPay Server Bitcoin node is synchronized with the most recent block in the Bitcoin blockchain, [check your node height](#how-can-i-check-the-block-height-of-my-bitcoin-node) matches the current block height using any blockchain explorer.
+BTCPay Server の Bitcoin ノードが最新ブロックまで同期しているか確認するには、任意のブロックチェーンエクスプローラーで現在のブロック高を確認し、[ノード高](#how-can-i-check-the-block-height-of-my-bitcoin-node) と一致するか比較してください。
 
-## How can I check the block height of my bitcoin node?
+## 自分の bitcoin ノードのブロック高を確認する方法は？
 
-To verify the sync status of your Bitcoin node, you can use bitcoin-cli commands inside your server's Bitcoin container. SSH into your server and navigate to the directory where you [view Bitcoin logs](../Troubleshooting.md#23-bitcoin-node-logs) run the command: `bitcoin-cli.sh getblockcount` to view the current block of your server's Bitcoin node.
+Bitcoin ノードの同期状態を確認するには、サーバーの Bitcoin コンテナ内で bitcoin-cli コマンドを使います。サーバーへ SSH 接続し、[Bitcoin ログを確認する](../Troubleshooting.md#23-bitcoin-node-logs) ディレクトリに移動したあと、`bitcoin-cli.sh getblockcount` を実行してサーバーの Bitcoin ノードの現在ブロック高を確認します。
 
-## BTCPay Server takes forever to synchronize
+## BTCPay Server の同期が非常に遅い
 
-Synchronizing a Full Bitcoin node should take between 1 and 5 days. It should sync quickly at first and more slowly at the end.
+Bitcoin フルノードの同期には通常 1〜5 日かかります。最初は速く、終盤に近づくほど遅くなるのが一般的です。
 
-If the node appears to not be syncing, verify:
+同期していないように見える場合は、次を確認してください。
 
-- Not enough CPU
-- Using swap memory
+- CPU が不足している
+- スワップメモリを使用している
 
-### Cause 1: Not enough CPU
+### 原因 1: CPU が不足している
 
-We recommend 2 CPU while synchronizing; however some hosting providers throttle your CPU if you use too much.
+同期中は 2 CPU を推奨します。ただし、ホスティングプロバイダーによっては CPU 使用量が多いと制限されることがあります。
 
-Check with
+次で確認します。
 
 ```bash
 sudo su -
 docker stats
 ```
 
-If you see more than 100% CPU usage, while being very slow to sync:
+同期が非常に遅いのに CPU 使用率が 100% 超の場合:
 
 ```
 8e7ac41e6e2a        btcpayserver_bitcoind               100%               560.5MiB / 3.853GiB   14.20%              4.17
 ```
 
-Then you need to scale up your machine specification.
+この場合はマシンスペックを引き上げる必要があります。
 
-If you see very low CPU usage (less than 10%) during synchronization:
+同期中の CPU 使用率が非常に低い（10% 未満）場合:
 
 ```
 8e7ac41e6e2a        btcpayserver_bitcoind               10%               560.5MiB / 3.853GiB   14.20%              4.17
 ```
 
-Your hosting provider might throttle your CPU. Please make sure your host supports the high use of CPU for an extended period.
+ホスティングプロバイダー側で CPU 制限されている可能性があります。長時間の高 CPU 使用を許容しているか確認してください。
 
-If they don't allow it, shut down your server until they stop throttling you. Then you can limit the CPU via docker, and restart the server:
+許容されない場合は、制限が解除されるまでサーバーを停止し、その後 docker 側で CPU を制限して再起動します。
 
 ```bash
 docker update btcpayserver_bitcoind --cpus ".8"
 ```
 
-### Cause 2: Using swap memory
+### 原因 2: スワップメモリを使用している
 
-If you are synching and don't have enough memory, your server may use swap memory to continue operating:
+同期時にメモリ不足だと、サーバーは動作継続のためスワップメモリを使用することがあります。
 
 ```bash
 sudo su -
 free -h
 ```
 
-If you see swap memory usage:
+スワップ使用が確認できる場合:
 
 ```bash
               total        used        free      shared  buff/cache   available
@@ -101,28 +113,28 @@ Mem:           2.0G        2.0G        0M         66M        0G        0M
 Swap:          1.0G        200M      800M
 ```
 
-Then it means you need to scale up your server by adding more memory.
+この場合はメモリを追加してサーバーをスケールアップしてください。
 
-## BTCPay Server keeps showing that my node is always starting
+## BTCPay Server でノードが常に starting と表示される
 
-Possible cause:
+考えられる原因:
 
-- You do not have enough RAM
-- You do not have enough storage
-- You accidentally disabled pruning
-- Your bitcoin data directory is corrupted
-- Your last wallet synchronisation goes beyond pruned data
+- RAM が不足している
+- ストレージが不足している
+- 誤って pruning を無効化した
+- bitcoin データディレクトリが破損している
+- 最後のウォレット同期が pruned データ範囲を超えている
 
-### Cause 1: You do not have enough RAM
+### 原因 1: RAM が不足している
 
-Check your RAM:
+RAM を確認します。
 
 ```bash
 sudo su -
 free -h
 ```
 
-If you see that you have no `free` or very little `available` memory:
+`free` がほぼない、または `available` が極端に少ない場合:
 
 ```bash
               total        used        free      shared  buff/cache   available
@@ -130,9 +142,9 @@ Mem:           2.0G        2.0G        0M         66M        0G        0M
 Swap:            0B          0B          0B
 ```
 
-Then you need more memory. If you have already synched your node, you can add some swap memory. If you haven't, your server specs are too limited.
+メモリ増設が必要です。ノード同期済みであればスワップメモリを追加できます。未同期ならサーバースペックが不足しています。
 
-If you have already synched, you can add 2G of swap memory with:
+同期済みの場合、次で 2G のスワップを追加できます。
 
 ```bash
 fallocate -l 2G /mnt/swapfile
@@ -142,16 +154,16 @@ swapon /mnt/swapfile
 echo "/mnt/swapfile   none    swap    sw    0   0" >> /etc/fstab
 ```
 
-### Cause 2: You do not have enough storage
+### 原因 2: ストレージが不足している
 
-Check the storage of your machine:
+マシンのストレージを確認します。
 
 ```bash
 sudo su -
 df -h
 ```
 
-If you see you don't have any storage left (/dev/sda1 in my case)
+ストレージ残量がない場合（例では `/dev/sda1`）:
 
 ```bash
 Filesystem      Size  Used Avail Use% Mounted on
@@ -164,15 +176,15 @@ tmpfs           2.0G     0  2.0G   0% /sys/fs/cgroup
 /dev/sdb1       7.8G   18M  7.4G   1% /mnt
 ```
 
-[Choose the docker fragment](https://docs.btcpayserver.org/Docker/#generated-docker-compose) for the amount of storage you aim to keep. Then [prune your node](https://docs.btcpayserver.org/Docker/#how-i-can-prune-my-nodes).
+維持したいストレージ量に応じた [docker fragment](https://docs.btcpayserver.org/Docker/#generated-docker-compose) を選択し、その後 [ノードを prune](https://docs.btcpayserver.org/Docker/#how-i-can-prune-my-nodes) してください。
 
-### Cause 3: You accidentally disabled pruning
+### 原因 3: 誤って pruning を無効化した
 
-If you have recently tried to modify your environment variables using the `export BTCPAYGEN_ADDITIONAL_FRAGMENTS="xyz"` command to add an additional fragment, but forgot to include your current ones, you may have disabled pruning.
+`export BTCPAYGEN_ADDITIONAL_FRAGMENTS="xyz"` で追加 fragment を設定した際、既存値を含め忘れると pruning を無効化してしまう場合があります。
 
-If you don't have enough memory to store the entire Bitcoin blockchain and you don't have an `opt-save-storage` listed when you [print the complete list of options](https://docs.btcpayserver.org/FAQ/Deployment/#how-can-i-modify-or-deactivate-environment-variables) that you are running, it is very likely you have disabled pruning.
+Bitcoin ブロックチェーン全体を保存できるだけのメモリがなく、かつ実行中オプション一覧に `opt-save-storage` がない（[実行中オプションの確認](https://docs.btcpayserver.org/FAQ/Deployment/#how-can-i-modify-or-deactivate-environment-variables)）なら、pruning 無効化の可能性が高いです。
 
-You can verify by checking your Bitcoind logs:
+Bitcoind ログで確認できます。
 
 ```bash
 sudo su -
@@ -180,7 +192,7 @@ cd btcpayserver-docker
 docker logs --tail 100 btcpayserver_bitcoind
 ```
 
-If you see:
+以下が表示される場合:
 
 ```bash
 Block files have previously been pruned.
@@ -189,25 +201,25 @@ This will redownload the entire blockchain.
 Please restart with -reindex or -reindex-chainstate to recover.
 ```
 
-You can simply [re-enable pruning](#how-to-enable-bitcoin-node-pruning) to solve the issue.
+この場合は [pruning を再有効化](#how-to-enable-bitcoin-node-pruning) すれば解決できます。
 
-### Cause 4: Your bitcoin data directory is corrupted
+### 原因 4: bitcoin データディレクトリが破損している
 
-Check the logs of your node:
+ノードログを確認します。
 
 ```bash
 sudo su -
 docker logs --tail 10 btcpayserver_bitcoind
 ```
 
-If you see:
+以下が表示される場合:
 
 ```bash
 Please restart with -reindex or -reindex-chainstate to recover.
 ```
 
-Then your bitcoin data directory has been corrupted. It may be physical damage or failure of the hard drive.
-To reindex your node:
+bitcoin データディレクトリが破損しています。物理的なディスク損傷や故障の可能性があります。
+ノードを再インデックスするには:
 
 ```bash
 btcpay-down.sh
@@ -217,41 +229,41 @@ rm -rf /var/lib/docker/volumes/generated_bitcoin_datadir/_data/chainstate
 btcpay-up.sh
 ```
 
-### Cause 5: Your last wallet synchronisation goes beyond pruned data
+### 原因 5: 最後のウォレット同期が pruned データ範囲を超えている
 
-This can happen if you use FastSync or import an already synched blockchain. It means that the bitcoin core wallet needs to be removed because it was created before the utxoset, likely because BTCPay Server started without the utxoset at the first boot. To verify this case, [check the bitcoind log](../Troubleshooting.md#21-btcpay-logs) for this:
+FastSync を使った場合や、すでに同期済みのブロックチェーンを取り込んだ場合に発生することがあります。これは Bitcoin Core ウォレットを削除する必要がある状態で、原因は多くの場合、初回起動時に BTCPay Server が utxoset なしで起動し、ウォレットが utxoset より前に作成されたためです。該当ケースかどうかは [bitcoind ログ](../Troubleshooting.md#21-btcpay-logs) で次を確認します。
 
 ```bash
 Error: Prune: last wallet synchronisation goes beyond pruned data. You need to -reindex (download the whole blockchain again in case of pruned node)
 ```
 
-If you see this error and agree to remove the wallet to finish syncing, use `docker volume rm generated_bitcoin_wallet_datadir` after you run `btcpay-down.sh` and before you run `btcpay-up.sh`
-WARNING: Do not delete this wallet if you have any funds on it.
+このエラーが表示され、同期完了のためにウォレット削除に同意する場合は、`btcpay-down.sh` 実行後、`btcpay-up.sh` 実行前に `docker volume rm generated_bitcoin_wallet_datadir` を実行してください。
+WARNING: このウォレットに資金がある場合は削除しないでください。
 
-## I'm running a full node and have a synched blockchain, can BTCPay use it so that it doesn't have to do a full sync?
+## フルノードで同期済みブロックチェーンを持っています。フル同期せず BTCPay で使えますか？
 
-Yes you can! However, before you do that, you'll want to stop bitcoind from updating docker's volume for it, as that job will be taken over by BTCPay Server.
+可能です。ただし先に、docker volume を更新している既存の bitcoind を停止してください。その役割は BTCPay Server が引き継ぎます。
 
-If you want to run BTCPay Server inside a docker-compose, and that you have the data directory (`.bitcoin`) of a fully synched node on your docker host, then you can reuse it easily for BTCPay Server.
+BTCPay Server を docker-compose で実行し、docker host 側に完全同期済みノードのデータディレクトリ（`.bitcoin`）がある場合、それを BTCPay Server で再利用できます。
 
-To do that, follow the following steps :
+手順は次のとおりです。
 
-- Do the normal setup according to [this instruction](https://docs.btcpayserver.org/Docker/). Note the `opt-save-storage` environment variable, which is used to enable various pruning levels. If you do not want to prune your exiting data directory, then omit the following line in your BTCPay docker deployment: `export BTCPAYGEN_ADDITIONAL_FRAGMENTS="opt-save-storage-s"`.
-- Once `btcpay-setup.sh` is over, turn down the docker compose with `btcpay-down.sh`.
-- Login as root with `sudo su -`.
-- Open the docker's volume for bitcoind : `cd /var/lib/docker/volumes/generated_bitcoin_datadir/`, and check its content with `ls -la`. You should see only one directory named `_data`.
-- Now remove the `_data`directory : `rm -r _data`. If for any reason you want to keep this directory and its content you can also rename it instead : `mv _data/ _data.old/`
-- Now create a [symbolic link](https://www.cyberciti.biz/faq/creating-soft-link-or-symbolic-link/) between `/var/lib/docker/volumes/generated_bitcoin_datadir/_data` and your data directory (`.bitcoin`) on your host: `ln -s path/to/.bitcoin /var/lib/docker/volumes/generated_bitcoin_datadir/_data`
-- Check that the link has been done with a `ls -la`
-- Start your docker-compose again with `btcpay-up.sh`
+- [この手順](https://docs.btcpayserver.org/Docker/) に従って通常セットアップを行います。`opt-save-storage` 環境変数は pruning レベル有効化に使われます。既存データディレクトリを prune したくない場合は、BTCPay docker デプロイで `export BTCPAYGEN_ADDITIONAL_FRAGMENTS="opt-save-storage-s"` を設定しないでください。
+- `btcpay-setup.sh` 完了後、`btcpay-down.sh` で docker compose を停止します。
+- `sudo su -` で root ログインします。
+- bitcoind の docker volume を開きます: `cd /var/lib/docker/volumes/generated_bitcoin_datadir/`。`ls -la` で内容を確認すると `_data` ディレクトリのみのはずです。
+- `_data` ディレクトリを削除します: `rm -r _data`。保持したい場合は `mv _data/ _data.old/` でリネームします。
+- `/var/lib/docker/volumes/generated_bitcoin_datadir/_data` と host 上のデータディレクトリ（`.bitcoin`）の間に [シンボリックリンク](https://www.cyberciti.biz/faq/creating-soft-link-or-symbolic-link/) を作成します: `ln -s path/to/.bitcoin /var/lib/docker/volumes/generated_bitcoin_datadir/_data`
+- `ls -la` でリンク作成を確認します。
+- `btcpay-up.sh` で docker-compose を再起動します。
 
-Your BTCPay Server should now be fully synched.
+これで BTCPay Server は完全同期済みになるはずです。
 
-If after this BTCPay Server keeps showing that your node is always starting, see the cause of [BTCPay Server keeps showing that my node is always starting](#btcpay-server-keeps-showing-that-my-node-is-always-starting).
+この後も BTCPay Server がノードを常に starting と表示する場合は、[BTCPay Server keeps showing that my node is always starting](#btcpay-server-keeps-showing-that-my-node-is-always-starting) の原因を参照してください。
 
-## How to enable Bitcoin node pruning?
+## Bitcoin ノードの pruning を有効化するには？
 
-This will prune your Bitcoin full node to a maximum of 100GB (of blocks):
+これにより Bitcoin フルノードを最大 100GB（blocks）まで pruning できます。
 
 ```bash
 sudo su -
@@ -260,18 +272,18 @@ export BTCPAYGEN_ADDITIONAL_FRAGMENTS="opt-save-storage"
 . ./btcpay-setup.sh -i
 ```
 
-Other pruning options are [documented here](https://docs.btcpayserver.org/Docker/#generated-docker-compose). See [this example](./Deployment.md#how-can-i-modify-or-deactivate-environment-variables) for use with other additional fragments.
+他の pruning オプションは [こちら](https://docs.btcpayserver.org/Docker/#generated-docker-compose) を参照してください。他の additional fragments と併用する場合は [この例](./Deployment.md#how-can-i-modify-or-deactivate-environment-variables) を参照してください。
 
-## How to disable Bitcoin node pruning?
+## Bitcoin ノードの pruning を無効化するには？
 
-To disable pruning of your Bitcoin node in BTCPay, first ensure you have enough memory to store the entire blockchain and BTCPayServer on your system. Then disable the `opt-save-storage` environment variable. See [this example](./Deployment.md#how-can-i-modify-or-deactivate-environment-variables) to view your fragment list and select only one for removal. The following example will remove **all** additional fragments:
+BTCPay で Bitcoin ノードの pruning を無効化する前に、システムにブロックチェーン全体と BTCPayServer を保存できるだけのメモリがあることを確認してください。そのうえで `opt-save-storage` 環境変数を無効化します。fragment 一覧の確認と 1 つだけ削除する方法は [この例](./Deployment.md#how-can-i-modify-or-deactivate-environment-variables) を参照してください。次の例は additional fragments を **すべて** 削除します。
 
 ```bash
 export BTCPAYGEN_ADDITIONAL_FRAGMENTS=""
 . ./btcpay-setup.sh -i
 ```
 
-Then run the following commands to recreate a non-pruned Bitcoin node:
+その後、pruning なし Bitcoin ノードを再作成するため次のコマンドを実行します。
 
 ```bash
 btcpay-down.sh

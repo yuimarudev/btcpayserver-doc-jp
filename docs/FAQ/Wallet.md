@@ -1,168 +1,183 @@
-# Wallet FAQ
+<!-- legacy-anchor-aliases -->
+<span id="can-i-use-a-hardware-wallet-with-btcpay-server"></span>
+<span id="do-i-have-to-use-btcpay-server-wallet"></span>
+<span id="how-to-add-custom-labels-and-comments-to-transactions"></span>
+<span id="how-to-set-up-my-wallet-with-btcpay-server"></span>
+<span id="i-dont-see-lightning-network-payments-in-btcpay-wallet"></span>
+<span id="is-there-a-mobile-app-for-btcpay-server-wallet"></span>
+<span id="what-is-a-derivation-scheme"></span>
+<span id="what-is-a-replace-by-fee-rbf-transaction"></span>
+<span id="what-is-btcpay-server-wallet"></span>
+<span id="what-is-wallet-re-scan-in-btcpay"></span>
+<span id="why-is-sending-a-transaction-using-trezor-failing"></span>
+<!-- /legacy-anchor-aliases -->
 
-This document contains frequently asked questions related to BTCPay Server's [internal wallet](../Wallet.md).
+# ウォレットFAQ
+
+このドキュメントには、BTCPay Server の[内部ウォレット](../Wallet.md)に関するよくある質問をまとめています。
 
 [[toc]]
 
-## What is BTCPay Server wallet?
+## BTCPay Server ウォレットとは何ですか？
 
-BTCPay Server has an internal wallet which you can use to view incoming and outgoing associated Bitcoin transactions and spend your funds.
+BTCPay Server には内部ウォレットがあり、関連する Bitcoin の入出金トランザクションを確認したり、資金を使用したりできます。
 
-It works like any other wallet, but has enhanced privacy features (non-custodial, no third-parties, verified with your server's dedicated full node, etc.) by default and also solves certain UX problems you may encounter when using an existing wallet with BTCPay Server. It also includes many other wallet features such as custom transaction labelling, blockchain explorer links, transaction confirmation status, etc. It can be connected with many different external wallet types and even server generated hot wallets. For these reasons, it's recommended to use the internal wallet for the most flexible and best wallet experience in BTCPay Server.
+これは他のウォレットと同様に動作しますが、既定でプライバシー機能（ノンカストディアル、第三者不要、サーバー専用フルノードで検証、など）が強化されており、既存ウォレットを BTCPay Server と使う際に発生しうる UX 上の問題も解決します。さらに、トランザクションのカスタムラベル、ブロックチェーンエクスプローラーへのリンク、トランザクション承認ステータスなど、多くの機能も含まれています。さまざまな外部ウォレット型や、サーバー生成のホットウォレットとも接続できます。これらの理由から、BTCPay Server で最も柔軟で優れたウォレット体験のために、内部ウォレットの利用を推奨します。
 
-For more information on how to use the built-in wallet [check this page](../Wallet.md). To use the internal wallet, you first need to [set up the wallet](../WalletSetup.md) with your BTCPay store.
+組み込みウォレットの使い方については、[このページ](../Wallet.md)を確認してください。内部ウォレットを使うには、まず BTCPay ストアで[ウォレットをセットアップ](../WalletSetup.md)する必要があります。
 
-## How to set up my wallet with BTCPay Server?
+## BTCPay Server でウォレットをセットアップするには？
 
-Your store's wallet setup page should guide you completely step by step to setting up any kind of wallet with BTCPay Server. If you have more questions, check our in-depth documentation on [how to set up a wallet](../WalletSetup.md).
+ストアのウォレットセットアップページでは、BTCPay Server であらゆる種類のウォレットを設定できるよう、手順が段階的に案内されます。さらに質問がある場合は、[ウォレットの設定方法](../WalletSetup.md)に関する詳細ドキュメントを確認してください。
 
-## Can I use a hardware wallet with BTCPay Server?
+## BTCPay Server でハードウェアウォレットは使えますか？
 
-The internal wallet has a [built in hardware wallet integration](../HardwareWalletIntegration.md). You can use a supported hardware wallet with the [BTCPay wallet](../Wallet.md).
+内部ウォレットには[ハードウェアウォレット統合](../HardwareWalletIntegration.md)が組み込まれています。[BTCPay ウォレット](../Wallet.md)で対応ハードウェアウォレットを使用できます。
 
-This means that you're using a hardware wallet without leaking information to third-party apps or servers unlike the default software for the devices, since the wallet relies on the full node in your BTCPay.
+これは、ウォレットが BTCPay のフルノードに依存するため、デバイス標準ソフトウェアとは異なり、第三者アプリやサーバーに情報を漏らさずにハードウェアウォレットを使えることを意味します。
 
-## Is there address re-use for separate stores using same xpub?
+## 同じ xpub を使う別ストア間でアドレス再利用は起きますか？
 
-In short, no there is not.
-Create 2 separate stores on BTCpay Server under the same instance with the same xpub.
-If you do so, BTCPay Server will do address rotation correctly and never re-use between the stores.
+結論から言うと、起きません。
+同一インスタンス上の BTCPay Server で、同じ xpub を使って 2 つの別ストアを作成できます。
+その場合でも、BTCPay Server は正しくアドレスをローテーションし、ストア間で再利用しません。
 
 :::warning
-This has to be done on the same instance.
-As was documented in [Github issue #960](https://github.com/btcpayserver/btcpayserver-doc/issues/960)
+これは同じインスタンス上で行う必要があります。
+[Github issue #960](https://github.com/btcpayserver/btcpayserver-doc/issues/960) に記載があります。
 :::
 
-## Do I have to use BTCPay Server wallet?
+## BTCPay Server ウォレットは必須ですか？
 
-By default BTCPay Server only requires an extended public key. To receive payments to your BTCPay store, you provide an extended public key (xPub) which you can generate in an external (existing) wallet. You do not have to use the built in wallet at all, you can manage funds in your [existing wallet](../WalletSetup.md#use-an-existing-wallet) instead.
+既定では、BTCPay Server が必要とするのは拡張公開鍵だけです。BTCPay ストアで支払いを受け取るには、外部（既存）ウォレットで生成した拡張公開鍵（xPub）を提供します。組み込みウォレットをまったく使わず、代わりに[既存ウォレット](../WalletSetup.md#use-an-existing-wallet)で資金管理することもできます。
 
-However, it's recommended to use the built in wallet for funds management. The built in wallet not only improves your privacy by default, but also solves user-experience issues like [gap-limit](#missing-payments-in-my-software-or-hardware-wallet).
+ただし、資金管理には組み込みウォレットの利用を推奨します。組み込みウォレットは既定でプライバシーを高めるだけでなく、[gap-limit](#missing-payments-in-my-software-or-hardware-wallet) のようなユーザー体験上の問題も解消します。
 
-## Why is sending a transaction using Trezor failing?
+## Trezor を使った送金トランザクションが失敗するのはなぜですか？
 
-If you are experiencing problems (such as "user refused" or unresponsive Trezor) while trying to send a (PSBT) transaction using the BTCPay [HWI (Vault)](../HardwareWalletIntegration.md) and your Trezor wallet, enable the **Always include non-witness UTXO if available** setting by expanding the Advanced Settings on the Send page.
+BTCPay の [HWI (Vault)](../HardwareWalletIntegration.md) と Trezor ウォレットを使って (PSBT) トランザクションを送信しようとした際に（"user refused" や Trezor が反応しないなどの）問題が発生する場合は、Send ページで Advanced Settings を展開し、**Always include non-witness UTXO if available** を有効化してください。
 
-## Missing payments in my software or hardware wallet
+<a id="missing-payments-in-my-software-or-hardware-wallet"></a>
+## ソフトウェアまたはハードウェアウォレットで支払いが表示されない
 
-If you're using an [existing software or a hardware wallet](../WalletSetup.md#use-an-existing-wallet) with your BTCPay Server, you may experience a discrepancy between balance in your BTCPay wallet and the external wallet's web, desktop or mobile app. This discrepancy is usually related to a **gap-limit** issue.
+BTCPay Server で[既存のソフトウェアまたはハードウェアウォレット](../WalletSetup.md#use-an-existing-wallet)を使用している場合、BTCPay ウォレット残高と外部ウォレットの Web / デスクトップ / モバイルアプリで表示される残高に差異が出ることがあります。この差異は通常、**gap-limit** の問題に関連しています。
 
-### The gap limit problem
+### gap limit の問題
 
-The majority of third party wallets are [light wallets](https://en.bitcoin.it/wiki/Lightweight_node), which share a node between many users. To prevent performance issues, both light and full node reliant wallets limit the amount (typically 20) of addresses without balance that they track on the blockchain. BTCPay Server generates a new address for every invoice.
+大半のサードパーティウォレットは、複数ユーザーでノードを共有する[ライトウォレット](https://en.bitcoin.it/wiki/Lightweight_node)です。性能上の問題を防ぐため、ライトウォレットもフルノード依存ウォレットも、ブロックチェーン上で追跡する残高ゼロのアドレス数を（通常 20 件に）制限しています。BTCPay Server は請求書ごとに新しいアドレスを生成します。
 
-With above in mind, after BTCPay Server generates 20 consecutive unpaid invoices, the external wallet stops fetching the transactions, assuming no new transactions occurred. Once 21st, 22nd, etc invoices are paid, your external wallet won't show them.
+この前提では、BTCPay Server が未払い請求書を 20 件連続で生成すると、外部ウォレットは新規トランザクションがないと見なして取得を停止します。21 件目、22 件目以降の請求書が支払われても、外部ウォレットには表示されません。
 
-On the other hand, internally, BTCPay Server wallet tracks any address it generates itself along with a much greater gap limit. It does not rely on a third-party and is able to always show a correct balance.
+一方、BTCPay Server の内部ウォレットは、自身が生成したあらゆるアドレスを、はるかに大きい gap limit とともに追跡します。第三者に依存しないため、常に正しい残高を表示できます。
 
-### The gap limit solution
+### gap limit の解決策
 
-It's not easy to solve the gap limit problem. You have two options:
+gap limit 問題の解決は簡単ではありません。選択肢は 2 つあります。
 
-1. Increase the gap limit in your existing (external) wallet
-2. Use internal BTCPay Server wallet
+1. 既存（外部）ウォレットの gap limit を増やす
+2. BTCPay Server の内部ウォレットを使う
 
-#### 1. Increasing the gap limit
+#### 1. gap limit を増やす
 
-If your [external/existing wallet](../WalletSetup.md#use-an-existing-wallet) allows gap-limit configuration, the easy fix is to increase it. However, majority of wallets do not allow this.
+[外部/既存ウォレット](../WalletSetup.md#use-an-existing-wallet)で gap-limit 設定が可能なら、簡単な対処はその値を増やすことです。ただし、多くのウォレットはこれをサポートしていません。
 
-The only wallets that allow gap-limit configuration that we're aware of are the following:
+私たちが把握している、gap-limit 設定が可能なウォレットは次のとおりです。
 - [Electrum](../ElectrumWallet.md)
 - [Wasabi](../WasabiWallet.md)
 - [Sparrow](https://sparrowwallet.com/)
 - [Bitcoin Core](https://github.com/bitcoin/bitcoin)
 - [Specter](https://specter.solutions/index.html)
 - [Nunchuk](https://nunchuk.io/)
-- [Samourai Wallet](https://samouraiwallet.com/) (when used with Dojo Maintenance Tool)
+- [Samourai Wallet](https://samouraiwallet.com/) (Dojo Maintenance Tool と併用した場合)
 
-Unfortunately, with any other wallet you're likely to encounter a problem.
+残念ながら、それ以外のウォレットでは問題が発生する可能性が高いです。
 
-If you'd like to use an [external wallet](../WalletSetup.md#use-an-existing-wallet) to manage the funds, we recommend that you recover your existing wallet into one of following wallets and increase the gap limit:
+資金管理に[外部ウォレット](../WalletSetup.md#use-an-existing-wallet)を使いたい場合は、既存ウォレットを次のいずれかへリカバリーし、gap limit を増やすことを推奨します。
 
-- [Increasing the gap limit in Electrum](../ElectrumWallet.md#configuring-the-gap-limit-in-electrum)
-- [Increasing the gap limit in Wasabi](../WasabiWallet.md#configuring-the-gap-limit-in-wasabi)
+- [Electrum で gap limit を増やす](../ElectrumWallet.md#configuring-the-gap-limit-in-electrum)
+- [Wasabi で gap limit を増やす](../WasabiWallet.md#configuring-the-gap-limit-in-wasabi)
 
-After you've increased the gap limit, the balance in your external wallet and BTCPay wallet should match. If they don't, you may have set up your derivation scheme incorrectly.
+gap limit を増やした後は、外部ウォレットと BTCPay ウォレットの残高が一致するはずです。一致しない場合は、導出方式の設定が誤っている可能性があります。
 
-#### 2. Use the internal wallet
+#### 2. 内部ウォレットを使う
 
-For best user-experience and privacy, we recommend that you consider dropping external wallets and start using the [BTCPay Server internal wallet](../Wallet.md).
+ユーザー体験とプライバシーを最良にするため、外部ウォレットの使用をやめて [BTCPay Server 内部ウォレット](../Wallet.md)の利用を検討することを推奨します。
 
-## What is a derivation scheme?
+## derivation scheme とは何ですか？
 
-No matter [how you set up your wallet](../WalletSetup.md), BTCPay Server uses a `derivation scheme` to represent the destination of the funds received by your invoices. The destination of those funds will be your wallet, located by the extended public key that you provide.
+BTCPay Server は、[ウォレットの設定方法](../WalletSetup.md)にかかわらず、請求書で受け取る資金の送金先を表すために `derivation scheme` を使用します。これらの資金の送金先は、あなたが提供した拡張公開鍵によって特定されるウォレットです。
 
-Using different derivation schemes with your extended public key, you can also choose to create various receiving address types, shown in your store invoices.
+拡張公開鍵に異なる導出方式を使用することで、ストア請求書に表示されるさまざまな受取アドレスタイプを選択することもできます。
 
-| Address Type         |             Example             |
-| :------------------- | :-----------------------------: |
-| P2WPKH               |             xpub...             |
-| P2SH-P2WPKH          |         xpub...-[p2sh]          |
-| P2PKH                |        xpub...-[legacy]         |
-| Multi-sig P2WSH      |     2-of-xpub1...-xpub2...      |
-| Multi-sig P2SH-P2WSH |  2-of-xpub1...-xpub2...-[p2sh]  |
-| Multi-sig P2SH       | 2-of-xpub1...-xpub2...-[legacy] |
+| アドレスタイプ         |             例             |
+| :--------------------- | :------------------------: |
+| P2WPKH                 |           xpub...          |
+| P2SH-P2WPKH            |       xpub...-[p2sh]       |
+| P2PKH                  |      xpub...-[legacy]      |
+| マルチシグ P2WSH       |    2-of-xpub1...-xpub2...   |
+| マルチシグ P2SH-P2WSH  | 2-of-xpub1...-xpub2...-[p2sh] |
+| マルチシグ P2SH        | 2-of-xpub1...-xpub2...-[legacy] |
 
 :::tip
-On top of the xPub extended public key formats shown above, BTCPay Server supports yPub and zPub formats. Please note that these will be converted to xPub once the wallet setup is completed. This has no effect on how you receive or send funds.
+上記の xPub 拡張公開鍵フォーマットに加えて、BTCPay Server は yPub と zPub フォーマットもサポートしています。ウォレットセットアップ完了時にこれらは xPub に変換されますが、資金の受け取りや送金には影響しません。
 :::
 
-## What is a Replace-By-Fee (RBF) transaction?
+## Replace-By-Fee (RBF) トランザクションとは何ですか？
 
-A Replace-By-Fee (RBF) transaction is a feature of the Bitcoin protocol. Learn more about what it is, why it happens and the different types of RBF [here](https://bitcoin.stackexchange.com/a/54457/85016).
+Replace-By-Fee (RBF) トランザクションは、Bitcoin プロトコルの機能です。RBF の概要、発生理由、種類については[こちら](https://bitcoin.stackexchange.com/a/54457/85016)を参照してください。
 
-RBF capability is by default randomly enabled/disabled between transactions when using the BTCPay Server internal wallet, for enhanced privacy. In order to ensure it is enabled, or to disable it, see the advanced options of the BTCPay Server [internal wallet](../Wallet.md#rbf-replace-by-fee).
+プライバシー強化のため、BTCPay Server 内部ウォレットではトランザクションごとに RBF 機能が既定でランダムに有効/無効になります。常に有効にしたい場合や無効にしたい場合は、BTCPay Server [内部ウォレット](../Wallet.md#rbf-replace-by-fee)の詳細オプションを確認してください。
 
-## Does BTCPay Server use mempoolfullrbf=1 ?
+## BTCPay Server は mempoolfullrbf=1 を使いますか？
 
-In very short, yes.
-We've decided to add this as default to your BTCPay Server setup. However, we've also made it a fragment you can disable yourself.
-Without mempoolfullrbf=1 if a customer is double-spending a payment with a transaction not signaling RBF, the merchant would only know after confirmation.
+非常に短く答えると、はい。
+これを BTCPay Server セットアップの既定値として追加することにしました。ただし、無効化できるフラグメントにもしています。
+`mempoolfullrbf=1` がない場合、顧客が RBF シグナルなしのトランザクションで二重支払いを行っていたとしても、加盟店がそれを把握できるのは承認後になります。
 
-However, some users don't want to activate this policy. Some people consider that while it aligns with the merchant's incentive to activate it, it is considered against the interests of the network, as it makes accepting a payment with 0 confirmations harder once the policy is widely deployed.
+ただし、このポリシーを有効化したくないユーザーもいます。加盟店のインセンティブには合致する一方で、このポリシーが広く導入されると 0 承認での支払い受け入れが難しくなり、ネットワーク全体の利益には反すると考える人もいます。
 
-To opt out use the following :
+無効化するには、次を使用します。
 
 ```bash
 BTCPAYGEN_EXCLUDE_FRAGMENTS="$BTCPAYGEN_EXCLUDE_FRAGMENTS;opt-mempoolfullrbf"
 . btcpay-setup.sh -i
 ```
 
-## How to add custom labels and comments to transactions?
+## トランザクションにカスタムラベルやコメントを追加するには？
 
-In addition to the [automatic labels](../Wallet.md#transaction-labels), you can easily create your own custom transaction labels. Labels can be used for filtering transactions in the wallet view. You can also add individual comments to transactions to leave a note or description about the payment.
+[自動ラベル](../Wallet.md#transaction-labels)に加えて、独自のカスタムトランザクションラベルを簡単に作成できます。ラベルはウォレット表示でトランザクションをフィルタリングするために使えます。支払いに関するメモや説明として、各トランザクションに個別コメントを追加することもできます。
 
-![Custom Transaction Labels](../img/wallet/WalletTxComment.png)
+![カスタムトランザクションラベル](../img/wallet/WalletTxComment.png)
 
-## I don't see Lightning network payments in BTCPay wallet?
+## BTCPay ウォレットに Lightning Network の支払いが表示されません
 
-The [Lightning Network](../LightningNetwork.md) and the BTCPay Server [wallet](../Wallet.md) are different concepts. The internal BTCPay Server wallet only shows on-chain payments.
+[Lightning Network](../LightningNetwork.md) と BTCPay Server の[ウォレット](../Wallet.md)は別の概念です。BTCPay Server 内部ウォレットにはオンチェーン支払いのみ表示されます。
 
-In the future they may become unified but for the time being, to manage your Lightning Network funds, use Ride the Lightning, ThunderHub, an externally connected Lightning wallet (Zeus, Zap, etc.), or the Command Line Interface (CLI).
+将来的に統合される可能性はありますが、現時点で Lightning Network の資金を管理するには、Ride the Lightning、ThunderHub、外部接続の Lightning ウォレット（Zeus、Zap など）、またはコマンドラインインターフェース（CLI）を使用してください。
 
-## Is there a mobile app for BTCPay Server wallet?
+## BTCPay Server ウォレット用のモバイルアプリはありますか？
 
 :::tip
-Update 11/2023:
-There will be a mobile app for BTCPay Server wallet in the future. [It is currently in development](https://twitter.com/BtcpayServer/status/1699114457421447543).
+更新 11/2023:
+今後、BTCPay Server ウォレット向けモバイルアプリが提供される予定です。[現在開発中です](https://twitter.com/BtcpayServer/status/1699114457421447543)。
 :::
 
-BTCPay Server is a web app (not a mobile app) and may be viewed using any device that can display a web browser. There are mobile apps which allow you to connect to your BTCPay Server Lightning node (Zeus, Zap, etc.).
+BTCPay Server はモバイルアプリではなく Web アプリであり、Web ブラウザを表示できるあらゆるデバイスで利用できます。BTCPay Server の Lightning ノードに接続できるモバイルアプリ（Zeus、Zap など）もあります。
 
-You can also use mobile apps to connect to your Bitcoin full node using either P2P or RPC. If you are on iOS you can easily connect to your Bitcoin full node using Fully Noded.
+また、P2P または RPC を使ってモバイルアプリから Bitcoin フルノードに接続することもできます。iOS の場合は、Fully Noded を使って簡単に Bitcoin フルノードへ接続できます。
 
-To connect your BTCPay node to Fully Noded:
+BTCPay ノードを Fully Noded に接続するには:
 
-    1. Download Fully Noded from the App store.
-    2. In BTCPay, go to Server Settings > Services and click on the Full Node RPC.
-    3. Open your Fully Noded app, Quick Connect QR.
-    4. Scan the QR code displayed on your BTCPay.
-    5. Your Bitcoin full node is now connected to Fully Noded.
+    1. App Store から Fully Noded をダウンロードします。
+    2. BTCPay で Server Settings > Services に移動し、Full Node RPC をクリックします。
+    3. Fully Noded アプリを開き、Quick Connect QR を選択します。
+    4. BTCPay に表示された QR コードをスキャンします。
+    5. これで Bitcoin フルノードが Fully Noded に接続されます。
 
-Here are some node statuses and network information you can easily monitor from your Fully Noded:
+Fully Noded から簡単に監視できるノード状態やネットワーク情報の一部は次のとおりです。
 
 ![Fully Noded](../img/FullyNoded.png)
 
-## How can I use PSBT (partially signed bitcoin transactions) with BTCPay Server?
+## BTCPay Server で PSBT（partially signed bitcoin transactions）を使うには？
 
-You can use BTCPay Server to create and/or broadcast PSBT. Check our guides to [Sign a PSBT transaction with ColdCard hardware wallet](./ColdCardWallet.md#spending-from-btcpay-server-wallet-with-coldcard-psbt) and [create and sign a PSBT transaction with Sparrow wallet](./Sign-PSBT-with-sparrow-wallet.md).
+BTCPay Server を使って PSBT の作成および/またはブロードキャストができます。ガイドとして、[ColdCard ハードウェアウォレットで PSBT トランザクションに署名する](../ColdCardWallet.md#spending-from-btcpay-server-wallet-with-coldcard-psbt) と [Sparrow ウォレットで PSBT トランザクションを作成して署名する](../Sign-PSBT-with-sparrow-wallet.md) を確認してください。

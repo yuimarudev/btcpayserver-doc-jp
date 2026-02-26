@@ -1,72 +1,77 @@
 ---
-description: Learn what are invoices and how to manage them in BTCPay Server.
+description: BTCPay Server の請求書とは何か、そしてその管理方法を学びます。
 tags:
-  - Invoices
-  - Payment request
-  - Bitcoin invoices
-  - Invoice status
-  - Managing bitcoin invoices
-  - Bitcoin invoicing
+  - 請求書
+  - 支払いリクエスト
+  - Bitcoin 請求書
+  - 請求書ステータス
+  - Bitcoin 請求書の管理
+  - Bitcoin 請求処理
 ---
+<!-- legacy-anchor-aliases -->
+<span id="archived-invoices"></span>
+<span id="invoice-statuses"></span>
+<!-- /legacy-anchor-aliases -->
 
-# What is an invoice in BTCPay Server?
 
-An **invoice** is a document issued by the seller to a buyer to collect payment.
+# BTCPay Server の請求書とは？
 
-In BTCPay Server, an invoice represents a document that must be paid within a **defined time interval** at a fixed exchange rate. Invoices have expiration because they lock the exchange rate within a specified time frame to protect the receiver from price fluctuations.
+**請求書（invoice）** は、支払いを回収するために売り手が買い手へ発行する文書です。
+
+BTCPay Server における請求書は、**定義された時間内**に固定為替レートで支払われるべき文書を表します。請求書に有効期限があるのは、指定時間内に為替レートを固定し、受け取り側を価格変動から保護するためです。
 
 ![Invoices](./img/invoice/Invoices.png)
 
-The core of BTCPay Server is the ability to act as a bitcoin invoice management system. An invoice is an essential tool for keeping track and managing a received payment.
+BTCPay Server の中核機能は、Bitcoin 請求書管理システムとして動作できることです。請求書は受け取った支払いの追跡と管理に不可欠な仕組みです。
 
-Unless you use a built in [Wallet](/Wallet.md) to receive payments manually, all payments within a store will be shown on the `Invoices` page. This page cumulatively sorts payments by date and is a central piece for invoice management and payment troubleshooting.
+手動で支払いを受け取るために組み込みの [Wallet](/Wallet.md) を使う場合を除き、ストア内のすべての支払いは `Invoices` ページに表示されます。このページは支払いを日付順に集約して表示し、請求書管理や支払いトラブルシューティングの中心となります。
 
-## Invoice statuses
+## 請求書ステータス
 
-Table below lists and describes common invoice statuses in BTCPay and suggests common actions.
-Actions are just recommendations.
-It's up to users to define best course of action for their use-case and business.
+以下の表は BTCPay の一般的な請求書ステータスと推奨アクションを示しています。
+アクションはあくまで推奨です。
+最適な対応は、各ユーザーが自分のユースケースやビジネスに応じて判断してください。
 
 | Invoice Status                 | Description                                                                                                                             | Action                                                                                                                      |
 | ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------- |
-| **New**                        | Not paid, invoice timer still has not expired                                                                                           | None                                                                                                                        |
-| **New (paidPartial)**          | Paid, not in full, invoice timer still has not expired                                                                                  | None                                                                                                                        |
-| **Expired**                    | Not paid, invoice timer expired                                                                                                         | None                                                                                                                        |
-| **Expired (paidPartial)** \*\* | Paid, not in full amount, and expired                                                                                                   | Contact buyer to arrange a refund or ask for them to pay their due. Optionally mark invoice as settled or invalid           |
-| **Expired (paidLate)**         | Paid, in full amount, after the invoice timer has expired                                                                               | Contact buyer to arrange a refund or process order if late confirmations are acceptable.                                    | Optionally mark as settled or mark as invalid |
-| **Settled (paidOver)**         | Paid more than the invoice amount, settled, received sufficient amount of confirmations                                                 | Contact buyer to arrange a refund for the extra amount, or optionally wait for buyer to contact you                         |
-| **Processing**                 | Paid in full, but has not received sufficient amount of confirmations specified in the store settings                                   | Wait for confirmations (The invoice should become - settled)                                                                |
-| **Processing (paidOver)**      | Paid more than the invoice amount, not received sufficient amount of confirmations                                                      | Wait to be settled then contact buyer to arrange a refund for the extra amount, or optionally wait for buyer to contact you |
-| **Settled**                    | Paid, in full, received sufficient amount of confirmations in store                                                                     | Fulfil the order                                                                                                            |
-| **Settled (marked)**           | Status was manually changed to settled from an processing or invalid status                                                             | Store admin has marked the payment as settled                                                                               |
-| **Invalid\***                  | Paid, but failed to receive sufficient amount of confirmations within the time specified in store settings                              | Check the transaction on a blockchain explorer, if it received sufficient confirmations, mark as settled                    |
-| **Invalid (marked)**           | Status was manually changed to invalid from a settled or expired status                                                                 | Store admin has marked the payment as invalid                                                                               |
-| **Invalid (paidOver)**         | Paid more than the invoice amount, but failed to receive sufficient amount of confirmations within the time specified in store settings | Check the transaction on a blockchain explorer, if it received sufficient confirmations, mark as settled                    |
+| **New**                        | 未払いで、請求書タイマーがまだ期限切れになっていない                                                                                   | なし                                                                                                                        |
+| **New (paidPartial)**          | 一部のみ支払い済みで、請求書タイマーはまだ期限切れになっていない                                                                       | なし                                                                                                                        |
+| **Expired**                    | 未払いで、請求書タイマーが期限切れ                                                                                                     | なし                                                                                                                        |
+| **Expired (paidPartial)** \*\* | 一部のみ支払い済みで、かつ期限切れ                                                                                                     | 返金対応を相談するか、不足分の支払いを依頼。必要に応じて settled または invalid に手動変更                                |
+| **Expired (paidLate)**         | 請求書タイマー期限切れ後に、全額支払い済み                                                                                             | 遅延確定を受け入れられるなら注文を処理、または返金対応を相談。                                                            | 必要に応じて settled または invalid に手動変更 |
+| **Settled (paidOver)**         | 請求額を超過して支払い済みで settled。必要な承認数も満たしている                                                                       | 超過分返金を相談するか、購入者からの連絡を待つ                                                                            |
+| **Processing**                 | 全額支払い済みだが、ストア設定で指定した承認数に達していない                                                                           | 承認を待つ（その後 settled になるはずです）                                                                                |
+| **Processing (paidOver)**      | 請求額を超過して支払い済みだが、必要承認数に未達                                                                                       | settled になるまで待ち、超過分返金を相談するか、購入者からの連絡を待つ                                                    |
+| **Settled**                    | 全額支払い済みで、ストア設定の必要承認数を満たした                                                                                     | 注文を履行                                                                                                                  |
+| **Settled (marked)**           | processing または invalid から、手動で settled に変更                                                                                  | ストア管理者がこの支払いを settled に手動設定                                                                              |
+| **Invalid\***                  | 支払いはあるが、ストア設定で指定時間内に十分な承認を得られなかった                                                                     | ブロックチェーンエクスプローラーで確認し、十分な承認がある場合は settled に手動変更                                       |
+| **Invalid (marked)**           | settled または expired から、手動で invalid に変更                                                                                     | ストア管理者がこの支払いを invalid に手動設定                                                                              |
+| **Invalid (paidOver)**         | 請求額超過で支払いはあるが、ストア設定で指定時間内に十分な承認を得られなかった                                                        | ブロックチェーンエクスプローラーで確認し、十分な承認がある場合は settled に手動変更                                       |
 
-- - Invoices paid via the [Lightning Network](./LightningNetwork.md) immediately go to a settled state, as their settlement is instant.
-- \*\* Paid Partial invoice usually happens when a buyer pays the invoice from the exchange wallet which takes a fee for their service and deducts it from a total. In some cases, it happens when buyer enters an incorrect amount in their wallet.
-- \*\*\* Invalid - If you're receiving a lot of invalid invoices in your store, you may want to [adjust invalid invoice time in store settings](./FAQ/Stores.md#payment-invalid-if-transactions-fails-to-confirm-minutes-after-invoice-expiration).
+- - [Lightning Network](./LightningNetwork.md) 経由で支払われた請求書は、即時決済のため直ちに settled 状態になります。
+- \*\* Paid Partial 請求書は、購入者が手数料を差し引く取引所ウォレットから支払った場合に発生しがちです。購入者がウォレットで誤った金額を入力した場合にも起こります。
+- \*\*\* Invalid - ストアで invalid 請求書が多発する場合は、[ストア設定の invalid 請求書時間を調整](./FAQ/Stores.md#payment-invalid-if-transactions-fails-to-confirm-minutes-after-invoice-expiration) してください。
 
-### Invoice details
+### 請求書詳細
 
-The invoice details page contains all information related to an invoice.
+請求書詳細ページには、請求書に関するすべての情報が表示されます。
 
-Invoice information is created automatically based on invoice status, exchange rate, etc. Product information is created automatically if the invoice was created with product information such as in the Point of Sale app. Read about collecting Buyer information [here](./FAQ/Stores.md#how-to-collect-additional-buyer-information).
+請求書情報は、請求書ステータス、為替レートなどに基づいて自動生成されます。Point of Sale アプリのように商品情報付きで請求書を作成した場合は、商品情報も自動生成されます。購入者情報の収集については [こちら](./FAQ/Stores.md#how-to-collect-additional-buyer-information) を参照してください。
 
-### Invoice filtering
+### 請求書フィルタリング
 
-Invoices can be filtered via the quick filters located next to the search button or the advanced filters, which can be toggled by clicking the (Help) link on the top. Users can **filter invoices** by store, order id, item id, status, or date.
+請求書は、検索ボタン横のクイックフィルター、または上部の（Help）リンクで表示切替できる詳細フィルターで絞り込めます。ユーザーは **filter invoices** により、ストア、order id、item id、ステータス、日付で絞り込みできます。
 
 ![Invoice Filtering](./img/invoice/InvoiceFiltering.gif)
 
-### Invoice export
+### 請求書エクスポート
 
-BTCPay Server Invoices can be exported in CSV or JSON format. For more information about invoice export and accounting, [see this page](./Reporting.md).
+BTCPay Server の請求書は CSV または JSON 形式でエクスポートできます。請求書エクスポートと会計に関する詳細は、[こちらのページ](./Reporting.md) を参照してください。
 
-## Refunding an invoice
+## 請求書を返金する
 
-If for any reason you would like to issue a refund, you can easily create a refund from the invoice view. Check our [refunding documentation](/Refund.md) for more information.
+何らかの理由で返金したい場合、請求書画面から簡単に返金を作成できます。詳細は [返金ドキュメント](/Refund.md) を参照してください。
 
-## Archiving invoices
+## 請求書をアーカイブする
 
-As a result of the no address re-use feature of BTCPay Server, it's common to see many expired invoices in your store's invoice page. To hide them from your view, select them in the list and mark them as **archived**. Invoices that have been marked as archived are not deleted. Payment to an archived invoice will still be detected by your BTCPay Server (paidLate status). You can view the store's archived invoices at any time by selecting archived invoices from the search filter dropdown.
+BTCPay Server のアドレス再利用防止機能により、ストアの請求書ページに期限切れ請求書が多く表示されるのは一般的です。表示から隠すには、一覧で対象を選択して **archived** としてマークします。archived 請求書は削除されません。archived 済み請求書への支払いも BTCPay Server は引き続き検知します（paidLate ステータス）。検索フィルターのドロップダウンで archived 請求書を選択すれば、いつでも閲覧できます。

@@ -1,5 +1,5 @@
 ---
-description: Apps allow users an easy way to extend BTCPay Server.
+description: Apps は BTCPay Server を簡単に拡張できる機能です。
 tags:
   - BTCPay Server
   - Apps
@@ -10,62 +10,62 @@ tags:
 
 # BTCPay Server Apps
 
-The primary purpose of BTCPay Server is to remove dependencies on trusted third-parties. The Apps are built in applications that obsolete central-authorities and allow users an easy way to extend the [use case](./UseCase.md) of the software. Users can self-host all sorts of customizable applications that work out of the box.
+BTCPay Server の主な目的は、信頼できる第三者への依存をなくすことです。Apps は中央集権的な権限を不要にし、ソフトウェアの[ユースケース](./UseCase.md)を簡単に拡張できる組み込みアプリケーションです。ユーザーは、すぐに使えるさまざまなカスタマイズ可能アプリをセルフホストできます。
 
-To create an app, go to Apps > Create a new app. Apps are store-dependent, which means that each app needs to be connected to a store.
+アプリを作成するには、Apps > Create a new app に進みます。Apps はストアに紐づくため、各アプリをストアに接続する必要があります。
 
 ## Point of Sale App
 
-The **web-based PoS app** allows users with brick and mortar stores to readily **accept cryptocurrencies without fees or a third-party**, directly to their wallet. The **PoS** can be displayed easily on tablets or any other devices which support web browsing. Users can easily create a homescreen shortcut for a quick access to the web-app.
+**Web ベースの PoS アプリ**を使うと、実店舗を持つユーザーは**手数料や第三者を介さずに暗号通貨を受け取り**、直接自分のウォレットに入金できます。**PoS** はタブレットや Web 閲覧可能なデバイスに簡単に表示できます。ホーム画面ショートカットを作れば、Web アプリへすぐアクセスできます。
 
 ![BTCPay Pos](./img/BTCPayPointOfSale1.jpg)
 
-Adding new products is easy. The app has a **shopping cart feature**, **tips**, **product inventory**, **custom payment options** and more.
+新しい商品追加は簡単です。このアプリには**ショッピングカート機能**、**チップ**、**在庫管理**、**カスタム支払いオプション**などがあります。
 
-The **Point of sale app** can also be used to receive donations, tips or even as a small e-commerce shop, depending on the options or customizations applied.
+**Point of Sale app** は、設定やカスタマイズ次第で、寄付・チップの受け取りや小規模 EC ショップとしても利用できます。
 
-Curently, the **Point of Sale app** supports three different views:
+現在、**Point of Sale app** は次の 3 つの表示モードに対応しています。
 
-- A `Static` view representing only the items for sale.
-- A `Cart` view including items for sale and a cart for checkout.
-- A `Light` view consisting only of a keypad for easy and quick payments (Starting from [v1.0.5.6](https://blog.btcpayserver.org/btcpay-server-1-0-5-6/#simplePOS)).
+- `Static` ビュー: 販売商品だけを表示
+- `Cart` ビュー: 商品一覧とチェックアウト用カートを表示
+- `Light` ビュー: すばやい支払い向けのキーパッドのみを表示（[v1.0.5.6](https://blog.btcpayserver.org/btcpay-server-1-0-5-6/#simplePOS) 以降）
 
-To get your first **Point of Sale app** running, follow theses few simple steps:
+最初の **Point of Sale app** を動かすには、以下の手順に従ってください。
 
-1. Go to `Apps` and `Create a new app`
-2. Add a `name` for your app
-3. Choose `app type` > Point Of Sale
-4. Select the `store` to associate with the app.
-5. Customize your PoS by choosing a `view` (Static, Cart, Light), adding your own `items` with prices, photos, and a description.
-6. Click `Save Settings`.
-7. Click `View App` to view your PoS (Your customers can access the PoS through that link).
+1. `Apps` で `Create a new app` をクリック
+2. アプリの `name` を入力
+3. `app type` > Point Of Sale を選択
+4. アプリに紐づける `store` を選択
+5. `view`（Static / Cart / Light）を選び、価格・写真・説明付きで `items` を追加して PoS をカスタマイズ
+6. `Save Settings` をクリック
+7. `View App` をクリックして PoS を表示（顧客はこのリンクから PoS にアクセス可能）
 
-You can change the appearance of your **Point of Sale app** by following the [theme customization guide](./Development/Theme.md).
+**Point of Sale app** の見た目は、[theme customization guide](./Development/Theme.md) に従って変更できます。
 
 ## Crowdfunding App
 
-**Crowdfunding** is an application which you can launch from BTCPay Server interface that allows you to create a **self-hosted funding campaign**, similar to Kickstarter or Indiegogo. Unlike traditional **crowdfunding platforms**, the creator of the campaign is the owner of the platform. Funds go directly to the creator’s wallet **without any fees**.
+**Crowdfunding** は、BTCPay Server の画面から起動できるアプリで、Kickstarter や Indiegogo のような**セルフホスト型資金調達キャンペーン**を作成できます。従来の**クラウドファンディングプラットフォーム**と異なり、キャンペーン作成者自身がプラットフォームの所有者です。資金は**手数料なしで**作成者のウォレットへ直接入金されます。
 
-1. Go to > Apps
-2. Add a name of your app
-3. Choose app type > Crowdfund
-4. Select the store to associate with the app.
-5. Customize your Crowdfund by adding your own perks with prices, photos, and description.
-6. Check the box > Allow crowdfund to be publicly visible
-7. Click "Save Settings".
-8. Click "View App" to view your Crowdfund (Contributors can access the crowdfund through that link).
+1. Apps に移動
+2. アプリ名を入力
+3. app type > Crowdfund を選択
+4. 紐づけるストアを選択
+5. 価格・写真・説明付きで特典（perks）を追加して Crowdfund をカスタマイズ
+6. Allow crowdfund to be publicly visible をチェック
+7. `Save Settings` をクリック
+8. `View App` をクリックして Crowdfund を表示（支援者はこのリンクからアクセス可能）
 
 [![BTCPay Server Crowdfunding](https://img.youtube.com/vi/tFbfyneDj88/mqdefault.jpg)](https://www.youtube.com/watch?v=tFbfyneDj88)
 
-If you would like to provide digital or physical products to the backers of your **crowdfunding campaign**, you can [integrate WooCommerce store into it](./FAQ/Apps.md#how-to-integrate-woocommerce-store-into-a-btcpay-crowdfund-app). You can also set limits on contribution perks using the inventory feature.
+**クラウドファンディングキャンペーン**の支援者にデジタル商品や物理商品を提供したい場合は、[WooCommerce ストアを連携](./FAQ/Apps.md#how-to-integrate-woocommerce-store-into-a-btcpay-crowdfund-app)できます。在庫機能を使って特典の上限数も設定できます。
 
 ## Payment Button
 
-Easily-embeddable HTML and highly-customizable **payment buttons** allow users to receive tips and donations. Online stores can also integrate payment buttons. When a site visitor clicks on the button, BTCPay displays the **invoice**.
+埋め込みが簡単な HTML で高いカスタマイズ性を持つ**payment button** を使うと、チップや寄付を受け取れます。オンラインストアにも統合できます。サイト訪問者がボタンをクリックすると、BTCPay が**invoice** を表示します。
 
-1. In your left menu bar, under the "PLUGINS" section, select "Pay Button".
-2. Allow anyone to create invoices.
-3. Customize your button.
-4. Copy the generated form and embed it on your website.
+1. 左メニューの "PLUGINS" セクションで "Pay Button" を選択
+2. 誰でも請求書を作成できるように設定
+3. ボタンをカスタマイズ
+4. 生成されたフォームをコピーして Web サイトに埋め込む
 
 [![BTCPay Server Payment Buttons](https://img.youtube.com/vi/MIWGvl6_WzI/mqdefault.jpg)](https://www.youtube.com/watch?v=MIWGvl6_WzI)

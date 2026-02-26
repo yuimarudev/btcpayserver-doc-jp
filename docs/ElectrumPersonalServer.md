@@ -1,30 +1,30 @@
-# Electrum Personal Server (EPS) integration
+# Electrum Personal Server (EPS) 統合
 
-[Electrum Personal Server or EPS](https://github.com/chris-belcher/electrum-personal-server) is a personal version of public Electrum servers like [ElectrumX](./ElectrumX.md).
+[Electrum Personal Server (EPS)](https://github.com/chris-belcher/electrum-personal-server) は、[ElectrumX](./ElectrumX.md) のような公開 Electrum サーバーの個人向けバージョンです。
 
-**EPS can be integrated into BTCPay Server** using the optional docker fragment [opt-add-electrum-ps.yml](https://github.com/btcpayserver/btcpayserver-docker/blob/master/docker-compose-generator/docker-fragments/opt-add-electrum-ps.yml). Use EPS when you want to use your own full node (included in BTCPay Server) to verify your own transactions privately when using Electrum Wallet.
+**EPS は BTCPay Server に統合できます**。任意の docker フラグメント [opt-add-electrum-ps.yml](https://github.com/btcpayserver/btcpayserver-docker/blob/master/docker-compose-generator/docker-fragments/opt-add-electrum-ps.yml) を使います。Electrum Wallet 利用時に、自分のトランザクションをプライベートに検証するため、自分のフルノード（BTCPay Server に同梱）を使いたい場合に EPS を利用してください。
 
-The biggest difference with public Electrum servers (eg. ElectrumX), is that **EPS is for monitoring only your own wallet(s)**. The "XPUB" (extended public key) of the wallet you use in Electrum must be shared with EPS in order for it to function all all. Other than this, it functions (from an end user perspective) in the same way as ElectrumX etc. It is **easy to integrate into BTCPay** just follow the instructions below.
+公開 Electrum サーバー（例: ElectrumX）との最大の違いは、**EPS が自分のウォレットのみを監視するためのもの**である点です。機能させるには、Electrum で使うウォレットの "XPUB"（拡張公開鍵）を EPS に共有する必要があります。これ以外は、エンドユーザー視点では ElectrumX などと同様に動作します。**BTCPay への統合は簡単**なので、以下の手順に従ってください。
 
-EPS does not require `txindex` and works on a pruned node.
+EPS は `txindex` を必要とせず、プルーニングノードでも動作します。
 
-## About Tor support
+## Tor サポートについて
 
-By default your EPS is accessible over Tor. You can run the following command line via SSH on your server to get your Tor address:
+デフォルトでは、EPS は Tor 経由でアクセス可能です。サーバーに SSH で接続し、次のコマンドで Tor アドレスを取得できます。
 
 ```bash
 cat /var/lib/docker/volumes/generated_tor_servicesdir/_data/btc-electrum-ps/hostname
 ```
 
-You can also go to your BTCPay Server > Server Settings > Services and find the tor link in `Other TOR hidden services`.
+BTCPay Server > Server Settings > Services から `Other TOR hidden services` の Tor リンクを確認することもできます。
 
-On the Electrum wallet machine, if you want to connect to your server via Tor, we assume in this tutorial that you run the Tor Browser locally, and thus you will use SOCKS5 port `9150`. If you run Tor through the command line instead, the local SOCKS5 port is `9050`.
+Electrum Wallet を使うマシン側で Tor 経由接続する場合、このチュートリアルでは Tor Browser をローカル実行している前提のため、SOCKS5 ポート `9150` を使います。コマンドライン経由で Tor を動かしている場合、ローカル SOCKS5 ポートは `9050` です。
 
-## How to enable Electrum Personal Server (EPS) in BTCPay:
+## BTCPay で Electrum Personal Server (EPS) を有効化する方法:
 
-1. **If you do not use Tor**, EPS is accessible for Electrum Wallets via TCP port 50002. You need to open this port up fully at least to be available within your own network to any PC or Android device running Electrum Wallet, and turn on port forwarding. If you use Tor, you can skip this step.
+1. **Tor を使わない場合**、EPS は TCP ポート 50002 で Electrum Wallet からアクセスできます。少なくとも自分のネットワーク内で Electrum Wallet を動かす PC や Android デバイスから到達できるようこのポートを開放し、ポートフォワーディングを設定する必要があります。Tor を使うならこの手順は不要です。
 
-2. As EPS is for a single wallet (single user), you must specify the XPUB/YPUB/ZPUB of your wallet as an environment varable before you enable the EPS docker-fragment. In Electrum Wallet go to the "Wallet" menu then select "Information" to copy and paste yours. Set ENV variable for your wallet XPUB and enable the Docker Additional Fragment on your BTCPay node by running the following steps:
+2. EPS は単一ウォレット（単一ユーザー）向けなので、EPS の docker-fragment を有効にする前に、ウォレットの XPUB/YPUB/ZPUB を環境変数として指定する必要があります。Electrum Wallet で "Wallet" メニューから "Information" を開き、値をコピーしてください。次の手順でウォレット XPUB の ENV 変数を設定し、BTCPay ノードで Docker Additional Fragment を有効化します。
 
 ```bash
 export BTCPAYGEN_ADDITIONAL_FRAGMENTS="$BTCPAYGEN_ADDITIONAL_FRAGMENTS;opt-add-electrum-ps"
@@ -32,69 +32,69 @@ export EPS_XPUB="XPUB_ADD_YOUR_XPUB_YPUB_OR_ZPUB_HERE"
 . btcpay-setup.sh -i
 ```
 
-3. WAIT for your Bitcoin full node and EPS server to fully sync:
-   You can check the status of bitcoin core sync by going to your domain for BTCPay server, and it will show you on the front page. Or, you can check from the command line as well, using these commands:
-   `docker logs btcpayserver_bitcoind` - this will show you the bitcoin core blockchain sync status (and ALL other info about your node, including any errors)
-   `docker logs generated_electrum_ps_1` - this will show you the EPS sync status. Note: EPS will NOT start syncing until bitcoin full node has finished syncing, you will see errors until that is finished and these can be ignored.
+3. Bitcoin フルノードと EPS サーバーの同期完了まで待ちます。
+   Bitcoin Core の同期状態は、BTCPay Server のドメインを開くとトップページで確認できます。あるいはコマンドラインでも確認できます。
+   `docker logs btcpayserver_bitcoind` - Bitcoin Core のブロックチェーン同期状態（およびノードの全情報、エラー含む）を表示します。
+   `docker logs generated_electrum_ps_1` - EPS の同期状態を表示します。注意: EPS は Bitcoin フルノードの同期完了後まで同期を開始しません。完了まで表示されるエラーは無視して構いません。
 
-Once all syncing for both bitcoin and EPS have finished synching, you can proceed to the next step. (Note: Electrum wallets will not connect to an EPS server that has not finished synching)
+Bitcoin と EPS の同期が両方完了したら、次の手順に進めます。（注意: 同期未完了の EPS サーバーには Electrum Wallet は接続できません）
 
-## How to connect Electrum Wallet to EPS
+## Electrum Wallet を EPS に接続する方法
 
-There are three ways to use your server from Electrum Wallet:
+Electrum Wallet からサーバーを利用する方法は3つあります。
 
-1. By editing the configuration file
-2. By running Electrum by the command line
-3. Via the user interface (not recommended, bad privacy)
+1. 設定ファイルを編集する
+2. コマンドラインで Electrum を起動する
+3. ユーザーインターフェース経由で設定する（非推奨、プライバシー面で不利）
 
-#### Option 1: Connect to your EPS Server by directly editing Electrum Wallet config file (before even opening the Electrum wallet GUI - recommended for full privacy):
+#### Option 1: Electrum Wallet の設定ファイルを直接編集して EPS サーバーに接続する（GUI を開く前・完全なプライバシーのため推奨）
 
-You can **setup your Electrum server** by editing the configuration file.
+設定ファイルを編集して **Electrum サーバーを設定**できます。
 
-In the [Electrum Wallet folder](https://electrum.readthedocs.io/en/latest/faq.html#where-is-my-wallet-file-located), open and edit the `config` file like this:
+[Electrum Wallet folder](https://electrum.readthedocs.io/en/latest/faq.html#where-is-my-wallet-file-located) で `config` ファイルを開き、次のように編集します。
 
-1. Find line: `"auto_connect": true,` and switch it to: `"auto_connect": false,` - this will prevent your Electrum Wallet from auto-connecting to other 3rd party Electrum Servers at launch time (to obtain block headers and transaction information).
+1. `"auto_connect": true,` を `"auto_connect": false,` に変更します。これにより、Electrum Wallet 起動時に他のサードパーティ Electrum サーバーへ自動接続してブロックヘッダーやトランザクション情報を取得する動作を防げます。
 
-2. Find line: `"oneserver": false,` and switch it to: `"oneserver": true,` - ensures that all data is obtained from just one server.
+2. `"oneserver": false,` を `"oneserver": true,` に変更します。これにより、すべてのデータを1台のサーバーから取得するようになります。
 
-3. Find or add line: `"server": "yourserver:50002:s",`and switch it to your own EPS Server's IP address, in the example above this would be: `"server": "192.168.1.3:50002:s",`- hard code your IP address as the default upon opening the Wallet.
+3. `"server": "yourserver:50002:s",` を見つけるか追加し、自分の EPS サーバー IP アドレスに変更します。上の例なら `"server": "192.168.1.3:50002:s",` です。Wallet 起動時のデフォルト接続先として自分の IP を固定します。
 
-These 3 steps strongly recommended for full privacy by locking down Electrum Wallet to one single connection with your private server only ([Reference](https://github.com/chris-belcher/electrum-personal-server#how-to)).
+これら3手順は、Electrum Wallet を自分のプライベートサーバー1台にのみ接続固定することで完全なプライバシーを実現するため、強く推奨されます（[Reference](https://github.com/chris-belcher/electrum-personal-server#how-to)）。
 
-4. (**If you use Tor**) If you run Tor Browser, you can use it as SOCK5 proxy by adding `"proxy": "socks5:127.0.0.1:9150::",` to the configuration file.
+4. （**Tor を使う場合**）Tor Browser を実行しているなら、設定ファイルに `"proxy": "socks5:127.0.0.1:9150::",` を追加して SOCKS5 プロキシとして使用できます。
 
-#### Option 3: Connect to your EPS Server by command line
+#### Option 3: コマンドラインで EPS サーバーに接続する
 
-You can run electrum via command line `electrum --oneserver --server yourserver:50002:s`.
+コマンドラインで `electrum --oneserver --server yourserver:50002:s` を実行して Electrum を起動できます。
 
-If you use Tor, add `-p socks5:localhost:9150`.
+Tor を使う場合は `-p socks5:localhost:9150` を追加します。
 
-#### Option 4: Connect to your EPS Server from Electrum Wallet GUI (not recommended as this will momentarily connects with other random public Electrum servers if you are online):
+#### Option 4: Electrum Wallet GUI から EPS サーバーに接続する（オンライン時に一時的に他の公開 Electrum サーバーへ接続するため非推奨）
 
-1. Open Electrum Wallet. When you click the traffic light (green or red) at the bottom of your Electrum Wallet, you will see a screen with a list of all the available Electrum servers that your wallet can connect to, normally with the `Select Server Automatically` box already checked:
+1. Electrum Wallet を開きます。画面下部の信号アイコン（緑または赤）をクリックすると、Wallet が接続可能な Electrum サーバー一覧の画面が表示されます。通常は `Select Server Automatically` がすでにチェックされています。
 
 ![ElectrumWalletServerList](https://user-images.githubusercontent.com/1388507/68437521-8a5eb580-01c1-11ea-9ece-0666353a6742.png)
 
-2. Now is the time to UNCHECK that `Select Server Automatically` setting, which will enable you to enter the IP address or domain or hostname of your EPS Server. In the case below, the EPS server is on the local network at `192.168.1.3` so we enter that manually (leave port as 50002) and press `close`.
+2. ここで `Select Server Automatically` のチェックを外し、EPS サーバーの IP アドレス・ドメイン・ホスト名を入力できるようにします。以下の例ではローカルネットワークの `192.168.1.3` を入力しています（ポートは 50002 のまま）。“close” を押します。
 
 ![EnterElectrumServerIP](https://user-images.githubusercontent.com/1388507/68496320-4e276580-0252-11ea-8caf-facc8a246d70.png)
 
-4. (**If you use Tor**) Go to proxy, then click on `Use Tor Proxy at port 9150`.
+4. （**Tor を使う場合**）proxy に移動し、`Use Tor Proxy at port 9150` をクリックします。
 
-5. If all of the above worked well, and your node is healthy and synched, you will get a green traffic light down the bottom right of the wallet screen - that means success!
+5. ここまでが正しく完了し、ノードが健全で同期済みなら、Wallet 画面右下の信号アイコンが緑になります。これで成功です。
 
-### Reflection on what has been achieved:
+### 達成できたことの振り返り:
 
-You are now running your very **own private EPS Server**. All Electrum Wallet related data transfer happens directly between your EPS Server and the bitcoin blockchain, without going over any other 3rd party servers. You have attained full bitcoin transaction privacy (at least from the perspective of your blockchain queries and transactions, payment/receive addresses etc - nobody except you and the blockchain can see what you are doing).
+これで、あなた自身の**プライベート EPS サーバー**を運用できています。Electrum Wallet 関連データは、他のサードパーティサーバーを経由せず、EPS サーバーと Bitcoin ブロックチェーンの間で直接やり取りされます。少なくともブロックチェーンクエリ、トランザクション、支払い/受け取りアドレスの観点では、完全な Bitcoin 取引プライバシーを達成できます（あなたとブロックチェーン以外に行動を把握できません）。
 
-### Troubleshooting:
+### トラブルシューティング:
 
-So there is one thing you may encounter, where even after you did everything correctly, you still get a red traffic light (which means not connected to any server) in the steps above. Any other troubleshooting tips that people encounter can be added, I would suggest to make a PR to this document directly.
+正しく設定しても、上記手順で赤い信号（どのサーバーにも未接続）が出る場合があります。追加のトラブルシュート情報は、このドキュメントに直接 PR で追加することをおすすめします。
 
-- If you get a red traffic light, shutdown Electrum Wallet completely, then go to your Electrum Wallet folder ([see here](https://electrum.readthedocs.io/en/latest/faq.html#where-is-my-wallet-file-located) if you don't know where that is).
+- 赤い信号が表示されたら、Electrum Wallet を完全終了します。その後 Electrum Wallet folder を開いてください（場所が不明な場合は [see here](https://electrum.readthedocs.io/en/latest/faq.html#where-is-my-wallet-file-located)）。
 
-Inside the Electrum Wallet folder (in this case below, it is what it looks like on a Mac) locate the `certs` directory and delete the certificate for the server you are trying to connect to, in this case `192.168.1.3`, by dragging it to the Trash.
+Electrum Wallet folder 内（以下の例は Mac）で `certs` ディレクトリを見つけ、接続先サーバーの証明書（この例では `192.168.1.3`）をゴミ箱へ移動して削除します。
 
 ![Certs](https://user-images.githubusercontent.com/1388507/68497330-9a73a500-0254-11ea-9349-71bdb3bd9511.png)
 
-Start up Electrum Wallet again, and connect to your **EPS server**. If it is fully synched, it will now likely show a green traffic light, and you are good to go.
+Electrum Wallet を再起動し、**EPS server** に接続します。同期が完了していれば、信号アイコンは緑になり、利用可能な状態になります。

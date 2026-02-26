@@ -1,186 +1,186 @@
-# Setting up BTCPay Server for Conference / Event / Local Community
+# カンファレンス / イベント / ローカルコミュニティ向け BTCPay Server セットアップ
 
-We will be going through the setup we used at [Bitcoin Atlantis](https://blog.btcpayserver.org/case-study-bitcoin-atlantis/), [Bitcoin Hong Kong](https://bitcoinmagazine.com/business/case-study-enabling-bitcoin-as-a-medium-of-exchange-at-the-bitcoin-asia-conference-in-hong-kong), [Bitcoin Nashville](https://x.com/BtcpayServer/status/1856410949797683379) and other conferences for a great user experience for attendees and merchants.
+ここでは、[Bitcoin Atlantis](https://blog.btcpayserver.org/case-study-bitcoin-atlantis/)、[Bitcoin Hong Kong](https://bitcoinmagazine.com/business/case-study-enabling-bitcoin-as-a-medium-of-exchange-at-the-bitcoin-asia-conference-in-hong-kong)、[Bitcoin Nashville](https://x.com/BtcpayServer/status/1856410949797683379) などのカンファレンスで実際に使ったセットアップを紹介します。参加者と出店者の双方にとって優れたユーザー体験を実現するための構成です。
 
-For Point of Sale (PoS) devices we use the [Bitcoinize](https://bitcoinize.com/) devices with receipt printer (but you can use any other Android-based PoS device).
+Point of Sale (PoS) 端末には、レシートプリンター付きの [Bitcoinize](https://bitcoinize.com/) 端末を使います（ただし、他の Android ベース PoS 端末でも構いません）。
 
-The Lightning Network part will be done by [Blink.sv](https://blink.sv) with the Blink plugin (but you can swap it for any other LN service like Alby, Breez, use our internal LN node or connect to your own LN node).
+Lightning Network 部分は Blink プラグイン経由で [Blink.sv](https://blink.sv) を使います（Alby、Breez、内蔵 LN ノード、または自前 LN ノード接続など、他サービスに置き換え可能です）。
 
-To allow an even smoother UX for attendees without an internet connection or no prior Bitcoin knowledge we show how to set up and issue Bolt Cards and allow users to top-up.
+さらに、インターネット接続がない参加者や Bitcoin 知識がない参加者でもよりスムーズに使えるよう、Bolt Card の発行とトップアップを可能にする方法も説明します。
 
-To get an overview of the whole setup and steps you can watch our workshop from BTCPrague 2024.
+セットアップ全体と手順を俯瞰するには、BTCPrague 2024 のワークショップをご覧ください。
 [![BTCPrague 2024 Workshop](https://img.youtube.com/vi/Hpd-IytvI4Y/1.jpg)](https://youtu.be/Hpd-IytvI4Y)
 
 ---
 
-**Table of contents**
+**目次**
 
 [[toc]]
 
-##  Initial setup
-- Setup BTCPay Server v2.0.5 or later on a VPS (with public IP)
-- Setup a subdomain or use one provided by VPS hosting (e.g. Lunanode)
-- Register the admin account and create a first test store
-- Do [FastSync](https://docs.btcpayserver.org/Docker/fastsync/) (optional)
+##  初期セットアップ
+- 公開 IP 付き VPS に BTCPay Server v2.0.5 以降をセットアップ
+- サブドメインを設定、または VPS ホスティング（例: Lunanode）が提供するものを使用
+- 管理者アカウントを登録し、最初のテストストアを作成
+- [FastSync](https://docs.btcpayserver.org/Docker/fastsync/) を実施（任意）
 
 
-**Once the server is up, install these plugins:**
+**サーバー起動後、次のプラグインをインストールします:**
 - Blink plugin
 - Bolt Cards plugin
 
-Then restart BTCPay Server (via UI or `docker restart generated_btcpayserver_1` via SSH)
+その後、BTCPay Server を再起動します（UI から、または SSH で `docker restart generated_btcpayserver_1`）
 
-## Setup merchant stores and initialize Bitcoinize devices
+## 出店者ストアのセットアップと Bitcoinize 端末の初期化
 
-### Preparation of Bitcoinize devices
-- Make sure Bitcoinize devices battery level is 90%+ (if less, then charge)
-- Extension cords / high-powered USB hubs are critical when setting up 10+ devices
-- Insert the paper roll in the device's printer
+### Bitcoinize 端末の準備
+- Bitcoinize 端末のバッテリー残量が 90% 以上であることを確認（不足時は充電）
+- 10台以上を一度にセットアップする場合、延長コードや高出力 USB ハブが重要
+- 端末プリンターに用紙ロールを装填
 
-## Setup merchant stores
+## 出店者ストアのセットアップ
 
-Log into your BTCPay Server instance with your admin account.
+管理者アカウントで BTCPay Server インスタンスにログインします。
 
-***Repeat the following steps for each merchant:***
+***各出店者ごとに以下を繰り返します:***
 
-### 1. Create store
-- Top left dropdown -> "**Create store**" button
-  - **Name**: e.g. Nakamoto's Pineapple Pizza
-  - **Default Currency**: USD, HKD, ... depending on location
-  - **Preferred Price Source**: For USD, EUR Kraken is recommended, HKD Coingecko, for more exotic currencies you can try Coingecko or check if there is a local exchange listed in the dropdown
-- Click "**Create store**" button
-### 2. Setup Lightning Network wallet
-Setup the Lightning wallet to be connected to the merchants' Blink account, follow the [instructions on Blink docs](https://dev.blink.sv/examples/btcpayserver-plugin#how-to-connect).
-(Alternatively, in case your merchants want to get paid in local currency you can set up your conference Blink account and distribute funds later on fiat ramps)
+### 1. ストア作成
+- 左上ドロップダウン -> "**Create store**" ボタン
+  - **Name**: 例: Nakamoto's Pineapple Pizza
+  - **Default Currency**: 場所に応じて USD、HKD など
+  - **Preferred Price Source**: USD/EUR なら Kraken 推奨、HKD なら Coingecko。よりマイナーな通貨は Coingecko を試すか、ドロップダウンでローカル取引所があるか確認
+- "**Create store**" ボタンをクリック
+### 2. Lightning Network ウォレット設定
+出店者の Blink アカウントへ接続する Lightning ウォレットを設定します。[Blink docs の手順](https://dev.blink.sv/examples/btcpayserver-plugin#how-to-connect)に従ってください。
+（代替として、出店者が法定通貨で受け取りたい場合は、カンファレンス側の Blink アカウントを設定し、後で fiat ramps 経由で分配する運用も可能です）
 
-### 3. Configure spread and enable sounds
-- Click "**Settings**" -> "**Rates**"
-- **Add Exchange Rate Spread**: enter `1`, so we have extra room (Blink charges 0.2% for hedging in StableSats USD
-- Click "**Save**" button
-- Click "**Settings**" -> "**Checkout Appearance**"
-- On dropdown "**Select a preset**", select "**In-store**"
-- Click "**Save**" button
+### 3. スプレッド設定とサウンド有効化
+- "**Settings**" -> "**Rates**" をクリック
+- **Add Exchange Rate Spread**: `1` を入力して余裕を持たせます（Blink は StableSats USD のヘッジで 0.2% を課金）
+- "**Save**" ボタンをクリック
+- "**Settings**" -> "**Checkout Appearance**" をクリック
+- "**Select a preset**" ドロップダウンで "**In-store**" を選択
+- "**Save**" ボタンをクリック
 
-### 4. Setup Point of Sale (PoS)
-- Left sidebar under "Plugins", click on "**Point of Sale**"
-- "**App Name**": enter the same merchant name as for the store
-- Click "**Create**" button
-- Now on PoS settings, make sure "**App Name**" and "**Display Title**" are filled out
-- "**Choose Point of Sale Style**": select "**Keypad**"
-- "**Currency**", select the same currency as your store
-- Click on "**Save**" button
-- On the top right click on the "**View**" button and make sure the keypad is shown
+### 4. Point of Sale (PoS) 設定
+- 左サイドバー「Plugins」配下の "**Point of Sale**" をクリック
+- "**App Name**": ストアと同じ出店者名を入力
+- "**Create**" ボタンをクリック
+- PoS 設定画面で、"**App Name**" と "**Display Title**" が入力済みであることを確認
+- "**Choose Point of Sale Style**": "**Keypad**" を選択
+- "**Currency**": ストアと同じ通貨を選択
+- "**Save**" ボタンをクリック
+- 右上の "**View**" ボタンをクリックし、キーパッド表示を確認
 
-### 5. Put PoS link and labels on Bitcoinize device
+### 5. Bitcoinize 端末への PoS リンク登録とラベル貼付
 
-- Go back to PoS settings in your browser and click on the "**QR-code icon**"
-- On your Bitcoinize (or other) device, open the "**Camera**" app
-- Scroll to the right until you find "**more**" category -> select "**QR-Code**"
-- Now scan the QR-Code shown in your browser (on the PoS settings page)
-- After scanning open the URL in the Chrome browser
-- Check that you see the keypad and the correct merchant name
-- Tap on the 3 dots "**...**" on the top right and select "**Add to home**"
-- Place the icon on the main home screen for easy access
-- Label the device and box with stickers bearing the merchant name
+- ブラウザで PoS 設定に戻り、"**QR-code icon**" をクリック
+- Bitcoinize（または他端末）で "**Camera**" アプリを開く
+- 右にスクロールして "**more**" カテゴリ -> "**QR-Code**" を選択
+- ブラウザに表示された QR コード（PoS 設定ページ）をスキャン
+- スキャン後、Chrome ブラウザで URL を開く
+- キーパッドと正しい出店者名が表示されることを確認
+- 右上の 3 点 "**...**" をタップし、"**Add to home**" を選択
+- 端末ホームのメイン画面にアイコンを配置してアクセスしやすくする
+- 出店者名ステッカーで端末と箱にラベルを貼る
 
-***Testing the PoS device payments and give permissions:***
-- Start the PoS page from the home screen
-- Ensure that the sound on the device is turned up so that there is audio feedback on payment, especially if Bolt Cards are used
-- Enter 0.01 USD (or other currency equivalent) and tap on "**Charge**" button
-- Only first time the browser will ask for NFC permission, tap on the button to give it the requested permission
-- Pay the invoice either with a Bolt Card or Lightning wallet
-- Ensure you hear the sound after the payment
-- Tap on "**View receipt**" button, test printing the receipt by selecting the **POSPrinter** from the dropdown, tap on the "**Print**" button
+***PoS 支払いテストと権限付与:***
+- ホーム画面から PoS ページを起動
+- 端末の音量を上げ、支払い時に音声フィードバックが出るようにする（Bolt Card 利用時は特に重要）
+- 0.01 USD（または同等額）を入力し、"**Charge**" ボタンをタップ
+- 初回のみブラウザが NFC 権限を要求するため、許可ボタンをタップ
+- Bolt Card または Lightning ウォレットで請求書を支払う
+- 支払い後に音が鳴ることを確認
+- "**View receipt**" ボタンをタップし、ドロップダウンで **POSPrinter** を選択、"**Print**" ボタンで印刷テスト
 
-### 6. Give merchants access to the payment history (optional, but recommended)
+### 6. 出店者へ支払い履歴アクセス権を付与（任意だが推奨）
 
-Optionally you can also create a login for each store/merchant on the PoS device so they can access the payment history. This is helpful to double-check what was the last payment or if a payment was already made. You can do so by adding a "Merchant" role with the following permissions:
+必要に応じて、各ストア/出店者ごとに PoS 端末でログインできるようにすると、支払い履歴を確認できます。直近支払いの確認や二重支払い防止に役立ちます。次の権限を持つ "Merchant" ロールを追加してください:
 - btcpay.store.canmodifyinvoices
 - btcpay.store.canviewstoresettings
 - btcpay.store.canviewpaymentrequestes
 - btcpay.store.canarchivepullpayments
 - btcpay.store.cancreatenonapprovedpullpayments
 
-After that create a user for each store and assign them to the right store.
+その後、各ストア用ユーザーを作成して正しいストアに割り当てます。
 
-### 7. Increase Rate Limits if You Haven't Logged in Merchants on Devices (Optional)
+### 7. 端末で出店者ログインをしない場合のレート制限引き上げ（任意）
 
-By default, the `create invoice` endpoint is throttled by IP to 4 requests per minute for public requests. If you are sharing an IP across multiple POS devices, you may encounter issues where more than 4 invoices cannot be created simultaneously during stress testing.
+デフォルトでは、`create invoice` エンドポイントは public リクエストに対して IP ごとに 1 分あたり 4 リクエストに制限されています。複数の POS 端末で同一 IP を共有していると、負荷テスト時に同時に 4 件を超える請求書を作成できないことがあります。
 
-In a [November 2024 PR](https://github.com/btcpayserver/btcpayserver/pull/6415), we ensured that this throttling does not apply to logged-in users. Therefore, if you completed **Step 6**, this issue won’t affect you. However, if you prefer not to log in users on each device, you can increase the rate limit as follows:
+[2024年11月の PR](https://github.com/btcpayserver/btcpayserver/pull/6415) で、ログイン済みユーザーにはこの制限を適用しないようになりました。したがって **Step 6** を実施済みならこの問題は起きません。各端末でログインさせない運用にしたい場合は、次のように制限を引き上げられます。
 
-1. Go to **Manage Plugins** on your BTCPay Server instance and install the **Dynamic Rate Limit** plugin by Kukks.
-2. Navigate to `/plugins/dynamicrateslimiter` (**Server Settings -> Dynamic Reports -> Rate Limits**).
-3. Click on **Add Rate Limit** and enter the following value: `zone=publicinvoices rate=9999r/m burst=500 nodelay`
+1. BTCPay Server の **Manage Plugins** で Kukks 作成の **Dynamic Rate Limit** プラグインをインストール。
+2. `/plugins/dynamicrateslimiter`（**Server Settings -> Dynamic Reports -> Rate Limits**）へ移動。
+3. **Add Rate Limit** をクリックし、次の値を入力: `zone=publicinvoices rate=9999r/m burst=500 nodelay`
 
 ![Rate Limiting configuration setup for zone=publicinvoices](./img/conference-pos-guide/rate-limiting.png)
 
-This change allows anyone to create up to 9999 invoices per minute from any IP. For this reason, completing **Step 6** (logging in users on devices) is the recommended approach.
+この変更により、任意の IP から 1 分あたり最大 9999 件まで請求書作成が可能になります。そのため、推奨アプローチは **Step 6**（端末でのユーザーログイン）です。
 
-## Setup a Bolt Cards provider
+## Bolt Cards プロバイダのセットアップ
 
-We will create a separate store that is serving as a Bolt Cards provider. To find it easier in the list of stores you can append the store name with a "z", e.g. "z - Bolt Cards Provider".
+Bolt Cards プロバイダ専用の別ストアを作成します。ストア一覧で見つけやすいよう、ストア名の先頭に "z" を付けると便利です（例: "z - Bolt Cards Provider"）。
 
-For this special store we will connect a Blink account with the important differences compared to merchant Blink accounts:
-- the API key has to have also **write permission**, otherwise Bolt Cards won't be able to pull the funds
-- Make sure you connect the **Bitcoin wallet** (and *not* StableSats USD)
+この特別ストアでは Blink アカウントを接続しますが、出店者向け Blink アカウントとは次の点が異なります:
+- API key に **write permission** も必要（ないと Bolt Cards が資金を引き出せません）
+- **Bitcoin wallet** を接続すること（*StableSats USD* ではない）
 
-### 1. Create a store
-- Create a store with the name "**z - Bolt Cards Provider**" (same steps as shown for merchant stores above)
+### 1. ストア作成
+- "**z - Bolt Cards Provider**" という名前でストアを作成（手順は上の出店者ストアと同じ）
 
-### 2. Setup Lightning Network wallet
+### 2. Lightning Network ウォレット設定
 
-Setup the Lightning wallet to be connected to your Blink account as per [instructions on Blink docs](https://dev.blink.sv/examples/btcpayserver-plugin#how-to-connect) but make sure:
-- the API key has "Read", "Receive" and "Write" permissions, otherwise Bolt Cards won't be able to pull the funds
-- make sure you connect to the **Bitcoin wallet** (and *not* StableSats USD)
+[Blink docs の手順](https://dev.blink.sv/examples/btcpayserver-plugin#how-to-connect)に沿って、Blink アカウントへ接続する Lightning ウォレットを設定します。以下を必ず確認:
+- API key に "Read"、"Receive"、"Write" 権限があること（ないと Bolt Cards が資金を引き出せません）
+- **Bitcoin wallet** に接続していること（*StableSats USD* ではない）
 
-### 3. Setup automated payouts
+### 3. 自動払い出し設定
 
-To allow no-interaction top-ups of Bolt Cards we need to make sure payouts are processing automatically.
+Bolt Cards への無操作トップアップを可能にするため、払い出しを自動処理する必要があります。
 
-- Go "**Settings**" -> "**Payout Processors**"
-- Below "**Automated Lightning Sender**", click on "**Configure**"
-- Enable "**Process approved payouts instantly"
-- Click on "**Save**" button
+- "**Settings**" -> "**Payout Processors**" へ移動
+- "**Automated Lightning Sender**" の下で "**Configure**" をクリック
+- "**Process approved payouts instantly" を有効化
+- "**Save**" ボタンをクリック
 
-### 4. Setup Bolt Cards Factory
+### 4. Bolt Cards Factory 設定
 
-#### Setup a Bolt Card factory
+#### Bolt Card factory を設定
 
-- On the left sidebar go to "**Boltcard Factories**"
-- "**App Name**": Enter a name like "Your conference" (it will be displayed when the card is read)
-- Click on the "**Create**" button, and you will see the following settings. For example, if you want to preload the cards with 210 Sats, enter the following:
-  - "**Name**": Name of the conference/event that is displayed when a Bolt Card is read
+- 左サイドバーで "**Boltcard Factories**" へ移動
+- "**App Name**": "Your conference" のような名前を入力（カード読み取り時に表示されます）
+- "**Create**" ボタンをクリックし、次の設定を行います。例として 210 Sats を事前チャージする場合:
+  - "**Name**": Bolt Card 読み取り時に表示するカンファレンス/イベント名
   - "**Amount**": 210
-  - "**Currency**": SATS (The currency must to be **SATS**, do not set any other currency)
-  - "**Automatically approve claims**": checked (true)
-  - "**Payment Methods**": "BTC (Off-Chain)" checked (true)
-  -  Click on "**Save**" button
+  - "**Currency**": SATS（必ず **SATS**。他通貨を設定しない）
+  - "**Automatically approve claims**": チェックあり（true）
+  - "**Payment Methods**": "BTC (Off-Chain)" にチェック（true）
+  - "**Save**" ボタンをクリック
 
-#### Program Bolt Cards
+#### Bolt Cards をプログラム
 
-Still, on that Boltcards Factory settings page, you now click on "**View**" button on the top right, the page that opens will need to be opened on a mobile device with NFC writing support (e.g. a Bitcoinize device).
+同じ Boltcard Factory 設定ページで、右上の "**View**" ボタンをクリックします。開いたページは NFC 書き込み対応モバイル端末（例: Bitcoinize）で開く必要があります。
 
-- Ensure that you have the [Bolt Card NFC Card Creator](https://play.google.com/store/apps/details?id=com.lightningnfcapp&hl=en&gl=US) installed on the mobile device
-- If there is a Bolt Card NFC Card Creator app already installed - ***make sure it's the latest version***, optionally uninstall and install the newest version from the app store
-- When you click on the "**Setup**" button on the Boltcard Factory it should open the Bolt Card NFC Card Creator app
-- Make sure you hold the Bolt Card ***until ALL green checkmarks are done**
-- You can now batch initialize cards. Just click on the "**Write again**" button
+- モバイル端末に [Bolt Card NFC Card Creator](https://play.google.com/store/apps/details?id=com.lightningnfcapp&hl=en&gl=US) がインストールされていることを確認
+- 既にインストール済みの場合は ***必ず最新バージョン*** であることを確認。必要ならアンインストール後、ストアから最新版を再インストール
+- Boltcard Factory の "**Setup**" ボタンを押すと Bolt Card NFC Card Creator アプリが開くはずです
+- Bolt Card を ***すべての緑チェックが完了するまで*** 端末にかざし続けてください
+- その後は "**Write again**" ボタンでカードを連続初期化できます
 
-### 5. Checking the balance of cards and topping them up
+### 5. カード残高確認とトップアップ
 
-In the same store that serves as the Bolt Card provider you will have a "**Boltcard Balance**" menu item on the left sidebar. The URL will look like this [https://btcpay.yourdomain.tld/boltcards/balance](https://btcpay.yourdomain.tld/boltcards/balance)
+Bolt Card プロバイダ用ストアの左サイドバーに "**Boltcard Balance**" メニューが表示されます。URL はこの形式です: [https://btcpay.yourdomain.tld/boltcards/balance](https://btcpay.yourdomain.tld/boltcards/balance)
 
-When you open that link on a mobile device with NFC support (such as Bitcoinize), you can use it to allow users to check their balance and also for topping their cards up with Sats, to do that, tap on the "**QR-Code icon**" after reading the balance of the card.
+このリンクを NFC 対応モバイル端末（Bitcoinize など）で開くと、ユーザーが残高確認でき、さらに Sats でトップアップできます。トップアップするには、残高読み取り後に "**QR-Code icon**" をタップします。
 
-### 6. Resetting Bolt Cards after the conference/event
+### 6. カンファレンス/イベント後の Bolt Cards リセット
 
-Like the balance page, you can find the link on the left sidebar. The URL will look like this [https://btcpay.yourdomain.tld/boltcards/balance?view=Reset](https://btcpay.yourdomain.tld/boltcards/balance?view=Reset)
+残高ページと同様、リンクは左サイドバーから確認できます。URL はこの形式です: [https://btcpay.yourdomain.tld/boltcards/balance?view=Reset](https://btcpay.yourdomain.tld/boltcards/balance?view=Reset)
 
-You should consider publishing this link during or even before the event and allow attendees to sweep and reset their cards after the event, so they can reuse the Bolt Cards and reprogram them. This is only possible after the reset is done successfully.
+このリンクはイベント中または事前に公開しておくことを検討してください。イベント後に参加者がカードを sweep して reset できるようにすると、Bolt Cards を再利用し再プログラムできます。これはリセット成功後のみ可能です。
 
-To reset Bolt Cards, like for setting them up, you need the Bolt Card NFC Card Creator app.
+Bolt Cards のリセットにも、セットアップ時と同じく Bolt Card NFC Card Creator アプリが必要です。
 
-See [this tweet by Uncle Rockstar Dev](https://x.com/r0ckstardev/status/1767618114139639817) how the instructions could look like.
+案内文の例として、[Uncle Rockstar Dev のこのツイート](https://x.com/r0ckstardev/status/1767618114139639817)を参照してください。
 
-Congratulations, you have now set up a BTCPay Server for a conference or event with a smooth user experience for attendees and merchants. Enjoy the event!
+これで、参加者と出店者の双方にとってスムーズな体験を提供する、カンファレンス/イベント向け BTCPay Server セットアップが完了です。イベントを楽しんでください。

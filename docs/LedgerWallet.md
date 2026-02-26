@@ -1,69 +1,73 @@
-# Connecting Ledger Wallet to BTCPay Server
+<!-- legacy-anchor-aliases -->
+<span id="quick-setup"></span>
+<!-- /legacy-anchor-aliases -->
 
-This document shows **how to connect Ledger Nano S Wallet to BTCPay Server**.
+# Ledger Wallet を BTCPay Server に接続する
+
+このドキュメントでは、**Ledger Nano S Wallet を BTCPay Server に接続する方法**を説明します。
 
 :::warning
-Direct Ledger Nano S integration is **no longer supported**. For Bitcoin wallets, you can use your Ledger hardware wallet regularly via the [new hardware wallet integration](./HardwareWalletIntegration.md).
+Ledger Nano S の直接連携は**現在サポートされていません**。Bitcoin ウォレットについては、[新しいハードウェアウォレット連携](./HardwareWalletIntegration.md) を使って通常どおり Ledger ハードウェアウォレットを利用できます。
 
-For [altcoin](/Development/Altcoins.md) wallets, you can spend funds from your external wallet, sign a transaction within the [internal wallet](./Wallet.md) with [HD Private Key or mnemonic seed](./Wallet.md#signing-with-hd-private-key-or-mnemonic-seed) or a [hot wallet](./Wallet.md#signing-with-a-hot-wallet).
+[altcoin](/Development/Altcoins.md) ウォレットでは、外部ウォレットから資金を使うか、[内部ウォレット](./Wallet.md) 内で [HD Private Key or mnemonic seed](./Wallet.md#signing-with-hd-private-key-or-mnemonic-seed) または [hot wallet](./Wallet.md#signing-with-a-hot-wallet) を使ってトランザクション署名できます。
 
-To set up a new altcoin wallet, add the extended public key manually or [create a new wallet](./CreateWallet.md).
+新しい altcoin ウォレットを設定する場合は、拡張公開鍵を手動追加するか、[新しいウォレットを作成](./CreateWallet.md) してください。
 :::
 
-## Ledger Nano S Wallet Setup
+## Ledger Nano S Wallet セットアップ
 
-This guide assumes, you have a Nano S wallet set up. To configure the Nano S, please see the [quick setup guide on manufacturer's website](https://www.ledger.com/start/).
+このガイドは Nano S ウォレットの初期設定が済んでいる前提です。Nano S の設定は [メーカーサイトのクイックセットアップガイド](https://www.ledger.com/start/) を参照してください。
 
-### Requirements
+### 要件
 
-1. Bitcoin App installed on the Ledger
-2. Google Chrome or Firefox
-3. For Firefox, U2F needs to be enabled in about:config
-4. No other U2F devices plugged in into your PC (Yubikey, other wallets, etc)
+1. Ledger に Bitcoin App がインストール済み
+2. Google Chrome または Firefox
+3. Firefox の場合、about:config で U2F を有効化
+4. PC に他の U2F デバイス（Yubikey、他ウォレットなど）を接続していないこと
 
-### Quick Setup
+### クイックセットアップ
 
-1. Plug in Ledger Nano S into your PC.
-2. Open the Bitcoin app on your Ledger.
-3. In BTCPay Server, Store > Settings > Wallet > Setup > Derivation Scheme > Import from Hardware Device > Ledger wallet
-4. Select the account which you want to use, in most cases it's the `Account 0`
-5. Confirm the `Export public key` on the wallet.
-6. The extended public key will now automatically be added from Ledger to your BTCPay Server Store.
-7. Make sure that the derivation scheme is `Enabled`
-8. Click `Continue`
-9. `Confirm` the address match in BTCPay.
+1. Ledger Nano S を PC に接続します。
+2. Ledger 上で Bitcoin app を開きます。
+3. BTCPay Server で Store > Settings > Wallet > Setup > Derivation Scheme > Import from Hardware Device > Ledger wallet へ進みます。
+4. 使用するアカウントを選択します。ほとんどの場合 `Account 0` です。
+5. ウォレット上で `Export public key` を確認します。
+6. 拡張公開鍵が Ledger から BTCPay Server ストアへ自動追加されます。
+7. derivation scheme が `Enabled` になっていることを確認します。
+8. `Continue` をクリックします。
+9. BTCPay でアドレス一致を `Confirm` します。
 
-Your Ledger wallet is now connected to your BTCPay. Payments go directly to Ledger.
+これで Ledger ウォレットが BTCPay に接続されます。支払いは Ledger に直接入ります。
 
-#### Manual Setup
+#### 手動セットアップ
 
-If you have more than 20 accounts in your Ledger you might not be able to find the correct account because the select shows a maximum of 20 entries.
-In this case you can manually find the extended public key for your wanted account in these steps:
+Ledger に 20 を超えるアカウントがある場合、選択リストの最大表示数（20）により正しいアカウントが見つからないことがあります。
+その場合、次の手順で希望アカウントの拡張公開鍵を手動取得できます。
 
-1. Open the [Ledger live app](https://shop.ledger.com/pages/ledger-live)
-2. Accounts -> choose your account
-3. Edit Account on the top right via the tool-icon
-4. In Edit Account -> ADVANCED LOGS
-5. Copy the extended public key string
-6. Paste it manually into the "DerivationScheme" textfield
-7. Continue with [Step 7 of the Quick Setup above](#quick-setup)
+1. [Ledger live app](https://shop.ledger.com/pages/ledger-live) を開く
+2. Accounts -> 対象アカウントを選択
+3. 右上のツールアイコンから Edit Account
+4. Edit Account -> ADVANCED LOGS
+5. 拡張公開鍵文字列をコピー
+6. "DerivationScheme" テキストフィールドに手動で貼り付け
+7. [上記クイックセットアップの手順7](#quick-setup) 以降を続行
 
 ![Ledger Account "Advanced Logs" info screenshot](./img/LedgerHelpXpub.png)
 
-### Spending from BTCPay Server wallet with Ledger
+### Ledger で BTCPay Server ウォレットから送金する
 
-Once there are some funds in received to your BTCPay Wallet connected to Ledger, you can spend them by signing a transaction with your hardware wallet. This allows easy interaction of the Ledger wallet with your full node, without leaking information to third-party servers.
+Ledger 接続済み BTCPay Wallet に資金が入ったら、ハードウェアウォレットでトランザクション署名して送金できます。これにより、第三者サーバーへ情報を漏らさずに、Ledger と自分のフルノードを簡単に連携できます。
 
-1. Plug in Ledger Nano S into your PC.
-2. Open the Bitcoin app on your Ledger.
-3. In BTCPay, go to Wallets > Manage > Send
-4. Fill in destination address and the amount
-5. Click on the Sign with `your Ledger Wallet device`.
-6. BTCPay will establish a connection with the Ledger wallet and display transaction information on the wallet screen.
-7. Confirm the transaction on the Ledger.
-8. In Ledger, click on the `Ready To Sign`
-9. Review your transactions and click `Broadcast` to broadcast it on the network.
+1. Ledger Nano S を PC に接続します。
+2. Ledger 上で Bitcoin app を開きます。
+3. BTCPay で Wallets > Manage > Send へ進みます。
+4. 宛先アドレスと金額を入力します。
+5. `your Ledger Wallet device` で署名をクリックします。
+6. BTCPay が Ledger と接続し、ウォレット画面にトランザクション情報を表示します。
+7. Ledger 上でトランザクションを確認します。
+8. Ledger で `Ready To Sign` をクリックします。
+9. トランザクションを確認し、`Broadcast` をクリックしてネットワークへ送信します。
 
-The video below shows how to connect your BTCPay store to your Ledger and how to use Ledger with the [internal BTCPay wallet](./Wallet.md).
+以下の動画では、BTCPay ストアを Ledger に接続する方法と、[内部 BTCPay ウォレット](./Wallet.md) で Ledger を使う方法を紹介しています。
 
 [![BTCPay Server and Ledger](https://img.youtube.com/vi/1Sj5mP4TkFI/mqdefault.jpg)](https://www.youtube.com/watch?v=1Sj5mP4TkFI)

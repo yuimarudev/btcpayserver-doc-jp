@@ -1,36 +1,36 @@
 ---
 layout: Homepage
 heroImage: /img/btcpay-logo.svg
-heroText: BTCPay Server Documentation
-tagline: Start Accepting Bitcoin Payments With 0% Fees & No Third-party
+heroText: BTCPay Server ドキュメント
+tagline: 0%手数料・サードパーティ不要で Bitcoin 決済を始めよう
 features:
-  - title: User Guide
-    details: Guide for users and merchants using BTCPay Server.
-    actionText: User Docs  ❯
+  - title: ユーザーガイド
+    details: BTCPay Server を利用するユーザーと加盟店向けのガイドです。
+    actionText: ユーザードキュメント  ❯
     actionLink: /Guide/
-  - title: Deployment
-    details: Setting up and maintaining your BTCPay Server.
-    actionText: Deployment Docs  ❯
+  - title: デプロイ
+    details: BTCPay Server のセットアップと運用管理。
+    actionText: デプロイドキュメント  ❯
     actionLink: /Deployment/
-  - title: Development
-    details: Docs for developers building on BTCPay Server.
-    actionText: Developers Docs  ❯
+  - title: 開発
+    details: BTCPay Server 上で開発する開発者向けドキュメント。
+    actionText: 開発者ドキュメント  ❯
     actionLink: /Development/
-footer: Content Released under MIT license.
+footer: コンテンツは MIT ライセンスで公開されています。
 ---
 
 <div class="topics">
-  <h3>Explore by topic</h3>
+  <h3>トピックから探す</h3>
 
-- [What is BTCPay&nbsp;Server](./Guide.md)
-- [Why BTCPay&nbsp;Server](./UseCase.md)
-- [How to deploy BTCPay&nbsp;Server](./TryItOut.md)
-- [Wallet Setup](./WalletSetup.md)
+- [BTCPay&nbsp;Server とは](./Guide.md)
+- [なぜ BTCPay&nbsp;Server なのか](./UseCase.md)
+- [BTCPay&nbsp;Server のデプロイ方法](./TryItOut.md)
+- [ウォレット設定](./WalletSetup.md)
 - [Lightning Network](./LightningNetwork.md)
-- [How to setup POS](./Conference-PoS-guide.md)
+- [POS の設定方法](./Conference-PoS-guide.md)
 - [Greenfield API](./Development/GreenFieldExample.md)
-- [Frequently Asked Questions<br>and Common Issues](./FAQ/README.md)
-- [How to contribute to BTCPay&nbsp;Server](./Contribute/README.md)
+- [よくある質問<br>と一般的な問題](./FAQ/README.md)
+- [BTCPay&nbsp;Server への貢献方法](./Contribute/README.md)
 
 </div>
 

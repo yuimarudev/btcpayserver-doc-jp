@@ -1,20 +1,20 @@
-# Forward ports with a reverse SSH tunnel
+# reverse SSH トンネルでポートを転送する
 
-## Advantages
+## 利点
 
-- no port forwarding needed on the LAN of the host
-- encrypted connection
-- hides the IP of the host
+- ホスト側 LAN でポートフォワーディングが不要
+- 接続が暗号化される
+- ホストの IP を隠せる
 
-## Requirements
+## 要件
 
-- a Virtual Private Server (VPS) - eg. a minimal package on Lunanode for ~3.5$/month
-- root access on the VPS - only root can forward ports under no. 1000
-- ssh access to the host computer (where the ports will be forwarded from)
+- Virtual Private Server (VPS)（例: Lunanode の最小プランで約 3.5$/月）
+- VPS で root アクセス可能であること（1000 未満のポート転送は root のみ可能）
+- ホストコンピューター（ポート転送元）への ssh アクセス
 
-## Setup
+## セットアップ
 
-### On the host (your BTCPay Server instance)
+### ホスト側（BTCPay Server インスタンス）
 
 ```bash
 # switch to root user (if not logged in as root)
@@ -24,15 +24,15 @@ sudo su -
 cat ~/.ssh/*.pub
 ```
 
-If there is none generate one (keep pressing ENTER):
+公開鍵がなければ生成します（ENTER を押し続けます）。
 
 ```bash
 ssh-keygen -t rsa -b 4096
 ```
 
-This will generate the SSH keypair `id_rsa` (private key) and `id_rsa.pub` inside `~/.ssh`.
+これにより `~/.ssh` 内に SSH キーペア `id_rsa`（秘密鍵）と `id_rsa.pub`（公開鍵）が生成されます。
 
-The private key needs to get added to the ssh-agent:
+秘密鍵は ssh-agent に追加する必要があります。
 
 ```bash
 # start the ssh-agent in the background
@@ -42,31 +42,31 @@ eval $(ssh-agent -s)
 ssh-add ~/.ssh/id_rsa
 ```
 
-Copy the public key over to the VPS (fill in the `VPS_IP_ADDRESS`).
-You will be prompted for the root password of the VPS.
+公開鍵を VPS にコピーします（`VPS_IP_ADDRESS` を入力）。
+VPS の root パスワード入力が求められます。
 
 ```bash
 ssh-copy-id -i ~/.ssh/id_rsa.pub root@VPS_IP_ADDRESS
 ```
 
-To verify that it works, SSH into the VPS – this should not prompt for the password anymore:
+動作確認として VPS に SSH 接続します。成功すればパスワードはもう求められません。
 
 ```bash
 ssh root@VPS_IP_ADDRESS
 ```
 
-### On the VPS
+### VPS 側
 
-You can either reuse the connection from before or login as root.
+先ほどの接続を再利用しても、root で再ログインしても構いません。
 
-Edit the sshd config:
+sshd 設定を編集します。
 
 ```bash
 sudo nano /etc/ssh/sshd_config
 ```
 
-Make sure these entries are active (meaning there is no `#` at the beginning of the line).
-Alternatively, you can just paste these on the end of the file:
+次の項目が有効になっていることを確認してください（行頭に `#` がない状態）。
+または、以下をファイル末尾に貼り付けても構いません。
 
 ```
 RSAAuthentication yes     # not needed on latest OpenSSH versions
@@ -76,36 +76,36 @@ AllowTcpForwarding yes
 ClientAliveInterval 60
 ```
 
-CTRL+O, ENTER to save, CTRL+X to exit.
+保存は CTRL+O, ENTER、終了は CTRL+X です。
 
 :::warning
-You can lose access at this point if the sshd config is wrong. Please double-check!
+この時点で sshd 設定が誤っているとアクセス不能になる可能性があります。必ず再確認してください。
 :::
 
-Restart the sshd service:
+sshd サービスを再起動します。
 
 ```bash
 sudo systemctl restart sshd
 ```
 
-### Back to the host (your BTCPay Server instance)
+### ホスト側（BTCPay Server インスタンス）に戻る
 
-#### Install and set up autossh
+#### autossh のインストールと設定
 
-Install the `autossh` dependency:
+依存パッケージ `autossh` をインストールします。
 
 ```bash
 sudo apt-get install autossh
 ```
 
-Create the service file:
+サービスファイルを作成します。
 
 ```bash
 sudo nano /etc/systemd/system/autossh-tunnel.service
 ```
 
-Paste the following and fill in the `VPS_IP_ADDRESS`.
-Add or remove ports as required.
+以下を貼り付け、`VPS_IP_ADDRESS` を入力します。
+必要に応じてポートを追加・削除してください。
 
 ```ini
 [Unit]
@@ -123,31 +123,31 @@ StandardOutput=journal
 WantedBy=multi-user.target
 ```
 
-Enable and start the service:
+サービスを有効化して起動します。
 
 ```bash
 sudo systemctl enable autossh-tunnel
 sudo systemctl start autossh-tunnel
 ```
 
-The port forwarding with a reverse ssh-tunnel is now complete.
-You should be able access the ports/services of the host computer through the IP of the VPS.
+これで reverse ssh-tunnel によるポート転送は完了です。
+VPS の IP 経由でホストコンピューターのポート/サービスにアクセスできるはずです。
 
-## Monitoring
+## 監視
 
-Check if there are any errors on the host computer:
+ホストコンピューターでエラーがないか確認します。
 
 ```bash
 sudo journalctl -f -n 20 -u autossh-tunnel
 ```
 
-To check if tunnel is active on the VPS:
+VPS 側でトンネルが有効か確認するには:
 
 ```bash
 netstat -tulpn
 ```
 
-## Resources
+## 参考資料
 
 - Raspiblitz FAQ: [How to setup port-forwarding with a SSH tunnel?](https://github.com/rootzoll/raspiblitz/blob/master/FAQ.md#how-to-setup-port-forwarding-with-a-ssh-tunnel)
 - RaspiBolt Docs: [Login with SSH keys](https://raspibolt.org/guide/raspberry-pi/security.html#login-with-ssh-keys)

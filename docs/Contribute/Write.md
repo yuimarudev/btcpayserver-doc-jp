@@ -1,46 +1,46 @@
-# Documenting BTCPay Server
+# BTCPay Server のドキュメント作成
 
 [[toc]]
 
-## Why documentation matters
+## ドキュメントが重要な理由
 
-Documentation is essential to give users of all skill levels concise and clear information about the software and how to use it. BTCPay server has many different use cases and as a result many different kinds of users seeking information from the documentation. Writers contributing to BTCPay Server are as important as any other contributor.
+ドキュメントは、あらゆるスキルレベルのユーザーに対して、ソフトウェアとその使い方に関する簡潔で明確な情報を提供するために不可欠です。BTCPay Server には多様なユースケースがあり、その結果、ドキュメントから情報を求めるユーザーの種類も多岐にわたります。BTCPay Server に貢献する執筆者は、他のどの貢献者と同じくらい重要です。
 
-If you have technical knowledge in a certain area, want to help document new features or simply get involved in the BTCPay Server project, documentation is a great place to get started with contributing.
+特定分野の技術知識がある方、新機能のドキュメント化を手伝いたい方、あるいは BTCPay Server プロジェクトに関わりたい方にとって、ドキュメント作成は貢献を始めるのに最適な場所です。
 
-If you have writing skills or if you have a fair knowledge of the English language, then you can contribute to BTCPay Server or review the work of other contributors. Writing contributors can help in a number of places.
+執筆スキルがある、または英語にある程度の知識がある場合、BTCPay Server に貢献したり他の貢献者の作業をレビューしたりできます。執筆による貢献には、さまざまな形があります。
 
-## BTCPay Documentation
+## BTCPay ドキュメント
 
-Documentation work needing to be completed can be found in the [open issues page](https://github.com/btcpayserver/btcpayserver-doc/issues) on Github. For information on how to start a documentation task, see the [documentation guide](WriteDocs.md).
+対応が必要なドキュメント作業は、Github の [open issues page](https://github.com/btcpayserver/btcpayserver-doc/issues) で確認できます。ドキュメント作業の開始方法は、[documentation guide](WriteDocs.md) を参照してください。
 
-For documentation guidance or discussion of a new documentation idea, join the [#documentation channel on Mattermost](https://chat.btcpayserver.org/btcpayserver/channels/documentation).
+ドキュメントのガイダンスや新しいドキュメント案の議論は、Mattermost の [#documentation channel](https://chat.btcpayserver.org/btcpayserver/channels/documentation) に参加してください。
 
-## BTCPay Blog
+## BTCPay ブログ
 
-Another great way to contribute is by writing content for the [BTCPay blog](WriteBlog.md). To get started on a blog topic, join the [#content creation channel on Mattermost](https://chat.btcpayserver.org/btcpayserver/channels/content-creation).
+もう一つの優れた貢献方法は、[BTCPay blog](WriteBlog.md) 向けにコンテンツを書くことです。ブログトピックを始めるには、Mattermost の [#content creation channel](https://chat.btcpayserver.org/btcpayserver/channels/content-creation) に参加してください。
 
-## Requirements
+## 要件
 
-In order to contribute to BTCPay Server as a writer there are some requirements.
+執筆者として BTCPay Server に貢献するには、いくつかの要件があります。
 
-Since most of the documentation done in BTCPay Server is submitted and reviewed through Github, you must have a [Github account](https://github.com/). It's also on Github that you can contribute by reviewing the documentation work done by others (pull requests).
+BTCPay Server のドキュメントの多くは Github 上で提出・レビューされるため、[Github account](https://github.com/) が必要です。また Github では、他の人が行ったドキュメント作業（pull requests）のレビューでも貢献できます。
 
-**Important note**: Contributions explained in this documentation are meant to be done in **English** only. If you wish to contribute in other languages, see [Translations](./Translate.md).
+**重要事項**: このドキュメントで説明している貢献は **English** で行うことを前提としています。その他の言語で貢献したい場合は、[Translations](./Translate.md) を参照してください。
 
-## Recommended software
+## 推奨ソフトウェア
 
-### Text Editor
+### テキストエディター
 
-It is recommended to have a Rich-Text editor.
+リッチテキストエディターを用意することを推奨します。
 
-[Notepad++](https://notepad-plus-plus.org/downloads/) is a decent software and easy to use for the newer contributors.
+[Notepad++](https://notepad-plus-plus.org/downloads/) は、使いやすく新規貢献者にも扱いやすいソフトウェアです。
 
-For more advanced users, [Visual Studio Code (VS Code)](https://visualstudio.microsoft.com/) is a good choice.
-The `Markdown All In One` extension in VS Code is also recommended, for visual comfort while editing and the ability to preview Markdown changes. This is helpful for the BTCPay documentation which is written primarily in Markdown.
+より上級のユーザーには、[Visual Studio Code (VS Code)](https://visualstudio.microsoft.com/) がよい選択肢です。
+VS Code の `Markdown All In One` 拡張機能も、編集時の視認性向上と Markdown 変更のプレビュー機能のために推奨されます。BTCPay のドキュメントは主に Markdown で書かれているため、特に有用です。
 
-These are only recommended: If you already use other similar software that you're accustomed to, you are free to continue using them.
+これらはあくまで推奨です。すでに使い慣れた同種のソフトウェアがあれば、引き続きそれを使用できます。
 
-### Version Control
+### バージョン管理
 
-To be able to manage your contributions (such as forking repositories, creating and working on branches, making pull requests and issues, etc.) it's recommended you have [Github Desktop](https://desktop.github.com/). You can see the step by step guide to making a pull request using Github Desktop [here](./WriteSoftware.md).
+貢献作業（リポジトリの fork、ブランチ作成と作業、pull request や issue の作成など）を管理するために、[Github Desktop](https://desktop.github.com/) の利用を推奨します。Github Desktop を使った pull request 作成の手順ガイドは[こちら](./WriteSoftware.md)です。

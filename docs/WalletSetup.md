@@ -1,12 +1,16 @@
-# (3) Wallet Setup
+<!-- legacy-anchor-aliases -->
+<span id="use-an-existing-wallet"></span>
+<!-- /legacy-anchor-aliases -->
 
-After [account registration](./RegisterAccount.md) and [store creation](./CreateStore.md), it's time to configure a wallet in your BTCPay Server, so that you can start receiving payments into it.
+# (3) ウォレット設定
 
-There are two ways to set up a wallet in BTCPay Server:
+[account registration](./RegisterAccount.md) と [store creation](./CreateStore.md) が完了したら、次は BTCPay Server でウォレットを設定し、支払いを受け取れるようにします。
+
+BTCPay Server でウォレットを設定する方法は 2 つあります:
 
 - [Connect an existing wallet](./ConnectWallet.md)
 - [Create a new wallet](./CreateWallet.md)
 
-There are many options on how set up a wallet with your BTCPay Server. It's up to you to decide what works best for your use-case. Once you configure a wallet, you're all set. The next step, is to [start exploring the features](./WhatsNext.md).
+BTCPay Server でウォレットを設定する方法には多くの選択肢があります。どれがユースケースに最適かはあなた次第です。ウォレットを設定すれば準備完了です。次のステップは、[機能を試し始める](./WhatsNext.md) ことです。
 
-**_Proceed to the next step - [What's Next?](./WhatsNext.md)._**
+**_次のステップへ進む - [What's Next?](./WhatsNext.md)._**

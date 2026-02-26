@@ -1,72 +1,72 @@
-# How to penny-pinch your Azure deployment
+# Azure デプロイを節約運用する方法
 
-This guide is for [Azure-deployed](https://github.com/btcpayserver/btcpayserver-azure) users who wishes to do some saving on their install.
+このガイドは、インストール費用を節約したい [Azure デプロイ](https://github.com/btcpayserver/btcpayserver-azure) のユーザー向けです。
 
-Please do this **only after your nodes are fully synched**.
-During synchronization you need a powerful setup.
+これは **ノードの同期が完全に終わった後にのみ** 実施してください。
+同期中は高性能な構成が必要です。
 
-**Penny-pinching** is an opportunity for you to better understand the resources you are consuming and tailor the configuration to your workload.
+**節約運用**は、消費しているリソースを理解し、ワークロードに合わせて構成を調整する良い機会です。
 
-Downside:
+デメリット:
 
-- Running `btcpay-update.sh` or rebooting will take longer
-- You might see `502 Bad Gateway` and your node taking lots of time to start
-- Your server might become very slow
+- `btcpay-update.sh` の実行や再起動に時間がかかる
+- `502 Bad Gateway` が表示され、ノード起動に非常に時間がかかる場合がある
+- サーバーが非常に遅くなる可能性がある
 
-Upside:
+メリット:
 
-- 50% savings
+- 50% の節約
 
-If you find that your server is too slow:
+サーバーが遅すぎる場合:
 
-- Drop support for coins by editing the setting `BTCPAY_DOCKER_COMPOSE` in `/etc/profile.d/btcpay-env.sh`, or
-- Increase the size of your Virtual Machine
+- `/etc/profile.d/btcpay-env.sh` の `BTCPAY_DOCKER_COMPOSE` を編集して対応コインを減らす、または
+- Virtual Machine のサイズを上げる
 
 :::warning
-After some testing, it seems that following this guide for a setup on mainnet involving BTC+LTC+CLightning is a bit too much and makes the server very laggy.
+いくつかのテストの結果、BTC+LTC+CLightning を含む mainnet 構成でこのガイドを適用するのはやや負荷が高く、サーバーがかなり重くなるようです。
 
-Note that the server becomes less laggy as time passes after restart, so it might still be ok for your case.
-If it is not acceptable, you should switch from `B1MS` (20 USD/Month) type to a `B2S` (40 USD/Month) type.
+再起動後、時間の経過とともにサーバーは軽くなるため、ケースによっては問題ない可能性もあります。
+許容できない場合は、`B1MS`（20 USD/月）から `B2S`（40 USD/月）へ切り替えるべきです。
 :::
 
-## How much am I spending now?
+## 今どれくらい支払っているか？
 
-Find out how much your installation costs:
+まず、現在のインストールコストを確認します。
 
-- Go on the Azure portal
-- Go to Subscription (If you don't find the `Subscription` menu search `Subscription` in the search bar next to the notifications bell.)
-- Go to Cost Analysis
-- Select your Resource group (mine is called "dwoiqdwqb')
-- Timespan 30 days
-- Click on apply
+- Azure ポータルへ移動
+- Subscription へ移動（`Subscription` メニューが見つからない場合は、通知ベル横の検索バーで `Subscription` を検索）
+- Cost Analysis へ移動
+- Resource group を選択（私の環境では "dwoiqdwqb'" という名前）
+- 期間を 30 days に設定
+- apply をクリック
 
 ![Show Cost Microsoft Azure](../img/ShowCost.png)
 
-As you can see, my install costs `47.00 EUR/Month`.
-Most of the cost is spent on the virtual machine.
+この例では、インストールコストは `47.00 EUR/Month` です。
+大部分のコストは virtual machine に使われています。
 
-## What is my current configuration
+## 現在の構成は何か
 
-First see what Virtual machine you currently have:
+まず、現在どの Virtual machine を使っているかを確認します。
 
-- Go on the Azure portal
-- Go to Resource Groups
-- Select your resource group
-- Select BTCPayServerVM
+- Azure ポータルへ移動
+- Resource Groups へ移動
+- あなたの resource group を選択
+- BTCPayServerVM を選択
 
 ![Show Microsoft Azure VM](../img/ShowVM.png)
 
-As you can see the CPU is mainly unused, disk as well. We can probably cut some fat here.
-Also my VM type is `Standard_D1_v2`. As you can see on [Azure Price Website](https://azureprice.net/).
+この例では、CPU とディスクは主に未使用です。ここは削減できそうです。
+また VM タイプは `Standard_D1_v2` です。[Azure Price Website](https://azureprice.net/) で確認できます。
 
 ![Show Azure Price](../img/ShowPrice.png)
 
-This costs me `0.0573444 EUR/H` or `42.66 EUR/Month`.
+この VM は `0.0573444 EUR/H`、つまり `42.66 EUR/Month` かかります。
 
-Now we know that downgrading this VM will bring us the largest cost benefit.
-Let's see how far we can go.
+つまり、この VM をダウングレードすることが最大のコスト削減効果になります。
+どこまで下げられるか確認しましょう。
 
-Connect by SSH to your VM, then:
+SSH で VM に接続し、次を実行します。
 
 ```bash
 sudo su -
@@ -75,9 +75,9 @@ docker stats
 
 ![Show Azure Resources](../img/ShowResources.png)
 
-As you can see, I have 3.352 GB of RAM, and around 55%.
+この例では、RAM は 3.352 GB で、使用率は約 55% です。
 
-The free command also seems to tell me I have approximately 1GB of RAM in fat:
+`free` コマンドからも、約 1GB 程度は余剰があると見て取れます。
 
 ```
 root@BTCPayServerVM:~# free --human
@@ -88,12 +88,12 @@ Mem:          3.4G       3.2G       138M        30M       8.8M       991M
 Swap:           0B         0B         0B
 ```
 
-## Selecting a new Virtual Machine
+## 新しい Virtual Machine を選ぶ
 
-Now we know that 2 GB of RAM, and a less powerful CPU will probably do the trick.
+ここまでで、RAM 2 GB とより低性能な CPU でもおそらく動くと分かりました。
 
-But first, you don't want your machine to crash if it runs out of RAM, so you need to add some swap:
-Note that `/mnt` is used in Azure for temporary data, and is optimized for low latency, this is why we set the swapfile here.
+ただし先に、RAM 不足でマシンが落ちないように swap を追加します。
+Azure では `/mnt` が一時データ用で低レイテンシに最適化されているため、swapfile をここに作成します。
 
 ```bash
 sudo su -
@@ -104,7 +104,7 @@ swapon /mnt/swapfile
 echo "/mnt/swapfile   none    swap    sw    0   0" >> /etc/fstab
 ```
 
-As you can see, the swap got added:
+次のように、swap が追加されたことを確認できます。
 
 ```
 root@BTCPayServerVM:~# free -h
@@ -114,49 +114,49 @@ Mem:          3.4G       3.2G       141M        30M       9.8M       983M
 Swap:         **2.0G**         0B       2.0G
 ```
 
-Now, go back to [azureprice.net](https://azureprice.net/) and find something cheaper than `0.0573444 EUR/H`.
+次に [azureprice.net](https://azureprice.net/) へ戻り、`0.0573444 EUR/H` より安いものを探します。
 
 ![Azure VM comparison](../img/ShowB1.png)
 
-Wow! `Standard_B1ms` cost only `0.02049219 EUR/H` – let's switch to it!
+`Standard_B1ms` は `0.02049219 EUR/H` しかかかりません。これに切り替えましょう。
 
-A quick look at [this article](https://www.singhkays.com/blog/understanding-azure-b-series/) shows us that this type of virtual machine is adapted for low CPU consumption with occasional burst. This is what BTCPay Server is about after the nodes are synched.
+[この記事](https://www.singhkays.com/blog/understanding-azure-b-series/)をざっと見ると、この VM タイプは低い CPU 消費と一時的なバーストに適していることが分かります。ノード同期後の BTCPay Server には適した特性です。
 
-- Go on the Azure portal
-- Go to Resource Groups
-- Select your resource group
-- Select BTCPayServerVM
-- Select `Size`
-- Select `B1MS` (if you don't see, take a look at the [FAQ](#b1ms))
-- Click `Select`
+- Azure ポータルへ移動
+- Resource Groups へ移動
+- あなたの resource group を選択
+- BTCPayServerVM を選択
+- `Size` を選択
+- `B1MS` を選択（表示されない場合は [FAQ](#b1ms) を確認）
+- `Select` をクリック
 
 ![Show Azure VM Size](../img/ShowSize.png)
 
-Wait between 5 and 15 minutes.
+5〜15 分待ちます。
 
-When Azure is happy:
+Azure の処理が完了すると:
 
 ![Happy Microsoft Azure](../img/HappyAzure.png)
 
-Congratulations! You just cut down the cost by 50% per month! :)
+完了です。月額コストを 50% 削減できました。
 
-### FAQ: B1MS does not appear in the list <a name="b1ms"></a>
+### FAQ: 一覧に B1MS が表示されない <a name="b1ms"></a>
 
-In some situation, you might not see the Virtual Machine B1MS in the list.
-It means your Azure hardware cluster does not support this type.
+状況によっては、一覧に B1MS Virtual Machine が表示されないことがあります。
+これは、あなたが利用している Azure ハードウェアクラスターがこのタイプをサポートしていないことを意味します。
 
 :::warning
-Stopping your Virtual Machine will change the public IP Address of your server. If you configured a A (as opposed to CNAME) record in your domain registar, you'll need to update it.
+Virtual Machine を停止すると、サーバーの公開 IP アドレスは変更されます。ドメインレジストラで CNAME ではなく A レコードを設定している場合は、更新が必要です。
 :::
 
-You need to go in:
+次の操作を行います。
 
-- Your Virtual Machine resource
-- `Overview` menu
-- Click on `Stop`
+- Virtual Machine リソースを開く
+- `Overview` メニューへ移動
+- `Stop` をクリック
 
 ![Stop Azure VM](../img/StopVM.png)
 
-Wait until the Virtual Machine has stopped, then change the size.
+Virtual Machine が停止するまで待ってから、サイズを変更します。
 
-Once the size is changed, go back to `Overview` and click on `Start`.
+サイズ変更後は `Overview` に戻り、`Start` をクリックします。

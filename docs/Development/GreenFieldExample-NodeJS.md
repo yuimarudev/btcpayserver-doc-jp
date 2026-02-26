@@ -1,19 +1,19 @@
-# Greenfield API example with Node.js (JavaScript)
+# Node.js (JavaScript) での Greenfield API 例
 
 
-The **[Greenfield API](https://docs.btcpayserver.org/API/Greenfield/v1/)** (also available on your instance on `/docs`) allows you to operate BTCPay Server via an easy-to-use REST API.
+**[Greenfield API](https://docs.btcpayserver.org/API/Greenfield/v1/)**（インスタンス上の `/docs` でも利用可能）を使うと、使いやすい REST API 経由で BTCPay Server を操作できます。
 
-Note that you can partially generate clients in the language of your choice by using the [Swagger file](https://docs.btcpayserver.org/API/Greenfield/v1/swagger.json).
+[Swagger file](https://docs.btcpayserver.org/API/Greenfield/v1/swagger.json) を使うことで、任意の言語向けクライアントを部分的に自動生成できます。
 
-In this guide, we will show you how to use it using Node.js/JavaScript.
+このガイドでは、Node.js/JavaScript での使い方を紹介します。
 
-## Prerequisites
+## 前提条件
 
-Unless for a few endpoints like creating a store and API key on behalf of a specific user, Basic Auth should be avoided and an API key should be used instead. Make sure that API keys only have the needed permissions and not more. E.g. if you only create invoices you should not give the API key the permission to manage your stores.
+特定ユーザーの代理でストアや API キーを作るような一部エンドポイントを除き、Basic Auth は避けて API キーを使うべきです。API キーには必要最小限の権限だけを与えてください。たとえば請求書の作成だけが目的なら、ストア管理権限は不要です。
 
-You can create a new API key in the BTCPay Server UI under `Account` -> `Manage account` -> `API keys`
+新しい API キーは、BTCPay Server UI の `Account` -> `Manage account` -> `API keys` から作成できます。
 
-For the ecommerce examples below the API key needs the following permissions:
+以下の eCommerce 例では、API キーに次の権限が必要です。
 - View invoices
 - Create invoice
 - Modify invoices
@@ -21,15 +21,15 @@ For the ecommerce examples below the API key needs the following permissions:
 - View your stores
 - Create non-approved pull payments
 
-For an overview of available permissions see the [API documentation](https://docs.btcpayserver.org/API/Greenfield/v1/#section/Authentication/API_Key) or the permissions documented on each endpoint.
+利用可能な権限の概要は [API documentation](https://docs.btcpayserver.org/API/Greenfield/v1/#section/Authentication/API_Key) または各エンドポイントの権限説明を参照してください。
 
-## eCommerce examples
+## eCommerce 例
 
-The following examples will show you how to create a basic eCommerce flow using the Greenfield API by creating an invoice, registering a webhook, processing webhooks, and issuing a full refund of an invoice.
+以下の例では、Greenfield API を使って、請求書作成、Webhook 登録、Webhook 処理、請求書の全額返金までを含む基本的な eCommerce フローを構築する方法を示します。
 
-### Create an invoice
+### 請求書を作成する
 
-We create an invoice using the [create invoice endpoint](https://docs.btcpayserver.org/API/Greenfield/v1/#operation/Invoices_CreateInvoice). This is a simple example but you can set a lot more data like order id, buyer email or custom metadata. That said, don't store redundant data on the invoice to prevent data leaks in case of a hack. E.g. in most cases it makes no sense to store the customer address on your eCommerce system and also on the BTCPay invoice.
+[create invoice endpoint](https://docs.btcpayserver.org/API/Greenfield/v1/#operation/Invoices_CreateInvoice) を使って請求書を作成します。これはシンプルな例ですが、注文 ID、購入者メール、カスタムメタデータなど、さらに多くのデータを設定できます。ただし、侵害時の情報漏えいを防ぐため、請求書に冗長データを保存しないでください。たとえば多くの場合、顧客住所を eCommerce システムと BTCPay 請求書の両方に保存する意味はありません。
 
 ```JS
 const btcpayServerUrl = 'https://mainnet.demo.btcpayserver.org'
@@ -59,9 +59,9 @@ fetch(btcpayServerUrl + apiEndpoint, {
   })
 ```
 
-### Register a webhook (optional)
+### Webhook を登録する（任意）
 
-Let's register a webhook to be notified when the invoice is paid. You can use the [create webhook endpoint](https://docs.btcpayserver.org/API/Greenfield/v1/#operation/Webhooks_CreateWebhook) to register a webhook.
+請求書の支払いを通知するための Webhook を登録しましょう。Webhook の登録には [create webhook endpoint](https://docs.btcpayserver.org/API/Greenfield/v1/#operation/Webhooks_CreateWebhook) を使えます。
 
 ```JS
 const btcpayServerUrl = 'https://mainnet.demo.btcpayserver.org'
@@ -89,14 +89,14 @@ fetch(btcpayServerUrl + apiEndpoint, {
   })
 ```
 
-This step is optional, you can also manually create a webhook in the BTCPay Server UI in your store `Settings` -> `Webhooks`.
+この手順は任意です。BTCPay Server UI でストアの `Settings` -> `Webhooks` から手動で Webhook を作成することもできます。
 
-### Validate and process webhooks
+### Webhook を検証して処理する
 
-You can use your Node.js Express web application to receive webhook requests from your BTCPay Server.
+Node.js Express の Web アプリで、BTCPay Server からの Webhook リクエストを受信できます。
 
-First you need a route so that your Node.js application can receive POST requests.
-Based on how you set up the express server this should look something like this:
+まず、Node.js アプリで POST リクエストを受け取るルートが必要です。
+Express サーバーの構成次第ですが、次のようになります。
 
 ```JS
 app.post('/your-webhook-endpoint', (req, res) => {
@@ -104,13 +104,13 @@ app.post('/your-webhook-endpoint', (req, res) => {
 })
 ```
 
-What's important is that the webhook sends a HTTP-header `BTCPAY-SIG` which is the signed request using the `secret` you got back from the previous step when registering the webhook. You can use that `secret` and the raw payload (as bytes) you get from the webhook, hash it and compare it to `BTCPAY-SIG`. Therefore, you need `body-parser` which is a middleware to parse the raw body of the request. For comparing the hashes you also need `crypto` which is a built-in Node.js module.
+重要なのは、Webhook が `BTCPAY-SIG` という HTTP ヘッダーを送ることです。これは、Webhook 登録時に取得した `secret` を使って署名されたリクエストです。この `secret` と Webhook から受け取る raw payload（バイト列）を使ってハッシュを計算し、`BTCPAY-SIG` と比較できます。そのため、リクエスト本文の raw body をパースするミドルウェア `body-parser` が必要です。ハッシュ比較には Node.js 組み込みの `crypto` モジュールも必要です。
 ```JS
 const bodyParser = require('body-parser')
 const crypto = require('crypto')
 ```
 
-You can parse the raw body of the request like this:
+リクエストの raw body は次のようにパースできます。
 
 ```JS
 app.use(
@@ -121,15 +121,15 @@ app.use(
   })
 )
 ```
-This makes sure that in req.rawBody the correct content is parsed so that you can compare the hashed req.rawBody with the `BTCPAY-SIG` header value.
+これにより `req.rawBody` に正しい内容が格納され、`req.rawBody` のハッシュ値と `BTCPAY-SIG` ヘッダー値を比較できるようになります。
 
-However, if you are using TypeScript, you might run into this error:
+ただし TypeScript を使っている場合、次のエラーが出ることがあります。
 
 ```
 Property 'rawBody' does not exist on type 'Request'.
 ```
 
-The temporary fix is to use the `as` keyword to tell the compiler to consider the `req` object as another type when you accessing the `rawBody`. Here is an example of how to obtain `rawBody` using this workaround, no need for the middleware code above:
+一時的な回避策として、`as` キーワードでコンパイラに `req` オブジェクトを別型として扱わせ、`rawBody` にアクセスします。次はこの回避策で `rawBody` を取得する例です（上記ミドルウェアコードは不要）。
 
 ```JS
 import { Request, Response } from "express-serve-static-core"
@@ -141,9 +141,9 @@ const myFunc = async (req: Request, res: Response) => {
   const rawBody = (req as FirebaseRequest).rawBody;
 }
 ```
-Replace `req.rawBody` with `rawBody` in the next sections if utilizing this method with TypeScript.
+TypeScript でこの方法を使う場合、以降のセクションでは `req.rawBody` を `rawBody` に置き換えてください。
 
-In your router it looks like this put all together: (Change `webhookSecret` with the `secret` you got back from the previous step when registering the webhook).
+ルーターでまとめると次のようになります（`webhookSecret` は、Webhook 登録時に取得した `secret` に置き換えてください）。
 
 ```JS
 app.post('/your-webhook-endpoint', (req, res) => {
@@ -175,9 +175,9 @@ app.post('/your-webhook-endpoint', (req, res) => {
 })
 ```
 
-### Issue a full refund of an invoice
+### 請求書の全額返金を実行する
 
-Using the [invoice refund endpoint](https://docs.btcpayserver.org/API/Greenfield/v1/#operation/Invoices_Refund) you can issue a full (or even partial) refund of an invoice. This will return a link where the customer can claim the refund.
+[invoice refund endpoint](https://docs.btcpayserver.org/API/Greenfield/v1/#operation/Invoices_Refund) を使うと、請求書の全額（または部分）返金を実行できます。顧客が返金を受け取るためのリンクが返されます。
 
 ```JS
 const btcpayServerUrl = 'https://mainnet.demo.btcpayserver.org'
@@ -209,13 +209,13 @@ fetch(btcpayServerUrl + apiEndpoint, {
   })
 ```
 
-## BTCPay Server management examples
+## BTCPay Server 管理の例
 
-Here we assume you are an ambassador and host BTCPay Server for your users. You manage your users on your own system and want to create a user and set email and password for their BTCPay Server login. Then using the same credentials to create a store and an API key on behalf of that user.
+ここでは、あなたがアンバサダーとしてユーザー向けに BTCPay Server をホストしている想定です。自分のシステムでユーザー管理を行い、BTCPay Server ログイン用のユーザーを作成し、メールとパスワードを設定します。その後、同じ認証情報を使って、そのユーザーの代理でストアと API キーを作成します。
 
-### Create a new user
+### 新しいユーザーを作成する
 
-Creating a new user can be done by using [this endpoint](https://docs.btcpayserver.org/API/Greenfield/v1/#operation/Users_CreateUser).
+新規ユーザー作成は [this endpoint](https://docs.btcpayserver.org/API/Greenfield/v1/#operation/Users_CreateUser) で実行できます。
 
 ```JS
 const btcpayServerUrl = 'https://mainnet.demo.btcpayserver.org'
@@ -246,13 +246,13 @@ fetch(btcpayServerUrl + apiEndpoint, {
   })
 ```
 
-### Create a new API key (for the user)
+### 新しい API キーを作成する（ユーザー向け）
 
-While we can use basic authentication to access the greenfield API, it is recommended to use API Keys to limit the scope of the credentials.
+Greenfield API へのアクセスに Basic 認証も利用できますが、認証情報のスコープを限定するため API キーの利用が推奨されます。
 
-For example: If we want to [create a new store](https://docs.btcpayserver.org/API/Greenfield/v1/#operation/Stores_CreateStore) we need the `btcpay.store.canmodifystoresettings` permission for the API key. Warning: If you do not pass any permission then the API key will have unrestricted access.
+例として、[create a new store](https://docs.btcpayserver.org/API/Greenfield/v1/#operation/Stores_CreateStore) するには API キーに `btcpay.store.canmodifystoresettings` 権限が必要です。注意: 権限を1つも渡さない場合、その API キーは無制限アクセスになります。
 
-As mentioned above, you can do this through the BTCPay Server UI of your instance, but let's do it through the API using [this endpoint](https://docs.btcpayserver.org/API/Greenfield/v1/#operation/ApiKeys_CreateUserApiKey) where we with our admin API key create an API key for our new user.
+前述のとおり、これはインスタンスの BTCPay Server UI からも実行できますが、ここでは [this endpoint](https://docs.btcpayserver.org/API/Greenfield/v1/#operation/ApiKeys_CreateUserApiKey) を使って、admin API キーで新規ユーザー用 API キーを作成します。
 
 ```js
 const btcpayServerUrl = 'https://mainnet.demo.btcpayserver.org'
@@ -283,9 +283,9 @@ fetch(btcpayServerUrl + apiEndpoint, {
   })
 ```
 
-### Create a new store
+### 新しいストアを作成する
 
-Now, we can use the api key to [create a new store](https://docs.btcpayserver.org/API/Greenfield/v1/#operation/Stores_CreateStore).
+次に、API キーを使って [create a new store](https://docs.btcpayserver.org/API/Greenfield/v1/#operation/Stores_CreateStore) できます。
 
 ```JS
 const btcpayserverUrl = 'https://mainnet.demo.btcpayserver.org'
@@ -313,9 +313,9 @@ fetch(btcpayServerUrl + apiEndpoint, {
   })
 ```
 
-### Read store information
+### ストア情報を取得する
 
-We can use the new apikey to [read store](https://docs.btcpayserver.org/API/Greenfield/v1/#operation/Stores_GetStore) information:
+新しい API キーで [read store](https://docs.btcpayserver.org/API/Greenfield/v1/#operation/Stores_GetStore) 情報を取得できます。
 
 ```JS
 const btcpayServerUrl = 'https://mainnet.demo.btcpayserver.org'

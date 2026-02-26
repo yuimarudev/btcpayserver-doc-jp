@@ -1,50 +1,56 @@
-# Customizing themes
+<!-- legacy-anchor-aliases -->
+<span id="2-bootstrap-themes"></span>
+<span id="checkout-page-theme"></span>
+<span id="notes-on-bootstrap-css"></span>
+<!-- /legacy-anchor-aliases -->
 
-BTCPay Server is built on Bootstrap and offers the flexibility to adjust its look to your needs.
-Learn more about the [standard design specifications used in BTCPay](https://design.btcpayserver.org/).
+# テーマのカスタマイズ
 
-## Developing and extending a custom theme
+BTCPay Server は Bootstrap をベースに構築されており、見た目を要件に合わせて柔軟に調整できます。
+詳しくは [BTCPay で使われる標準デザイン仕様](https://design.btcpayserver.org/) を参照してください。
 
-The BTCPay Server user interface is built on a **customized version of Bootstrap** that supports [CSS custom properties](https://developer.mozilla.org/en-US/docs/Web/CSS/--*).
-This allows us to change theme related settings like fonts and colors without affecting the [`bootstrap.css`](#notes-on-bootstrap-css).
-Also we can provide just the relevant customized parts instead of shipping a whole `bootstrap.css` file for each theme.
+## カスタムテーマの開発と拡張
 
-Take a look at the [predefined themes](https://github.com/btcpayserver/btcpayserver/blob/master/BTCPayServer/wwwroot/main/themes/) to get an overview of this approach.
+BTCPay Server のユーザーインターフェースは、[CSS custom properties](https://developer.mozilla.org/en-US/docs/Web/CSS/--*) をサポートした **カスタマイズ版 Bootstrap** で構成されています。
+これにより、[`bootstrap.css`](#notes-on-bootstrap-css) に影響を与えずに、フォントや色などテーマ関連の設定を変更できます。
+また、テーマごとに `bootstrap.css` 全体を配布する代わりに、必要なカスタマイズ部分だけを提供できます。
 
-### Modifying existing themes
+このアプローチの概要は、[predefined themes](https://github.com/btcpayserver/btcpayserver/blob/master/BTCPayServer/wwwroot/main/themes/) を見ると理解しやすいです。
 
-The custom property definitions in the `:root` selector are divided into several sections, that can be seen as a cascade:
+### 既存テーマの変更
 
-- The first section contains general definitions (i.e. for custom brand and neutral colors).
-- The second section defines variables for specific purposes.
-  Here you can map the general definitions or create additional ones.
-- The third section contains definitions for specific parts of the page, sections or components.
-  Here you should try to reuse definitions from above as much as possible to provide a consistent look and feel.
+`:root` セレクタ内のカスタムプロパティ定義は、カスケードとして捉えられる複数セクションに分かれています。
 
-The variables defined in a theme file get used in the [`site.css`](https://github.com/btcpayserver/btcpayserver/blob/master/BTCPayServer/wwwroot/main/site.css) file.
+- 最初のセクションは汎用定義（例: ブランドカラーやニュートラルカラー）です。
+- 2つ目のセクションは用途別の変数を定義します。
+  ここでは汎用定義をマッピングしたり、追加の変数を作成したりできます。
+- 3つ目のセクションはページ、セクション、コンポーネントなど特定部分向けの定義です。
+  一貫した見た目にするため、可能な限り上位の定義を再利用してください。
 
-#### Overriding Bootstrap selectors
+テーマファイルで定義した変数は [`site.css`](https://github.com/btcpayserver/btcpayserver/blob/master/BTCPayServer/wwwroot/main/site.css) で使われます。
 
-In addition to the variables you can also provide styles by directly **adding CSS selectors** to this file.
-This can be seen as a last resort in case there is no variable for something you want to change or some minor tweaking.
+#### Bootstrap セレクタの上書き
 
-#### Adding theme variables
+変数に加えて、このファイルに **CSS セレクタを直接追加** してスタイルを指定することも可能です。
+これは、変更したい対象に該当変数がない場合や軽微な微調整が必要な場合の最終手段として考えてください。
 
-In general it is a good idea to introduce **specific variables** for special purposes (like setting the link colors of a specific section).
-This allows us to address individual portions of the styles without affecting other parts which might be tight to a general variable.
+#### テーマ変数の追加
 
-For cases in which you want to introduce new variables that are used across all themes, add them to the `site.css` file.
-This file contains our modifications of the Bootstrap styles.
-Refrain from modifying `bootstrap.css` directly – see the [additional notes](#notes-on-bootstrap-css) for the reasoning behind this.
+一般的には、特定用途（例: あるセクションのリンク色）向けに **専用変数** を導入するのが有効です。
+こうすることで、汎用変数に結びついた他の部分へ影響を与えず、個別にスタイルを調整できます。
 
-#### Adding a new theme
+すべてのテーマで使う新しい変数を導入したい場合は、`site.css` に追加してください。
+このファイルには Bootstrap スタイルへの変更内容が含まれます。
+`bootstrap.css` を直接変更するのは避けてください。理由は [additional notes](#notes-on-bootstrap-css) を参照してください。
 
-You should copy one of our predefined themes and change the variables to fit your needs.
+#### 新しいテーマの追加
 
-To test and play around with the adjustments, you can also use the developer tools of the browser:
-Inspect the `<html>` element and modify the variables in the `:root` section of the styles inspector.
+既存の predefined themes のいずれかをコピーし、要件に合わせて変数を変更してください。
 
-In most cases it should suffice to adapt the primary colors like this:
+調整内容を試すには、ブラウザの開発者ツールも利用できます。
+`<html>` 要素を検査し、スタイルインスペクタの `:root` セクションで変数を変更します。
+
+多くの場合、次のように主要色を調整すれば十分です。
 
 ```css
 :root {
@@ -66,11 +72,11 @@ In most cases it should suffice to adapt the primary colors like this:
 }
 ```
 
-Once you are done adapting, save the CSS as a file and upload it on the `Server Settings > Branding` page:
+調整が終わったら、CSS をファイルとして保存し、`Server Settings > Branding` ページでアップロードします。
 
 ![CustomTheme](../img/BrandingTheme.png)
 
-The theme will be applied on upload.
-With the example above, the section looks like this after applying the custom theme:
+アップロードするとテーマが適用されます。
+上記例では、カスタムテーマ適用後の表示は次のようになります。
 
 ![CustomTheme](../img/CustomTheme.png)

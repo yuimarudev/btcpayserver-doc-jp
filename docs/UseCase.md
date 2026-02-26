@@ -1,5 +1,5 @@
 ---
-description: Who uses BTCPay Server and why? What are the benefits of using BTCPay Server over other payment gateways?
+description: BTCPay Server は誰が、なぜ使うのか？他の決済ゲートウェイと比べた利点は何か？
 tags:
   - Use-case
   - Target-audience
@@ -7,96 +7,96 @@ tags:
   - benefits
 ---
 
-# Who can use BTCPay Server?
+# BTCPay Server は誰が使えるのか？
 
-The versatility and flexibility of BTCPay Server attract different types of users. **Anyone** can use BTCPay Server.
+BTCPay Server の汎用性と柔軟性は、さまざまなタイプのユーザーを引きつけます。BTCPay Server は **誰でも** 利用できます。
 
-We're ensuring an open future for businesses and individuals regardless of geographic, political or financial barriers.
+私たちは、地理的・政治的・金融的な障壁に関係なく、企業と個人のためのオープンな未来を目指しています。
 
-Below are the most common use cases for BTCPay Server:
+以下は BTCPay Server の代表的なユースケースです。
 
-- **Merchants** who sell products and services online or in person
-- Self-sovereign **individuals** wanting to protect their wealth and manage their funds and full bitcoin node
-- **Charities and non-profits** looking to accept donations or crowdfund their dream project
-- **Developers** building on top of bitcoin and bleeding-edge payment infrastructure
-- Members of **local communities** willing to onboard people to their BTCPay instance and offer payment processing as a service or for free, creating a circular economy.
-- **Exchanges** offering instant conversions for the users of BTCPay Server
-- **Hosting providers** offering BTCPay as a cloud service or ready-to-use hardware.
+- オンラインまたは対面で商品やサービスを販売する **加盟店**
+- 自分の資産を守り、資金とフル bitcoin ノードを管理したい自己主権志向の **個人**
+- 寄付の受け取りやクラウドファンディングを行いたい **慈善団体・非営利団体**
+- bitcoin や最先端の決済インフラ上に構築する **開発者**
+- 自分の BTCPay インスタンスに人をオンボードし、決済処理を有償または無償で提供して循環経済を作りたい **ローカルコミュニティ** のメンバー
+- BTCPay Server ユーザー向けに即時変換を提供する **取引所**
+- BTCPay をクラウドサービスやすぐ使えるハードウェアとして提供する **ホスティング事業者**
 
 ![BTCPay UseCase Infographic](./img/infographics/BTCPayUseCasev2-1.png)
 
-The software usage is by no means limited to the groups of users mentioned in this document.
+本ドキュメントで挙げたグループに、ソフトウェアの利用用途が限定されるわけではありません。
 
 ## Merchants
 
-Merchants accepting bitcoin payments online or in person are the primary user group of a BTCPay Server.
+オンラインまたは対面で bitcoin 決済を受け付ける加盟店は、BTCPay Server の主要ユーザー層です。
 
-By choosing BTCPay Server to process payments, merchants are:
+決済処理に BTCPay Server を選ぶことで、加盟店は次のメリットを得られます。
 
-- Saving money (BTCPay is free with no fees or subscriptions)
-- Cutting out the middle-man (If self-hosted payments go directly to their wallet)
-- Enhancing privacy for their customers (no address re-use, no information leaks to the third party servers if they're self-hosting BTCPay Server)
-- Saving time (easy integration with popular e-commerce platforms)
-- Protecting themselves from interference in their business (self-sovereignty)
+- コスト削減（BTCPay は無料で、手数料やサブスクリプションが不要）
+- 仲介者の排除（セルフホストなら支払いは直接自分のウォレットへ）
+- 顧客プライバシーの強化（アドレス再利用なし、セルフホスト時は第三者サーバーへの情報漏えいなし）
+- 時間短縮（主要 e-commerce プラットフォームとの簡単な統合）
+- ビジネスへの干渉からの保護（自己主権）
 
 ### Online stores
 
-Merchants selling goods or services over the internet, usually pick an online e-commerce plugin we offer for multiple popular e-commerce platforms [WooCommerce](WooCommerce.md), [Shopify](/Shopify.md), [PrestaShop](/PrestaShop.md), [Magento](/Magento.md) [Drupal](Drupal.md), [Shopaware](https://github.com/lampsolutions/LampSBtcPayShopware) or other. Install a plugin for the CMS of your choice, and connect it to a self-hosted BTCPay or one hosted by a third party.
+インターネットで商品やサービスを販売する加盟店は、通常、主要 e-commerce プラットフォーム向けに提供しているプラグインを利用します。[WooCommerce](WooCommerce.md)、[Shopify](/Shopify.md)、[PrestaShop](/PrestaShop.md)、[Magento](/Magento.md)、[Drupal](/Drupal/)、[Shopaware](https://github.com/lampsolutions/LampSBtcPayShopware) などです。任意の CMS 用プラグインをインストールし、セルフホストの BTCPay または第三者ホストの BTCPay に接続します。
 
-BTCPay Server's checkout is no different from any other payment gateway. The customer gets an invoice. They pay it by scanning a QR code or by copy-pasting the amount and the bitcoin address. When their payment is confirmed, you're notified via the e-commerce software and can ship the item.
+BTCPay Server のチェックアウトは他の決済ゲートウェイと同様です。顧客には請求書が表示されます。顧客は QR コードをスキャンするか、金額と bitcoin アドレスをコピー＆ペーストして支払います。支払いが確認されると、e-commerce ソフトウェア経由で通知を受け取り、商品を発送できます。
 
 ### Physical stores
 
-For in-person retailers, BTCPay Server has a [web-based Point of Sale](./Apps.md#point-of-sale-app). Similar to the online store, the customer is presented with an invoice that he can pay on the spot. The **POS app** can be run on any web-connected device.
+対面販売の小売店向けに、BTCPay Server には [Web ベースの Point of Sale](./Apps.md#point-of-sale-app) があります。オンラインストアと同様に、顧客にはその場で支払える請求書が表示されます。**POS app** は Web 接続可能な任意のデバイスで実行できます。
 
-Take a look at [our demo POS app](https://mainnet.demo.btcpayserver.org/apps/3utBTfSKkW4gK7aQMd2hW5Bh9Fpa/pos).
+[デモ POS app](https://mainnet.demo.btcpayserver.org/apps/3utBTfSKkW4gK7aQMd2hW5Bh9Fpa/pos) も確認してください。
 
 ## Self-sovereign individuals
 
-**Privacy-minded individuals** can use BTCPay Server's internal wallet for their everyday bitcoin transactions without providing a private key. For self-hosted servers, the [internal wallet](./Wallet.md) relies on a full node, significantly enhancing privacy. [Hardware wallet integration](./HardwareWalletIntegration.md) allows the usage of a hardware wallet with a [full node](https://en.bitcoin.it/wiki/Full_node) and avoids leaks to a third-party server.
+**プライバシーを重視する個人** は、秘密鍵を提供せずに日常的な bitcoin 取引のために BTCPay Server の内部ウォレットを利用できます。セルフホスト環境では、[内部ウォレット](./Wallet.md) はフルノードに依存するため、プライバシーが大幅に向上します。[Hardware wallet integration](./HardwareWalletIntegration.md) を使えば、[full node](https://en.bitcoin.it/wiki/Full_node) とハードウェアウォレットを組み合わせ、第三者サーバーへの情報漏えいを防げます。
 
 ## Freelancers & bill pay
 
-**Freelancers** can _request_ for payment by sharing a [Payment Request](./PaymentRequests.md). The content and appearance of the payment request are customizable. With or without expiry, customers can pay the request at any time. BTCPay Server automatically updates the exchange rate when the customer pays the payment request when it's convenient for them. Merchants or freelancers can use payment requests for bill pay services. Payment requests can even be used to quickly request money from friends.
+**フリーランサー** は [Payment Request](./PaymentRequests.md) を共有して支払いを _請求_ できます。Payment Request の内容と見た目はカスタマイズ可能です。有効期限の有無にかかわらず、顧客は任意のタイミングで支払えます。BTCPay Server は、顧客が都合のよいタイミングで支払う際の為替レートを自動更新します。加盟店やフリーランサーは、請求書支払いサービスにも Payment Request を利用できます。友人への送金依頼にも素早く活用できます。
 
-Merchants can _provide_ payment by sharing a [Pull Payment](./PullPayments.md). This is a long-lived payment offer that the freelancer can pull funds from at their convenience. The merchant can specify the total amount and approve a partial or full request for payment.
+加盟店は [Pull Payment](./PullPayments.md) を共有して支払いを _提供_ することもできます。これは、フリーランサーが都合のよい時に資金を引き出せる長期的な支払いオファーです。加盟店は総額を指定し、部分支払いまたは全額支払いのリクエストを承認できます。
 
 ## Charities & non-profits
 
-Charities, non-profits, content creators, and other organizations that want to accept bitcoin donations in a more private way than the traditional static bitcoin address method can utilize the [Pay Button](./WhatsNext.md#creating-the-pay-button), [POS app](./WhatsNext.md#creating-the-point-of-sale-app) or [Crowdfunding app](./Apps.md#crowdfunding-app) for a better user experience.
+慈善団体、非営利団体、コンテンツ制作者など、従来の固定 bitcoin アドレス方式よりもプライベートな形で寄付を受け取りたい組織は、[Pay Button](./WhatsNext.md#creating-the-pay-button)、[POS app](./WhatsNext.md#creating-the-point-of-sale-app)、[Crowdfunding app](./Apps.md#crowdfunding-app) を活用して、より良いユーザー体験を提供できます。
 
-Benefits of using BTCPay for accepting donations:
+寄付受け取りに BTCPay を使う利点:
 
-- Saving money (no fees, no subscriptions)
-- Cutting out the middle-man (Payments go directly to their wallet)
-- Enhancing privacy for them and their donors (no address re-use, no IP leaks to third parties)
+- コスト削減（手数料・サブスクリプションなし）
+- 仲介者の排除（支払いは直接ウォレットへ）
+- 団体と寄付者双方のプライバシー向上（アドレス再利用なし、第三者への IP 漏えいなし）
 
-It's essential to mention that BTCPay Server prevents address reuse, as many people have been reusing addresses for donations in the past. Here is why you SHOULD NOT reuse a Bitcoin address:
+過去には寄付受け取りでアドレスを再利用する人が多くいましたが、BTCPay Server はアドレス再利用を防ぎます。以下は、Bitcoin アドレスを再利用すべきでない理由です。
 
-- Privacy: reusing the same address for donations not only makes it incredibly easy to link it to your identity, but it also compromises the privacy of your donors and every person that interacts with you
-- Security: by compromising your privacy, address reuse increases your attack surface, as people that want to steal from you or harm you would have A LOT of information about you and your donors
-- High fees: fees for a Bitcoin transaction are calculated according to the "size" of a transaction (which has nothing to do with the amount being sent). By reusing addresses, you are building huge transactions involving many inputs, that will cost you a lot in fees when you want to move them
+- プライバシー: 同じアドレスを寄付に再利用すると、本人との結び付けが非常に容易になるだけでなく、寄付者や関係者全員のプライバシーも損ないます
+- セキュリティ: プライバシーが損なわれることで攻撃対象領域が広がり、あなたや寄付者に危害を加えたい相手が大量の情報を得られるようになります
+- 高額手数料: Bitcoin 取引手数料は送金額ではなく取引の「サイズ」で計算されます。アドレス再利用により多数の入力を含む巨大な取引になり、資金移動時の手数料が高くなります
 
-You can read more about address reuse on the [Bitcoin Wiki](https://en.bitcoin.it/wiki/Address_reuse).
+アドレス再利用の詳細は [Bitcoin Wiki](https://en.bitcoin.it/wiki/Address_reuse) を参照してください。
 
 ## Developers
 
-By deploying an instance, developers get a full tech stack to develop on top of Bitcoin. They can build things using the [Greenfield API](https://docs.btcpayserver.org/API/Greenfield/v1/) or build free or premium plugins for BTCPay users. Since BTCPay is an open-source organization, they can also get involved and [contribute](/Contribute.md) and help us improve the software.
+インスタンスをデプロイすると、開発者は Bitcoin 上に構築するためのフル技術スタックを得られます。[Greenfield API](https://docs.btcpayserver.org/API/Greenfield/v1/) を使って構築したり、BTCPay ユーザー向けに無料または有料プラグインを作ったりできます。BTCPay はオープンソース組織なので、[contribute](/Contribute/) に参加し、ソフトウェア改善に貢献することもできます。
 
 ## Local communities
 
-People self-hosting a BTCPay Server instance, can enable registration for other users and become a [third-party host](/Deployment/ThirdPartyHosting.md) for family, friends or their local community allowing them to accept Bitcoin by piggybacking on the host's instance. This allows motivated community members to onboard local communities and fuel hyperbitcoinization locally.
+BTCPay Server をセルフホストする人は、他ユーザー向けに登録を有効化し、家族・友人・地域コミュニティ向けの [third-party host](/Deployment/ThirdPartyHosting.md) になることができます。これにより、ホストのインスタンスに乗る形で Bitcoin 受け取りを可能にできます。意欲のあるメンバーが地域コミュニティをオンボードし、ローカルでのハイパービットコイニゼーションを促進できます。
 
 [![BTCPay Server for local communities](https://img.youtube.com/vi/9n81qnzlPf8/mqdefault.jpg)](https://www.youtube.com/watch?v=9n81qnzlPf8)
 
 ## Cryptocurrency exchanges
 
-The [number of merchants](https://directory.btcpayserver.org) using BTCPay Server grows each day, and cryptocurrency exchanges could benefit from it by developing integrations with BTCPay and allow offer instant conversion of payments into local fiat currencies.
+BTCPay Server を使う[加盟店数](https://directory.btcpayserver.org)は日々増えており、暗号資産取引所は BTCPay との統合を開発することで恩恵を受けられます。これにより、支払いを法定通貨へ即時変換する機能を提供できます。
 
 ## Hosting providers
 
-Hosting providers can (and some already have) create easy 1-click BTCPay deployment solutions for their customers. With the growing interest in BTCPay Server, hosting companies can tap into this source of new customers and make money by hosting easily-deployable BTCPay instances for merchants.
+ホスティング事業者は、顧客向けに簡単な 1-click BTCPay デプロイソリューションを作成できます（すでに提供している事業者もいます）。BTCPay Server への関心が高まる中、ホスティング企業はこの新規顧客層を取り込み、加盟店向けに簡単にデプロイできる BTCPay インスタンスをホストして収益化できます。
 
 ---
 
-These are some of the many ways in which you can use BTCPay. Unleash your creativity and feel free to build your own solutions to solve problems.
+以上は BTCPay の活用方法の一部です。創造性を発揮し、課題を解決する独自のソリューションを自由に構築してください。

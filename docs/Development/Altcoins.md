@@ -1,74 +1,74 @@
-# How to add an Altcoin
+# Altcoin の追加方法
 
-Bitcoin is the only focus of the BTCPay Server project and its core developers. However, opt-in integrations are available for several altcoins. For more information check the [Altcoin FAQ page](../FAQ/Altcoin.md).
+BTCPay Server プロジェクトとそのコア開発者は Bitcoin のみに注力しています。ただし、任意で有効化できる altcoin 統合がいくつか存在します。詳細は [Altcoin FAQ page](../FAQ/Altcoin.md) を確認してください。
 
-## Overview
+## 概要
 
-Altcoin integration requires two things:
+Altcoin 統合には次の2点が必要です。
 
-1. **BTCPay Server plugin** - handles payment logic, wallet management, and UI
-2. **Docker Compose fragment** - allows others to run your coin's node infrastructure alongside BTCPay Server
+1. **BTCPay Server plugin** - 決済ロジック、ウォレット管理、UI を担当
+2. **Docker Compose fragment** - 他のユーザーが BTCPay Server と並行して対象コインのノード基盤を実行できるようにする
 
-Do **not** modify BTCPay Server core. All new coins must be integrated as plugins.
+BTCPay Server のコアを変更してはいけません。新しいコインはすべてプラグインとして統合する必要があります。
 
-## Create a BTCPay Server Plugin
+## BTCPay Server プラグインを作成する
 
-Build a plugin that extends `BaseBTCPayServerPlugin`. Your plugin registers the coin's network, payment handler, and UI extensions with BTCPay Server.
+`BaseBTCPayServerPlugin` を拡張するプラグインを作成します。プラグインでは、コインのネットワーク、支払いハンドラ、UI 拡張を BTCPay Server に登録します。
 
-Use the [Monero plugin](https://github.com/btcpay-monero/btcpayserver-monero-plugin) as your reference. Key files to study:
+参考として [Monero plugin](https://github.com/btcpay-monero/btcpayserver-monero-plugin) を使用してください。確認すべき主要ファイルは次のとおりです。
 
-* [MoneroPlugin.cs](https://github.com/btcpay-monero/btcpayserver-monero-plugin/blob/master/Plugins/Monero/MoneroPlugin.cs) - plugin entry point and service registration
-* [MoneroLikePaymentMethodHandler.cs](https://github.com/btcpay-monero/btcpayserver-monero-plugin/tree/master/Plugins/Monero/Payments) - payment handling
-* [MoneroListener.cs](https://github.com/btcpay-monero/btcpayserver-monero-plugin/tree/master/Plugins/Monero/Services) - transaction and block monitoring
-* [MoneroLoadUpService.cs](https://github.com/btcpay-monero/btcpayserver-monero-plugin/tree/master/Plugins/Monero/Services) - wallet creation and loading via RPC
+* [MoneroPlugin.cs](https://github.com/btcpay-monero/btcpayserver-monero-plugin/blob/master/Plugins/Monero/MoneroPlugin.cs) - プラグインのエントリポイントとサービス登録
+* [MoneroLikePaymentMethodHandler.cs](https://github.com/btcpay-monero/btcpayserver-monero-plugin/tree/master/Plugins/Monero/Payments) - 支払い処理
+* [MoneroListener.cs](https://github.com/btcpay-monero/btcpayserver-monero-plugin/tree/master/Plugins/Monero/Services) - トランザクションとブロックの監視
+* [MoneroLoadUpService.cs](https://github.com/btcpay-monero/btcpayserver-monero-plugin/tree/master/Plugins/Monero/Services) - RPC 経由でのウォレット作成と読み込み
 
-See the [Plugin Development docs](./Plugins.md) for general plugin guidance - project setup, UI extensions, database, and publishing.
+一般的なプラグイン開発手順（プロジェクト設定、UI 拡張、データベース、公開方法）については [Plugin Development docs](./Plugins.md) を参照してください。
 
-## Create a Docker Compose Fragment
+## Docker Compose Fragment を作成する
 
-To allow users to deploy your coin's node alongside BTCPay Server, submit a PR to the [btcpayserver-docker](https://github.com/btcpayserver/btcpayserver-docker) repository with the following components. See [Beldex PR #1042](https://github.com/btcpayserver/btcpayserver-docker/pull/1042) for a complete example.
+ユーザーが BTCPay Server と一緒に対象コインのノードをデプロイできるようにするには、次の構成要素を含む PR を [btcpayserver-docker](https://github.com/btcpayserver/btcpayserver-docker) リポジトリへ提出してください。完全な例は [Beldex PR #1042](https://github.com/btcpayserver/btcpayserver-docker/pull/1042) を参照してください。
 
 ### Docker image
 
-Build and publish a Docker image for your coin's daemon and wallet RPC. Host it in your own Docker Hub or container registry - do not add your build to BTCPay's image build pipeline.
+対象コインの daemon と wallet RPC 用の Docker イメージをビルドして公開します。公開先は自身の Docker Hub またはコンテナレジストリにし、BTCPay のイメージビルドパイプラインへは追加しないでください。
 
 ### Docker Compose fragment
 
-Add a YAML file to `docker-compose-generator/docker-fragments/` that defines your coin's daemon and wallet RPC services. The fragment must pass the RPC URIs to BTCPay Server via environment variables so the plugin can connect.
+`docker-compose-generator/docker-fragments/` に YAML ファイルを追加し、対象コインの daemon と wallet RPC サービスを定義します。プラグインが接続できるよう、この fragment で RPC URI を環境変数経由で BTCPay Server に渡す必要があります。
 
-Example: [monero.yml](https://github.com/btcpayserver/btcpayserver-docker/blob/master/docker-compose-generator/docker-fragments/monero.yml)
+例: [monero.yml](https://github.com/btcpayserver/btcpayserver-docker/blob/master/docker-compose-generator/docker-fragments/monero.yml)
 
 ### crypto-definitions.json
 
-Add an entry for your coin in [`docker-compose-generator/crypto-definitions.json`](https://github.com/btcpayserver/btcpayserver-docker/blob/master/docker-compose-generator/crypto-definitions.json) so the docker-compose generator includes it.
+docker-compose generator に取り込まれるよう、[`docker-compose-generator/crypto-definitions.json`](https://github.com/btcpayserver/btcpayserver-docker/blob/master/docker-compose-generator/crypto-definitions.json) に対象コインのエントリを追加します。
 
-### Optional extras
+### 任意の追加要素
 
-You may also include:
+必要に応じて次も追加できます。
 
-* **Expose fragment** (e.g. `opt-yourcoin-expose.yml`) - exposes RPC ports on localhost for debugging
-* **Wallet CLI scripts** (e.g. `yourcoin-wallet-cli.sh`) - convenience wrappers for accessing the wallet CLI inside the container
-* **Backup script changes** - add your coin's volumes to `btcpay-backup.sh`
+* **Expose fragment**（例: `opt-yourcoin-expose.yml`）- デバッグ用に localhost で RPC ポートを公開
+* **Wallet CLI scripts**（例: `yourcoin-wallet-cli.sh`）- コンテナ内の wallet CLI へアクセスするための補助ラッパー
+* **Backup script changes** - `btcpay-backup.sh` に対象コインのボリュームを追加
 
-## Publishing and Listing
+## 公開と掲載
 
-Once your integration is ready:
+統合の準備ができたら、次を実施します。
 
-1. **Publish your plugin** to the [BTCPay Plugin Builder](https://plugin-builder.btcpayserver.org/) so test users can install it from the BTCPay Server UI (they will need to run whatever fork of the BTCPay Server repo you developed your plugin on).
-2. **Get your Docker PR merged** into [btcpayserver-docker](https://github.com/btcpayserver/btcpayserver-docker) so users can deploy your coin's node.
-3. **Request listing** on the BTCPay Plugin Builder **only** once the Docker PR from the previous step is merged.
+1. テストユーザーが BTCPay Server UI からインストールできるよう、[BTCPay Plugin Builder](https://plugin-builder.btcpayserver.org/) に **プラグインを公開** します（ユーザーは、あなたがプラグインを開発した BTCPay Server リポジトリの fork を実行している必要があります）。
+2. ユーザーが対象コインのノードをデプロイできるよう、[btcpayserver-docker](https://github.com/btcpayserver/btcpayserver-docker) への **Docker PR をマージ** してもらいます。
+3. 前ステップの Docker PR がマージされた後にのみ、BTCPay Plugin Builder への **掲載申請** を行います。
 
 ## FAQ
 
-### How do I test my plugin locally?
+### ローカルでプラグインをテストするには？
 
-Your plugin repo should include its own `docker-compose.yml` that spins up your coin's daemon (in regtest mode), wallet RPC, and the base BTCPay dependencies (bitcoind, nbxplorer, postgres). You then run BTCPay Server from your IDE with the plugin loaded via `DEBUG_PLUGINS`.
+プラグインのリポジトリには、対象コインの daemon（regtest モード）、wallet RPC、BTCPay の基本依存関係（bitcoind、nbxplorer、postgres）を起動する専用の `docker-compose.yml` を含めるべきです。そのうえで、`DEBUG_PLUGINS` 経由でプラグインを読み込んだ状態で、IDE から BTCPay Server を実行します。
 
-See the [Monero plugin's docker-compose.yml](https://github.com/btcpay-monero/btcpayserver-monero-plugin/blob/master/BTCPayServer.Plugins.IntegrationTests/docker-compose.yml) and its [Local Development Setup](https://github.com/btcpay-monero/btcpayserver-monero-plugin#local-development-setup) for the full workflow.
+完全なワークフローは [Monero plugin's docker-compose.yml](https://github.com/btcpay-monero/btcpayserver-monero-plugin/blob/master/BTCPayServer.Plugins.IntegrationTests/docker-compose.yml) と [Local Development Setup](https://github.com/btcpay-monero/btcpayserver-monero-plugin#local-development-setup) を参照してください。
 
-### How do I test the Docker fragment for production?
+### 本番向けに Docker fragment をテストするには？
 
-Install [.NET 8.0 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) and run:
+[.NET 8.0 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) をインストールして次を実行します。
 
 ```bash
 BTCPAYGEN_CRYPTO1='YOUR-COIN'
@@ -77,8 +77,8 @@ cd docker-compose-generator/src
 dotnet run
 ```
 
-This generates your docker-compose in the `Generated` folder. Review it to verify your fragment was included correctly.
+これで `Generated` フォルダに docker-compose が生成されます。fragment が正しく含まれていることを確認してください。
 
-## Maintenance
+## メンテナンス
 
-BTCPay developers do not implement alternative coins on request. Adding a new coin depends entirely on the community and developers of those coins. BTCPay developers do not spend excessive time testing or maintaining altcoins. If you submit a PR, make sure your integration works. If it is not actively maintained, it will be removed.
+BTCPay 開発者は、依頼ベースで代替コインの実装は行いません。新しいコインの追加は、そのコインのコミュニティと開発者に完全に依存します。BTCPay 開発者は altcoin のテストや保守に多くの工数を割きません。PR を提出する場合は、統合が正しく動作することを必ず確認してください。アクティブに保守されない場合は削除されます。

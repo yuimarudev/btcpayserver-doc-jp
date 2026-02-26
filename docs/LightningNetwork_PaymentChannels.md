@@ -1,27 +1,27 @@
-# Opening and operating payment channels
+# 決済チャネルの開設と運用
 
-Given that the Lightning Network is a relatively new technology under active development, getting your freshly deployed node ready to send and receive payments, still, requires a couple of steps.
+Lightning Network は現在も活発に開発が進む比較的新しい技術であるため、新しくデプロイしたノードを送受金できる状態にするには、いくつかの手順が必要です。
 
-Overview:
+概要:
 
-1. The lightning node is deployed, enabled and its on-chain wallet is funded
-2. A peer is identified and the first payment channel is opened
-3. Inbound and outbound liquidity is acquired. The node is now able to **send** and **receive**
-4. Liquidity management, an ongoing process to maintain the capacity to **send** and **receive**
+1. ライトニングノードをデプロイして有効化し、オンチェーンウォレットに資金を入れる
+2. ピアを特定し、最初の決済チャネルを開設する
+3. インバウンド流動性とアウトバウンド流動性を確保する。これでノードは **送金** と **受取** が可能になる
+4. 流動性管理を継続する。**送金** と **受取** の能力を維持するための継続的な作業
 
-Key considerations:
+重要な考慮点:
 
-- **Choosing** the channel partner. Consider opening the first channel to a well connected peer with robust uptime. This will increase the chances for your payments to be routed and settled.
-- **Inbound** vs **outbound** capacity. Outbound capacity allows nodes to **send** payments whereas inbound capacity allows nodes to **receive** payments. As a merchant using lightning, having inbound capacity is essential for customers to be able to pay you.
-- **Inbound capacity**. A node adds inbound capacity by either spending sats from its local balance or having other nodes in the network open channels to it.
-- **Liquidity management**: maintaining the ability to send and receive is a continous process where a balance between inbound vs outbound capacity has to be maintained across payment channels. This capacity distribution must be adjusted depending upon the use case of the node operator.
-- **Lightning Service Providers**: LSPs offer paid third-party services that improve the ease of operating a lightning network node. Such services can be used to acquire inbound capacity or to automate the rebalancing process.
+- **チャネル相手の選定**。最初のチャネルは、接続性が高く稼働率の高いピアに開くことを検討してください。支払いがルーティングされ、決済される可能性が高まります。
+- **インバウンド** と **アウトバウンド** の容量。アウトバウンド容量はノードが支払いを **送金** するために必要で、インバウンド容量は支払いを **受取** するために必要です。ライトニングを使う加盟店にとって、顧客が支払えるようにするにはインバウンド容量が不可欠です。
+- **インバウンド容量**。ノードは、ローカル残高から sats を使うか、ネットワーク内の他ノードにチャネルを開いてもらうことで、インバウンド容量を増やせます。
+- **流動性管理**: 送受金能力を維持するには継続的な調整が必要であり、決済チャネル全体でインバウンド容量とアウトバウンド容量のバランスを保つ必要があります。この容量配分は、ノード運用者のユースケースに応じて調整する必要があります。
+- **Lightning Service Providers**: LSP は、ライトニングノード運用を容易にする有償のサードパーティサービスを提供します。これらのサービスは、インバウンド容量の確保やリバランス自動化に利用できます。
 
-Below a set of good resources for a deeper dive into topics such as:
+以下は、次のようなトピックをより深く理解するための参考リソースです:
 
-- [Good peers on the LN](https://docs.lightning.engineering/the-lightning-network/the-gossip-network/identify-good-peers)
-- [Lightning node types](https://bitcoin.design/guide/how-it-works/nodes/#lightning-nodes)
-- [What is Lightning liquidity?](https://bitcoin.design/guide/how-it-works/liquidity/)
-- [How to get inbound capacity?](https://lightningnetwork.plus/posts/234)
-- [How to manage liquidity?](https://docs.lightning.engineering/the-lightning-network/liquidity/manage-liquidity#rebalancing-channels)
-- [Lightning service providers (LSP)](https://bitcoin.design/guide/how-it-works/lightning-services/)
+- [LN における良いピア](https://docs.lightning.engineering/the-lightning-network/the-gossip-network/identify-good-peers)
+- [Lightning ノードの種類](https://bitcoin.design/guide/how-it-works/nodes/#lightning-nodes)
+- [Lightning の流動性とは？](https://bitcoin.design/guide/how-it-works/liquidity/)
+- [インバウンド容量を確保するには？](https://lightningnetwork.plus/posts/234)
+- [流動性を管理するには？](https://docs.lightning.engineering/the-lightning-network/liquidity/manage-liquidity#rebalancing-channels)
+- [Lightning サービスプロバイダー (LSP)](https://bitcoin.design/guide/how-it-works/lightning-services/)

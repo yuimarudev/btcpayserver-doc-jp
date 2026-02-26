@@ -1,78 +1,78 @@
-# Translating BTCPay Server
+# BTCPay Server の翻訳
 
 [[toc]]
 
-## Why translations matter
+## 翻訳が重要な理由
 
-Translating BTCPay Server into multiple languages lets us reach a broader user base for the software and also decreases friction in the invoice checkout for customers that might not understand English perfectly.
+BTCPay Server を複数言語に翻訳すると、より幅広いユーザーにソフトウェアを届けられます。また、英語を十分に理解できない顧客にとって、請求書チェックアウト時の摩擦を減らせます。
 
-## Requirements
+## 要件
 
-BTCPay Server uses a translation platform called Transifex to allow contributors to translate it into more languages.
+BTCPay Server では、より多くの言語への翻訳を可能にするため、Transifex という翻訳プラットフォームを使用しています。
 
-The community is currently working on translating the [invoice checkout page](https://www.transifex.com/btcpayserver/btcpayserver/dashboard/) and the [official website](https://www.transifex.com/btcpayserver/btcpayserver-website/dashboard/).
+コミュニティは現在、[請求書チェックアウトページ](https://www.transifex.com/btcpayserver/btcpayserver/dashboard/)と[公式ウェブサイト](https://www.transifex.com/btcpayserver/btcpayserver-website/dashboard/)の翻訳に取り組んでいます。
 
-After a translation has been made on Transifex, the submittal process is completely automated and merged periodically into the BTCPay repository. Translations provided outside of Transifex, such as pull requests in Github will not be accepted.
+Transifex で翻訳が行われた後、提出プロセスは完全に自動化され、定期的に BTCPay リポジトリへマージされます。Github の pull request など、Transifex 以外で提供された翻訳は受け付けられません。
 
 ---
 
-## Step 1: View Existing Translations
+## ステップ 1: 既存の翻訳を確認する
 
-First verify the language translation you would like to complete has not been started already. If it has already been started, you can complete the remaining strings. If you don't see the language you are looking for, make a request to add it to the project and to be a translator for it.
+まず、作業したい言語の翻訳がすでに開始されていないか確認します。すでに開始されている場合は、残りの文字列を翻訳できます。目的の言語が見つからない場合は、プロジェクトへの追加と、その言語の翻訳者権限をリクエストしてください。
 
-## Step 2: Start New Translation
+## ステップ 2: 新しい翻訳を開始する
 
-Look for the language you would like to translate. Some languages have the option for several regions. If your language request was denied, the reason is likely that the language is already being translated.
+翻訳したい言語を探します。言語によっては複数地域向けの選択肢があります。言語リクエストが拒否された場合、理由はその言語の翻訳がすでに進行中である可能性が高いです。
 
-## Step 3: Translation
+## ステップ 3: 翻訳する
 
-Line 1: Translate your Country-Code.
+1 行目: あなたの国コードを翻訳します。
 
-    Example for Brazilian Portuguese
-     'en' translates to 'pt-BR'
+    ブラジル・ポルトガル語の例
+     'en' は 'pt-BR' に翻訳されます
 
-Line 2: The name of your language, in your language.
+2 行目: あなたの言語名を、その言語で記載します。
 
 :::tip
-This is the language name that will appear in user interface language dropdowns.
+これは、ユーザーインターフェースの言語ドロップダウンに表示される言語名です。
 :::
-Example for French
-'English' translates to 'Français'
+フランス語の例
+'English' は 'Français' に翻訳されます
 
 ---
 
-## Translation Tips
+## 翻訳のヒント
 
-### **Variables**
-
-```
-{{Words}} like this will be replaced by a variable depending on user choices.
-{{btcDue}} Example: 10
-{{cryptoCode}} Example: BTC
-```
-
-They should not be translated, but they need to remain in the correct place in your translated string because their placement will vary by language.
+### **変数**
 
 ```
-French Example:
-"Return to StoreName" translates to "Retourner sur {{storeName}}"
-
-Japanese Example:
-"Return to StoreName" translates to "{{storeName}} に戻る"
+{{Words}} のような部分は、ユーザーの選択に応じて変数に置き換えられます。
+{{btcDue}} 例: 10
+{{cryptoCode}} 例: BTC
 ```
 
-### **Notifications**
+これらは翻訳してはいけません。ただし、言語によって位置が変わるため、翻訳後の文字列でも正しい位置に残す必要があります。
 
-To stay up to date with new strings - enable alerts for new strings needing to be translated by enabling the watch language feature in Transifex.
+```
+フランス語の例:
+"Return to StoreName" は "Retourner sur {{storeName}}" に翻訳されます
 
-Click on the "eye" icon (in red in the following screenshot).
+日本語の例:
+"Return to StoreName" は "{{storeName}} に戻る" に翻訳されます
+```
+
+### **通知**
+
+新しい文字列に追従するには、Transifex の言語ウォッチ機能を有効にして、未翻訳の新規文字列に対するアラートを有効化してください。
+
+「目」アイコン（下記スクリーンショットの赤枠）をクリックします。
 
 ![Transifex Alerts](../img/transifex-alert.png)
 
-You have to click it for the each project you wish to follow.
+追従したい各プロジェクトごとに、この操作を行う必要があります。
 
 ---
 
-## Get help, ask questions
+## ヘルプ・質問
 
-If you have any questions about translating, join the [#Translations channel](https://chat.btcpayserver.org/btcpayserver/channels/translations) on Mattermost.
+翻訳について質問がある場合は、Mattermost の [#Translations channel](https://chat.btcpayserver.org/btcpayserver/channels/translations) に参加してください。

@@ -1,21 +1,47 @@
-# Server Settings FAQ
+<!-- legacy-anchor-aliases -->
+<span id="files"></span>
+<span id="forgot-btcpay-admin-password"></span>
+<span id="how-can-i-check-my-btcpay-server-version-via-terminal"></span>
+<span id="how-can-i-see-my-btcpay-version"></span>
+<span id="how-to-add-a-new-user-by-invite"></span>
+<span id="how-to-add-google-analytics-code-to-btcpay"></span>
+<span id="how-to-allow-registration-on-my-btcpay-server"></span>
+<span id="how-to-configure-smtp-settings-in-btcpay"></span>
+<span id="how-to-customize-my-btcpay-theme-style"></span>
+<span id="how-to-disable-u2f-and-2fa-for-a-user"></span>
+<span id="how-to-hide-my-btcpay-server-from-search-engines"></span>
+<span id="how-to-modify-the-checkout-page"></span>
+<span id="how-to-remotely-connect-to-my-btcpay-full-node"></span>
+<span id="how-to-restart-btcpay-server"></span>
+<span id="how-to-ssh-into-my-btcpay-running-on-vps"></span>
+<span id="how-to-update-btcpay-server"></span>
+<span id="how-to-upload-files-to-btcpay"></span>
+<span id="maintainance"></span>
+<span id="policies"></span>
+<span id="services"></span>
+<span id="theme-customization"></span>
+<span id="what-is-btcpay-ssh-key-file"></span>
+<span id="error-maintenance-feature-requires-access-to-SSH-properly-configured-in-btcpayserver-configuration"></span>
+<!-- /legacy-anchor-aliases -->
 
-This document covers all the questions and issues related to Server Settings.
-These settings are only available to the server admin. Take a look at the [walkthrough page](../Walkthrough.md) to learn more.
+# サーバー設定 FAQ
+
+このドキュメントでは、サーバー設定に関する質問と問題を扱います。
+これらの設定はサーバー管理者のみが利用できます。詳細は[ウォークスルーページ](../Walkthrough.md)を参照してください。
 
 [[toc]]
 
-## Maintenance
+## メンテナンス
 
-### How to update BTCPay Server?
+### BTCPay Server を更新するには？
 
-There are 2 ways to update your BTCPay Server:
+BTCPay Server を更新する方法は2つあります。
 
-1. Updating in the user interface: Server Settings > Maintenance > Update.
+1. ユーザーインターフェースから更新: Server Settings > Maintenance > Update
 
 ![Updating BTCPay Server](../img/HowToUpdateBTCPayServer.png)
 
-2. Updating using SSH: Login into your virtual machine with ssh, then apply following commands:
+2. SSH で更新: `ssh` で仮想マシンにログインし、次のコマンドを実行します。
 
 ```bash
 sudo su -
@@ -23,15 +49,15 @@ cd btcpayserver-docker
 btcpay-update.sh
 ```
 
-### How to restart BTCPay Server?
+### BTCPay Server を再起動するには？
 
-There are 2 ways to restart your BTCPay Server:
+BTCPay Server を再起動する方法は2つあります。
 
-1. Restarting in the user interface: Server Settings > Maintenance > Restart.
+1. ユーザーインターフェースから再起動: Server Settings > Maintenance > Restart
 
 ![Restarting BTCPay Server](../img/HowToRestartBTCPayServer.png)
 
-2. Restarting using SSH: Login into your virtual machine with ssh, then apply following commands:
+2. SSH で再起動: `ssh` で仮想マシンにログインし、次のコマンドを実行します。
 
 ```bash
 sudo su -
@@ -39,9 +65,9 @@ cd btcpayserver-docker
 btcpay-restart.sh
 ```
 
-### How to SSH into my BTCPay running on VPS?
+### VPS 上で動作する BTCPay に SSH 接続するには？
 
-Follow these instructions to SSH via domain or IP:
+ドメインまたは IP で SSH 接続するには、次を実行します。
 
 ```
 ssh domainuser@example.com (domain)
@@ -52,9 +78,9 @@ domainuser@example.com's password:
 yourPassword
 ```
 
-Press Enter
+Enter キーを押します。
 
-If this is your first time connecting to the server from this computer, you will see the following output.
+このコンピューターからサーバーへ初回接続する場合、次の出力が表示されます。
 
 ```
 The authenticity of host 'example.com (70.32.86.175)' can't be established.
@@ -64,51 +90,51 @@ Are you sure you want to continue connecting (yes/no)?
 yes
 ```
 
-Or see this [LunaNode example](https://github.com/JeffVandrewJr/patron/blob/master/SSH.md) with PuTTY.
+または、PuTTY を使ったこの [LunaNode example](https://github.com/JeffVandrewJr/patron/blob/master/SSH.md) を参照してください。
 
-### How to see, as an admin, what's running on my BTCPay Server?
+### 管理者として、BTCPay Server 上で何が動いているか確認するには？
 
-You need to SSH into your BTCPay Server, and run a single line to see the list of `apps` in the system:
+BTCPay Server に SSH 接続し、次の1行でシステム内の `apps` 一覧を確認できます。
 
 ```
 docker exec -ti $(docker ps -a -q -f "name=postgres_1") psql -U postgres -d btcpayservermainnet -c 'select "Name" from "Apps";'
 ```
 
-This to see the list of `stores` and their websites:
+`stores` とその Web サイトの一覧を確認するには次を実行します。
 
 ```
 docker exec -ti $(docker ps -a -q -f "name=postgres_1") psql -U postgres -d btcpayservermainnet -c 'select "StoreName","StoreWebsite" from "Stores";'
 ```
 
-You can also run this to see the users list:
+ユーザー一覧を表示するには次を実行します。
 
 ```
 docker exec -ti $(docker ps -a -q -f "name=postgres_1") psql -U postgres -d btcpayservermainnet -c 'select "Id", "Email" from "AspNetUsers";'
 ```
 
-### How can I see my BTCPay Server version?
+### BTCPay Server のバージョンを確認するには？
 
-You can see your BTCPay Server version in the **bottom right of the page footer** when you're logged in as a server admin.
+サーバー管理者としてログインしているとき、**ページフッター右下**で BTCPay Server のバージョンを確認できます。
 
-Deployments using v1.0.5.7 and later will automatically receive notifications to alert when a new BTCPay Server version has been released.
+v1.0.5.7 以降のデプロイでは、新しい BTCPay Server バージョンがリリースされると通知が自動表示されます。
 
 ![Version](../img/notifications/notification-version.png)
 
-Note: This feature will automatically set the `BTCPAY_UPDATEURL` environment variable in the BTCPay Server container to make a single daily request to [this Github endpoint](https://api.github.com/repos/btcpayserver/btcpayserver/releases/latest). Server admins can disable these notifications by disabling the policy in Server Settings > Policies > Check releases on GitHub.
+注: この機能は BTCPay Server コンテナー内で `BTCPAY_UPDATEURL` 環境変数を自動設定し、1日1回 [this Github endpoint](https://api.github.com/repos/btcpayserver/btcpayserver/releases/latest) にリクエストします。サーバー管理者は Server Settings > Policies > Check releases on GitHub のポリシーを無効化することで、この通知を無効にできます。
 
-### How can I check my BTCPay Server version via terminal?
+### ターミナルで BTCPay Server のバージョンを確認するには？
 
-In the btcpayserver-docker folder: `bitcoin-cli.sh getnetworkinfo`
+`btcpayserver-docker` フォルダーで次を実行します: `bitcoin-cli.sh getnetworkinfo`
 
-### What is BTCPay SSH key file?
+### BTCPay SSH key file とは？
 
-BTCPay SSH key, enables users to update their server or quickly change the domain name from btcpay website, via the user interface.
+BTCPay SSH key を使うと、ユーザーインターフェースからサーバー更新やドメイン名変更を素早く行えます。
 
-### Forgot BTCPay Admin password?
+### BTCPay 管理者パスワードを忘れた場合は？
 
-First, register a new user on your BTCPay Server, by clicking "Register", for example: "newadmin@example.com".
+まず、BTCPay Server で「Register」をクリックして新規ユーザーを登録します。例: `newadmin@example.com`
 
-If you can't create a new user because registrations are disabled in your Server Settings > Policies, you need to reset the policies settings. Please skip this step if you can create a new user on the front-end home page using the register button. Run the following command (It also deletes any other server settings currently being used):
+Server Settings > Policies で登録が無効化されていて新規ユーザーを作成できない場合は、ポリシー設定をリセットする必要があります。フロントページの Register ボタンでユーザー作成できる場合、この手順は不要です。次のコマンドを実行してください（現在使われている他のサーバー設定も削除されます）。
 
 ```bash
 # In root
@@ -118,32 +144,32 @@ cd $BTCPAY_BASE_DIRECTORY/btcpayserver-docker/
 ./btcpay-admin.sh reset-server-policy
 ```
 
-Head back to your BTCPay Server and click on the "Register" button which should now be enabled. In case you don't see the Register link in the menu, that's probably because of the caching. Restart your btcpay with `btcpay-restart.sh`.
+BTCPay Server に戻り、有効化された「Register」ボタンをクリックします。メニューに Register リンクが出ない場合はキャッシュが原因の可能性があります。`btcpay-restart.sh` で再起動してください。
 
-Next, add the newly registered user `newadmin@example.com` as an admin:
+次に、新規登録したユーザー `newadmin@example.com` を管理者に追加します。
 
 ```bash
 # Set new user as admin
 ./btcpay-admin.sh set-user-admin newadmin@example.com
 ```
 
-Now you can access using `newadmin@example.com` as admin.
+これで `newadmin@example.com` を管理者として利用できます。
 
-Note that if you were already logged in with the user prior to making it an admin, you'll have to log-out and log-in again.
+管理者化する前にそのユーザーでログイン済みだった場合は、一度ログアウトして再ログインが必要です。
 
-After applying the changes, you’ll notice the newly created admin user isn't automatically added to any stores. If your BTCPayServer version is 2.0 or newer, you can manually add the new server admin to the stores. For older versions of BTCPayServer, you can regain access to the old server admin account (and thus stores) by either configuring SMTP to send a password reset email or by using the [**Admin Pass Reset** plugin from R0ckstar Dev](https://github.com/rockstardev/BTCPayServerPlugins.RockstarDev/tree/master/Plugins/BTCPayServer.RockstarDev.Plugins.AdminPassReset).
+変更適用後、新しく作成した管理者ユーザーは自動的にはどのストアにも追加されません。BTCPayServer 2.0 以降なら新しいサーバー管理者を手動でストアに追加できます。古いバージョンでは、SMTP を設定してパスワードリセットメールを送るか、[R0ckstar Dev の **Admin Pass Reset** plugin](https://github.com/rockstardev/BTCPayServerPlugins.RockstarDev/tree/master/Plugins/BTCPayServer.RockstarDev.Plugins.AdminPassReset) を使うことで旧サーバー管理者アカウント（およびストア）へのアクセスを復旧できます。
 
-### How to add a new user by invite?
+### 招待で新規ユーザーを追加するには？
 
-Server admins can add new users by creating an invite link to share with them. This can allow admins to disable public registration on the server, or to invite specific users by clicking: Server Settings > Add User (do not provide password) > Create account
+サーバー管理者は共有用の招待リンクを作成して新規ユーザーを追加できます。これによりサーバーで公開登録を無効化したまま、特定ユーザーのみを招待できます。操作は Server Settings > Add User (do not provide password) > Create account です。
 
 ![Invite User](../img/InviteUser.png)
 
-A shareable link will be displayed for the server admin to distribute. An email will be sent (if email is [configured on the server](#how-to-configure-smtp-settings-in-btcpay) to set the password. The new user will create a password upon first visit to the invite link.
+管理者が配布できる共有リンクが表示されます。パスワード設定用メールも送信されます（メールが[サーバーで設定済み](#how-to-configure-smtp-settings-in-btcpay)の場合）。新規ユーザーは招待リンクへの初回アクセス時にパスワードを作成します。
 
-### How to disable U2F and 2FA for a user?
+### ユーザーの U2F と 2FA を無効化するには？
 
-Remove U2F and 2FA settings for a registered user, for example `user@example.com` with the following commands:
+登録済みユーザー（例: `user@example.com`）の U2F/2FA 設定を削除するには、次のコマンドを実行します。
 
 ```bash
 # In root
@@ -153,11 +179,11 @@ cd $BTCPAY_BASE_DIRECTORY/btcpayserver-docker/
 ./btcpay-admin.sh disable-multifactor user@example.com
 ```
 
-### How to configure SMTP settings in BTCPay?
+### BTCPay で SMTP 設定を行うには？
 
-SMTP can be configured in settings for each store. It can also be configured for the entire server if you have admin privileges.
+SMTP は各ストア設定で構成できます。管理者権限があればサーバー全体にも設定できます。
 
-Each e-mail provider has different configuration, so we can't provide you with exact setup, but here's the configuration for gmail:
+メールプロバイダーごとに設定が異なるため正確な値は案内できませんが、以下は Gmail の例です。
 
 ```
 SMTP Host: smtp.gmail.com
@@ -168,27 +194,27 @@ SMTP Username: (your Gmail username)
 SMTP Password: (your Gmail password)
 ```
 
-For gmail it's important to allow access from less secure apps. To enable go to: Manage Your Google Account > Security > Allow Less Secure Apps (On). Also note Google may automatically turn off this setting if it’s not being used. If your smtp has stopped working, check this setting is not off.
+Gmail では安全性の低いアプリからのアクセス許可が重要です。有効化は Manage Your Google Account > Security > Allow Less Secure Apps (On) です。この設定は未使用時に Google 側で自動的にオフになることがあります。SMTP が急に動かない場合はこの設定を確認してください。
 
-If by any chance you have 2-step verification added to your gmail account, [visit this article](https://support.google.com/mail/answer/185833).
+Gmail アカウントで 2 段階認証を使っている場合は、[こちらの記事](https://support.google.com/mail/answer/185833)を参照してください。
 
-Use the test email feature in BTCPay to verify your emails are being sent properly. If you are seeking a more reliable smtp service for your business needs, consider using a dedicated mail service like Mailgun.
+BTCPay のテストメール機能で、メール送信が正常か確認してください。業務用途でより信頼性の高い SMTP を求める場合は、Mailgun のような専用メールサービスの利用を検討してください。
 
 Maintenance feature requires access to SSH properly configured in BTCPayServer configuration
 
 ### Error: Maintenance feature requires access to SSH properly configured in BTCPayServer configuration
 
-Sometimes an issue with Docker can temporarily cause your BTCPay Server's maintenance features to be misconfigured. This issue is typically fixed by restarting your BTCPay Server. Unfortunately when this error appears in the interface, the restart button will be disabled. You will need to [restart using ssh](FAQ-ServerSettings.md#how-to-restart-btcpay-server) to resolve the issue.
+Docker の問題により、BTCPay Server のメンテナンス機能設定が一時的に壊れる場合があります。通常は BTCPay Server を再起動すると解消します。ただしこのエラーが UI に表示されると再起動ボタンが無効になります。解決には [ssh で再起動](#how-to-restart-btcpay-server) してください。
 
 ### Error: Your local changes to the following files would be overwritten by merge
 
-Sometimes, an accidentally edited file can break the update mechanism with the following error:
+誤ってファイルを編集してしまうと、次のエラーで更新機構が壊れる場合があります。
 
 ```bash
 error: Your local changes to the following files would be overwritten by merge:
 ```
 
-To fix the this, [ssh into your server](#how-to-ssh-into-my-btcpay-running-on-vps) and run the following commands:
+これを修正するには、[サーバーへ ssh 接続](#how-to-ssh-into-my-btcpay-running-on-vps) して次を実行します。
 
 ```bash
 sudo su -
@@ -198,19 +224,19 @@ git reset --hard origin/master
 
 ### Error: BTCPAY_SSHKEYFILE is not set when running the docker install, or unable to update through Server Settings / Maintenance
 
-You may see such the following message when you run your docker-compose (either via `btcpay-up.sh` or `btcpay-setup.sh`):
+`docker-compose` 実行時（`btcpay-up.sh` または `btcpay-setup.sh`）に、次のようなメッセージが表示されることがあります。
 
 ```bash
 WARNING: The BTCPAY_SSHKEYFILE variable is not set. Defaulting to a blank string.
 WARNING: The BTCPAY_SSHTRUSTEDFINGERPRINTS variable is not set. Defaulting to a blank string.
 ```
 
-`BTCPay Server` requires SSH access, to allow you to perform the following tasks from the front-end:
+`BTCPay Server` は、フロントエンドから次の操作を行うために SSH アクセスを必要とします。
 
-- Updating the server
-- Changing the domain name of the server
+- サーバー更新
+- サーバーのドメイン名変更
 
-You can run the following command line to give access to BTCPay to your server via SSH.
+次のコマンドで、SSH 経由のサーバーアクセスを BTCPay に付与できます。
 
 ```bash
 sudo su -
@@ -227,52 +253,52 @@ BTCPAY_HOST_SSHKEYFILE=/root/.ssh/id_rsa_btcpay
 . ./btcpay-setup.sh -i
 ```
 
-## Theme / Customization
+## テーマ / カスタマイズ
 
-### How to customize my BTCPay theme style?
+### BTCPay テーマスタイルをカスタマイズするには？
 
-There are two ways to customize the theme of your BTCPay.
-The easy way is to choose or provide custom theme preferences in your BTCPay as explained in the [Theme documentation](../Development/Theme.md).
+BTCPay のテーマをカスタマイズする方法は2つあります。
+簡単な方法は、[Theme documentation](../Development/Theme.md) にある通り、BTCPay 側でカスタムテーマ設定を選択または指定することです。
 
-For advanced theme changes, you'll most likely need to fork BTCPay repository and apply desired design changes. Build and publish the docker image to Docker Hub. Set the `BTCPAY_IMAGE` environment variable to your docker image tag(`export BTCPAY_IMAGE="your custom btcpay docker image"`) and run the setup (`. ./btcpay-setup.sh -i`) as usual from [BTCPay Docker](https://github.com/btcpayserver/btcpayserver-docker). Modify generated docker compose to use your custom docker image.
+より高度なテーマ変更では、BTCPay リポジトリを fork してデザイン変更を適用する必要が出ることが多いです。Docker イメージをビルドして Docker Hub に公開し、`BTCPAY_IMAGE` 環境変数をあなたのイメージタグに設定（`export BTCPAY_IMAGE="your custom btcpay docker image"`）して、[BTCPay Docker](https://github.com/btcpayserver/btcpayserver-docker) で通常通りセットアップ（`. ./btcpay-setup.sh -i`）を実行します。生成された docker compose を、カスタムイメージを使うように修正してください。
 
 :::warning
-A forked BTCPay Server will need to create a new image manually and follow these steps for EACH BTCPay update so it is advised to stick with the default setup and theme options.
+fork した BTCPay Server では、BTCPay の更新ごとに新しいイメージを手動作成して同じ手順を毎回実施する必要があります。基本的にはデフォルト設定とテーマオプションを使うことを推奨します。
 :::
 
-### How to modify the checkout page?
+### チェックアウトページを変更するには？
 
-You can easily change the appearance of your BTCPay's checkout page by following the [instructions here](../Development/Theme.md#checkout-page-theme)
+BTCPay のチェックアウトページの見た目は、[instructions here](../Development/Theme.md#checkout-page-theme) に従うことで簡単に変更できます。
 
-### How to add Google Analytics code to BTCPay?
+### BTCPay に Google Analytics コードを追加するには？
 
-You should be able to do what you want by injecting your GA code to `~/wwwroot/checkout/js/core.js.` This might be the easiest way but you have to redo it every time you update BTCPay to the latest version. Then you won’t have the hassle of forking the code, deploying it manually. Every time there is an update. Just do the docker update and add the same lines to the .js file.
+`~/wwwroot/checkout/js/core.js.` に GA コードを埋め込むことで実現できます。これは最も簡単な方法ですが、BTCPay を更新するたびに再適用が必要です。コードを fork して手動デプロイする手間は省けます。更新のたびに Docker 更新後、同じ行を `.js` ファイルへ再追加してください。
 
-## Policies
+## ポリシー
 
-### How to allow registration on my BTCPay Server?
+### BTCPay Server で登録を許可するには？
 
-To allow other users to register and use your server, in Server Settings > Policies enable registration. If you [configured SMTP properly](FAQ-ServerSettings.md#how-to-configure-smtp-settings-in-btcpay), you can request users to provide e-mail confirmation to prevent spam or bots from registering on your instance.
+他ユーザーにサーバー登録と利用を許可するには、Server Settings > Policies で registration を有効化します。SMTP を[正しく設定済み](#how-to-configure-smtp-settings-in-btcpay)であれば、スパムやボット登録を防ぐためにメール確認を要求できます。
 
-### How to hide my BTCPay Server from Search Engines?
+### 検索エンジンに BTCPay Server を表示させないには？
 
-Discouraging search engines from indexing your site in Server Settings > Policies, adds `<meta name="robots" content="noindex">` to your server header, which informs search engines not to index your pages.
+Server Settings > Policies でサイトのインデックスを抑制すると、サーバーヘッダーに `<meta name="robots" content="noindex">` が追加され、検索エンジンにインデックスしないよう通知できます。
 
-It is up to search engines to honor this request, and may take time for your pages to disappear completely. Unfortunately, the exact time is beyond our control, it depends on crawl bots of the particular search engine like Google.
+このリクエストを実際に反映するかは検索エンジン側に依存し、ページが完全に検索結果から消えるまで時間がかかる場合があります。正確な反映時期は制御できず、Google など各検索エンジンのクローラーボットに依存します。
 
-## Services
+## サービス
 
-### How to remotely connect to my BTCPay full node?
+### BTCPay フルノードへリモート接続するには？
 
-If you're using an external wallet which allows BTC-P2P connection, you can easily connect it to your BTCPay full node. By doing this, you avoid leaking information to third-party servers and are solely relying on your own full node.
-To connect to a compatible BTC-P2P wallet, go to **Server Settings > Services > Full node P2P** Reveal the QR code and scan it with a BTC-P2P compatible wallet, or input it by copy-pasting it.
+BTC-P2P 接続に対応した外部ウォレットを使っている場合、BTCPay フルノードへ簡単に接続できます。これにより、第三者サーバーへの情報漏えいを避け、自分のフルノードのみに依存できます。
+対応する BTC-P2P ウォレットを接続するには、**Server Settings > Services > Full node P2P** で QR コードを表示し、ウォレットで読み取るか、コピー＆ペーストで入力してください。
 
 ![BTC-P2P](../img/BTC-P2P.png)
 
-If you do not see Full node P2P in your Services, you probably have to [activate Tor on your server](FAQ-Deployment.md#how-do-i-activate-tor-on-my-btcpay-server).
+Services に Full node P2P が表示されない場合は、[サーバーで Tor を有効化](./Deployment.md#how-do-i-activate-tor-on-my-btcpay-server)する必要がある可能性があります。
 
-## Files
+## ファイル
 
-### How to upload files to BTCPay?
+### BTCPay にファイルをアップロードするには？
 
-To upload files to your BTCPay Server instance, first under Server Settings > Services, enable the External Storage feature and choose which storage service provider you would like to use. Next, go to Server Settings > Files to browse and upload local files. Depending on the limitations of your storage system, you may have difficulty uploading large files.
+BTCPay Server インスタンスにファイルをアップロードするには、まず Server Settings > Services で External Storage を有効化し、利用するストレージプロバイダーを選択します。次に Server Settings > Files でローカルファイルを参照・アップロードします。ストレージシステムの制限によっては、大きなファイルのアップロードが難しい場合があります。

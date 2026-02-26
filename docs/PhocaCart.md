@@ -1,11 +1,11 @@
-# Phoca Cart integration for Joomla 4 and 5
+# Joomla 4 と 5 向け Phoca Cart 統合
 
 :::warning
-Please be aware that this integration is not maintained by the BTCPay Server team. If you have any questions, please go to their [GitHub issues](https://github.com/Jacquesvw/PhocaCart-BtcpayServer-Plugin/issues) to report a problem or get support.
+この統合は BTCPay Server チームによって保守されていません。質問がある場合は、問題報告やサポートのために [GitHub issues](https://github.com/Jacquesvw/PhocaCart-BtcpayServer-Plugin/issues) を利用してください。
 :::
 
-## Installation instructions and download
+## インストール手順とダウンロード
 
-- [Installation instructions on GitHub](https://github.com/Jacquesvw/PhocaCart-BtcpayServer-Plugin/blob/main/docs/INSTRUCTIONS.md)
-- [Download from GitHub](https://github.com/Jacquesvw/PhocaCart-BtcpayServer-Plugin) or
-- Install via [Joomla Extension Manager](https://extensions.joomla.org/extension/phoca-cart-btcpay/)
+- [GitHub 上のインストール手順](https://github.com/Jacquesvw/PhocaCart-BtcpayServer-Plugin/blob/main/docs/INSTRUCTIONS.md)
+- [GitHub からダウンロード](https://github.com/Jacquesvw/PhocaCart-BtcpayServer-Plugin) または
+- [Joomla Extension Manager](https://extensions.joomla.org/extension/phoca-cart-btcpay/) からインストール

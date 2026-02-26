@@ -1,129 +1,129 @@
-# MultiSig support in BTCPay Server
+# BTCPay Server のマルチシグ対応
 
-BTCPay Server v2.1.0 introduced refined support for multi signature (multisig) wallets designed to empower your setup with added security, collaboration, and flexibility.
+BTCPay Server v2.1.0 では、セキュリティ、共同運用、柔軟性をさらに高めるために設計されたマルチシグネチャ（multisig）ウォレットのサポートが強化されました。
 
-This document provides step-by-step instructions for configuring and utilizing multisig wallets within your BTCPay Server instance.
+このドキュメントでは、BTCPay Server インスタンス内でマルチシグウォレットを設定して利用する手順を、ステップごとに説明します。
 
-[![Refined Multi-Sig in BTCPay Server using XPUB Extractor](https://img.youtube.com/vi/V95pLvVTAqM/mqdefault.jpg)](https://www.youtube.com/watch?v=V95pLvVTAqM)
+[![XPUB Extractor を使った BTCPay Server の強化マルチシグ](https://img.youtube.com/vi/V95pLvVTAqM/mqdefault.jpg)](https://www.youtube.com/watch?v=V95pLvVTAqM)
 
-## Overview
+## 概要
 
-Multisig functionality in BTCPay Server enables:
+BTCPay Server のマルチシグ機能により、次のことが可能になります。
 
-- **Collaborative custody**: Create a wallet that requires multiple signatures to authorize broadcast a transaction.
-- **Self-hosted multisig coordination**: Shared control of company’s public keys and signing flow without relying on a third-party.
-- **Hardware wallet support**: Works seamlessly with the BTCPay Vault and is compatible with majority hardware signing devices allowing you to authorize a transaction with a hardware wallet.
-- **Notification system**: Stay informed with email alerts when transactions are created, pending, (requiring sufficient amount of signatures), and broadcasted.
-- **Integration with plugins**: Works with Vendor Pay and future features, enabling multisig-based payouts. Integrates with Xpub Extractor, allowing all multisig participants to easily get appropriate format
+- **共同保管**: トランザクションのブロードキャスト承認に複数の署名を必要とするウォレットを作成できます。
+- **セルフホスト型マルチシグ調整**: 企業の公開鍵管理と署名フローを、第三者サービスに依存せず共有管理できます。
+- **ハードウェアウォレット対応**: BTCPay Vault とシームレスに連携し、多数のハードウェア署名デバイスと互換性があります。ハードウェアウォレットでトランザクションを承認できます。
+- **通知システム**: トランザクションが作成されたとき、保留中（必要署名数が不足）になったとき、ブロードキャストされたときにメール通知を受け取れます。
+- **プラグイン連携**: Vendor Pay や今後の機能と連携し、マルチシグベースの payout を実現します。Xpub Extractor との連携により、マルチシグ参加者全員が適切な形式の情報を簡単に取得できます。
 
-## Prerequisites
+## 前提条件
 
-Ensure the following components are installed and configured:
+次のコンポーネントがインストールおよび設定されていることを確認してください。
 
-- BTCPay Server instance (v2.1 or later)
+- BTCPay Server インスタンス（v2.1 以降）
 - [BTCPay Vault](https://github.com/btcpayserver/BTCPayServer.Vault)
-- [XpubExtractor Plugin](https://github.com/btcpayserver/BTCPayServer.Plugins.XpubExtractor) (if you're setting up hardware wallet)
+- [XpubExtractor Plugin](https://github.com/btcpayserver/BTCPayServer.Plugins.XpubExtractor)（ハードウェアウォレットをセットアップする場合）
 
-## Step 1: Collect Extended Public Keys
+## Step 1: 拡張公開鍵を収集する
 
-The following explains how to get required public key from the [hardware wallet](https://docs.btcpayserver.org/HardwareWalletIntegration/). If you're using software wallet, you can proceed to step 2.
+以下では [hardware wallet](https://docs.btcpayserver.org/HardwareWalletIntegration/) から必要な公開鍵を取得する方法を説明します。ソフトウェアウォレットを使用する場合は Step 2 に進んでください。
 
-1. Navigate to `Manage Plugins` and confirm that **XpubExtractor** is installed and published by *RockstarDev*.
-2. Connect the hardware wallet and launch [BTCPay Vault](http://docs.btcpayserver.org/HardwareWalletIntegration/).
-3. Use the `Fetch Xpub` function to retrieve:
-   - Extended public key (xpub)
+1. `Manage Plugins` に移動し、**XpubExtractor** がインストール済みで、公開元が *RockstarDev* であることを確認します。
+2. ハードウェアウォレットを接続し、[BTCPay Vault](http://docs.btcpayserver.org/HardwareWalletIntegration/) を起動します。
+3. `Fetch Xpub` 機能を使って次の情報を取得します。
+   - 拡張公開鍵（xpub）
    - Root fingerprint
    - Derivation path
-4. Save data for the wallet.
+4. ウォレット用のデータを保存します。
 
-Example value:
+値の例:
 
 ```
 xpub6CUGRUonZSQ4TWtTMmzXdrXDtypWKiKp5KUMRmD9YgoWDbEVpLFgje71pRAVBPX6DCmV9HNTLr8GHqKZANvNcFpSZe3kiKsH5Ej7ApG1NVDK
 Root Fingerprint: abcdef21
 Key Path: 48'/0'/0'/0'
 ```
-### Inviting Additional Signers
+### 追加署名者の招待
 
-1. Go to `Settings` > `Users`.
-2. Add each participant’s email address and share the generated invite link with them directly. If you have Email SMTP in your server, they'll receive an invite email.
-3. Instruct participants to:
-   - Accept the invitation
-   - [Create a BTCPay Server Store](https://docs.btcpayserver.org/CreateStore/)
-   - Use [XpubExtractor](https://github.com/rockstardev/BTCPayServerPlugins.RockstarDev/tree/1235799827c24d33bfe1095db5169afd39e620f1/Plugins/BTCPayServer.RockstarDev.Plugins.XpubExtractor) to provide their xpub information
-4. They should save data for their wallets and share them with you.
+1. `Settings` > `Users` に移動します。
+2. 各参加者のメールアドレスを追加し、生成された招待リンクを直接共有します。サーバーで Email SMTP を設定している場合、参加者には招待メールが送信されます。
+3. 参加者には次を実施してもらいます。
+   - 招待を承諾する
+   - [BTCPay Server Store を作成する](https://docs.btcpayserver.org/CreateStore/)
+   - [XpubExtractor](https://github.com/rockstardev/BTCPayServerPlugins.RockstarDev/tree/1235799827c24d33bfe1095db5169afd39e620f1/Plugins/BTCPayServer.RockstarDev.Plugins.XpubExtractor) を使って xpub 情報を提供する
+4. 参加者側でウォレットデータを保存し、それをあなたに共有してもらいます。
 
-Please note that, for now, you must invite users as Store `Owners`. We plan to implement additional roles and permissions in the future to reduce the trust factor for those you invite to the multisig store. You can [track the status of this implementation on GitHub](https://github.com/btcpayserver/btcpayserver/issues/6651).
+現時点では、ユーザーは Store `Owners` として招待する必要があります。今後、マルチシグストアに招待する相手への信頼要件を下げるため、追加のロールと権限を実装する予定です。この実装状況は [GitHub で追跡](https://github.com/btcpayserver/btcpayserver/issues/6651) できます。
 
-## Step 2: Create the Multi-signature Wallet
+## Step 2: マルチシグウォレットを作成する
 
-After collecting all required public keys, (e.g., 2-of-3 setup), proceed as follows:
+必要な公開鍵（例: 2-of-3 構成）をすべて収集したら、次の手順で進めます。
 
-1. Go to `Bitcoin Wallets`.
-2. Select `Connect an existing wallet` > `Enter extended public key`.
-3. Choose `Show multisig examples` and input the collected xpubs in the required format.
-4. Click `Continue` to validate and preview the derived addresses. You can validate the preview via external software wallet, or simply by testing in the final step of this document.
+1. `Bitcoin Wallets` に移動します。
+2. `Connect an existing wallet` > `Enter extended public key` を選択します。
+3. `Show multisig examples` を選択し、収集した xpub を必要な形式で入力します。
+4. `Continue` をクリックして、導出アドレスを検証しプレビューします。プレビューは外部ソフトウェアウォレットでも検証できますし、このドキュメントの最終ステップでテストしても構いません。
 
-An example of your multisig could look like this:
+マルチシグの例は次のようになります。
 
 ```
 2-of-xpub6BosLW1vGZLkCW7NrgUQdREa7i3a7XJXnAMQzA3aJCEuEt8hXNRu2yG6Vxq2YvCCu8n2eUpZhVz5Zw3eQro2d5Wq8UdD2qhM1YG4ZcnC3kYd-xpub6FHVXph13QMR77fUMLREpN2L7D1fCqcVtzsGhM28jUy5CWTpYHDuN6gvN5Gi5rxJjL45AgXLhSzE27AHZkDwKZgTYaUmYc9rBoF2tuAgf6M-xpub6CJ61yVNhtEtcpS7pU8Jjpd1NHgAG6xWv1NG4b47SvhhVVqfzFrHdcDUpm96B2ftov3qd5uoy6b7bEVcdxQwK6R7T5ndJP8vTWTdS6RBn7Jr
 ```
 
-This means 2 out of 3 listed signatures are required to authorize a transaction. You can as well put 3 out of 5, and so on.
+これは、列挙された 3 つの署名のうち 2 つがトランザクション承認に必要であることを意味します。同様に、3-of-5 などの構成も可能です。
 
-Next, adjust wallet settings to ensure proper compatibility with various formats and easier signing.
+次に、各種形式との互換性を高め、署名を容易にするためにウォレット設定を調整します。
 
-1. Navigate to `Wallet Settings`.
-2. Enable the `Multisig on Server` option.
-3. Input the `root fingerprint` and `derivation path` for each key.
-4. Enable `Include non-witness UTXO in PSBTs` for enhanced compatibility.
-5. `Save` changes.
+1. `Wallet Settings` に移動します。
+2. `Multisig on Server` オプションを有効にします。
+3. 各鍵の `root fingerprint` と `derivation path` を入力します。
+4. 互換性向上のために `Include non-witness UTXO in PSBTs` を有効にします。
+5. 変更を `Save` します。
 
 ![](./img/multisig/multisig-configuration.png)
 
-### (Optional) Testing the receive funds setup
+### （任意）受取設定のテスト
 
-1. From the main multisig store, in the sidebar, click `Bitcoin > Receive`
-2. Label the address (e.g. "Test")
-3. Send a small amount of Bitcoin to verify the setup
-4. Optionally you can import the multisig into a different software to verify receiving works.
+1. メインのマルチシグストアで、サイドバーの `Bitcoin > Receive` をクリックします
+2. アドレスにラベルを付けます（例: "Test"）
+3. 少額の Bitcoin を送金して設定を確認します
+4. 必要に応じて、別のソフトウェアにマルチシグをインポートして受け取りが機能するか確認できます。
 
-## 3. Configure email notifications
+## 3. メール通知の設定
 
-This step ensures all participants receive email when the new transaction is created, requires their signature and finally broadcasted successfully.
+このステップにより、新しいトランザクションが作成されたとき、署名が必要なとき、最終的に正常にブロードキャストされたときに、参加者全員へメールが届くようになります。
 
-For participants to receive updates on multisig activity, you have to set up [custom email-rules](https://docs.btcpayserver.org/Notifications/#email-rules).
+マルチシグ活動の更新を参加者が受け取るには、[custom email-rules](https://docs.btcpayserver.org/Notifications/#email-rules) を設定する必要があります。
 
 ![](./img/multisig/multisig-email-rule-configure.png)
 
 ![](./img/multisig/multisig-email-rule-create.png)
 
-1. Go to `Store Settings > Emails > Email Rules`
-2. Click on `Configure` and then `Create`
-3. From the `Trigger` dropdown, select `Pending Transaction Created` and add email addresses of multisig participants, separated by a comma: `email1@test.com, email2@test.com, email3@test.com`
-4. Feel free to modify the default Body and Text to your liking.
-5. When you're done, click `Save`
+1. `Store Settings > Emails > Email Rules` に移動します
+2. `Configure` をクリックしてから `Create` をクリックします
+3. `Trigger` ドロップダウンで `Pending Transaction Created` を選択し、マルチシグ参加者のメールアドレスをカンマ区切りで追加します: `email1@test.com, email2@test.com, email3@test.com`
+4. 既定の Body と Text は必要に応じて変更できます。
+5. 完了したら `Save` をクリックします
 
-Repeat the steps 3 to 5 for two more triggers: `Signature Collected` and `Transaction Broadcasted`
+手順 3 から 5 を、次の 2 つのトリガーについても繰り返します: `Signature Collected` と `Transaction Broadcasted`
 
-## Step 4: Send a transaction from the multisig wallet
+## Step 4: マルチシグウォレットからトランザクションを送信する
 
-1. Go to your multisig wallet
-2. Enter recipient address and amount
-3. Click `Create Pending Transaction`
-4. Participants will now receive an email if you followed the Step 3, prompting them to sign a transaction with their wallet.
+1. マルチシグウォレットに移動します
+2. 送金先アドレスと金額を入力します
+3. `Create Pending Transaction` をクリックします
+4. Step 3 を実施していれば、参加者にはメールが届き、各自のウォレットでトランザクション署名を求められます。
 
 
-## Step 5. Signing a multi-sig transaction:
+## Step 5. マルチシグトランザクションに署名する:
 
-Now that transaction has been created, participants would have to sign(authorize it) with their hardware wallet.
+トランザクションが作成されたので、参加者はハードウェアウォレットで署名（承認）する必要があります。
 
-1. In wallet transaction list of the main multi-signature store, participant will see a pending transaction.
-2. Click on `View`
-3. If you're signing with a hardware wallet, connect your hardware wallet and ensure `BTCPay Vault` is running
-4. Click `Sign`
-5. Follow on-screen and device prompts to `sign the transaction`
+1. メインのマルチシグストアのウォレットトランザクション一覧で、参加者は保留中のトランザクションを確認できます。
+2. `View` をクリックします
+3. ハードウェアウォレットで署名する場合は、ハードウェアウォレットを接続し、`BTCPay Vault` が動作していることを確認します
+4. `Sign` をクリックします
+5. 画面およびデバイスの指示に従って `sign the transaction` を実行します
 
 ![](./img/multisig/multisig-view.png)
 
@@ -131,10 +131,10 @@ Now that transaction has been created, participants would have to sign(authorize
 
 ![](./img/multisig/multisig-signed-1.png)
 
-Other participants should follow the same steps.  Once the required number of signatures is collected, click Broadcast to send the transaction.
+他の参加者も同じ手順に従います。必要な署名数が揃ったら、Broadcast をクリックしてトランザクションを送信します。
 
 ![](./img/multisig/multisig-broadcast.png)
 
 ![](./img/multisig/multisig-broadcast-2.png)
 
-Congratulations! You’ve sent your first multisig transaction using BTCPay Server.
+これで、BTCPay Server を使った最初のマルチシグトランザクション送信が完了です。

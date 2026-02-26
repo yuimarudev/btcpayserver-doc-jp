@@ -1,44 +1,49 @@
-# Lightning Network (LN) and BTCPay Server
+<!-- legacy-anchor-aliases -->
+<span id="connecting-an-external-lightning-node-in-btcpay"></span>
+<span id="connecting-your-internal-lightning-node-in-btcpay"></span>
+<!-- /legacy-anchor-aliases -->
 
-## Overview
+# Lightning Network (LN) と BTCPay Server
 
-After deploying BTCPay Server, you may want to experiment with an innovative second-layer payment system built on top of Bitcoin protocol - the [Lightning Network](https://en.bitcoin.it/wiki/Lightning_Network).
+## 概要
 
-This guide will show you how to set up your Lightning Network (LN) node in BTCPay Server and guide you through the basics.
+BTCPay Server のデプロイ後、Bitcoin プロトコル上に構築された革新的なセカンドレイヤー決済システムである [Lightning Network](https://en.bitcoin.it/wiki/Lightning_Network) を試したくなるかもしれません。
 
-BTCPay Server currently offers these implementations of the Lightning Network:
+このガイドでは、BTCPay Server で Lightning Network (LN) ノードを設定する方法と基本事項を説明します。
+
+現在、BTCPay Server は次の Lightning Network 実装を提供しています。
 
 - [LND](https://github.com/lightningnetwork/lnd)
-- [Core Lightning (CLN)](https://github.com/ElementsProject/lightning) (formerly c-lightning)
+- [Core Lightning (CLN)](https://github.com/ElementsProject/lightning)（旧 c-lightning）
 - [Eclair](https://github.com/ACINQ/eclair)
 
 ::: danger
-Before you proceed, please understand that the Lightning Network is still in the experimental stage.
-Using the Lightning Network can put your money at risk. Do not use more than you can afford to lose.
+続行する前に、Lightning Network はまだ実験段階であることを理解してください。
+Lightning Network の利用には資金損失リスクがあります。失っても問題ない額以上は使わないでください。
 :::
 
-Take time to familiarize yourself with the risks associated with using the Lightning Network.
+Lightning Network 利用に伴うリスクを十分に理解してください。
 
-If you choose to run the internal Lightning Node in BTCPay Server, consider:
+BTCPay Server で内部 Lightning Node を運用する場合は、次の点を考慮してください。
 
-1. Any lightning network node operates at 2 levels: **on-chain** and **off-chain**.
-2. The LN implementation of choice will create an on-chain hot wallet that will be used to fund the off-chain payment channels.
-3. Make sure you back up the **on-chain** hot wallet seed (see below instructions for the individual implementations).
-4. The seed in step #3 can **only recover the on-chain funds**, although it is necessary for the off-chain operation.
-5. **Off-chain** funds locked in channels **cannot** be backed up using a single-seed. Read the documentation issued by your LN implementation of choice.
-6. **Off-chain** recovery mechanisms are under active research and development. Erasing your BTCPay Server or unsafe/unsecure operation of the computing environment (e.g Filesystem corruption, compromised keys) can lead to permanent **loss of funds**.
+1. すべての lightning network ノードは **on-chain** と **off-chain** の2層で動作します。
+2. 選択した LN 実装は、off-chain の payment channel 資金に使う on-chain hot wallet を作成します。
+3. **on-chain** hot wallet のシードを必ずバックアップしてください（実装ごとの手順は後述）。
+4. 手順 #3 のシードで復元できるのは **on-chain 資金のみ** です（ただし off-chain 運用には必要です）。
+5. チャネルにロックされた **off-chain** 資金は単一シードではバックアップできません。利用する LN 実装のドキュメントを確認してください。
+6. **off-chain** の復旧メカニズムは現在も研究・開発中です。BTCPay Server の消去や安全でない運用（例: ファイルシステム破損、鍵の漏えい）は、**恒久的な資金損失**につながる可能性があります。
 
-As the technology matures and develops, mechanisms for proper backup will be easier to implement in BTCPay Server.
-As of [v1.0.3.138](https://blog.btcpayserver.org/btcpay-lnd-migration/), LND is the only lightning network implementation that allows for [lightning seed backups with BTCPay Server](./FAQ/LightningNetwork.md#where-can-i-find-recovery-seed-backup-for-my-lightning-network-wallet-in-btcpay-server).
+技術が成熟するにつれ、適切なバックアップ機構は BTCPay Server でより実装しやすくなります。
+[v1.0.3.138](https://blog.btcpayserver.org/btcpay-lnd-migration/) 時点では、BTCPay Server で [lightning seed backups](./FAQ/LightningNetwork.md#where-can-i-find-recovery-seed-backup-for-my-lightning-network-wallet-in-btcpay-server) が可能なのは LND のみです。
 
-## Choosing the Lightning Network implementation
+## Lightning Network 実装の選択
 
-First, read [here](./FAQ/LightningNetwork.md#can-i-use-a-pruned-node-with-ln-in-btcpay) about using pruned Bitcoin nodes with lightning network implementations before deploying.
+まず、デプロイ前に pruning 済み Bitcoin ノードと lightning network 実装の併用について [こちら](./FAQ/LightningNetwork.md#can-i-use-a-pruned-node-with-ln-in-btcpay) を確認してください。
 
-On the installation, you'll have the option to choose the implementation.
+インストール時に実装を選択できます。
 
-For [web-interface installations](/Deployment/LunaNode.md), you can simply select the implementation from the drop-down menu.
-For other [docker](https://github.com/btcpayserver/btcpayserver-docker) based [deployment methods](/Deployment/README.md) you need to:
+[web-interface installations](/Deployment/LunaNode.md) の場合は、ドロップダウンメニューから実装を選ぶだけです。
+それ以外の [docker](https://github.com/btcpayserver/btcpayserver-docker) ベースの [deployment methods](/Deployment/README.md) では次を実行します。
 
 ```bash
 sudo su -
@@ -47,67 +52,67 @@ export BTCPAYGEN_LIGHTNING="implementationgoeshere"
 . ./btcpay-setup.sh -i
 ```
 
-- For **Core Lightning (CLN)** use `export BTCPAYGEN_LIGHTNING="clightning"`
-- For **LND** use `export BTCPAYGEN_LIGHTNING="lnd"`
-- For **eclair** use `export BTCPAYGEN_LIGHTNING="eclair"` AND `export BTCPAYGEN_ADDITIONAL_FRAGMENTS="opt-txindex"`
+- **Core Lightning (CLN)** は `export BTCPAYGEN_LIGHTNING="clightning"` を使用
+- **LND** は `export BTCPAYGEN_LIGHTNING="lnd"` を使用
+- **eclair** は `export BTCPAYGEN_LIGHTNING="eclair"` と `export BTCPAYGEN_ADDITIONAL_FRAGMENTS="opt-txindex"` を使用
 
-Finally, to begin using Lightning, your blockchain needs to be fully synced.
+最後に、Lightning を使い始めるにはブロックチェーン同期が完了している必要があります。
 
-## Lightning node configuration in BTCPay Server
+## BTCPay Server での Lightning ノード設定
 
-### Connecting your internal Lightning Node
+### 内部 Lightning Node を接続する
 
-Irrespective of the LN implementation deployed, the process of connecting your internal Lightning Node in BTCPay Server is the same.
+どの LN 実装をデプロイした場合でも、BTCPay Server で内部 Lightning Node を接続する手順は同じです。
 
-1. Choose a store
-2. Go to "Lightning" > Select "Use internal node"
-3. Click "Save" > See "BTC Lightning node updated" message
-4. Go to "Public Node Info" > The node should appear **"Online"**
+1. ストアを選択
+2. "Lightning" > "Use internal node" を選択
+3. "Save" をクリックし、"BTC Lightning node updated" メッセージを確認
+4. "Public Node Info" を開き、ノードが **"Online"** と表示されることを確認
 
 ![LightningNetworkNodeSetupOverview](./img/lightning-node-setup/LightningNetworkNodeSetupOverview.jpg)
 
-If the internal connection fails, confirm:
+内部接続に失敗する場合は、次を確認してください。
 
-1. The Bitcoin on-chain node is fully synchronized
-2. The Internal lightning node is "Enabled" under "Lightning" > "Settings" > "BTC Lightning Settings"
+1. Bitcoin on-chain ノードの同期が完了している
+2. "Lightning" > "Settings" > "BTC Lightning Settings" で Internal lightning node が "Enabled" になっている
 
-If you are unable to connect to your Lightning node, try [restarting your server](./FAQ/ServerSettings.md#how-to-restart-btcpay-server) or reviewing our [troubleshooting guide](./Troubleshooting.md). You will not be able to accept lightning payments in your store until your Lightning node appears "Online". Try to test your Lightning connection by clicking the "Public Node Info" link.
+Lightning ノードに接続できない場合は、[サーバー再起動](./FAQ/ServerSettings.md#how-to-restart-btcpay-server) または [トラブルシューティングガイド](./Troubleshooting.md) を確認してください。Lightning ノードが "Online" になるまで、ストアで lightning 決済は受け付けられません。"Public Node Info" リンクをクリックして接続テストしてください。
 
-### Connecting an external Lightning Node in BTCPay Server
+### 外部 Lightning Node を BTCPay Server に接続する
 
-BTCPay Server offers the option to connect to an external Lightning node. To configure it:
+BTCPay Server は外部 Lightning ノード接続にも対応しています。設定手順は以下です。
 
-1. Go to "Lightning" > Select "Use custom node" if there is no Lightning node configured.
-2. Go to "Lightning" > Select "Settings" > Select "Change connection" > Select "Use custom node" to modify an existing connection
-3. Add the configuration details matching the lightning implementation used > "Test connection"
+1. Lightning ノード未設定の場合、"Lightning" > "Use custom node" を選択
+2. 既存接続を変更する場合、"Lightning" > "Settings" > "Change connection" > "Use custom node" を選択
+3. 利用実装に合わせた接続情報を入力し、"Test connection" を実行
 
-## Getting started with BTCPay Server and LND
+## BTCPay Server と LND の開始手順
 
-### Control your LND using Ride The Lightning (RTL)
+### Ride The Lightning (RTL) で LND を操作する
 
-The easiest way to use LND implementation with BTCPay Server is to use the **[Ride The Lightning](https://github.com/Ride-The-Lightning/RTL)** (RTL) service. A web user interface for the Lightning Network, RTL allows you to operate your node without leaving BTCPay Server, from your browser.
+BTCPay Server で LND 実装を使う最も簡単な方法は、**[Ride The Lightning](https://github.com/Ride-The-Lightning/RTL)** (RTL) サービスです。RTL は Lightning Network 用の Web UI で、ブラウザから BTCPay Server を離れずにノードを運用できます。
 \
-To initiate RTL in BTCPay Server, Go to Server Settings > Services > Ride The Lightning > See information.
+BTCPay Server で RTL を開始するには、Server Settings > Services > Ride The Lightning > See information へ進みます。
 
-### Control your LND using Zap
+### Zap で LND を操作する
 
-For remote use of your LND node on iOS or PC, you can use [Zap wallet integration](https://github.com/LN-Zap/zap-tutorials/blob/master/docs/desktop/btcpay-server.mdx).
+iOS や PC から LND ノードをリモート利用する場合は、[Zap wallet integration](https://github.com/LN-Zap/zap-tutorials/blob/master/docs/desktop/btcpay-server.mdx) を利用できます。
 \
 [![LND BTCPay](https://img.youtube.com/vi/CWhTOunTb2Q/mqdefault.jpg)](https://www.youtube.com/watch?v=CWhTOunTb2Q)
 \
-Besides Zap, there are a few more wallets that allow remote control of the LND node, [the Nayuta wallet](https://nayuta.co/) and the [ZeusLN](https://github.com/ZeusLN/zeus). Both of which have not yet extensively been tested by the community.
+Zap 以外にも、LND ノードをリモート操作できるウォレットとして [Nayuta wallet](https://nayuta.co/) と [ZeusLN](https://github.com/ZeusLN/zeus) があります。いずれもコミュニティでの十分な検証はまだ行われていません。
 
-### Control your LND using Lightning Joule
+### Lightning Joule で LND を操作する
 
-To remotely control your LND node via web browser, you can use Lightning Joule.
+Web ブラウザ経由で LND ノードをリモート操作するには Lightning Joule を利用できます。
 \
 [![Joule](https://img.youtube.com/vi/a9_uHJhnKR4/mqdefault.jpg)](https://www.youtube.com/watch?v=a9_uHJhnKR4)
 
-### Control your LND via the command-line: lncli
+### コマンドラインで LND を操作する: lncli
 
-LND can be accessed via the command-line using the shell script `bitcoin-lncli.sh`.
+LND は `bitcoin-lncli.sh` シェルスクリプトでコマンドラインから利用できます。
 \
-If you're on Docker make sure you're in docker directory.
+Docker 環境の場合は docker ディレクトリにいることを確認してください。
 
 ```bash
 sudo su -
@@ -116,21 +121,21 @@ cd btcpayserver-docker
 ./bitcoin-lncli.sh getinfo #show info about the node
 ```
 
-Run ./bitcoin-lncli.sh --help` to see a full list of commands or check the full [API documentation](https://api.lightning.community/).
+`./bitcoin-lncli.sh --help` を実行するとコマンド一覧を表示できます。詳細は [API documentation](https://api.lightning.community/) も参照してください。
 
-## Getting started with BTCPay Server and Core Lightning (CLN)
+## BTCPay Server と Core Lightning (CLN) の開始手順
 
-### Control your CLN using Ride The Lightning (RTL)
+### Ride The Lightning (RTL) で CLN を操作する
 
-The easiest way to use CLN implementation with BTCPay Server is to use the **[Ride The Lightning](https://github.com/Ride-The-Lightning/RTL)** (RTL) service. A web user interface for the Lightning Network, RTL allows you to operate your node without leaving BTCPay Server, from your browser.
+BTCPay Server で CLN 実装を使う最も簡単な方法は、**[Ride The Lightning](https://github.com/Ride-The-Lightning/RTL)** (RTL) サービスです。RTL は Lightning Network 用の Web UI で、ブラウザから BTCPay Server を離れずにノードを運用できます。
 \
-To initiate RTL in BTCPay Server, Go to Server Settings > Services > Ride The Lightning > See information.
+BTCPay Server で RTL を開始するには、Server Settings > Services > Ride The Lightning > See information へ進みます。
 
-### Control your CLN via the command-line: lightning-cli
+### コマンドラインで CLN を操作する: lightning-cli
 
-Similar to `lncli`, CLN can be accessed via the command-line using the shell script `bitcoin-lightning-cli.sh`.
+`lncli` と同様に、CLN も `bitcoin-lightning-cli.sh` シェルスクリプトでコマンドラインから利用できます。
 \
-If you're on Docker make sure you're in docker directory.
+Docker 環境の場合は docker ディレクトリにいることを確認してください。
 
 ```bash
 sudo su -
@@ -139,36 +144,36 @@ cd btcpayserver-docker
 ./bitcoin-lightning-cli.sh getinfo #show info about the node
 ```
 
-Run `./bitcoin-lightning-cli.sh help` to see a full list of commands or check the full [API documentation](https://lightning.readthedocs.io/).
+`./bitcoin-lightning-cli.sh help` を実行するとコマンド一覧を表示できます。詳細は [API documentation](https://lightning.readthedocs.io/) を参照してください。
 
-## Lightning node backup
+## Lightning ノードのバックアップ
 
-Before you start transacting using your new lightning node, consider backing up the **on-chain** wallet. Steps:
+新しい lightning ノードで取引を始める前に、**on-chain** ウォレットのバックアップを検討してください。手順:
 
-1. **for LND**: storing a copy of the LND seed.
-   Go to "Server Settings" > "Services" > "LND Seed Backup" and select "See information"
-2. **for CLN**: storing a copy of the [hsm_secret](https://lightning.readthedocs.io/BACKUP.html#hsm-secret)
+1. **LND の場合**: LND seed のコピーを保存。
+   "Server Settings" > "Services" > "LND Seed Backup" > "See information" を選択
+2. **CLN の場合**: [hsm_secret](https://lightning.readthedocs.io/BACKUP.html#hsm-secret) のコピーを保存
 \
-   The CLN $LIGHTNINGDIR is located in `/var/lib/docker/volumes/generated_clightning_bitcoin_datadir/_data/bitcoin`
+   CLN の $LIGHTNINGDIR は `/var/lib/docker/volumes/generated_clightning_bitcoin_datadir/_data/bitcoin` にあります。
 
-Acknowledge the limitations of **off-chain** payment channel backups and associated risks.
+**off-chain** payment channel バックアップの制約と関連リスクを理解してください。
 \
-See [backup FAQ](https://docs.btcpayserver.org/Docker/backup-restore/#lightning-channel-backup) if you are running the BTCPay Server instance with Docker.
+Docker で BTCPay Server を運用している場合は [backup FAQ](https://docs.btcpayserver.org/Docker/backup-restore/#lightning-channel-backup) も参照してください。
 
-### Funding your on-chain wallet
+### on-chain ウォレットへ資金を入れる
 
-Now that your lightning node is active, before opening lightning payment channels, you will need to fund the on-chain wallet.
+Lightning ノードが有効になったら、payment channel を開く前に on-chain ウォレットへ資金を入れる必要があります。
 \
-The on-chain funding process can be performed in two ways:
+on-chain への資金投入は次の2つの方法で行えます。
 
-1. via the Ride The Lightning (RTL) UI interface
+1. Ride The Lightning (RTL) UI から行う
 
-- Select a "Store" and go to the "Lightning" section
-- Under "Services", select "Ride The Lightning"
-- In the RTL app, go to "On-chain", select "Receive" under the "On-chain Transactions" menu
-- Select "Generate Address" and use it as the destination for the allocated funds
+- "Store" を選択し、"Lightning" セクションへ移動
+- "Services" の "Ride The Lightning" を選択
+- RTL アプリで "On-chain" を開き、"On-chain Transactions" メニューの "Receive" を選択
+- "Generate Address" を選び、資金送付先として使用
 
-2. via the command-line using `bitcoin-lncli.sh` or `bitcoin-lightning-cli.sh`
+2. `bitcoin-lncli.sh` または `bitcoin-lightning-cli.sh` を使いコマンドラインで行う
 
 ```bash
 sudo su -
@@ -180,10 +185,10 @@ cd btcpayserver-docker
 }
 ```
 
-Once your on-chain lightning node is funded, it's time to connect to other nodes on the network and open payment channels.
+on-chain lightning ノードへの資金投入が完了したら、ネットワーク上の他ノードへ接続して payment channel を開く段階です。
 \
-Check out [Payment channels](./LightningNetwork_PaymentChannels.md) for recommendations on opening payment channels, liquidity management and more.
+payment channel の開設、流動性管理などの推奨事項は [Payment channels](./LightningNetwork_PaymentChannels.md) を参照してください。
 
 ## Alby Extension
 
-[Alby](https://getalby.com/) is a free, fast, simple, and convenient way to send and receive Bitcoin payments with your normal browser on the Bitcoin Lightning Network with ease. You can now connect your BTCPay wallet directly to your Alby account. Learn more on [how to connect your BTCPay wallet to Alby](https://guides.getalby.com/user-guide/v/alby-account-and-browser-extension/alby-lightning-account/connect-your-alby-lightning-account-to-other-apps/connect-to-btcpay-server).
+[Alby](https://getalby.com/) は、Bitcoin Lightning Network 上で通常のブラウザから簡単に Bitcoin 決済を送受信できる、無料で高速かつシンプルな手段です。BTCPay ウォレットを Alby アカウントへ直接接続できます。詳細は [how to connect your BTCPay wallet to Alby](https://guides.getalby.com/user-guide/v/alby-account-and-browser-extension/alby-lightning-account/connect-your-alby-lightning-account-to-other-apps/connect-to-btcpay-server) を参照してください。

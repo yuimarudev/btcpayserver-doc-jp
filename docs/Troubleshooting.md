@@ -1,30 +1,36 @@
-# Troubleshooting an issue in BTCPay Server
+<!-- legacy-anchor-aliases -->
+<span id="13-restarting-a-service"></span>
+<span id="21-btcpay-logs"></span>
+<span id="23-bitcoin-node-logs"></span>
+<!-- /legacy-anchor-aliases -->
 
-Facing a problem is never fun. This document explains the most common workflow and steps you should take to **identify the issue** you're having more easily and hopefully solve it yourself or with community help.
+# BTCPay Server の問題をトラブルシューティングする
 
-Identifying the problem is crucial.
+問題が起きるのは決して楽しいことではありません。このドキュメントでは、**問題を特定する**ために役立つ最も一般的な手順を説明し、可能であれば自分で、またはコミュニティの助けを借りて解決できるようにします。
 
-## 1. Replicating the issue
+問題の特定は非常に重要です。
 
-First and foremost, try to determine when the issue happens.
-Try to replicate the problem.
-Try to update and restart your server to verify you can reproduce your issue.
-If you think it will describe your issue better, take a screenshot.
+## 1. 問題を再現する
 
-### 1.1 Updating the server
+まず最初に、問題がいつ発生するのかを確認してください。
+問題を再現できるか試してください。
+サーバーを更新して再起動し、同じ問題を再現できるか確認してください。
+問題の説明に役立つと思う場合は、スクリーンショットを撮ってください。
 
-Check [your version of BTCPay](./FAQ/ServerSettings.md#how-can-i-see-my-btcpay-version).
-If it is much older than the [latest version](https://github.com/btcpayserver/btcpayserver/releases) of BTCPay, [updating your server](./FAQ/ServerSettings.md#how-to-update-btcpay-server) may resolve the issue.
+### 1.1 サーバーを更新する
 
-### 1.2 Restarting the server
+[BTCPay のバージョン](./FAQ/ServerSettings.md#how-can-i-see-my-btcpay-version)を確認してください。
+現在のバージョンが BTCPay の[最新バージョン](https://github.com/btcpayserver/btcpayserver/releases)よりかなり古い場合、[サーバーの更新](./FAQ/ServerSettings.md#how-to-update-btcpay-server)で問題が解決する可能性があります。
 
-Restarting your server is an easy way to solve many of the most common BTCPay Server issues.
-You may need to [SSH into your server](./FAQ/ServerSettings.md#how-to-ssh-into-my-btcpay-running-on-vps) to restart it.
+### 1.2 サーバーを再起動する
 
-### 1.3 Restarting a service
+サーバーの再起動は、多くの一般的な BTCPay Server の問題を簡単に解決できる方法です。
+再起動するには、[サーバーに SSH 接続](./FAQ/ServerSettings.md#how-to-ssh-into-my-btcpay-running-on-vps)する必要がある場合があります。
 
-Some issues you may only need to restart a particular service in your BTCPay Server deployment.
-Such as restarting the letsencrypt container to renew the SSL certificate.
+### 1.3 サービスを再起動する
+
+問題によっては、BTCPay Server デプロイ内の特定サービスだけを再起動すれば解決する場合があります。
+たとえば、SSL 証明書更新のために letsencrypt コンテナを再起動します。
 
 ```bash
 sudo su -
@@ -32,26 +38,27 @@ cd btcpayserver-docker
 docker restart letsencrypt-nginx-proxy-companion
 ```
 
-Use `docker ps` to find the name of a different service you would like to restart.
+別のサービスを再起動したい場合は、`docker ps` でサービス名を確認してください。
 
-## 2. Looking through the logs
+<a id="2-looking-through-the-logs"></a>
+## 2. ログを確認する
 
-Logs can provide an essential piece of information.
-In the next few paragraphs, we will describe how to get the **log information for various parts of BTCPay**.
+ログには、問題解決に不可欠な情報が含まれていることがあります。
+以下では、**BTCPay の各コンポーネントのログ情報**を取得する方法を説明します。
 
-### 2.1 BTCPay Logs
+### 2.1 BTCPay ログ
 
-Since the v1.0.3.8, you can easily access BTCPay Server logs from the front-end.
-If you are a server admin, go to **Server Settings > Logs** and open the logs file.
-If you don't know what a particular error in the logs means, make sure to mention it when troubleshooting.
+v1.0.3.8 以降、BTCPay Server のログをフロントエンドから簡単に確認できます。
+サーバー管理者であれば、**Server Settings > Logs** に移動してログファイルを開いてください。
+ログ内の特定エラーの意味がわからない場合は、トラブルシューティング時に必ずその内容を共有してください。
 
-If you would like more detailed logs and you're using a Docker deployment, you can view logs of specific Docker containers using the command line.
-See these [instructions to ssh](./FAQ/ServerSettings.md#how-to-ssh-into-my-btcpay-running-on-vps) into an instance of BTCPay running on a VPS.
+さらに詳細なログが必要で、Docker デプロイを使っている場合は、コマンドラインで個別の Docker コンテナのログを確認できます。
+VPS 上で動作している BTCPay インスタンスに [SSH 接続する手順](./FAQ/ServerSettings.md#how-to-ssh-into-my-btcpay-running-on-vps)を参照してください。
 
-Below is a general list of the container names used for BTCPay.
+以下は、BTCPay でよく使われるコンテナ名の一覧です。
 
-| LOGS FOR     |          CONTAINER NAME           |
-| ------------ | :-------------------------------: |
+| ログ対象 |            コンテナ名             |
+| -------- | :-------------------------------: |
 | BTCPayServer |     generated_btcpayserver_1      |
 | NBXplorer    |       generated_nbxplorer_1       |
 | Bitcoind     |       btcpayserver_bitcoind       |
@@ -67,8 +74,8 @@ Below is a general list of the container names used for BTCPay.
 | Tor          |              tor-gen              |
 | Tor          |                tor                |
 
-Run the commands below to print logs by container name.
-Replace the container name to view other container logs.
+以下のコマンドで、コンテナ名を指定してログを表示できます。
+他のコンテナログを見たい場合は、コンテナ名を置き換えてください。
 
 ```bash
 sudo su -
@@ -77,50 +84,50 @@ docker ps
 docker logs --tail 100 generated_btcpayserver_1
 ```
 
-### 2.2 Lightning Network Logs
+### 2.2 Lightning Network ログ
 
-Use the following if you're having a problem with the Lightning Network.
+Lightning Network で問題がある場合は、以下を利用してください。
 
 ### 2.2.1 - Lightning Network LND - Docker
 
-There are a few ways to access your LND logs when using Docker.
-First log in as root:
+Docker 利用時に LND ログへアクセスする方法はいくつかあります。
+まず root としてログインします。
 
 `sudo su -`
 
-Navigate to the correct directory:
+正しいディレクトリへ移動します。
 
 `cd btcpayserver-docker`
 
-Find container name:
+コンテナ名を確認します。
 
 `docker ps`
 
-Print logs by container name:
+コンテナ名でログを表示します。
 
 `docker logs --tail 100 btcpayserver_lnd_bitcoin`
 
-Alternatively, you can quickly print logs by using container ID (only the first unique ID characters are needed, such as the two furthest left characters):
+あるいは、コンテナ ID（先頭の一意な数文字だけで可）でも簡単に表示できます。
 
 `docker logs 'add your container ID '`
 
-If for any reason you need more logs
+何らかの理由でさらに多くのログが必要な場合
 
 `sudo su -`
 
 `cd /var/lib/docker/volumes/generated_lnd_bitcoin_datadir/_data/logs/bitcoin/mainnet/`
 
-inside that directory do `ls`
+そのディレクトリ内で `ls` を実行します。
 
-You will see something like `lnd.log  lnd.log.13  lnd.log.15  lnd.log.16.gz  lnd.log.17.gz`
+`lnd.log  lnd.log.13  lnd.log.15  lnd.log.16.gz  lnd.log.17.gz` のようなファイルが表示されます。
 
-To access uncompressed logs of those logs do `cat lnd.log` or if you want another one, use `cat lnd.log.15`
+未圧縮ログを読むには `cat lnd.log`、別のログなら `cat lnd.log.15` を使います。
 
-To access compressed logs in .gzip use `gzip -d lnd.log.16.gz` (in this case we're accessing lnd.log.16.gz)
+`.gzip` の圧縮ログを読むには `gzip -d lnd.log.16.gz` を使います（この例では `lnd.log.16.gz`）。
 
-This should give you a new file, where you can do `cat lnd.log.16`
+これで新しいファイルが生成され、`cat lnd.log.16` で表示できます。
 
-In case the above does not work, you may need to use install gzip first `sudo apt-get install gzip`
+上記でうまくいかない場合は、先に gzip をインストールする必要があるかもしれません: `sudo apt-get install gzip`
 
 ### 2.2.2 - Lightning Network Core Lightning (CLN) - Docker
 
@@ -128,91 +135,91 @@ In case the above does not work, you may need to use install gzip first `sudo ap
 
 `docker ps`
 
-Find the Core Lightning (CLN) container ID.
+Core Lightning (CLN) コンテナ ID を見つけます。
 
 docker logs 'add your container ID here'
 
-alternatively, use this
+または、次のコマンドを使います。
 
 `docker logs --tail 100 btcpayserver_clightning_bitcoin`
 
-You can also get log information with Core Lightning (CLN) cli command.
+Core Lightning (CLN) の cli コマンドでもログ情報を取得できます。
 
 `bitcoin-lightning-cli.sh getlog`
 
-## 2.3 - Bitcoin Node Logs
+## 2.3 - Bitcoin Node ログ
 
-In addition to [looking at logs](#2-looking-through-the-logs) of your Bitcoind container, you can also use any of the [bitcoin-cli commands](https://developer.bitcoin.org/reference/rpc/index.html) to obtain information from your bitcoin node.
-BTCPay includes a script to allow you to communicate with your Bitcoin node easily.
+Bitcoind コンテナの[ログ確認](#2-looking-through-the-logs)に加えて、[bitcoin-cli コマンド](https://developer.bitcoin.org/reference/rpc/index.html)を使って bitcoin ノード情報を取得することもできます。
+BTCPay には、Bitcoin ノードと簡単に通信できるスクリプトが含まれています。
 
-Inside the `btcpayserver-docker` folder, get the blockchain information using your node:
+`btcpayserver-docker` フォルダ内で、ノードからブロックチェーン情報を取得します。
 
 `bitcoin-cli.sh getblockchaininfo`
 
-## 3. Finding a solution yourself (Google, FAQ, GitHub issues)
+## 3. 自分で解決策を探す（Google、FAQ、GitHub issues）
 
-Even though setups differ, the chances that someone else experienced the same issue as yours are pretty high.
-Take a few moments, Google around and see if you can solve it yourself.
+環境は異なっていても、同じ問題を他の誰かがすでに経験している可能性は高いです。
+少し時間を取って検索し、自分で解決できるか確認してみてください。
 
 ### 3.1 BTCPay FAQ
 
-We try to document the most common issues on the [Frequently Asked Questions page](./FAQ/README.md).
-Take a look there and see if your question is recorded.
+よくある問題は [Frequently Asked Questions ページ](./FAQ/README.md)に記録するようにしています。
+質問が載っているか確認してください。
 
 ### 3.2 GitHub
 
-When there's an advanced technical issue, users usually open an issue on GitHub.
-Take a look at the BTCPay GitHub repository and browse [search the closed issues](https://github.com/btcpayserver/btcpayserver/issues?q=is%3Aissue+is%3Aclosed).
+高度な技術的問題がある場合、ユーザーは GitHub に issue を作成することが多いです。
+BTCPay の GitHub リポジトリで [クローズ済み issue を検索](https://github.com/btcpayserver/btcpayserver/issues?q=is%3Aissue+is%3Aclosed)してみてください。
 
 ### 3.3 Mattermost
 
-Mattermost chat platform is great for similar issues, other users experienced before you.
-On the top right-hand corner, click on the search and enter your query.
+Mattermost チャットは、他のユーザーが以前に経験した類似問題を探すのに適しています。
+右上の検索をクリックし、クエリを入力してください。
 
-## 4. Asking for help
+## 4. 助けを求める
 
-If you're unable to solve the problem yourself, do not worry.
-There's an amid community ready to help you.
+自分で問題を解決できなくても心配いりません。
+助けてくれる活発なコミュニティがあります。
 
-The better you describe the problem, the higher are the chances of getting a timely fix.
-Be concise and provide as much relevant information as possible.
-Be sure to include the [version you're using](./FAQ/ServerSettings.md#how-can-i-see-my-btcpay-version) and describe your BTCPay Deployment Setup.
-Try to explain what you're trying to do and what's the issue.
-If you can provide the logs.
-If you think it's relevant, feel free to include a screenshot.
+問題をより正確に説明するほど、迅速に解決できる可能性が高くなります。
+簡潔に、かつ関連情報をできるだけ多く提供してください。
+[利用中のバージョン](./FAQ/ServerSettings.md#how-can-i-see-my-btcpay-version)と BTCPay のデプロイ構成は必ず含めてください。
+何をしようとしていて、何が問題なのかを説明してください。
+可能であればログを添付してください。
+関連があるなら、スクリーンショットもぜひ追加してください。
 
-Here's a good example of how to ask a question.
+以下は、質問の良い例です。
 
-> I'm having a problem with XYZ. I can replicate the problem. My BTCPay version is 0.100.31, and I deployed my server on Digital Ocean by following Docker deployment guide. I've searched through the FAQ and closed GitHub issues, but there's no solution to my problem. My BTCPay Setup is XYZ, and the issue is occurring when I do XYZ. Here are the logs I was able to get from my BTCPay instance. You can see the error in the image I attached.
+> XYZ で問題が発生しています。問題は再現できます。BTCPay バージョンは 0.100.31 で、Docker deployment guide に従って Digital Ocean にサーバーをデプロイしました。FAQ とクローズ済み GitHub issues を調べましたが解決策が見つかりません。私の BTCPay セットアップは XYZ で、XYZ を実行すると問題が発生します。BTCPay インスタンスから取得できたログは以下です。添付画像にエラーが表示されています。
 
-:::warning Please note:
-The community will not provide extensive support for custom deployments.
-I.e. variations of [Manual Deployments](/Deployment/ManualDeployment.md) are expected to be used only for development purposes and by users with technical literacy with the ability to **resolve deployment and maintenance issues on their own**. This includes [Hardware-As-A-Service](/Deployment/HardwareAsAService.md) products (Nodl, RaspiBlitz, Umbrel, etc ...)
+:::warning 注意:
+コミュニティはカスタムデプロイに対して広範なサポートを提供しません。
+つまり、[Manual Deployments](/Deployment/ManualDeployment.md) のような構成は、開発目的および **デプロイとメンテナンスの問題を自力で解決できる** 技術的知識を持つユーザー向けです。これには [Hardware-As-A-Service](/Deployment/HardwareAsAService.md) 製品（Nodl、RaspiBlitz、Umbrel など）も含まれます。
 :::
 
-### 4.1 Asking the community (general problems)
+### 4.1 コミュニティに質問する（一般的な問題）
 
-For quick answers to fundamental problems, it's best to post a question in #support channel on [BTCPay Mattermost](https://chat.btcpayserver.org/btcpayserver/channels/support).
+基本的な問題に素早く回答を得るには、[BTCPay Mattermost](https://chat.btcpayserver.org/btcpayserver/channels/support) の #support チャンネルで質問するのが最適です。
 
-### 4.2 Opening an Issue on GitHub (advanced problems)
+### 4.2 GitHub で Issue を作成する（高度な問題）
 
-If you have a custom build setup and are facing a complex problem, [open an issue on GitHub](https://github.com/btcpayserver/btcpayserver/issues) so that developers can help you out.
+カスタムビルド環境で複雑な問題に直面している場合は、開発者が対応できるよう [GitHub で issue を作成](https://github.com/btcpayserver/btcpayserver/issues)してください。
 
 ### 4.3 Premium Support
 
-Some community members provide paid support.
-If you want a quicker help, check out the list of [members providing premium support](./Support.md).
+一部のコミュニティメンバーは有償サポートを提供しています。
+より迅速なサポートが必要な場合は、[premium support 提供メンバーの一覧](./Support.md)を確認してください。
 
-### 4.4 Lightning Network Support
+### 4.4 Lightning Network サポート
 
-If you're facing a technical problem with your Lightning Network implementation, you may want to ask questions in their respective communities.
+Lightning Network 実装に関する技術的問題がある場合は、それぞれのコミュニティで質問することを検討してください。
 
-#### 4.4.1 LND Support
+#### 4.4.1 LND サポート
 
 - [LND GitHub](https://github.com/lightningnetwork/lnd/issues)
 - [Lightning Community on Slack](https://lightningcommunity.slack.com)
 
-#### 4.4.2 Core Lightning (CLN) Support
+#### 4.4.2 Core Lightning (CLN) サポート
 
 - [CLN GitHub](https://github.com/ElementsProject/lightning/issues)
 - [CLN Telegram Group](https://t.me/lightningd)

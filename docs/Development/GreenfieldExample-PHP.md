@@ -1,21 +1,21 @@
-# Greenfield API examples with PHP
+# PHP を使った Greenfield API の例
 
-The **[Greenfield API](https://docs.btcpayserver.org/API/Greenfield/v1/)** (also available on your instance on `/docs`) allows you to operate BTCPay Server via an easy-to-use REST API.
+**[Greenfield API](https://docs.btcpayserver.org/API/Greenfield/v1/)**（`/docs` としてあなたのインスタンスでも利用可能）を使うと、使いやすい REST API 経由で BTCPay Server を操作できます。
 
-Note that you can partially generate clients in the language of your choice by using the [Swagger file](https://docs.btcpayserver.org/API/Greenfield/v1/swagger.json).
+[Swagger file](https://docs.btcpayserver.org/API/Greenfield/v1/swagger.json) を使えば、任意の言語向けクライアントを部分的に生成できる点にも注意してください。
 
-For PHP we have a client library available which can be found [here](https://github.com/btcpayserver/btcpayserver-greenfield-php) and is also available for installation via Composer `composer require btcpayserver/btcpayserver-greenfield-php`
+PHP には専用クライアントライブラリがあり、[こちら](https://github.com/btcpayserver/btcpayserver-greenfield-php) で確認できます。Composer でも `composer require btcpayserver/btcpayserver-greenfield-php` でインストールできます。
 
-In this guide, we will give some examples how to use the Greenfield API with our PHP library for eCommerce and BTCPay management. Additional examples can be found [here](https://github.com/btcpayserver/btcpayserver-greenfield-php/tree/master/examples).
+このガイドでは、eCommerce 用途と BTCPay 管理用途で、PHP ライブラリを使って Greenfield API を利用する例を紹介します。追加の例は [こちら](https://github.com/btcpayserver/btcpayserver-greenfield-php/tree/master/examples) にあります。
 
 
-## Prerequisites
+## 前提条件
 
-Unless for a few endpoints like creating a store and API key on behalf of a specific user, Basic Auth should be avoided and an API key should be used instead. Make sure that API keys only have the needed permissions and not more. E.g. if you only create invoices you should not give the API key the permission to manage your stores.
+特定ユーザーの代理でストアや API キーを作成するような一部のエンドポイントを除き、Basic Auth は避け、代わりに API キーを使うべきです。API キーには必要最小限の権限だけを付与してください。たとえば請求書作成だけを行うなら、ストア管理権限は不要です。
 
-You can create a new API key in the BTCPay Server UI under `Account` -> `Manage account` -> `API keys`
+BTCPay Server UI の `Account` -> `Manage account` -> `API keys` で新しい API キーを作成できます。
 
-For the ecommerce examples below the API key needs the following permissions:
+以下の eCommerce 例では、API キーに次の権限が必要です。
 - View invoices
 - Create invoice
 - Modify invoices
@@ -23,15 +23,15 @@ For the ecommerce examples below the API key needs the following permissions:
 - View your stores
 - Create non-approved pull payments
 
-For an overview of available permissions see the [API documentation](https://docs.btcpayserver.org/API/Greenfield/v1/#section/Authentication/API_Key) or the permissions documented on each endpoint.
+利用可能な権限の一覧は [API documentation](https://docs.btcpayserver.org/API/Greenfield/v1/#section/Authentication/API_Key)、または各エンドポイントに記載された権限情報を参照してください。
 
-## eCommerce examples
+## eCommerce の例
 
-The following examples will show you how to create a basic eCommerce flow using the Greenfield API by creating an invoice, registering a webhook, processing webhooks, and issuing a full refund of an invoice.
+以下の例では、請求書の作成、Webhook の登録、Webhook の処理、請求書の全額返金という流れで、Greenfield API を使った基本的な eCommerce フローを示します。
 
-### Create an invoice
+### 請求書を作成する
 
-We create an invoice using the [create invoice endpoint](https://docs.btcpayserver.org/API/Greenfield/v1/#operation/Invoices_CreateInvoice). This is a simple example but you can set a lot more data like order id, buyer email or custom metadata. That said, don't store redundant data on the invoice to prevent data leaks in case of a hack. E.g. in most cases it makes no sense to store the customer address on your eCommerce system and also on the BTCPay invoice.
+[create invoice endpoint](https://docs.btcpayserver.org/API/Greenfield/v1/#operation/Invoices_CreateInvoice) を使って請求書を作成します。これはシンプルな例ですが、注文 ID、購入者メール、カスタムメタデータなど多くの情報を設定できます。ただし、侵害時の情報漏えいを防ぐため、請求書には冗長なデータを保存しないでください。たとえば多くの場合、顧客住所を eCommerce システムと BTCPay 請求書の両方に保存する意味はありません。
 
 ```PHP
 require __DIR__ . './vendor/autoload.php';
@@ -58,9 +58,9 @@ try {
 }
 ```
 
-### Register a webhook (optional)
+### Webhook を登録する（任意）
 
-Let's register a webhook to be notified when the invoice is paid. You can use the [create webhook endpoint](https://docs.btcpayserver.org/API/Greenfield/v1/#operation/Webhooks_CreateWebhook) to register a webhook.
+請求書が支払われたときに通知を受けるため、Webhook を登録します。登録には [create webhook endpoint](https://docs.btcpayserver.org/API/Greenfield/v1/#operation/Webhooks_CreateWebhook) を使用できます。
 
 ```PHP
 require __DIR__ . './vendor/autoload.php';
@@ -81,15 +81,15 @@ try {
 }
 ```
 
-This step is optional, you can also manually create a webhook in the BTCPay Server UI in your store `Settings` -> `Webhooks`.
+この手順は任意です。ストアの `Settings` -> `Webhooks` から BTCPay Server UI 上で手動作成することもできます。
 
-### Validate and process webhooks
+### Webhook を検証して処理する
 
-The webhook payloads of BTCPay Server are signed, and therefore you can trust its content - but only after proper request validation. The validation of the provided `BTCPay-Sig` HTTP-header and payload, is done by the library.
+BTCPay Server の Webhook ペイロードには署名が付いているため、適切なリクエスト検証後であれば内容を信頼できます。`BTCPay-Sig` HTTP ヘッダーとペイロードの検証は、このライブラリが行います。
 
-On webhook registration step (see above), you provided an `url` that points to an endpoint route on your PHP site. e.g. `https://example.com/webhook`. The `secret` which is used to sign the request was returned in our example above.
+Webhook 登録時（上記参照）に、PHP サイトのエンドポイントルートを指す `url` を指定しました。たとえば `https://example.com/webhook` です。リクエスト署名に使う `secret` は、上の例の戻り値で取得できます。
 
-On your eCommerce site you can now validate and process the payload of your BTCPay Server webhook like this:
+eCommerce サイトでは、次のように BTCPay Server Webhook のペイロードを検証して処理できます。
 
 ```PHP
 require __DIR__ . './vendor/autoload.php';
@@ -127,9 +127,9 @@ echo 'Validation OK';
 
 ```
 
-### Issue a full refund of an invoice
+### 請求書を全額返金する
 
-Using the [invoice refund endpoint](https://docs.btcpayserver.org/API/Greenfield/v1/#operation/Invoices_Refund) you can issue a full (or even partial) refund of an invoice.  This will return a link where the customer can claim the refund.
+[invoice refund endpoint](https://docs.btcpayserver.org/API/Greenfield/v1/#operation/Invoices_Refund) を使うと、請求書の全額（または一部）返金を実行できます。顧客が返金を請求できるリンクが返されます。
 
 ```PHP
 require __DIR__ . './vendor/autoload.php';
@@ -154,13 +154,13 @@ try {
 ```
 
 
-## BTCPay Server management examples
+## BTCPay Server 管理の例
 
-Here we assume you are an ambassador and host BTCPay Server for your users. You manage your users on your own system and want to create a user and set email and password for their BTCPay Server login. Then using the same credentials to create a store and an API key on behalf of that user.
+ここでは、あなたがアンバサダーとしてユーザー向けに BTCPay Server をホストしている想定です。ユーザー管理は自分のシステムで行い、BTCPay Server ログイン用のメールとパスワードを設定してユーザーを作成します。その後、同じ認証情報を使ってユーザーの代理でストアと API キーを作成します。
 
-### Create a new user
+### 新しいユーザーを作成する
 
-Creating a new user can be done by using [this endpoint](https://docs.btcpayserver.org/API/Greenfield/v1/#operation/Users_CreateUser).
+新規ユーザーは [this endpoint](https://docs.btcpayserver.org/API/Greenfield/v1/#operation/Users_CreateUser) で作成できます。
 
 ```PHP
 require __DIR__ . './vendor/autoload.php';
@@ -181,13 +181,13 @@ try {
 }
 ```
 
-### Create a new API key (for the user)
+### 新しい API キーを作成する（ユーザー向け）
 
-While we can use basic authentication to access the greenfield API, it is recommended to use API Keys to limit the scope of the credentials.
+Basic 認証でも Greenfield API にアクセスできますが、認証情報のスコープを制限するため API キーの使用が推奨されます。
 
-For example: If we want to [create a new store](https://docs.btcpayserver.org/API/Greenfield/v1/#operation/Stores_CreateStore) we need the `btcpay.store.canmodifystoresettings` permission for the API key. Warning: If you do not pass any permission then the API key will have unrestricted access.
+たとえば [create a new store](https://docs.btcpayserver.org/API/Greenfield/v1/#operation/Stores_CreateStore) を行うには、API キーに `btcpay.store.canmodifystoresettings` 権限が必要です。注意: 権限を1つも渡さない場合、API キーは無制限アクセスになります。
 
-As mentioned above, you can do this through the BTCPay Server UI of your instance, but let's do it through the API using [this endpoint](https://docs.btcpayserver.org/API/Greenfield/v1/#operation/ApiKeys_CreateUserApiKey) where we with our admin API key create an API key for our new user.
+前述の通り、これはインスタンスの BTCPay Server UI からも実行できますが、ここでは [this endpoint](https://docs.btcpayserver.org/API/Greenfield/v1/#operation/ApiKeys_CreateUserApiKey) を使って API 経由で行います。管理者 API キーを使い、新規ユーザー向け API キーを作成します。
 
 ```PHP
 require __DIR__ . './vendor/autoload.php';
@@ -206,9 +206,9 @@ try {
 echo $generatedApiKey->getData()['apiKey'];
 ```
 
-### Create a new store
+### 新しいストアを作成する
 
-Now, we can use the users API key to [create a new store](https://docs.btcpayserver.org/API/Greenfield/v1/#operation/Stores_CreateStore).
+次に、ユーザーの API キーを使って [create a new store](https://docs.btcpayserver.org/API/Greenfield/v1/#operation/Stores_CreateStore) を行います。
 
 ```PHP
 require __DIR__ . './vendor/autoload.php';
@@ -224,9 +224,9 @@ try {
 }
 ```
 
-### Read store information
+### ストア情報を読み取る
 
-We can use the new apikey to [read store](https://docs.btcpayserver.org/API/Greenfield/v1/#operation/Stores_GetStore) information:
+新しい API キーを使って [read store](https://docs.btcpayserver.org/API/Greenfield/v1/#operation/Stores_GetStore) 情報を取得できます。
 
 ```PHP
 require __DIR__ . './vendor/autoload.php';
@@ -243,4 +243,4 @@ try {
 }
 ```
 
-Looking for more examples, you can find them [here](https://github.com/btcpayserver/btcpayserver-greenfield-php/tree/master/examples).
+さらに多くの例は [こちら](https://github.com/btcpayserver/btcpayserver-greenfield-php/tree/master/examples) で確認できます。

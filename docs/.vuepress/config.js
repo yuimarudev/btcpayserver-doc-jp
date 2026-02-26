@@ -14,8 +14,11 @@ const info = {
 }
 const extractDescription = text => {
   if (!text) return
-  const paragraph = text.match(/^[A-Za-z].*(?:\n[A-Za-z].*)*/m)
-  return paragraph ? paragraph.toString().replace(/[\*\_\(\)\[\]]/g, '') : null
+  const paragraph = text
+    .split(/\n\s*\n/)
+    .map(chunk => chunk.trim())
+    .find(chunk => chunk.length > 0)
+  return paragraph ? paragraph.replace(/[\*\_\(\)\[\]]/g, '') : null
 }
 
 const sidebarUserGuide = [

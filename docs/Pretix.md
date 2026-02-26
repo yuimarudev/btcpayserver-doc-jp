@@ -1,56 +1,56 @@
-# Pretix - ticketing software for events
+# Pretix - イベント向けチケット販売ソフトウェア
 
-[Pretix](https://pretix.eu/) is a free and [open-source ticketing software](https://github.com/pretix/pretix) for conferences, festivals, exhibitions, workshops, and other events. You can deploy it on your own or start with their [cloud version](https://pretix.eu/about/en/pricing) which is free for up to 2500 ticket sales.
-
-:::tip
-This integration is maintained by Pretix and is not part of the BTCPay Server project.
-:::
-
-# Requirements
-- You have a [Pretix cloud account](https://pretix.eu/signup/) or [self-hosted instance](https://docs.pretix.eu/en/latest/admin/installation/index.html)
-- If you are self-hosting Pretix, you need to manually install their [BitPay plugin](https://github.com/pretix/pretix-bitpay)
-- You have a BTCPay Server version 1.15.0 or later, either [self-hosted](/Deployment/README.md) or [hosted by a third-party](/Deployment/ThirdPartyHosting.md)
-- [You've a registered account on the instance](./RegisterAccount.md)
-- [You've a BTCPay store on the instance](./CreateStore.md)
-- [You've a wallet connected to your store](./WalletSetup.md)
-
-## Installing and configuring BitPay plugin for Pretix
+[Pretix](https://pretix.eu/) は、カンファレンス、フェスティバル、展示会、ワークショップなどのイベント向けの、無料で [オープンソースのチケット販売ソフトウェア](https://github.com/pretix/pretix) です。自分でデプロイすることも、最大 2500 枚のチケット販売まで無料の [クラウド版](https://pretix.eu/about/en/pricing) から始めることもできます。
 
 :::tip
-The plugin is called BitPay, but it actually supports BTCPay Server too as you can set a custom domain pointing to your BTCPay Server instance.
+この連携は Pretix によって保守されており、BTCPay Server プロジェクトの一部ではありません。
 :::
 
-1. In Pretix dashboard select the event you want to configure.
-2. On left sidebar, expand "Settings" and click on "Plugins".
-3. At the top select the "Payment providers" tab.
-4. Find "BitPay" plugin and click on "Enable".
+# 要件
+- [Pretix cloud account](https://pretix.eu/signup/) または [self-hosted instance](https://docs.pretix.eu/en/latest/admin/installation/index.html) を持っている
+- Pretix をセルフホストしている場合、[BitPay plugin](https://github.com/pretix/pretix-bitpay) を手動でインストールする必要がある
+- BTCPay Server 1.15.0 以上を利用している（[self-hosted](/Deployment/README.md) または [hosted by a third-party](/Deployment/ThirdPartyHosting.md)）
+- [インスタンスに登録済みアカウントがある](./RegisterAccount.md)
+- [インスタンスに BTCPay ストアがある](./CreateStore.md)
+- [ストアにウォレットが接続されている](./WalletSetup.md)
+
+## Pretix 用 BitPay プラグインのインストールと設定
+
+:::tip
+プラグイン名は BitPay ですが、BTCPay Server インスタンスを指すカスタムドメインを設定できるため、実際には BTCPay Server もサポートしています。
+:::
+
+1. Pretix ダッシュボードで設定したいイベントを選択します。
+2. 左サイドバーで "Settings" を展開し、"Plugins" をクリックします。
+3. 上部の "Payment providers" タブを選択します。
+4. "BitPay" プラグインを見つけて "Enable" をクリックします。
 ![Enable BitPay plugin](./img/pretix/pretix-step-1-4.png)
 ----
-5. On left sidebar, click on "Payment".
+5. 左サイドバーで "Payment" をクリックします。
 ![Payment](./img/pretix/pretix-step-5.png)
 ----
-6. On the line of "BitPay" click on "Settings".
+6. "BitPay" の行で "Settings" をクリックします。
 ![BitPay settings](./img/pretix/pretix-step-6.png)
 ----
-7. Fill in the URL of your BTCPay Server instance, for example `https://mainnet.demo.btcpayserver.org` (this is where you have created your BTCPay Server store, see [Requirements](#requirements) above).
-8. Click on "Start pairing".
+7. BTCPay Server インスタンスの URL を入力します。例: `https://mainnet.demo.btcpayserver.org`（このインスタンス上に BTCPay ストアを作成している必要があります。上記 [Requirements](#要件) を参照）。
+8. "Start pairing" をクリックします。
 ![Start pairing process](./img/pretix/pretix-step-7-8.png)
 ----
-9. You will get redirected to your BTCPay Server "pairing permission" page. Select the store you want to pair to.
-10. Click on "Approve".
+9. BTCPay Server の "pairing permission" ページへリダイレクトされます。ペアリングするストアを選択します。
+10. "Approve" をクリックします。
 ![Approve pairing](./img/pretix/pretix-step-9-10.png)
 ----
-11. You should see the message "Pairing successful". You won't get redirected back to Pretix automatically, so you can close the tab now.
+11. "Pairing successful" と表示されます。Pretix へ自動で戻らないため、このタブは閉じて構いません。
 ![Pairing successful](./img/pretix/pretix-step-11.png)
 ----
-12. Go back to Pretix and click on "Save" on bottom right.
+12. Pretix に戻り、右下の "Save" をクリックします。
 ![Save settings](./img/pretix/pretix-step-12.png)
 ----
-13. You now see the "Payment settings" page, you see **Enable payment method** at the top, check this box
-14. **Payment method name**: Enter a name for the payment method, for example "Bitcoin / Lightning Network". You can leave the rest as is or adjust it to your needs.
-15. Click on "Save" on bottom right.
+13. "Payment settings" ページが表示されます。上部の **Enable payment method** をチェックします。
+14. **Payment method name**: 支払い方法名を入力します。例: "Bitcoin / Lightning Network"。その他の項目はそのままでも、必要に応じて調整しても構いません。
+15. 右下の "Save" をクリックします。
 ![Payment settings](./img/pretix/pretix-step-13-15.png)
 
-Congratulations, you have completed the setup.
+これで設定は完了です。
 
-Now you can try a test purchase and make sure the payment method works as expected.
+テスト購入を実行して、支払い方法が期待どおり動作することを確認してください。

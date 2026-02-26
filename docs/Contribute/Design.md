@@ -1,10 +1,10 @@
-# Design BTCPay Server
+# BTCPay Server のデザイン
 
-## Why designing matters
+## なぜデザインが重要か
 
-Designing for BTCPay Server consists of improving overall experience for the end-user, making it easier to navigate the menus, options, etc...
+BTCPay Server のデザインは、エンドユーザーの全体的な体験を改善し、メニューやオプションなどをより分かりやすくすることです。
 
-To contribute design to BTCPay Server, check out the [UX/UI channel](https://chat.btcpayserver.org/btcpayserver/channels/ux-ui) for current discussions and the Figma [getting started](https://www.figma.com/file/C7Xyq0FlxgFW8vaBr8ht1z/BTCPAY?node-id=1766%3A1005) section for the design projects that are currently being worked on.
+BTCPay Server のデザインに貢献するには、現在の議論は [UX/UI channel](https://chat.btcpayserver.org/btcpayserver/channels/ux-ui) を確認し、進行中のデザインプロジェクトは Figma の [getting started](https://www.figma.com/file/C7Xyq0FlxgFW8vaBr8ht1z/BTCPAY?node-id=1766%3A1005) セクションを確認してください。
 
-Graphic content also helps promote BTCPay Server. Be it full scale logos, memes or other graphics, we're always enjoying seeing what contributors come up with.
-Following the [Codified Design Guidelines](https://design.btcpayserver.org/) is **required** so that graphical content can be consistent between contributors.
+グラフィックコンテンツも BTCPay Server の普及に役立ちます。フルサイズのロゴ、ミーム、その他のグラフィックなど、コントリビューターが作るものを見るのを私たちは常に楽しみにしています。
+グラフィックコンテンツの一貫性を保つため、[Codified Design Guidelines](https://design.btcpayserver.org/) に従うことは**必須**です。

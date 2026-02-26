@@ -1,33 +1,33 @@
-# Extended Manual Setup
+# 拡張手動セットアップ
 
-This document lists steps for **manually deploying BTCPay Server** and additional related components. Following these steps is likely to take a long time. A shorter and more pragmatic approach is to use a [docker based deployment](https://github.com/btcpayserver/btcpayserver-docker).
+このドキュメントでは、**BTCPay Server を手動でデプロイ**する手順と、関連する追加コンポーネントを説明します。これらの手順には長時間かかる可能性があります。より短く実践的な方法として、[Docker ベースのデプロイ](https://github.com/btcpayserver/btcpayserver-docker)を利用できます。
 
-The instructions also build all the application components from source which can be an advantage for certain audit and/or security scenarios.
+この手順では、アプリケーションの全コンポーネントをソースからビルドします。これは、特定の監査やセキュリティ要件の場面で利点になることがあります。
 
 :::danger
 
-#### Not recommended for production use
+#### 本番利用には非推奨
 
-Manual installation is NOT recommended for production use unless you are very confident with your Operating System and Bitcoin security expertise. If you are unsure use the docker deployment or one of the other [deployment options](./README.md).
+手動インストールは、OS 運用と Bitcoin セキュリティに関する十分な知識と経験がない限り、本番利用には推奨されません。不安がある場合は、Docker デプロイ、または他の[デプロイオプション](./README.md)を利用してください。
 
-#### You must have technical literacy and be able to resolve any issues on your own. The community will not provide extensive support for this deployment.
+#### 技術的な素養があり、問題を自力で解決できることが必要です。このデプロイ方法に対してコミュニティから手厚いサポートは提供されません。
 
 :::
 
-## Installation Steps Overview
+## インストール手順の概要
 
-The instructions in this article have been tested on Ubuntu 20.04. They should be applicable to other Linux based distributions. They are also based on all components being on the same host or virtual machine. It is possible to split the components across different hosts but these instructions don't describe that.
+このページの手順は Ubuntu 20.04 で検証されています。他の Linux ディストリビューションにも適用できるはずです。また、すべてのコンポーネントを同一ホストまたは仮想マシン上に配置する前提になっています。コンポーネントを複数ホストに分離することも可能ですが、この手順では扱いません。
 
-An example hostname of `mainnet.demo.btcpayserver.org` has been used, it needs to be replaced with the hostname you are using for your BTCPay Server.
+ここではホスト名の例として `mainnet.demo.btcpayserver.org` を使用しています。実際には、あなたの BTCPay Server で使用するホスト名に置き換えてください。
 
-### Security
+### セキュリティ
 
-If you do use these instructions to install a BTCPay Server connected to the Bitcoin mainnet then at a minimum you should understand how the wallet mechanisms work. It's highly recommended to read the two articles below and ask questions if anything is not clear.
+この手順で Bitcoin メインネットに接続する BTCPay Server を構築する場合、最低限ウォレットの仕組みを理解しておく必要があります。以下の 2 つの記事を読み、不明点があれば質問することを強く推奨します。
 
-- [BTCPay Wallet FAQ](/FAQ/Wallet.md)
-- [Lightning Network and BTCPay (first section)](/LightningNetwork.md)
+- [BTCPay ウォレット FAQ](/FAQ/Wallet.md)
+- [Lightning Network と BTCPay（最初のセクション）](/LightningNetwork.md)
 
-As an additional aid below is a list of iptables rules and instructions which should include all the ports that need to be open. **NO WARRANTY**. Use at your own risk, **including risk of locking yourself out**.
+補足として、開放が必要なすべてのポートを含む想定の `iptables` ルールと手順を以下に示します。**無保証**です。**自身を締め出してしまうリスクを含め**、自己責任で利用してください。
 
 ```bash
 ~$ vi iptables.txt
@@ -54,35 +54,35 @@ COMMIT
 ~$ sudo iptables-restore < iptables.txt
 ```
 
-At this point if you are still connected to you ssh session it's a good sign. If not the rules are temporary and you can use whatever mechanism you have to remotely reboot your server and try again.
+この時点で SSH セッションが維持されていれば良い兆候です。もし切断されても、ルールは一時的なため、利用可能な手段でサーバーをリモート再起動して再試行できます。
 
-The rules have now been temporarily applied. To apply the rules automatically each time your server starts use the `iptables-persistent` package.
+ルールはここまでで一時適用されています。サーバー起動時に毎回自動適用するには `iptables-persistent` パッケージを使用します。
 
 ```bash
 ~$ sudo apt install iptables-persistent
 ```
 
-If you subsequently change the iptables rules and want to save them across reboots use the command below.
+後で `iptables` ルールを変更し、再起動後も保持したい場合は次のコマンドを使います。
 
 ```bash
 ~$ sudo netfilter-persistent save
 ```
 
-## Unprivileged user
+## 非特権ユーザー
 
-These instructions configure everything to run under an **unprivileged user** called `admin`. Create this user before proceeding:
+この手順では、すべてを `admin` という**非特権ユーザー**で実行するように構成します。先にこのユーザーを作成してください。
 
 ```bash
 ~$ sudo useradd -M admin && sudo usermod -L admin
 ```
 
-### Prerequisites
+### 前提条件
 
 - Postgresql
 - Tor
-- NGINX and Let's Encrypt
+- NGINX と Let's Encrypt
 
-### Application Components
+### アプリケーションコンポーネント
 
 - Bitcoin Core<sup>1,2</sup>
 - NBXplorer<sup>1,2</sup>
@@ -90,25 +90,25 @@ These instructions configure everything to run under an **unprivileged user** ca
 - Lightning Network Daemon (LND)<sup>2</sup>
 - Ride The Lightning (RTL)<sup>2</sup>
 
-<sup>1</sup> The bare minimum install of a BTCPay Server only requires these items. Using a bare minimum configuration reduces the functionality: no Lightning payments, no auto-renewal of TLS certificates, less reliable data store, less capable of handling NAT and more.
+<sup>1</sup> BTCPay Server の最小構成インストールでは、これらだけが必要です。最小構成では機能が制限されます: Lightning 支払い不可、TLS 証明書の自動更新なし、データストアの信頼性低下、NAT 対応力の低下など。
 
-<sup>2</sup> Built from source code.
+<sup>2</sup> ソースコードからビルド。
 
 ## Postgresql
 
-**Postgresql** can be used by BTCPay Server in place of the default SQLite file based storage. It's also possible to use MySQL.
+BTCPay Server では、既定の SQLite ファイルベースストレージの代わりに **Postgresql** を使用できます。MySQL を使用することも可能です。
 
-##### Install
+##### インストール
 
 ```bash
 ~$ sudo apt install postgresql postgresql-contrib
 ```
 
-##### Configuration
+##### 設定
 
-Covered in BTCPay Server Configuration.
+BTCPay Server の設定セクションで扱います。
 
-##### Check
+##### 確認
 
 ```bash
 ~$ psql --version
@@ -123,20 +123,20 @@ postgres=# \q
 
 ## Tor
 
-**Tor** can be used by the following components to provide enhanced privacy and/or help with NAT traversal:
+**Tor** は、プライバシー強化や NAT 越えの補助のために、以下のコンポーネントで利用できます。
 
-- Bitcoin Core Daemon
-- Lightning Network Daemon (LND).
+- Bitcoin Core デーモン
+- Lightning Network Daemon (LND)
 
-Additional information running Bitcoin Core with Tor support can be found [here](https://github.com/bitcoin/bitcoin/blob/master/doc/tor.md).
+Bitcoin Core を Tor サポート付きで実行するための追加情報は[こちら](https://github.com/bitcoin/bitcoin/blob/master/doc/tor.md)です。
 
-##### Install
+##### インストール
 
 ```bash
 ~$ sudo apt install tor
 ```
 
-##### Configuration
+##### 設定
 
 ```bash
 ~$ sudo vi /etc/tor/torrc  # (and uncomment two lines below)
@@ -145,9 +145,9 @@ CookieAuthentication 1
 ~$ sudo systemctl restart tor
 ```
 
-Covered further in Bitcoin and Lightning Network Daemon sections.
+詳細は Bitcoin セクションおよび Lightning Network Daemon セクションで説明します。
 
-##### Check
+##### 確認
 
 ```bash
 ~$ tor --version
@@ -157,44 +157,44 @@ tcp        0      0 127.0.0.1:9050          0.0.0.0:*               LISTEN      
 tcp        0      0 127.0.0.1:9051          0.0.0.0:*               LISTEN      1376/tor
 ```
 
-## NGINX and Let's Encrypt
+## NGINX と Let's Encrypt
 
-**NGINX** is used as a web server to manage HTTP requests to BTCPay Server and Ride The Lightning. Paired with **Let's Encrypt** it allows seamless procurement and renewal of a TLS certificate for your BTCPay Server instance.
+**NGINX** は、BTCPay Server と Ride The Lightning への HTTP リクエストを処理する Web サーバーとして使用します。**Let's Encrypt** と組み合わせることで、BTCPay Server インスタンス向け TLS 証明書の取得と更新をシームレスに行えます。
 
-Let's Encrypt is a free service for procuring and renewing TLS certificates. The service comes with scripts that can be installed to automatically manage the whole process.
+Let's Encrypt は TLS 証明書の取得と更新を行う無料サービスです。処理全体を自動管理するためのスクリプトも提供されています。
 
-##### Install
+##### インストール
 
-##### 1. Install NGINX.
+##### 1. NGINX をインストール
 
 ```bash
 ~$ sudo apt install nginx
 ```
 
-##### 2. Install Let's Encrypt
+##### 2. Let's Encrypt をインストール
 
 ```bash
 ~$ sudo apt install certbot python3-certbot-nginx
 ```
 
-##### Configuration
+##### 設定
 
-##### 1. Let's Encrypt TLS certificate
+##### 1. Let's Encrypt TLS 証明書
 
-You must create an A or AAAA record for **\<your domain name\>** that points to the IP address of your server instance.
-If your server is behind NAT then you need to forward port 80 to your instance.
+**\<your domain name\>** について、サーバーインスタンスの IP アドレスを指す A または AAAA レコードを作成する必要があります。
+サーバーが NAT 配下にある場合は、ポート 80 をインスタンスへフォワードする必要があります。
 
-The **certbot** script works by checking for a specific file on the web server hosting the requested domain. If it can't get the file the TLS certificate won't be issued. If the initial attempt fails it will be periodically re-attempted or you can simply re-run the command.
+**certbot** スクリプトは、要求したドメインをホストしている Web サーバー上に特定のファイルが存在するかを確認して動作します。ファイルを取得できない場合、TLS 証明書は発行されません。初回の試行に失敗した場合は定期的に再試行されるか、手動でコマンドを再実行できます。
 
 ```bash
 sudo certbot --nginx -d <your domain name> # (e.g: sudo certbot --nginx -d mainnet.demo.btcpayserver.org)
 ```
 
-##### 2. Add NGINX configuration file
+##### 2. NGINX 設定ファイルを追加
 
-The configuration file below has been copied from the BTCPay Server docker install.
+以下の設定ファイルは、BTCPay Server の Docker インストールからコピーしたものです。
 
-Search for "mainnet.demo.btcpayserver.org" and replace it with your own domain name.
+`mainnet.demo.btcpayserver.org` を検索し、あなた自身のドメイン名に置き換えてください。
 
 ```bash
 ~$ vi /etc/nginx/conf.d/default.conf
@@ -307,17 +307,17 @@ server {
 ~$ sudo systemctl status nginx
 ```
 
-If there is an error message restarting `nginx` try:
+`nginx` の再起動でエラーが出る場合は、次を試してください。
 
 ```bash
 sudo journalctl -xe --unit nginx
 ```
 
-##### Check
+##### 確認
 
-##### 1. Check Let's Encrypt
+##### 1. Let's Encrypt を確認
 
-It can be a little bit tricky to get everything set up correctly for the Let's Encrypt script to work correctly. Some additional commands are listed below to help with any troubleshooting.
+Let's Encrypt のスクリプトが正しく動作するように設定を整えるのは少し難しい場合があります。トラブルシューティングに役立つ追加コマンドを以下に示します。
 
 ```bash
 ~$ sudo certbot certificates
@@ -354,7 +354,7 @@ Congratulations, all renewals succeeded. The following certs have been renewed:
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 ```
 
-##### 2. Check NGINX.
+##### 2. NGINX を確認
 
 ```bash
 ~$ sudo nginx -v
@@ -377,14 +377,14 @@ tcp6       0      0 :::80                   :::*                    LISTEN      
 -- The job identifier is 19471.
 ```
 
-Attempt to open your web site in a browser. At this point it is expected that a `502 Bad Gateway`error will occur. The `nginx` logs can be checked to verify that the connection attempt was received.
+ブラウザで Web サイトを開いてみてください。この時点では `502 Bad Gateway` エラーが発生する想定です。接続試行を受信したかどうかは `nginx` ログで確認できます。
 
 ```bash
 ~$ tail /var/log/nginx/access.log
 mainnet.demo.btcpayserver.org 127.0.0.1 - - [27/Jul/2020:12:19:57 +0100] "GET / HTTP/2.0" 502 552 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36"
 ```
 
-If there is a problem then the `nginx` error log can also be checked.
+問題がある場合は、`nginx` のエラーログも確認してください。
 
 ```bash
 ~$ tail /var/log/nginx/error.log
@@ -392,31 +392,31 @@ If there is a problem then the `nginx` error log can also be checked.
 
 ## Bitcoin Core
 
-The gateway to the Bitcoin network for BTCPay Server components.
+BTCPay Server の各コンポーネントが Bitcoin ネットワークに接続するためのゲートウェイです。
 
-##### Install
+##### インストール
 
-The full instructions to **build Bitcoin Core from source** are [here](https://github.com/bitcoin/bitcoin/blob/master/doc/build-unix.md).
+**Bitcoin Core をソースからビルド**する完全な手順は[こちら](https://github.com/bitcoin/bitcoin/blob/master/doc/build-unix.md)です。
 
-The alternative to building from source is to download a signed binary distribution from [https://bitcoincore.org/en/download/](https://bitcoincore.org/en/download/).
+ソースからビルドしない場合は、署名済みバイナリ配布物を [https://bitcoincore.org/en/download/](https://bitcoincore.org/en/download/) からダウンロードできます。
 
 ```bash
 ~$ wget https://bitcoincore.org/bin/bitcoin-core-0.20.0/bitcoin-0.20.0-x86_64-linux-gnu.tar.gz
 ~$ wget https://bitcoincore.org/bin/bitcoin-core-0.20.0/SHA256SUMS.asc
 ```
 
-##### 1. Install Pre-requisites and dependencies
+##### 1. 前提パッケージと依存関係をインストール
 
-These instructions do not build the Bitcoin Core GUI components as they are not needed for `BTCPay Server`.
+この手順では、`BTCPay Server` に不要なため Bitcoin Core の GUI コンポーネントはビルドしません。
 
 ```bash
 ~$ sudo apt install build-essential libtool autotools-dev automake pkg-config bsdmainutils python3
 ~$ sudo apt install libevent-dev libboost-system-dev libboost-filesystem-dev libboost-test-dev libboost-thread-dev libminiupnpc-dev libzmq3-dev
 ```
 
-##### 2. Download and Build Source
+##### 2. ソースを取得してビルド
 
-Before cloning the `Bitcoin Core` repository identify the most recent stable version. One convenient way to do this is on the GitHub repository page look at the latest version under the "Releases" heading. At the time of writing the stable version is `0.20.0`. Adjust the tag in the `git clone` command below for the stable version you want to build.
+`Bitcoin Core` リポジトリをクローンする前に、最新の安定版を確認してください。簡単な方法は、GitHub リポジトリの「Releases」欄で最新版を確認することです。執筆時点の安定版は `0.20.0` です。下記 `git clone` コマンドのタグを、ビルドしたい安定版に合わせて調整してください。
 
 ```bash
 ~$ cd src
@@ -424,13 +424,13 @@ Before cloning the `Bitcoin Core` repository identify the most recent stable ver
 ~/src$ cd bitcoin
 ```
 
-A specific version of the Berkeley DB dependency needs to be installed.
+Berkeley DB 依存関係の特定バージョンをインストールする必要があります。
 
 ```bash
 ~/src/bitcoin$ ./contrib/install_db4.sh `pwd`
 ```
 
-Use the `autoconf` scripts to generate the make files and then build.
+`autoconf` スクリプトで make ファイルを生成し、その後ビルドします。
 
 ```bash
 ~/src/bitcoin$ ./autogen.sh
@@ -442,11 +442,11 @@ Use the `autoconf` scripts to generate the make files and then build.
 Bitcoin Core version v0.20.0
 ```
 
-##### 3. Create the configuration file
+##### 3. 設定ファイルを作成
 
-An example **configuration file** is available on the Bitcoin Core repository at https://github.com/bitcoin/bitcoin/blob/master/share/examples/bitcoin.conf.
+**設定ファイル**の例は、Bitcoin Core リポジトリの https://github.com/bitcoin/bitcoin/blob/master/share/examples/bitcoin.conf で参照できます。
 
-Create a **bitcoin.conf file** to suit your needs. An example file that is suitable for BTCPay Server is shown below. This configuration does not prune blocks which means as of May 2019 you will require 235 GB for the Bitcoin blockchain.
+用途に合わせて **bitcoin.conf ファイル**を作成してください。BTCPay Server に適した例を以下に示します。この設定ではブロックの pruned を行わないため、2019 年 5 月時点で Bitcoin ブロックチェーン用に 235 GB が必要です。
 
 ```bash
 ~$ vi bitcoin.conf
@@ -462,7 +462,7 @@ zmqpubrawtx=tcp://127.0.0.1:28333     # needed for lightning.
 #prune=5000                           # Recommended if not enough disk space for full 600+GB blockchain.
 ```
 
-Copy the file to the directory specified in the systemd service file and assign read permissions to all users.
+ファイルを systemd サービスファイルで指定したディレクトリにコピーし、すべてのユーザーに読み取り権限を付与します。
 
 ```bash
 ~$ sudo mkdir -p /etc/bitcoin
@@ -470,13 +470,13 @@ Copy the file to the directory specified in the systemd service file and assign 
 ~$ sudo chmod 644 /etc/bitcoin/bitcoin.conf
 ```
 
-##### 5. Create a systemd service
+##### 5. systemd サービスを作成
 
-An example **systemd service** file is available in the Bitcoin Core repository at https://raw.githubusercontent.com/bitcoin/bitcoin/master/contrib/init/bitcoind.service.
+**systemd サービス**ファイルの例は、Bitcoin Core リポジトリの https://raw.githubusercontent.com/bitcoin/bitcoin/master/contrib/init/bitcoind.service にあります。
 
-Edit the service file depending on your needs.
+必要に応じてサービスファイルを編集してください。
 
-In the example below the **User** and **Group** have been changed to use the `admin` user instead of requiring a new `bitcoin` user. If the `admin` user on your system is intended for running `BTCPayServer` this is a reasonable choice. Otherwise consider creating a dedicated `bitcoin` user.
+以下の例では、新しい `bitcoin` ユーザーを作成せずに済むよう、**User** と **Group** を `admin` ユーザーに変更しています。システム上の `admin` ユーザーを `BTCPayServer` 実行用として使う想定であれば妥当な選択です。そうでない場合は、専用の `bitcoin` ユーザー作成を検討してください。
 
 ```bash
 ~$ vi bitcoind.service
@@ -547,7 +547,7 @@ MemoryDenyWriteExecute=true
 WantedBy=multi-user.target
 ```
 
-Once the service file is ready complete the commands below.
+サービスファイルの準備ができたら、以下のコマンドを実行します。
 
 ```bash
 ~$ sudo cp bitcoind.service /etc/systemd/system
@@ -557,30 +557,30 @@ Once the service file is ready complete the commands below.
 Jul 26 21:51:52 ubuntu systemd[1]: Started Bitcoin daemon.
 ```
 
-If the start attempt shows an error message check the log using:
+起動時にエラーメッセージが表示された場合は、次でログを確認します。
 
 ```bash
 sudo journalctl -xe --unit bitcoind
 ```
 
-##### 6. Create a symbolic link to the bitcoind cookie file
+##### 6. bitcoind cookie ファイルへのシンボリックリンクを作成
 
-The `bitcoin-cli` client needs to authenticate to `bitcoind` for RPC calls. The easiest way to allow this is to create a symbolic link to the cookie file.
+`bitcoin-cli` クライアントが RPC 呼び出しを行うには `bitcoind` への認証が必要です。最も簡単な方法は、cookie ファイルへのシンボリックリンクを作成することです。
 
 ```bash
 ~$ cd ~
 ~$ ln -s /var/lib/bitcoind/.cookie .bitcoin/.cookie
 ```
 
-It's not vital to perform this step but if not done then every `bitcoin-cli` command needs to specify the path to the cookie file as below.
+この手順は必須ではありませんが、実施しない場合は以下のように `bitcoin-cli` コマンドごとに cookie ファイルのパス指定が必要になります。
 
 ```bash
 ~$ bitcoin-cli -rpccookiefile=/var/lib/bitcoind/.cookie getblockchaininfo
 ```
 
-##### Check
+##### 確認
 
-It will take Bitcoin anywhere from a few hours to a few days to synchronise the blockchain. Use any or all of the commands below to check its status.
+Bitcoin のブロックチェーン同期には、数時間から数日かかる場合があります。状態確認には以下のコマンドを必要に応じて使用してください。
 
 ```bash
 ~$ sudo systemctl status bitcoind
@@ -608,13 +608,13 @@ Active: active (running) since Sun 2020-07-26 21:51:52 IST; 2min 47s ago
 }
 ```
 
-When the `verificationprogress` gets to either `0.99..` or `1.0` your node has synchronised. To double check you can also use a public block explorer such as [https://blockstream.info/](https://blockstream.info/) to view the latest `Bitcoin` block and compare it to the `blocks` value from the `bitcoin-cli getblockchaininfo` result.
+`verificationprogress` が `0.99..` または `1.0` になれば、ノードの同期は完了しています。念のため、[https://blockstream.info/](https://blockstream.info/) のような公開ブロックエクスプローラーで最新の `Bitcoin` ブロックを確認し、`bitcoin-cli getblockchaininfo` の `blocks` 値と比較することもできます。
 
-##### Check Tor and Bitcoin
+##### Tor と Bitcoin の確認
 
-If Tor was installed prior to the Bitcoin Daemon then it should have automatically registered and begun listening on a torv2 onion address (note support for torv3 onion addresses is in the [pipeline](https://github.com/bitcoin/bitcoin/issues/18884)).
+Bitcoin Daemon より先に Tor をインストールしていれば、自動的に登録されて torv2 onion アドレスで待ち受けを開始しているはずです（torv3 onion アドレス対応は[進行中](https://github.com/bitcoin/bitcoin/issues/18884)です）。
 
-The easiest way to get your Bitcoin Daemon torv2 address is using `bitcoin-cli`:
+Bitcoin Daemon の torv2 アドレスを確認する最も簡単な方法は `bitcoin-cli` を使うことです。
 
 ```bash
 bitcoin-cli getnetworkinfo
@@ -640,7 +640,7 @@ bitcoin-cli getnetworkinfo
 }
 ```
 
-An alternative approach is to search the Bitcoin daemon log file:
+別の方法として、Bitcoin daemon のログファイルを検索することもできます。
 
 ```bash
 ~$ cat /var/lib/bitcoind/debug.log | grep onion
@@ -648,7 +648,7 @@ An alternative approach is to search the Bitcoin daemon log file:
 2019-05-23T18:24:22Z AddLocal(4d4al7v4hj5p7bb6.onion:8333,4)
 ```
 
-If there is a problem and no onion address can be found in the log file then check for Tor related error messages:
+問題があり、ログファイル内に onion アドレスが見つからない場合は、Tor 関連のエラーメッセージを確認してください。
 
 ```bash
 ~$ cat /var/lib/bitcoind/debug.log | grep tor
@@ -656,13 +656,13 @@ If there is a problem and no onion address can be found in the log file then che
 2020-07-27T08:03:28Z tor: Authentication cookie /run/tor/control.authcookie could not be opened (check permissions)
 ```
 
-The above error message can occur if the user accounts running the Bitcoin service does not have read access to the Tor authentication cookie file, [more info](https://github.com/bitcoin/bitcoin/blob/master/doc/tor.md#3-automatically-listen-on-tor). To fix this particular error add the required user account to the `debian-tor` group.
+上記のエラーメッセージは、Bitcoin サービス実行ユーザーが Tor の認証 cookie ファイルを読み取れない場合に発生することがあります（詳細は[こちら](https://github.com/bitcoin/bitcoin/blob/master/doc/tor.md#3-automatically-listen-on-tor)）。このエラーを解消するには、対象ユーザーを `debian-tor` グループに追加してください。
 
 ```bash
 sudo usermod -a -G debian-tor admin
 ```
 
-To change your onion address:
+onion アドレスを変更するには:
 
 ```bash
 ~$ rm /var/lib/bitcoind/onion_private_key
@@ -672,7 +672,7 @@ To change your onion address:
       "address": "qud5iwbntqxlfwjv.onion",
 ```
 
-To check your onion address from a remote host with tor installed:
+Tor をインストールしたリモートホストから onion アドレスを確認するには:
 
 ```bash
 ~$ torsocks --shell
@@ -683,7 +683,7 @@ To check your onion address from a remote host with tor installed:
 ~$ exit
 ```
 
-To connect another `bitcoind` instance to your new node:
+別の `bitcoind` インスタンスを新しいノードへ接続するには:
 
 ```bash
 ~$ bitcoin-cli addnode "4d4al7v4hj5p7bb6.onion" "add"
@@ -702,13 +702,13 @@ To connect another `bitcoind` instance to your new node:
 
 ## NBXplorer
 
-**NBXplorer** is a dotnet core application that monitors the Bitcoin blockchain for transactions of interest to your BTCPay Server.
+**NBXplorer** は、BTCPay Server に関連するトランザクションを Bitcoin ブロックチェーン上で監視する dotnet core アプリケーションです。
 
-##### Install
+##### インストール
 
-##### 1. Install .NET 8.0 SDK
+##### 1. .NET 8.0 SDK をインストール
 
-[Follow the install instuctions](https://docs.microsoft.com/en-us/dotnet/core/install/linux-ubuntu#2004-):
+[インストール手順に従ってください](https://docs.microsoft.com/en-us/dotnet/core/install/linux-ubuntu#2004-)。
 
 ```bash
 # Add Microsoft package repository
@@ -726,7 +726,7 @@ sudo apt-get install -y dotnet-sdk-8.0
 dotnet --version
 ```
 
-##### 2. Build NBXplorer
+##### 2. NBXplorer をビルド
 
 ```bash
 ~$ cd ~; mkdir -p src; cd src
@@ -736,15 +736,15 @@ dotnet --version
 ~/src/NBXplorer$ ./build.sh
 ```
 
-##### 3. Create Postgresql Database
+##### 3. Postgresql データベースを作成
 
-While NBXplorer support storing data in a local database via `--dbtrie`, this is deprecated. Here how to create the appropriate database and user for NBXlporer in **Postgresql**.
+NBXplorer は `--dbtrie` によるローカルデータベース保存にも対応していますが、これは非推奨です。ここでは **Postgresql** で NBXplorer 用のデータベースとユーザーを作成する方法を示します。
 
 ```bash
 ~$ sudo -u postgres psql
 ```
 
-Then execute
+次を実行します。
 
 ```SQL
 CREATE DATABASE nbxplorer TEMPLATE 'template0' LC_CTYPE 'C' LC_COLLATE 'C' ENCODING 'UTF8';
@@ -752,13 +752,13 @@ CREATE USER nbxplorer WITH ENCRYPTED PASSWORD 'urpassword';
 GRANT ALL PRIVILEGES ON DATABASE nbxplorer TO nbxplorer;
 ```
 
-Exit
+終了します。
 
 ```
 postgres=#\q
 ```
 
-##### 4. Create a configuration file
+##### 4. 設定ファイルを作成
 
 ```bash
 $ vi nbxplorer.config
@@ -775,11 +775,11 @@ postgres=User ID=nbxplorer;Password=urpassword;Application Name=nbxplorer;MaxPoo
 ~$ sudo chmod 644 /etc/nbxplorer/nbxplorer.config
 ```
 
-Note: If you previously used a `dbtrie` backend for NBXplorer, but want to switch to postgres, [read this documentation](https://github.com/dgarage/NBXplorer/blob/master/docs/Postgres-Migration.md).
+注: 以前 NBXplorer で `dbtrie` バックエンドを使っていて postgres に切り替えたい場合は、[このドキュメント](https://github.com/dgarage/NBXplorer/blob/master/docs/Postgres-Migration.md)を参照してください。
 
-##### 5. Create a systemd service
+##### 5. systemd サービスを作成
 
-An example **systemd service** file is shown below. Adjust the paths, User and Group accordingly.
+以下に **systemd サービス**ファイルの例を示します。パス、User、Group は環境に合わせて調整してください。
 
 ```bash
 ~$ vi nbxplorer.service
@@ -809,7 +809,7 @@ WantedBy=multi-user.target
 ~$ sudo systemctl enable --now nbxplorer
 ```
 
-##### Check
+##### 確認
 
 ```bash
 ~$ sudo journalctl -xe --unit nbxplorer --follow
@@ -820,16 +820,16 @@ May 23 19:13:35 btc run.sh[8065]: info: Configuration:  Network: Mainnet
 May 23 19:20:04 btc run.sh[8065]: info: Events:         BTC: New block 0000000000000000000c405ba5df5f5533359a4393247a0c52d26c458d4dd989 (577449)
 ```
 
-If it doesn't start correctly stop the service and run the application directly to get any error messages.
+正しく起動しない場合はサービスを停止し、アプリケーションを直接実行してエラーメッセージを確認します。
 
 ```bash
 ~$ sudo systemctl stop nbxplorer
 ~$ cd ~; pushd ./src/NBXplorer; ./run.sh; popd
 ```
 
-##### Update
+##### 更新
 
-Updating could break things. Be careful on a live system.
+更新によって不具合が起こる可能性があります。本番稼働中のシステムでは注意してください。
 
 ```bash
 # Stop the service
@@ -842,11 +842,11 @@ Updating could break things. Be careful on a live system.
 
 ## BTCPay Server
 
-Like NBXplorer the BTCPay Server application is also .NET Core. The install steps assume .NET Core was previosuly installed.
+NBXplorer と同様に、BTCPay Server も .NET Core アプリケーションです。以下のインストール手順は .NET Core が事前にインストール済みである前提です。
 
-##### Install
+##### インストール
 
-##### 1. Build BTCPay Server
+##### 1. BTCPay Server をビルド
 
 ```bash
 ~$ cd ~; mkdir -p src; cd src
@@ -859,15 +859,15 @@ Like NBXplorer the BTCPay Server application is also .NET Core. The install step
 ~/src/btcpayserver$ ./build.sh
 ```
 
-##### 2. Create Postgresql Database
+##### 2. Postgresql データベースを作成
 
-By default BTCPay Server will store data in a single SQLite file. A more robust option is to use **Postgresql** which requires the appropriate database and user to exist.
+BTCPay Server は既定で 1 つの SQLite ファイルにデータを保存します。より堅牢な選択肢として **Postgresql** を使う場合は、対応するデータベースとユーザーを作成する必要があります。
 
 ```bash
 ~$ sudo -u postgres psql
 ```
 
-Then execute
+次を実行します。
 
 ```sql
 CREATE DATABASE btcpay TEMPLATE 'template0' LC_CTYPE 'C' LC_COLLATE 'C' ENCODING 'UTF8';
@@ -875,13 +875,13 @@ CREATE USER btcpay WITH ENCRYPTED PASSWORD 'urpassword';
 GRANT ALL PRIVILEGES ON DATABASE btcpay TO btcpay;
 ```
 
-Exit
+終了します。
 
 ```bash
 postgres=#\q
 ```
 
-##### 3. Create a configuration file
+##### 3. 設定ファイルを作成
 
 ```bash
 $ vi btcpay.config
@@ -899,11 +899,11 @@ explorer.postgres=User ID=nbxplorer;Password=urpassword;Application Name=nbxplor
 ~$ sudo chmod 644 /etc/btcpay/btcpay.config
 ```
 
-Alternatively, you can start BTCPay Server using a configuration file, environment variables (`BTCPAY_EXPLORERPOSTGRES` and `BTCPAY_POSTGRES`), or command-line arguments (`--explorerpostgres` and `--postgres`).
+代替として、設定ファイル、環境変数（`BTCPAY_EXPLORERPOSTGRES` と `BTCPAY_POSTGRES`）、またはコマンドライン引数（`--explorerpostgres` と `--postgres`）で BTCPay Server を起動することもできます。
 
-##### 4. Create a systemd service
+##### 4. systemd サービスを作成
 
-An example **systemd service** file is shown below. Adjust the paths, User and Group accordingly.
+以下に **systemd サービス**ファイルの例を示します。パス、User、Group は環境に合わせて調整してください。
 
 ```bash
 ~$ vi btcpay.service
@@ -934,7 +934,7 @@ WantedBy=multi-user.target
 ~$ sudo systemctl enable --now btcpay
 ```
 
-##### Check
+##### 確認
 
 ```bash
 ~$ sudo journalctl -xe --unit btcpay --follow
@@ -944,14 +944,14 @@ May 23 20:01:25 btc run.sh[10263]: info: Configuration:  Configuration File: /et
 May 23 20:01:25 btc run.sh[10263]: info: Configuration:  Network: Mainnet
 ```
 
-If it doesn't start correctly stop the service and run the application directly to get any error messages.
+正しく起動しない場合はサービスを停止し、アプリケーションを直接実行してエラーメッセージを確認します。
 
 ```bash
 ~$ sudo systemctl stop btcpay
 ~$ cd ~; pushd ~/src/btcpayserver; ./run.sh --conf=/etc/btcpay/btcpay.config; popd;
 ```
 
-An example of checking information in the database.
+データベース内の情報を確認する例です。
 
 ```bash
 ~$ sudo -u postgres psql
@@ -961,12 +961,12 @@ btcpay=# select * from "Invoices";
 btcpay=# \q
 ```
 
-Attempting to open your BTCPay Server domain in a browser now should show the "Welcome to your BTCPay Server" page.
-If you are not using a Lightning Node this is the end of the install.
+この時点でブラウザから BTCPay Server のドメインを開くと、「Welcome to your BTCPay Server」ページが表示されるはずです。
+Lightning Node を使用しない場合は、ここでインストール完了です。
 
-##### Update
+##### 更新
 
-Updating could break things. Be careful on a live system.
+更新によって不具合が起こる可能性があります。本番稼働中のシステムでは注意してください。
 
 ```bash
 # Stop the service
@@ -979,11 +979,11 @@ Updating could break things. Be careful on a live system.
 
 ## Lightning Network Daemon (LND)
 
-##### Install
+##### インストール
 
-Full [instructions](https://github.com/lightningnetwork/lnd/blob/master/docs/INSTALL.md).
+完全な[手順](https://github.com/lightningnetwork/lnd/blob/master/docs/INSTALL.md)はリンク先を参照してください。
 
-##### 1. Install Go
+##### 1. Go をインストール
 
 ```bash
 ~$ sudo apt install make
@@ -998,7 +998,7 @@ Full [instructions](https://github.com/lightningnetwork/lnd/blob/master/docs/INS
 go version go1.13 linux/amd64
 ```
 
-##### 2. Build and install LND
+##### 2. LND をビルドしてインストール
 
 ```bash
 ~$ cd ~; mkdir -p src; cd src
@@ -1011,15 +1011,15 @@ go version go1.13 linux/amd64
 lnd version 0.10.99-beta commit=clock/v1.0.0-229-ge64e71d86dc1ac716c30a80f85a22e8fb544697f
 ```
 
-##### 3. Create a symbolic link to the Bitcoin configuration file
+##### 3. Bitcoin 設定ファイルへのシンボリックリンクを作成
 
-lnd looks for bitcoin.conf in a specific location to get necessary RPC and zeromq details.
+lnd は必要な RPC と zeromq の情報を取得するため、特定の場所にある `bitcoin.conf` を参照します。
 
 ```bash
 ~$ ln -s ~/.bitcoin/bitcoin.conf /etc/bitcoin/bitcoin.conf
 ```
 
-##### 4. Create a configuration file
+##### 4. 設定ファイルを作成
 
 ```bash
 ~$ vi lnd.conf
@@ -1055,9 +1055,9 @@ tor.v3=true
 ~$ sudo chmod 644 /etc/lnd/lnd.conf
 ```
 
-##### 5. Create a systemd service
+##### 5. systemd サービスを作成
 
-An example **systemd service** file is shown below. Adjust the paths, User and Group accordingly.
+以下に **systemd サービス**ファイルの例を示します。パス、User、Group は環境に合わせて調整してください。
 
 ```bash
 ~$ vi lnd.service
@@ -1093,25 +1093,25 @@ WantedBy=multi-user.target
 ~$ sudo systemctl enable --now lnd
 ```
 
-##### Configuration
+##### 設定
 
 :::danger
-**Running a Bitcoin Lightning daemon requires a hot wallet on your BTCPay Server.**
+**Bitcoin Lightning daemon の実行には、BTCPay Server 上のホットウォレットが必要です。**
 :::
 
-With Bitcoin the protocol has evolved and deterministic key derivation means the keys for your wallet can be kept in a different location to the BTCPay Server. Lightning daemons do not have this facility. Any Bitcoins committed or received in your lightning channels are controlled by private keys that are on your BTCPay Server.
+Bitcoin ではプロトコルの進化により、決定的鍵導出によってウォレット鍵を BTCPay Server とは別の場所に保管できます。Lightning daemon にはこの仕組みがありません。Lightning チャネルにコミットまたは受け取った Bitcoin は、BTCPay Server 上にある秘密鍵で管理されます。
 
-##### 1. Create a symbolic link to the lnd data directory
+##### 1. lnd データディレクトリへのシンボリックリンクを作成
 
-The install steps above use `/var/lib/lnd` as the data directory rather than the default `/home/user/.lnd`. In order to save typing when using the `lncli` client it's useful to add a symbolic directory link.
+上記のインストール手順では、既定の `/home/user/.lnd` ではなく `/var/lib/lnd` をデータディレクトリとして使用しています。`lncli` クライアント利用時の入力を減らすため、ディレクトリへのシンボリックリンクを作成しておくと便利です。
 
 ```bash
 ln -s /var/lib/lnd .lnd
 ```
 
-##### 2. Create Lightning wallet
+##### 2. Lightning ウォレットを作成
 
-The first time the lnd is started a new wallet must be created and the backup seed safely recorded (if someone else gets your seed they can steal your funds so keep it safe).
+lnd を初めて起動するときは、新しいウォレットを作成し、バックアップ用シードを安全に記録する必要があります（シードを第三者に知られると資金を盗まれる可能性があるため、安全に保管してください）。
 
 ```bash
 ~$ lncli create
@@ -1140,21 +1140,21 @@ Generating fresh cipher seed...
 lnd successfully initialized!
 ```
 
-Note that if the symbolic directory link from the previous step **was not** created the command is:
+前の手順でシンボリックディレクトリリンクを**作成していない**場合は、次のコマンドを使用します。
 
 ```bash
 lncli --lnddir /var/lib/lnd create
 ```
 
-##### 3. Unlock the wallet
+##### 3. ウォレットをアンロック
 
-Every time lnd is restarted the wallet **needs to be unlocked**. This is not ideal for a BTCPay Server that can is designed to run unattended but Lighting is still in its infancy.
+lnd を再起動するたびに、ウォレットの**アンロックが必要**です。無人運用を想定した BTCPay Server には理想的ではありませんが、Lightning はまだ発展途上です。
 
 ```bash
 ~$ lncli unlock
 ```
 
-##### Check
+##### 確認
 
 ```bash
 ~$ lncli getinfo
@@ -1165,7 +1165,7 @@ Every time lnd is restarted the wallet **needs to be unlocked**. This is not ide
  }
 ```
 
-Check the service:
+サービスを確認します。
 
 ```bash
 ~$ sudo journalctl -xe --unit lnd --follow
@@ -1175,52 +1175,52 @@ Jul 27 15:49:41 ubuntu lnd[654474]: 2020-07-27 15:49:41.939 [INF] DISC: Attempti
 Jul 27 15:49:41 ubuntu lnd[654474]: 2020-07-27 15:49:41.940 [ERR] SRVR: Unable to retrieve initial bootstrap peers: no addresses found
 ```
 
-The **Lightning Node Connection String** to use with `BTCPay Server` is:
+`BTCPay Server` で使用する **Lightning Node 接続文字列** は次のとおりです。
 
 ```bash
 type=lnd-rest;server=https://127.0.0.1:8080/;macaroonfilepath=/home/admin/.lnd/data/chain/bitcoin/mainnet/admin.macaroon;allowinsecure=true
 ```
 
-##### Add LND as internal node
+##### LND を内部ノードとして追加
 
-To add LND as internal node you have to edit the [btcpay.config file](#3-create-a-configuration-file):
+LND を内部ノードとして追加するには、`btcpay.config` ファイルを編集します。
 
 ```bash
 cd /etc/btcpay
 vi btcpay.config
 ```
 
-Right below the database part, add the `BTC.lightning` setting:
+データベース設定の直下に、`BTC.lightning` 設定を追加します。
 
 ```
 ### Lightning ###
 BTC.lightning=type=lnd-rest;server=https://127.0.0.1:8080/;macaroonfilepath=/home/admin/.lnd/data/chain/bitcoin/mainnet/admin.macaroon;allowinsecure=true
 ```
 
-See the "Use custom node" view on the Lightning node connection setting screen in BTCPay Server for details on the connection string.
+接続文字列の詳細は、BTCPay Server の Lightning ノード接続設定画面にある「Use custom node」ビューを参照してください。
 
-You need to restart BTCPay Server for the settings update to take effect:
+設定変更を反映するには、BTCPay Server を再起動する必要があります。
 
 ```bash
 ~$ sudo systemctl restart btcpay
 ```
 
-##### Check Tor and LND
+##### Tor と LND の確認
 
-As with the Bitcoin daemon if Tor is installed and the configuration file enables it (the one above does) then `lnd` will automatically register an onion address. In lnd's case torv3 addresses are supported.
+Bitcoin daemon と同様に、Tor がインストール済みで設定ファイルで有効化されていれば（上記設定では有効）、`lnd` は自動的に onion アドレスを登録します。lnd では torv3 アドレスに対応しています。
 
-The torv3 onion address below is a lot longer than the torv2 one from the Bitcoin daemon section (16 characters compared to 56 characters).
+以下の torv3 onion アドレスは、Bitcoin daemon セクションの torv2 よりかなり長くなります（16 文字に対して 56 文字）。
 
 ```bash
 ~$ lncli getinfo | grep onion
 "029b0e3c05595074afcffdca0fb22fb68a95a9c4698dd20962f647de4891eceabd@liyuvwbbycrvvuzcrsd5rq7svwckabejlsymcxiwzkj3smvlwcsqpjyd.onion:9735"
 ```
 
-The Tor address created by lnd can be used to connect to other Lighting peers on the Tor network. The Tor address can work in parallel with an IPv4 or IPv6 address. To register one of those make sure the `externalip` is set in the lnd configuration file.
+lnd が作成した Tor アドレスは、Tor ネットワーク上の他の Lightning ピアへの接続に使用できます。この Tor アドレスは IPv4 または IPv6 アドレスと並行して利用できます。IPv4/IPv6 を登録する場合は、lnd 設定ファイルで `externalip` が設定されていることを確認してください。
 
-##### Update
+##### 更新
 
-Updating could break things. Be careful on a live system.
+更新によって不具合が起こる可能性があります。本番稼働中のシステムでは注意してください。
 
 ```bash
 ~$ sudo systemctl stop lnd
@@ -1237,13 +1237,13 @@ lnd version 0.10.99-beta commit=clock/v1.0.0-229-ge64e71d86dc1ac716c30a80f85a22e
 ~$ sudo systemctl start lnd
 ```
 
-After the daemon has been restarted the wallet needs to be unlocked:
+daemon を再起動した後は、ウォレットをアンロックする必要があります。
 
 ```bash
 ~$ lncli unlock
 ```
 
-If `Ride The Lightning (RTL)` is installed, see next section, it may have stopped when lnd disappeared so it will also need to be restarted.
+`Ride The Lightning (RTL)` をインストールしている場合（次セクション参照）、lnd 停止時に RTL も停止している可能性があるため、あわせて再起動が必要です。
 
 ```bash
 ~$ sudo systemctl start rtl
@@ -1251,19 +1251,19 @@ If `Ride The Lightning (RTL)` is installed, see next section, it may have stoppe
 
 ## Ride The Lightning (RTL)
 
-**Ride the Lightning** is a Node.js application to manage your Lightning peers, channels, wallet etc.
+**Ride the Lightning** は、Lightning のピア、チャネル、ウォレットなどを管理する Node.js アプリケーションです。
 
-The advantage of the work that has gone into BTCPay Server is that the RTL web page can be controlled and accessed in the same manner as the BTCPay site.
+BTCPay Server 側の統合作業により、RTL の Web ページは BTCPay サイトと同じ方法で制御・アクセスできます。
 
-##### Install
+##### インストール
 
-##### 1. Install dependencies
+##### 1. 依存関係をインストール
 
 ```bash
 ~$ sudo apt install nodejs build-essential npm
 ```
 
-##### 2. Build RTL
+##### 2. RTL をビルド
 
 ```bash
 ~$ cd ~/src
@@ -1272,9 +1272,9 @@ The advantage of the work that has gone into BTCPay Server is that the RTL web p
 ~$ npm install --only=prod
 ```
 
-##### 3. Create a configuration file
+##### 3. 設定ファイルを作成
 
-Copy the sample config file from `sample-RTL-Config.json` and adjust accordingly. An example that works with the rest of the instructions in this document is shown below.
+`sample-RTL-Config.json` からサンプル設定ファイルをコピーし、環境に合わせて調整します。このドキュメント内の他の手順と整合する例を以下に示します。
 
 ```bash
 ~$ cp src/RTL/sample-RTL-Config.json RTL-Config.json
@@ -1314,10 +1314,10 @@ Copy the sample config file from `sample-RTL-Config.json` and adjust accordingly
 }
 ```
 
-Note that RTL has different behaviour and requirements compared to the other services documented in theses instructions, specifically:
+RTL は、この手順で説明している他サービスとは挙動と要件が異なります。主な点は次のとおりです。
 
-1. The configuration file needs to exist in RTL's data directory,
-2. The RTL process may write update to the configuration file.
+1. 設定ファイルは RTL のデータディレクトリに配置する必要があります。
+2. RTL プロセスが設定ファイルを書き換えることがあります。
 
 ```bash
 ~$ sudo mkdir -p /var/lib/rtl
@@ -1326,7 +1326,7 @@ Note that RTL has different behaviour and requirements compared to the other ser
 ~$ sudo chmod 644 /var/lib/rtl/RTL-Config.json
 ```
 
-##### 4. Create a systemd service
+##### 4. systemd サービスを作成
 
 ```bash
 ~$ vi rtl.service
@@ -1357,9 +1357,9 @@ WantedBy=multi-user.target
 ~$ sudo systemctl enable --now rtl
 ```
 
-##### Check
+##### 確認
 
-Check the service:
+サービスを確認します。
 
 ```bash
 ~$ sudo journalctl -xe --unit rtl --follow
@@ -1367,7 +1367,7 @@ Check the service:
 Jul 27 18:27:52 ubuntu node[988638]: Server is up and running, please open the UI at http://localhost:3000
 ```
 
-If it doesn't start correctly stop the service and run the application directly to get any error messages.
+正しく起動しない場合はサービスを停止し、アプリケーションを直接実行してエラーメッセージを確認します。
 
 ```bash
 ~$ sudo systemctl stop rtl
@@ -1375,11 +1375,11 @@ If it doesn't start correctly stop the service and run the application directly 
 Server is up and running, please open the UI at http://localhost:3000
 ```
 
-From the `BTCPay Server` web page the `RTL` interface should be accessible from `Server Settings->Services` under the "Crypto services exposed by your server" heading.
+`BTCPay Server` の Web ページでは、`Server Settings->Services` の「Crypto services exposed by your server」配下から `RTL` インターフェースにアクセスできるはずです。
 
-##### Update
+##### 更新
 
-Updating could break things. Be careful on a live system.
+更新によって不具合が起こる可能性があります。本番稼働中のシステムでは注意してください。
 
 ```bash
 ~$ sudo systemctl stop rtl
@@ -1387,8 +1387,8 @@ Updating could break things. Be careful on a live system.
 ~$ sudo systemctl start rtl
 ```
 
-## The End
+## おわりに
 
-### Questions
+### 質問
 
-Join the [community chat](https://chat.btcpayserver.org/) on Mattermost by downloading [Mattermost app](https://mattermost.com/download/), or on [Telegram](https://t.me/btcpayserver) in case you need further help or help or want to hang around with like-minded people.
+[Mattermost アプリ](https://mattermost.com/download/)をダウンロードして Mattermost の[コミュニティチャット](https://chat.btcpayserver.org/)に参加するか、[Telegram](https://t.me/btcpayserver) に参加してください。追加のサポートが必要な場合や、同じ関心を持つ人たちと交流したい場合に役立ちます。

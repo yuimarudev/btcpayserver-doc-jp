@@ -1,62 +1,62 @@
-# Payment Requests
+# 支払いリクエスト (Payment Requests)
 
-Payment Requests are a feature which allows BTCPay store owners to create long-lived invoices.
-Funds paid to a payment request use the exchange rate at the time of payment.
-This allows users to make payments at their convenience without having to negotiate or verify exchange rates with the store owner at the time of payment.
+Payment Requests は、BTCPay のストアオーナーが長期間有効な請求書を作成できる機能です。
+Payment Request への支払いは、支払い時点の為替レートを使用します。
+これにより、ユーザーは支払い時にストアオーナーと為替レートを交渉または確認することなく、都合のよいタイミングで支払えます。
 
-Users can pay requests in partial payments.
-The payment request will remain valid until it is paid in full or if the store owner requires an expiration time.
-Addresses are never reused. A new address is generated each time the user clicks pay to create an invoice for the payment request.
+ユーザーはリクエストに対して分割支払いできます。
+Payment Request は、全額支払い完了まで、またはストアオーナーが有効期限を設定した場合はその期限まで有効です。
+アドレスは再利用されません。ユーザーが支払いをクリックして Payment Request 用請求書を作成するたびに、新しいアドレスが生成されます。
 
-Store owners can also print payment requests (or export invoice data) for record keeping and accounting.
-BTCPay automatically labels invoices as Payment Requests in your store's invoice list.
+ストアオーナーは、記録保管や会計のために Payment Request を印刷（または請求書データをエクスポート）することもできます。
+BTCPay はストアの請求書一覧で、該当請求書に自動的に Payment Requests ラベルを付与します。
 
-## Payment Requests Video
+## 支払いリクエスト動画
 
-[![BTCPay Server Payment Requests](https://img.youtube.com/vi/j6CvwDPvfzQ/mqdefault.jpg)](https://www.youtube.com/watch?v=j6CvwDPvfzQ)
-
-
-## Create a Payment Request
-
-Click Requests > Create Requests
-
-![Create Payment Request](./img/payment-requests/PaymentRequestList.png)
+[![BTCPay Server の Payment Requests](https://img.youtube.com/vi/j6CvwDPvfzQ/mqdefault.jpg)](https://www.youtube.com/watch?v=j6CvwDPvfzQ)
 
 
-![Create Payment Request](./img/payment-requests/CreatePaymentRequest.png)
+## Payment Request の作成
+
+`Requests > Create Requests` をクリックします。
+
+![Payment Request を作成](./img/payment-requests/PaymentRequestList.png)
 
 
-When creating a payment request, you provide the following details:
-
-- **Title**: The payment request title
-- **Amount & Currency**: The requested amount in Fiat or cryptocurrency 
-- **Expiration Time**: The date until which payments are valid (optional)
-- **Email**: If specified, the email address will receive notification regarding any payment done on this request
-- **Request Customer data on checkout**: You can request customer's details such as email address or shipping address. 
-- Memo: If you wish to leave a note for the client, you can write them in the memo section. A text editor that allows you format your message and also include attachment 
+![Payment Request 作成画面](./img/payment-requests/CreatePaymentRequest.png)
 
 
-Select the option _Allow payee to create invoices in their own denomination_ if you want to allow partial payments to be made.
+Payment Request 作成時には、次の詳細を入力します:
+
+- **Title**: Payment Request のタイトル
+- **Amount & Currency**: 法定通貨または暗号通貨での請求金額
+- **Expiration Time**: 支払いを有効とする期限日（任意）
+- **Email**: 指定した場合、このリクエストへの支払いが行われるたびに通知を受け取るメールアドレス
+- **Request Customer data on checkout**: メールアドレスや配送先住所など、顧客情報の入力を求められます
+- Memo: 顧客向けのメモを残したい場合は、memo セクションに記載できます。メッセージの書式設定や添付ファイル追加が可能なテキストエディターを利用できます
+
+
+分割支払いを許可したい場合は、_Allow payee to create invoices in their own denomination_ を選択してください。
 
 :::warning
-Payment requests are store-dependent, which means that each payment request is associated with a store during creation.
-Be sure to have a wallet connected to your store which the payment request belongs to.
+Payment Request はストア依存です。つまり、各 Payment Request は作成時に 1 つのストアに紐付きます。
+Payment Request が属するストアに、必ずウォレットを接続してください。
 :::
 
-Click Create to review your payment request.
+`Create` をクリックして Payment Request を確認します。
 
-![View New Payment Request](./img/payment-requests/NewPaymentRequest.png)
+![新しい Payment Request を表示](./img/payment-requests/NewPaymentRequest.png)
 
-BTCPay creates a URL for the payment request. Share this URL to view your payment request.
-Need multiple of the same request ? You can use the `Clone` option in the main menu to duplicate payment requests as shown.
+BTCPay は Payment Request 用の URL を作成します。この URL を共有すると、Payment Request を表示できます。
+同じリクエストを複数作りたいですか？ メインメニューの `Clone` オプションで、以下のように Payment Request を複製できます。
 
 
-![View Payment Request List](./img/payment-requests/PaymentRequestListOptions.png)
+![Payment Request 一覧を表示](./img/payment-requests/PaymentRequestListOptions.png)
 
-## Paid Request for Payment
+## 支払い済み Payment Request
 
-Both the payee and requester can view the status of the payment request after sending payment.
-The status will appear as **Settled** if payment has been received in full.
-If only partial payment was made, the Amount Due will show the balance due.
+支払い送信後、受取人と依頼者の双方が Payment Request の状態を確認できます。
+支払いが全額受領されると、状態は **Settled** と表示されます。
+一部のみ支払われた場合は、Amount Due に残額が表示されます。
 
-![View Paid Payment Request](./img/payment-requests/PaidPaymentRequest.png)
+![支払い済み Payment Request を表示](./img/payment-requests/PaidPaymentRequest.png)

@@ -1,88 +1,97 @@
-# Notifications
+# 通知
 
-Notifications to monitor BTCPay Server events can be configured in several different ways.
+BTCPay Server のイベントを監視するための通知は、いくつかの方法で設定できます。
 
-- [Notification Alerts](#notification-alerts)
-- [Server level SMTP (Email)](#server-emails)
-- [Store level SMTP (Email)](#store-emails)
-- [Store level Webhooks](https://docs.btcpayserver.org/API/Greenfield/v1/#tag/Webhooks)
+- [通知アラート](#notification-alerts)
+- [サーバーレベル SMTP (Email)](#server-emails)
+- [ストアレベル SMTP (Email)](#store-emails)
+- [ストアレベル Webhook](https://docs.btcpayserver.org/API/Greenfield/v1/#tag/Webhooks)
 
-## Notification Alerts
+<a id="notification-alerts"></a>
+## 通知アラート
 
-Click the notification icon in the main header to view the current notifications. The notification page shows the status of all current notifications such as invoice events, payouts, version updates, etc. Notifications can be marked as seen from the notifications dropdown or the notifications page.
+現在の通知を確認するには、メインヘッダーの通知アイコンをクリックします。通知ページには、請求書イベント、払い出し、バージョン更新など、現在の通知の状態が表示されます。通知は、通知ドロップダウンまたは通知ページから既読にできます。
 
-![BTCPay Notifications](./img/notifications/notification-page.png)
+![BTCPay 通知](./img/notifications/notification-page.png)
 
-Each user registered on the server can manage the notifications they receive.
+サーバーに登録されている各ユーザーは、受信する通知を管理できます。
 
-![BTCPay Manage Notifications](./img/notifications/notification-manage.png)
+![BTCPay 通知管理](./img/notifications/notification-manage.png)
 
-## Server Emails
+<a id="server-emails"></a>
+## サーバーメール
 
-Emails can be sent from the server-level of BTCPay. These are [user emails](#user-emails). Admins can setup server SMTP in:
+メールは BTCPay のサーバーレベルから送信できます。これらは [ユーザーメール](#user-emails) です。管理者は次の場所でサーバー SMTP を設定できます:
 
 Server Settings > Email server > [Setup](#smtp-email-setup)
 
-## Store Emails
+<a id="store-emails"></a>
+## ストアメール
 
-Emails can be sent from the store-level of BTCPay. These emails are for store related events such as invoices. Users can setup store SMTP in:
+メールは BTCPay のストアレベルから送信できます。これらのメールは請求書など、ストア関連イベント向けです。ユーザーは次の場所でストア SMTP を設定できます:
 
 Store Settings > General Settings > Services > Email > [Setup](#smtp-email-setup)
 
-### SMTP Email Setup
+<a id="smtp-email-setup"></a>
+### SMTP メール設定
 
-Use the Quick fill settings dropdown for commonly used email client setup parameters. Send yourself a test email from the same page to verify your setup parameters work properly.
+よく使うメールクライアント設定値は、Quick fill settings ドロップダウンで入力できます。同じページからテストメールを自分宛に送って、設定が正しく動作することを確認してください。
 
 ![BTCPay Email SMTP](./img/smtp/smtp-setup.png)
 
 ![BTCPay Email SMTP](./img/smtp/validate-smtp-setup.png)
 
-Each email client may have different requirements for setting up SMTP. For more information see this [SMTP FAQ](./FAQ/ServerSettings.md#how-to-configure-smtp-settings-in-btcpay) or refer to your email provider's documentation.
+SMTP の設定要件はメールクライアントごとに異なる場合があります。詳しくはこの [SMTP FAQ](./FAQ/ServerSettings.md#how-to-configure-smtp-settings-in-btcpay) を参照するか、メールプロバイダーのドキュメントを確認してください。
 
-# User Emails
+<a id="user-emails"></a>
+# ユーザーメール
 
-There are various user emails built-in to your BTCPay Server to communicate with your users.
+BTCPay Server には、ユーザーとのやり取りに利用できるさまざまなユーザーメール機能が組み込まれています。
 
 :::warning
-User emails will only be sent if SMTP is enabled for the server.
+ユーザーメールは、サーバーで SMTP が有効な場合にのみ送信されます。
 :::
 
-- [Forgot Password](#forgot-password-email)
-- [New User Confirmation](#new-user-confirmation-email)
-- [New User Invitation](#new-user-invitation-email)
-- [Custom Emails](#custom-emails)
+- [パスワード忘れ](#forgot-password-email)
+- [新規ユーザー確認](#new-user-confirmation-email)
+- [新規ユーザー招待](#new-user-invitation-email)
+- [カスタムメール](#custom-emails)
 
-## Forgot Password Email
+<a id="forgot-password-email"></a>
+## パスワード忘れメール
 
-This email can be sent to users who have lost their password. If SMTP is not enabled on the server, there is [no easy way](./FAQ/ServerSettings.md#forgot-btcpay-admin-password) to reset any user passwords including the server admin's password. Be sure to save your password in a safe place or setup email for your server.
+このメールは、パスワードを失念したユーザーに送信できます。サーバーで SMTP が有効でない場合、サーバー管理者のパスワードを含むすべてのユーザーパスワードをリセットする [簡単な方法](./FAQ/ServerSettings.md#forgot-btcpay-admin-password) はありません。パスワードは安全な場所に保存するか、サーバーにメール設定を行ってください。
 
-## New User Confirmation Email
+<a id="new-user-confirmation-email"></a>
+## 新規ユーザー確認メール
 
-This email is used to confirm new user account registration. In order to reduce spam account registration, email confirmation may be required by the server admin (set in server settings policies). New users can click the link in this email to verify their account to complete their registration process.
+このメールは、新規ユーザーアカウント登録を確認するために使用されます。スパム登録を減らすために、サーバー管理者がメール確認を必須にする場合があります（サーバー設定ポリシーで設定）。新規ユーザーはこのメール内のリンクをクリックしてアカウントを検証し、登録プロセスを完了できます。
 
-## New User Invitation Email
+<a id="new-user-invitation-email"></a>
+## 新規ユーザー招待メール
 
-Send an invitation email to [invite a new user](./FAQ/ServerSettings.md#how-to-add-a-new-user-by-invite) to register an account on your server. This can be used to keep server registration closed to the public but still invite new users.
+招待メールを送信して、サーバー上でアカウント登録する [新規ユーザーを招待](./FAQ/ServerSettings.md#how-to-add-a-new-user-by-invite) できます。これにより、サーバー登録を一般公開せずに新規ユーザーだけを招待できます。
 
-## Email rules
+<a id="custom-emails"></a>
+## メールルール
 
-Email rules allow BTCPay Server to send customized emails from your store based on events.
-Click the `Configure` button and `create` a new Email rule.
+メールルールを使うと、イベントに応じてストアから送信するメールを BTCPay Server でカスタマイズできます。
+`Configure` ボタンをクリックし、新しい Email rule を `create` してください。
 
-Set your Email trigger out of the following :
+次の中から Email trigger を設定します:
 
-- Invoice created
-- Invoice Received Payment
-- Invoice Processing
-- Invoice Expired
-- Invoice Settled
-- Invoice Invalid
-- Invoice Payment Settled
+- 請求書作成 (`Invoice created`)
+- 請求書の支払い受領 (`Invoice Received Payment`)
+- 請求書処理中 (`Invoice Processing`)
+- 請求書期限切れ (`Invoice Expired`)
+- 請求書決済完了 (`Invoice Settled`)
+- 請求書無効 (`Invoice Invalid`)
+- 請求書支払い決済完了 (`Invoice Payment Settled`)
 
-Set a recipient email address where you'd want to be updated by email on store events, or tick the option for `Send email to the buyer if an email was provided to the invoice`.
-Fill out a subject for the event email, and you can stylize the body of the email at last.
+ストアのイベント通知を受け取りたい受信先メールアドレスを設定するか、`Send email to the buyer if an email was provided to the invoice` オプションにチェックを入れてください。
+イベントメールの件名を設定し、最後に本文を任意にスタイル設定できます。
 
-Possible placeholder's we currently offer are as follows :
+現在利用できるプレースホルダーは次のとおりです:
 
 ```
             {Invoice.Id}
@@ -93,6 +102,6 @@ Possible placeholder's we currently offer are as follows :
             {Invoice.OrderId}
 ```
 
-Find the source [here for possible updates](https://github.com/btcpayserver/btcpayserver/blob/master/BTCPayServer/HostedServices/StoreEmailRuleProcessorSender.cs)
+更新の可能性を含むソースは [こちら](https://github.com/btcpayserver/btcpayserver/blob/master/BTCPayServer/HostedServices/StoreEmailRuleProcessorSender.cs) で確認できます。
 
-![Create new Email rule](./img/FAQ/btcpayemailrule1.jpg)
+![新しい Email rule を作成](./img/FAQ/btcpayemailrule1.jpg)

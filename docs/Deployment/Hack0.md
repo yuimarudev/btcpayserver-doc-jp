@@ -1,65 +1,65 @@
 # Hack0
 
-Hack0 is an alternative to [Raspberry Pi](/Deployment/RaspberryPi.md) deployments.
-It greatly simplifies the installation steps by providing the hardware and the operating system to run your BTCPay Server with docker deployment.
+Hack0 は [Raspberry Pi](/Deployment/RaspberryPi4.md) デプロイの代替です。
+ハードウェアと OS が提供されるため、docker デプロイで BTCPay Server を動かすためのインストール手順を大幅に簡素化できます。
 
-This project is maintained by [DG Lab](https://www.dglab.com/en/), if you need help, come on our [support chat](https://chat.btcpayserver.org/btcpayserver/channels/hack0).
+このプロジェクトは [DG Lab](https://www.dglab.com/en/) がメンテナンスしています。サポートが必要な場合は [support chat](https://chat.btcpayserver.org/btcpayserver/channels/hack0) に参加してください。
 
-Hack0 aims at two different kind of users: `Distributors` and `End users`.
+Hack0 は2種類のユーザーを想定しています: `Distributors` と `End users`。
 
-- `End users` are people ultimately running the Hack0 for their own purposes.
-- `Distributors` are people who buy the different part of the hardware, assemble it together, install Hack0, and distribute a plug-and-play box for `End users`.
+- `End users` は最終的に自分の用途で Hack0 を運用する人です。
+- `Distributors` は各種ハードウェア部品を購入して組み立て、Hack0 をインストールし、`End users` 向けにプラグアンドプレイの箱として配布する人です。
 
-If you buy the different piece of hardware for your Hack0, assemble, install hack0, then use it yourself, you are both a `distributor` and a `end users` as far as this documentation is concerned.
+Hack0 の部品を自分で購入・組み立て・インストールして自分で使う場合、このドキュメント上では `distributor` と `end users` の両方に該当します。
 
-You can watch an introduction here:
+紹介動画はこちらです。
 
 [![Introduction to Hack0](https://img.youtube.com/vi/m3i2EUTEukM/mqdefault.jpg)](https://www.youtube.com/watch?v=m3i2EUTEukM)
 
-## Hardware specification (for distributors)
+## ハードウェア仕様（distributors 向け）
 
-Here is the advised parts for running a Hack0:
+Hack0 の動作に推奨されるパーツは次のとおりです。
 
 - RockPro64 4GB ([Link](https://store.pine64.org/?product=rockpro64-4gb-single-board-computer)) `79.99$`
-- USB adapter for EMMC Module ([Link](https://pine64.com/product/usb-adapter-for-emmc-module/)) `4.99$`
+- EMMC Module 用 USB アダプター ([Link](https://pine64.com/product/usb-adapter-for-emmc-module/)) `4.99$`
 - EMMC 32GB ([Link](https://pine64.com/product/32gb-emmc-module/)) `24.95$`
-- Fan For ROCKPro64 20mm Mid Profile Heatsink ([Link](https://pine64.com/product/fan-for-rockpro64-20mm-mid-profile-heatsink/)) `2.99$`
+- ROCKPro64 20mm Mid Profile Heatsink 用ファン ([Link](https://pine64.com/product/fan-for-rockpro64-20mm-mid-profile-heatsink/)) `2.99$`
 - ROCKPro64 20mm Mid Profile Heatsink ([Link](https://pine64.com/product/rockpro64-20mm-mid-profile-heatsink/)) `3.29$`
 - SSD 500GB PCIe NVMe ([Link](https://www.crucial.com/ssd/p2/CT500P2SSD8)) `66.99$`
-- M.2 to PCIe adapter ([Link](https://www.silverstonetek.com/en/product/info/expansion-cards/ECM25/)) `25$`
+- M.2 to PCIe アダプター ([Link](https://www.silverstonetek.com/en/product/info/expansion-cards/ECM25/)) `25$`
 
-Total: `188.2$`
+合計: `188.2$`
 
-It is possible to replace the EMMC module and adapter by a microSD. But tests has shown that microSD aren't reliable on long term and may cease to work after 2-3 years of use.
+EMMC モジュールとアダプターを microSD に置き換えることも可能です。ただしテストでは、microSD は長期運用で信頼性が低く、2〜3年の使用後に動作しなくなる可能性が示されています。
 
-## Factory installation (for distributors)
+## 出荷時インストール（distributors 向け）
 
-Once you have your hardware, you need to flash the Hack0 image.
+ハードウェアを用意したら、Hack0 イメージを書き込みます。
 
-The Hack0 is based on the armbian distribution. You can build the image yourself by following instruction [on our github page](https://github.com/dgarage/hack0-armbian/tree/btcpay/userpatches). You can also find [pre-built image](https://github.com/dgarage/hack0-armbian/tree/btcpay/userpatches#pre-built-images) ready to download to save time on this page.
+Hack0 は armbian ディストリビューションをベースにしています。[GitHub ページの手順](https://github.com/dgarage/hack0-armbian/tree/btcpay/userpatches)に従って自分でイメージをビルドできます。時間を節約したい場合は、同ページにあるダウンロード可能な [pre-built image](https://github.com/dgarage/hack0-armbian/tree/btcpay/userpatches#pre-built-images) も利用できます。
 
-Once you have the image, you can flash it on the EMMC module thanks to the USB adapter for EMMC Module.
-During the first start, hack0 is in `setup mode`, the setup mode will:
+イメージを入手したら、EMMC Module 用 USB アダプターを使って EMMC モジュールに書き込みます。
+初回起動時、hack0 は `setup mode` で動作し、このセットアップモードでは次が行われます。
 
-> :warning: When you first boot a pre-built images, the hack0 will be in `setup mode`, which will wipe all data in the SSD drive.
+> :warning: pre-built image を最初に起動すると、hack0 は `setup mode` となり、SSD ドライブ上のデータをすべて消去します。
 
-During the `setup mode`, observe the two leds positioned next to the ethernet connector. You will see the red led staying on, while the white led is blinking.
-Once the setup mode succeed, the red led turns off and the white led turns on without blinking. At this point, you can safely disconnect the Hack0. It is now ready to be used by `end users`.
+`setup mode` 中は ethernet コネクタ横の2つの LED を確認してください。赤色 LED は点灯したまま、白色 LED は点滅します。
+セットアップが成功すると、赤色 LED は消灯し、白色 LED は点滅せずに点灯します。この時点で Hack0 を安全に取り外せます。`end users` が利用できる状態です。
 
-If the setup failed, then the red led will turns on, while the white turns off.
+セットアップに失敗した場合は、赤色 LED が点灯し、白色 LED は消灯します。
 
-## End user setup
+## エンドユーザー向けセットアップ
 
-As a end user, you only need to plug you hack0 with a ethernet cable to your network.
-After waiting 5 minutes, you should be able to access `http://hack0.local` which will show you the registration form of your BTCPay Server instance.
+エンドユーザーは、hack0 を ethernet ケーブルでネットワークに接続するだけです。
+5分ほど待つと `http://hack0.local` にアクセスでき、BTCPay Server インスタンスの登録フォームが表示されます。
 
-In some case, `hack0.local` might not work, and you need to use a tool such as [Angry IP Scanner](https://angryip.org/) to locate the IP address of your hack0, then connect to it. If your internet router has a configuration page, you can also find the IP of your hack0 there. You can then connect to `http://<ipaddress>`.
+場合によっては `hack0.local` が機能せず、[Angry IP Scanner](https://angryip.org/) のようなツールで hack0 の IP アドレスを探して接続する必要があります。ルーターに管理画面がある場合はそこでも hack0 の IP を確認できます。その場合は `http://<ipaddress>` に接続してください。
 
 ## FAQ
 
-### How to connect via SSH to your hack0?
+### hack0 に SSH で接続するには？
 
-You need to add your public ssh key to `http://hack0.local/server/services/ssh`. Do not remove the `btcpayserver` key that already exists.
-After this, you should be able to connect via ssh with `ssh root@hack0.local` or Putty.
+`http://hack0.local/server/services/ssh` に公開 ssh キーを追加する必要があります。すでに存在する `btcpayserver` キーは削除しないでください。
+これで `ssh root@hack0.local` または Putty で ssh 接続できるはずです。
 
 ![SSH Authorized keys](../img/SSH-Authorized-Keys.png)

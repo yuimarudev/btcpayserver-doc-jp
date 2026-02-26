@@ -1,40 +1,40 @@
-# Azure Deployment
+# Azure デプロイ
 
-This setup is similar to the [Docker Deployment](https://docs.btcpayserver.org/Docker/), except that the `docker-compose` is hosted by **Microsoft Azure**.
+このセットアップは [Docker Deployment](https://docs.btcpayserver.org/Docker/) と似ていますが、`docker-compose` を **Microsoft Azure** 上でホスティングする点が異なります。
 
-## One-click setup
+## ワンクリックセットアップ
 
-Start by clicking the following button:
+まず、次のボタンをクリックします。
 
 [![Deploy to Azure](../img/deploy-to-azure.svg)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fbtcpayserver%2Fbtcpayserver-azure%2Fmaster%2Fazuredeploy.json)
 
-You can log into [Azure](https://azure.microsoft.com/en-us/account/) with your Microsoft account.
+[Azure](https://azure.microsoft.com/en-us/account/) には Microsoft アカウントでログインできます。
 
-Final installation steps:
+最終インストール手順:
 
-Fill in the remaining options: ![Azure Resource Config](../img/AzureResourceConfig.png)
+残りのオプションを入力します: ![Azure Resource Config](../img/AzureResourceConfig.png)
 
-- Click 'Purchase' to confirm
-- (Wait for Azure deployment)
-- Type `ip` into the search bar and select the first option, `BTCPayServerPublicIP`
-- Copy the hostname for your Azure deployment, under `DNS name`: ![Azure BTCPayServerPublicIP](../img/AzureBTCPayServerPublicIP.png)
-- Visit it (all major browsers supported)
-- Click 'Register' and create an account - This will be your **admin** account!
-- At your domain registrar, point your domain at this hostname (read more: [How to change your BTCPay Server domain name](../FAQ/Deployment.md#how-to-change-your-btcpay-server-domain-name))
-- Then, visit `https://EXAMPLE.eastus.cloudapp.azure.com/server/maintenance`
-- Enter your domain name and click 'Confirm'
-- (Wait 1-5 minutes)
-- **Done!** Visit `https://EXAMPLE.MYSITE.com/stores` to create your store and begin invoicing.
+- 確認のため `'Purchase'` をクリック
+- （Azure のデプロイ完了を待つ）
+- 検索バーに `ip` と入力し、最初の項目 `BTCPayServerPublicIP` を選択
+- `DNS name` の下にある Azure デプロイのホスト名をコピー: ![Azure BTCPayServerPublicIP](../img/AzureBTCPayServerPublicIP.png)
+- そのホスト名へアクセス（主要ブラウザ対応）
+- `'Register'` をクリックしてアカウントを作成。これが **admin** アカウントになります
+- ドメインレジストラでこのホスト名にドメインを向ける（詳細: [How to change your BTCPay Server domain name](../FAQ/Deployment.md#how-to-change-your-btcpay-server-domain-name)）
+- その後、`https://EXAMPLE.eastus.cloudapp.azure.com/server/maintenance` にアクセス
+- あなたのドメイン名を入力して `'Confirm'` をクリック
+- （1〜5 分待機）
+- **完了!** `https://EXAMPLE.MYSITE.com/stores` にアクセスしてストアを作成し、請求を開始できます。
 
-For advanced users, you can connect via SSH with the information on `https://EXAMPLE.MYSITE.com/server/services/ssh`, and:
+上級者は、`https://EXAMPLE.MYSITE.com/server/services/ssh` の情報で SSH 接続し、次を実行できます。
 
-- Run `docker ps` and `docker logs xxx` to view running processes
-- Run `btcpay-down.sh` and `btcpay-up.sh` to stop and start the BTCPayServer
+- 実行中プロセス確認のため `docker ps` と `docker logs xxx` を実行
+- BTCPayServer を停止・起動するため `btcpay-down.sh` と `btcpay-up.sh` を実行
 
-Approximate Cost (unpruned, Bitcoin-only, after Azure $200 free trial): **60 USD per month**
+概算コスト（unpruned、Bitcoin-only、Azure の 200 ドル無料トライアル後）: **月額 60 USD**
 
-After all your nodes have synced and you've confirmed everything works, follow [this guide](./AzurePennyPinching.md) to fine-tune for savings; costs should drop to **30 or 40 USD per month**.
+すべてのノード同期が完了し、動作確認できたら、節約のために[このガイド](./AzurePennyPinching.md)で調整してください。コストは **月額 30〜40 USD** まで下げられるはずです。
 
 [![BTCPay Server - Azure](https://img.youtube.com/vi/xh3Eac66qc4/mqdefault.jpg)](https://www.youtube.com/watch?v=xh3Eac66qc4)
 
-Learn more: [btcpayserver/btcpayserver-azure](https://github.com/btcpayserver/btcpayserver-azure)
+詳しくは: [btcpayserver/btcpayserver-azure](https://github.com/btcpayserver/btcpayserver-azure)

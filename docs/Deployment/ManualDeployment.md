@@ -1,40 +1,44 @@
-# Minimal manual setup
+<!-- legacy-anchor-aliases -->
+<span id="testnet-specific-deployments"></span>
+<!-- /legacy-anchor-aliases -->
+
+# 最小構成の手動セットアップ
 
 :::danger
 
-#### Not recommended for production use
+#### 本番利用には非推奨
 
-Manual installation is NOT recommended for production use unless you are very confident with your Operating System and Bitcoin security expertise. If you are unsure use the docker deployment or one of the other [deployment options](./README.md).
+OS と Bitcoin セキュリティに十分な専門知識と自信がない限り、手動インストールは本番利用に推奨されません。不安がある場合は Docker デプロイ、または他の [デプロイ方法](./README.md) を利用してください。
 
-#### You must have technical literacy and be able to resolve any issues on your own. The community will not provide extensive support for this deployment.
+#### 技術的な読解力があり、問題を自力で解決できることが必須です。このデプロイ方法についてコミュニティから手厚いサポートは提供されません。
 
 :::
 
-The process is basically the following:
+手順の概要は次の通りです。
 
-1. Download and sync [Bitcoin Core](https://bitcoincore.org)
-2. Clone and run [NBXplorer](https://github.com/dgarage/NBxplorer)
-3. Clone and run [BTCPay Server](https://github.com/btcpayserver/btcpayserver)
+1. [Bitcoin Core](https://bitcoincore.org) をダウンロードして同期する
+2. [NBXplorer](https://github.com/dgarage/NBxplorer) をクローンして実行する
+3. [BTCPay Server](https://github.com/btcpayserver/btcpayserver) をクローンして実行する
 
-Take a look at our video to learn more:
+詳細は以下の動画も参照してください。
 
 [![BTCPay Server - Setup](https://img.youtube.com/vi/Xo_vApXTZBU/mqdefault.jpg)](https://www.youtube.com/watch?v=Xo_vApXTZBU)
 
-## Warning: Not recommended to use in production
+## 警告: 本番利用には非推奨
 
-**Manual installation** is NOT recommended in production. It should be only used for learning purpose.
+**手動インストール** は本番環境には推奨されません。学習目的でのみ使用してください。
 
-Instead you should use the [docker deployment](https://github.com/btcpayserver/btcpayserver-docker).
+代わりに [docker deployment](https://github.com/btcpayserver/btcpayserver-docker) を使用してください。
 
-The docker deployment will provide you easy update system and make sure that all moving parts are wired correctly without any technical knowledge. It will also setup HTTPS for you.
+docker deployment では、簡単な更新方式が提供され、すべての構成要素が技術的な知識なしでも正しく連携されます。HTTPS も自動で設定されます。
 
-## Typical manual installation
+## 一般的な手動インストール
 
-This steps have been done on Ubuntu 18.04, adapt for your own install.
+以下の手順は Ubuntu 18.04 で実施したものです。ご自身の環境に合わせて調整してください。
 
-For Testnet specific deployment, after installing Bitcoin, .NET Core, NBXplorer and BTCPayServer, see [Commands for Running in Testnet Mode](#testnet-specific-deployments)
+Testnet 向けのデプロイについては、Bitcoin、.NET Core、NBXplorer、BTCPayServer のインストール後に [Commands for Running in Testnet Mode](#testnet-specific-deployments) を参照してください。
 
-### 1) Install Bitcoin Core 0.19.1
+### 1) Bitcoin Core 0.19.1 をインストール
 
 ```bash
 BITCOIN_VERSION="0.19.1"
@@ -50,9 +54,9 @@ sudo tar -xzvf bitcoin.tar.gz -C /usr/local/bin --strip-components=2 "bitcoin-$B
 rm bitcoin.tar.gz
 ```
 
-### 2) Install .NET 8.0 SDK
+### 2) .NET 8.0 SDK をインストール
 
-On my Ubuntu 20.04 (See [these instructions](https://docs.microsoft.com/en-us/dotnet/core/install/linux-ubuntu#2004-) or [here](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) for different OS).
+私の Ubuntu 20.04 での例です（他の OS は [these instructions](https://docs.microsoft.com/en-us/dotnet/core/install/linux-ubuntu#2004-) または [here](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) を参照）。
 
 ```bash
 # Add Microsoft package repository
@@ -70,7 +74,7 @@ sudo apt-get install -y dotnet-sdk-6.0
 dotnet --version
 ```
 
-### 3) Install NBXplorer
+### 3) NBXplorer をインストール
 
 ```bash
 cd ~
@@ -80,7 +84,7 @@ git checkout latest
 ./build.sh
 ```
 
-### 4) Install BTCPayServer
+### 4) BTCPayServer をインストール
 
 ```bash
 cd ~
@@ -90,61 +94,61 @@ git checkout latest
 ./build.sh
 ```
 
-### 5) Run bitcoind
+### 5) bitcoind を実行
 
 ```bash
 bitcoind
 ```
 
-### 6) Run NBXplorer
+### 6) NBXplorer を実行
 
 ```bash
 cd ~/NBXplorer
 ./run.sh --dbtrie
 ```
 
-Note that using the `--dbtrie` backend for NBXplorer, while easier, is deprecated.
-You should better use a postgresql backend as documented on [Extended Manual Deployment](./ManualDeploymentExtended.md).
+`--dbtrie` バックエンドは簡単に使える一方で、NBXplorer では非推奨です。
+[Extended Manual Deployment](./ManualDeploymentExtended.md) にある通り、postgresql バックエンドの利用を推奨します。
 
-### 7) Run BTCPay Server
+### 7) BTCPay Server を実行
 
 ```bash
 cd ~/btcpayserver
 ./run.sh --port 8080 --bind 0.0.0.0
 ```
 
-Now you can browse your server on port 8080.
+これでポート 8080 でサーバーにアクセスできます。
 
-Note that by default, BTCPay Server will use SQLite as backend, while being easier, this is deprecated.
-You should better use a postgresql backend as documented on [Extended Manual Deployment](./ManualDeploymentExtended.md).
+デフォルトでは BTCPay Server は SQLite をバックエンドとして使用しますが、これは簡単な反面非推奨です。
+[Extended Manual Deployment](./ManualDeploymentExtended.md) にある通り、postgresql バックエンドの利用を推奨します。
 
-## Testnet Specific Deployments
+## Testnet 向けデプロイ
 
-Follow the instructions for installing Bitcoin, .NET Core, NBXplorer and BTCPayServer above.
+Bitcoin、.NET Core、NBXplorer、BTCPayServer のインストールは上記手順に従ってください。
 
-Then when running them use:
+その後、実行時に次を使用します。
 
-### Run bitcoind in testnet mode
+### bitcoind を testnet モードで実行
 
 ```bash
 bitcoind -testnet
 ```
 
-### Run NBXplorer in testnet mode
+### NBXplorer を testnet モードで実行
 
 ```bash
 cd ~/NBXplorer
 ./run.sh --network=testnet
 ```
 
-### Run BTCPayServer in testnet mode
+### BTCPayServer を testnet モードで実行
 
 ```bash
 cd ~/btcpayserver
 ./run.sh --port 8080 --bind 0.0.0.0 --network testnet
 ```
 
-## Additional links
+## 追加リンク
 
 - [Extended Manual Deployment](./ManualDeploymentExtended.md)
-- [How to Setup BTC and Lightning Payment Gateway with BTCPayServer on Linux [Manual Install]](https://freedomnode.com/blog/114/how-to-setup-btc-and-lightning-payment-gateway-with-btcpayserver-on-linux-manual-install) from freedomnode.com.
+- freedomnode.com の [How to Setup BTC and Lightning Payment Gateway with BTCPayServer on Linux [Manual Install]](https://freedomnode.com/blog/114/how-to-setup-btc-and-lightning-payment-gateway-with-btcpayserver-on-linux-manual-install)

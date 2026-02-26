@@ -1,27 +1,27 @@
-# Support
+# サポート
 
-This project is open source and is not a company. Instead **we rely on a network of contributors and users to provide support**.
+このプロジェクトはオープンソースであり、企業ではありません。代わりに、**サポートはコントリビューターとユーザーのネットワークに依存しています**。
 
-## Free support
+## 無料サポート
 
-Problem? Don't worry. Someone else has probably been through that before you.
+問題がありますか？心配いりません。あなたより先に同じ問題を経験した人がいるはずです。
 
-- First have a look at our [user documentation](./README.md) and [Frequently Asked Questions](./FAQ/readme.md).
+- まずは [user documentation](./README.md) と [Frequently Asked Questions](./FAQ/) を確認してください。
 
-- If your issue is not referenced there, or you want to request a new feature, please open a [github issue](https://github.com/btcpayserver/btcpayserver/issues).
+- そこに記載がない問題や新機能の要望がある場合は、[github issue](https://github.com/btcpayserver/btcpayserver/issues) を作成してください。
 
-- If you have more general questions about BTCPay, the way it works and why you should use it, you're welcome on our [Mattermost Chat](https://chat.btcpayserver.org/) or [Telegram](https://t.me/btcpayserver)
+- BTCPay の仕組みや利用理由に関する一般的な質問は、[Mattermost Chat](https://chat.btcpayserver.org/) または [Telegram](https://t.me/btcpayserver) へどうぞ。
 
-Getting proper support also depends on how you formulate your questions. Read our [troubleshooting guidelines](./Troubleshooting.md).
+適切なサポートを得るには、質問の書き方も重要です。[troubleshooting guidelines](./Troubleshooting.md) を読んでください。
 
-## Paid support
+## 有料サポート
 
-As we are an Open Source project, someone in the community might want to help.
-Therefore we've facilitated a channel on our Mattermost to find these talents.
+オープンソースプロジェクトであるため、コミュニティ内の誰かが支援を希望する場合があります。
+そのため、そうした人材を見つけられるよう Mattermost にチャネルを用意しています。
 
-Check out our `Dev` channel on Mattermost.
+Mattermost の `Dev` チャネルを確認してください。  
 [Mattermost Chat](https://chat.btcpayserver.org/btcpayserver/channels/dev)
 
 ::: danger
-**BTCPay Server is and will not guarantee or vouch for any support.**
+**BTCPay Server は、いかなるサポートも保証・推奨しません。**
 :::

@@ -1,20 +1,20 @@
-# How to contribute to BTCPay Server?
+# BTCPay Server に貢献するには？
 
-BTCPay Server is built and maintained entirely by volunteer contributors around the internet.
+BTCPay Server は、世界中のボランティア貢献者によって完全に構築・保守されています。
 
-We welcome, appreciate, and encourage new contributions.
+新しい貢献を歓迎し、感謝し、奨励しています。
 
-Depending on your skills and interest, you can help in a number of ways:
+あなたのスキルや関心に応じて、さまざまな形で支援できます。
 
-- [Software](./Dev.md)
-  - [Development](./DevCode.md)
-  - [Testing](./DevTest.md)
-- [Writing](./Write.md)
-  - [Tools](./WriteSoftware.md)
-  - [Documentation](./WriteDocs.md)
-  - [Blog](./WriteBlog.md)
-- [Designing](./Design.md)
-- [Translating](./Translate.md)
-- [Miscellaneous](./Misc.md)
+- [ソフトウェア](./Dev.md)
+  - [開発](./DevCode.md)
+  - [テスト](./DevTest.md)
+- [執筆](./Write.md)
+  - [ツール](./WriteSoftware.md)
+  - [ドキュメント](./WriteDocs.md)
+  - [ブログ](./WriteBlog.md)
+- [デザイン](./Design.md)
+- [翻訳](./Translate.md)
+- [その他](./Misc.md)
 
-Every contribution is important and if you have any questions, feel free to consult our growing [community](../Community.md).
+どんな貢献も重要です。質問があれば、成長し続ける[コミュニティ](../Community.md)に気軽にご相談ください。

@@ -1,33 +1,33 @@
-# Testnet demo
+# Testnet デモ
 
-First let's create a new store:
+まず、新しいストアを作成します。
 
-1. Go to the [Testnet website](https://testnet.demo.btcpayserver.org/)
-2. On the right side click on **Create an account** to [create an account](https://testnet.demo.btcpayserver.org/register) or **Sign In** if you already have an account.
-3. After having signed in, create a new store.
+1. [Testnet website](https://testnet.demo.btcpayserver.org/) にアクセスします。
+2. 右側の **Create an account** をクリックして [アカウントを作成](https://testnet.demo.btcpayserver.org/register) するか、すでにアカウントがある場合は **Sign In** をクリックします。
+3. サインイン後、新しいストアを作成します。
 
-Let's use Electrum to create a testnet wallet for your store:
+次に、Electrum を使ってストア用の testnet ウォレットを作成します。
 
-1. Download [Electrum](https://electrum.org)
-2. Run Electrum with parameter `--testnet` (i.e. on Mac OS using `open -a Electrum.app --args --testnet`)
-3. Click through the wizard and create a test wallet, using the default settings Electrum proposes
-4. After the wallet is set up, go to "Wallet" > "Information" in the Electrum menu.
-5. Copy the "Master Public Key" string (starting by `*pub...`)
+1. [Electrum](https://electrum.org) をダウンロードします。
+2. `--testnet` パラメータ付きで Electrum を起動します（例: Mac OS では `open -a Electrum.app --args --testnet`）。
+3. ウィザードを進め、Electrum が提案するデフォルト設定でテスト用ウォレットを作成します。
+4. ウォレット作成後、Electrum メニューの「Wallet」>「Information」を開きます。
+5. 「Master Public Key」の文字列（`*pub...` で始まる）をコピーします。
 
-Let's configure the store so it uses your Electrum wallet:
+続いて、ストアで Electrum ウォレットを使うように設定します。
 
-1. Go to the Settings page of your store in BTCPay
-2. On the "General Settings" page you will find the "Wallet" section - click the "Setup" button for configuring an on-chain wallet.
-3. Paste the "Master Public Key" copied from Electrum into the "Derivation Scheme" text field and click "Continue"
-4. Confirm the addresses by clicking on "Receive" in Electrum: The "Receiving address" should match the first address shown in BTCPay
-5. After that your test wallet should appear on the [Wallets page](https://testnet.demo.btcpayserver.org/wallets) of your BTCPay account
+1. BTCPay のストア設定ページを開きます。
+2. 「General Settings」ページにある「Wallet」セクションで、「Setup」ボタンをクリックしてオンチェーンウォレットを設定します。
+3. Electrum からコピーした「Master Public Key」を「Derivation Scheme」テキストフィールドに貼り付け、「Continue」をクリックします。
+4. Electrum の「Receive」を開いてアドレスを確認します。「Receiving address」が BTCPay に表示される最初のアドレスと一致しているはずです。
+5. 設定後、BTCPay アカウントの [Wallets page](https://testnet.demo.btcpayserver.org/wallets) にテストウォレットが表示されます。
 
-Then you can create an invoice, either through
+その後、請求書は次のいずれかで作成できます。
 
-- The "Invoice" menu on the website or
-- The process documented in the [Custom integration](../CustomIntegration.md)
+- Web サイトの「Invoice」メニュー
+- [Custom integration](../CustomIntegration.md) に記載された手順
 
-## Questions
+## 質問
 
-If you have questions about the BTCPay Server on Testnet, you can join the [community chat](https://chat.btcpayserver.org/).
-If you have questions about any of the other tools or commands, etc. it's likely you can find answers to your questions by doing a search on the internet or on [StackOverflow](https://stackoverflow.com/).
+Testnet 上の BTCPay Server について質問がある場合は、[community chat](https://chat.btcpayserver.org/) に参加してください。
+その他のツールやコマンドなどについては、インターネット検索や [StackOverflow](https://stackoverflow.com/) で解決できる可能性が高いです。

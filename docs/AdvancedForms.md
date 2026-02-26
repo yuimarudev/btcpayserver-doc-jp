@@ -1,10 +1,14 @@
-# Forms
+<!-- legacy-anchor-aliases -->
+<span id="mirror-fields"></span>
+<!-- /legacy-anchor-aliases -->
 
-BTCPay Server's Forms feature enables you to request that your customer complete a form before proceeding with a payment.
+# フォーム
 
-These forms are fully customizable to suit your requirements.
+BTCPay Server の Forms 機能を使うと、支払いに進む前に顧客へフォーム入力を求められます。
 
-Example of form definition:
+これらのフォームは要件に合わせて完全にカスタマイズできます。
+
+フォーム定義の例:
 
 ```json
 {
@@ -94,56 +98,56 @@ Example of form definition:
 }
 ```
 
-Output:
+出力:
 
 ![Form](./img/Forms-1.png)
 
-In a field definition, only the following fields can be set:
+フィールド定義では、次の項目のみ設定できます。
 
 | Field                   | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
 | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `.fields.constant`      | If `true`, the `.value` must be set in the form definition, and the user will not be able to change the field's value. ( example: the form definition's version)                                                                                                                                                                                                                                                                                                   |
-| `.fields.type`          | The HTML input type `text`, `checkbox`, `password`, `hidden`, `color`, `date`, `datetime-local`, `month`, `week`, `time`, `email`, `number`, `url`, `tel`                                                                                                                                                                                                                                                          |
-| `.fields.options`       | If `.fields.type` is `select`, the list of selectable values                                                                                                                                                                                                                                                                                                                                                                                                       |
-| `.fields.options.text`  | The text displayed for this option                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| `.fields.options.value` | The value of the field if this option is selected                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| `.fields.type=fieldset` | Create a HTML `fieldset` around the children `.fields.fields` (see below)                                                                                                                                                                                                                                                                                                                                                                                          |
-| `.fields.name`          | The JSON property name of the field as it will appear in the invoice's metadata                                                                                                                                                                                                                                                                                                                                                                                    |
-| `.fields.value`         | The default value of the field                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| `.fields.required`      | if `true`, the field will be required                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| `.fields.label`         | The label of the field (can contain HTML for formatting and links)                                                                                                                                                                                                                                                                                                                                                                                                 |
-| `.fields.helpText`      | Additional text to provide an explanation for the field (can contain HTML for formatting and links)                                                                                                                                                                                                                                                                                                                                                                |
-| `.fields.fields`        | If `.fields.type` is `fieldset`, you can organize your fields in a hierarchy, allowing child fields to be nested within the invoice's metadata. This structure can help you better organize and manage the collected information, making it easier to access and interpret. For example, if you have a form that collects customer information, you can group the fields under a parent field called customer. Within this parent field, you might have child fields like name, email, and address. |
-| `.fields.valuemap`      | If `.fields.type` is `mirror`, you can specify an object, where the key is the value to match and and the value is the mapped result. `{ "hello": "world"}`, means that if the copied value is `hello`, it will be saved as `world`.
+| `.fields.constant`      | `true` の場合、フォーム定義で `.value` を設定する必要があり、ユーザーはそのフィールド値を変更できません。（例: フォーム定義のバージョン）                                                                                                                                                                                                                                                                                                   |
+| `.fields.type`          | HTML の input type: `text`, `checkbox`, `password`, `hidden`, `color`, `date`, `datetime-local`, `month`, `week`, `time`, `email`, `number`, `url`, `tel`                                                                                                                                                                                                                                                          |
+| `.fields.options`       | `.fields.type` が `select` の場合に選択可能な値の一覧                                                                                                                                                                                                                                                                                                                                                                                                       |
+| `.fields.options.text`  | このオプションで表示されるテキスト                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| `.fields.options.value` | このオプションが選択されたときのフィールド値                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| `.fields.type=fieldset` | 子要素 `.fields.fields`（下記参照）を囲む HTML の `fieldset` を作成                                                                                                                                                                                                                                                                                                                                                                                          |
+| `.fields.name`          | 請求書メタデータ内で使われる、このフィールドの JSON プロパティ名                                                                                                                                                                                                                                                                                                                                                                                    |
+| `.fields.value`         | フィールドのデフォルト値                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| `.fields.required`      | `true` の場合、入力必須になります                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| `.fields.label`         | フィールドのラベル（整形やリンク用の HTML を含められます）                                                                                                                                                                                                                                                                                                                                                                                                 |
+| `.fields.helpText`      | フィールドの説明として表示する追加テキスト（整形やリンク用の HTML を含められます）                                                                                                                                                                                                                                                                                                                                                                |
+| `.fields.fields`        | `.fields.type` が `fieldset` の場合、階層構造でフィールドを整理でき、子フィールドを請求書メタデータ内にネストできます。この構造により、収集した情報の整理・管理がしやすくなり、アクセスや解釈も容易になります。たとえば顧客情報を収集するフォームでは、`customer` という親フィールド配下に `name`、`email`、`address` などの子フィールドを配置できます。 |
+| `.fields.valuemap`      | `.fields.type` が `mirror` の場合、キーが一致条件、値が変換結果となるオブジェクトを指定できます。`{ "hello": "world"}` は、コピー元が `hello` のとき `world` として保存されることを意味します。 |
 
-The values of the fields are stored in the [metadata of the invoice](/Development/InvoiceMetadata/).
+フィールド値は[請求書のメタデータ](/Development/InvoiceMetadata.md)に保存されます。
 
-## Well-known field names
+## よく使われるフィールド名
 
-The field name represents the JSON property name that stores the user-provided value in the invoice's metadata.
+フィールド名は、請求書メタデータにユーザー入力値を保存する JSON プロパティ名を表します。
 
-Some well-known names can be interpreted and modify the invoice's settings.
+いくつかの既知の名前は解釈され、請求書設定を変更できます。
 
 | Field name         | Description            |
 | ------------------ | ---------------------- |
-| `invoice_amount`   | The invoice's amount   |
-| `invoice_currency` | The invoice's currency |
-| Starts with `invoice_amount_adjustment` | As long its value is computed to be a number, it will adjust the invoice amount accordingly. |
-| Starts with `invoice_amount_multiply_adjustment` | Adjusts the generated invoice amount by multiplying with this value. |
+| `invoice_amount`   | 請求書の金額   |
+| `invoice_currency` | 請求書の通貨 |
+| Starts with `invoice_amount_adjustment` | 値が数値として評価できる限り、その値に応じて請求書金額を調整します。 |
+| Starts with `invoice_amount_multiply_adjustment` | この値を掛けることで、生成された請求書金額を調整します。 |
 
-## Mirror fields
+## Mirror フィールド
 
-A `Mirror` field is defined by the type `mirror`. Its value is set to the name of another field, and upon form submission, that field's value will be copied to the mirror field.
-The mirror type also has value mapping capabilities so that the referenced field's value can be transformed as it is copied over to the mirror field.
+`Mirror` フィールドは型 `mirror` で定義します。値には別フィールド名を設定し、フォーム送信時にそのフィールド値を mirror フィールドへコピーします。
+mirror 型には値マッピング機能もあり、参照先フィールドの値を変換して mirror フィールドへコピーできます。
 
-For example, you could have a select field with a list of countries, and then create an `invoice_amount_adjustment` field, where you adjust the price of the invoice based on the country selected.
-Or you can generate percentage-based promo codes based on the `invoice_amount_multiply_adjustment` field.
+たとえば、国一覧の select フィールドを用意し、`invoice_amount_adjustment` フィールドを作ることで、選択された国に応じて請求書価格を調整できます。
+また、`invoice_amount_multiply_adjustment` フィールドを使って、割合ベースのプロモコードを生成することもできます。
 
-Here's an example of how three promo codes with different discounts can be implemented:
+以下は、割引率の異なる3つのプロモコード実装例です。
 
-- `huge` = 50% discount
-- `medium` = 10% discount
-- `tiny` = 1% discount
+- `huge` = 50% 割引
+- `medium` = 10% 割引
+- `tiny` = 1% 割引
 
 ```json
 {
@@ -168,14 +172,14 @@ Here's an example of how three promo codes with different discounts can be imple
 }
 ```
 
-## Pre-filling form values
+## フォーム値の事前入力
 
-You can pre-fill the fields of an invoice automatically by adding query strings to the form's URL, such as `?your_field=value`.
+`?your_field=value` のようなクエリ文字列をフォーム URL に追加することで、請求書フィールドを自動で事前入力できます。
 
-Here are some use cases for this feature:
+この機能の利用例:
 
-- `Assisting user input`: Pre-fill fields with known customer information to make it easier for them to complete the form. For example, if you already know a customer's email address, you can pre-fill the email field to save them time.
-- `Personalization`: Customize the form based on customer preferences or segmentation. For instance, if you have different customer tiers, you can pre-fill the form with relevant data, such as their membership level or specific offers.
-- `Tracking`: Track the source of customer visits by using hidden fields and pre-filled values. For example, you can create different links with pre-filled `utm_media` values for each marketing channel (e.g., Twitter, Facebook, email). This helps you analyze the effectiveness of your marketing efforts.
+- `Assisting user input`: 既知の顧客情報を事前入力し、フォーム入力を簡単にします。たとえば顧客のメールアドレスが既知なら、メール欄を埋めて時間を短縮できます。
+- `Personalization`: 顧客の好みやセグメントに応じてフォームを調整できます。たとえば顧客ランクごとに会員レベルや特典情報を事前入力できます。
+- `Tracking`: 非表示フィールドと事前入力値を使って訪問元を追跡できます。たとえばマーケティングチャネル（Twitter、Facebook、email）ごとに `utm_media` を埋めたリンクを作成し、施策効果を分析できます。
 
-- `A/B testing`: Pre-fill fields with different values to test different versions of a form, enabling you to optimize the user experience and conversion rates.
+- `A/B testing`: 異なる値を事前入力したフォームを使い分けることで、ユーザー体験やコンバージョン率を最適化できます。

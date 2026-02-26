@@ -1,72 +1,72 @@
-# Accept Bitcoin in Shopify with BTCPay Server
+# BTCPay Server で Shopify での Bitcoin 決済を受け付ける
 
-Introducing BTCPay Server for Shopify – open-source payment gateway that enables you accept bitcoin payments directly on your website or stores from customers with no fee.
+Shopify 向け BTCPay Server をご紹介します。これはオープンソースの決済ゲートウェイで、手数料なしで、あなたの Web サイトやストアで顧客からの bitcoin 決済を直接受け付けられます。
 
-Our integration with Shopify allows you connect your self-hosted BTCPay Server with your [Shopify store](https://www.shopify.com/), enabling you accept Bitcoin payments swiftly and securely.
+Shopify との連携により、セルフホストした BTCPay Server を [Shopify ストア](https://www.shopify.com/)に接続し、Bitcoin 決済を迅速かつ安全に受け付けられます。
 
 :::warning
 
-⚠️ Shopify V1 Integration Deprecated
+⚠️ Shopify V1 連携は非推奨です
 
-New users can no longer use the Shopify V1 integration with BTCPay Server. Please refer to the [Shopify V2 integration guide](/ShopifyV2/) for instructions on setting up BTCPay Server with Shopify. 
-Existing users experiencing issues with the V1 integration are encouraged to open an issue on our [Github repository](https://github.com/btcpayserver/btcpayserver) or report them via [Mattermost](http://chat.btcpayserver.org/) or [Telegram](https://t.me/btcpayserver), and plan a migration to V2.
+新規ユーザーは、BTCPay Server の Shopify V1 連携を利用できなくなりました。BTCPay Server を Shopify と連携する設定手順は、[Shopify V2 integration guide](/ShopifyV2.md) を参照してください。  
+V1 連携で問題が発生している既存ユーザーは、[Github repository](https://github.com/btcpayserver/btcpayserver) に issue を作成するか、[Mattermost](http://chat.btcpayserver.org/) または [Telegram](https://t.me/btcpayserver) で報告し、V2 への移行計画を立てることをおすすめします。
 :::
 
 
-## What BTCPay offers:
+## BTCPay でできること:
 
-- **Zero fees**: Enjoy a payment gateway with no fees. Yes, You saw that right. Zero fees!
-- **Direct payment, No middlemen or KYC**: Say goodbye to intermediaries and tedious paperwork, and get your money directly in your wallet
-- **Fully automated system**: BTCPay takes care of payments, invoice management and refunds automatically.
-- **Display Bitcoin QR code at checkout**: Enhance customer experience with an easy and secure payment option.
-- **Self-hosted infrastructure**: Maintain full control over your payment gateway.
-- **Lightning Network integrated**: Instant, fast and low cost payments and payouts
-- **Easy CSV exports**
-- **Versatile plugin system**: Extend functionality according to your needs
-- **Point-of-sale integration** – Accept payments in your physical shops
-- **Multilingual ready**: Serve a global audience right out of the box.
-- **Community-driven support**: Get responsive assistance from our dedicated community ([Mattermost](http://chat.btcpayserver.org/) or [Telegram](https://t.me/btcpayserver)).
+- **手数料ゼロ**: 手数料のない決済ゲートウェイを利用できます。本当にゼロです。
+- **中間業者や KYC なしの直接決済**: 仲介業者や煩雑な書類対応は不要で、資金をウォレットへ直接受け取れます
+- **完全自動化されたシステム**: BTCPay が決済、請求書管理、返金を自動で処理します。
+- **チェックアウト時に Bitcoin QR コードを表示**: 簡単かつ安全な決済方法で顧客体験を向上できます。
+- **セルフホスト基盤**: 決済ゲートウェイを完全にコントロールできます。
+- **Lightning Network 統合**: 即時で高速、低コストな決済と支払い
+- **簡単な CSV エクスポート**
+- **柔軟なプラグインシステム**: ニーズに応じて機能を拡張できます
+- **POS 連携** – 実店舗でも決済を受け付け可能
+- **多言語対応**: 初期状態でグローバルなユーザーに対応できます。
+- **コミュニティ主導のサポート**: 専用コミュニティから迅速な支援を受けられます（[Mattermost](http://chat.btcpayserver.org/) または [Telegram](https://t.me/btcpayserver)）。
 
 
-## Prerequisites:
+## 前提条件:
 
-Before diving into the setup process, ensure you have the following:
+設定を始める前に、次のものを用意してください:
 
-- Shopify account
-- BTCPay Server - [self-hosted](Deployment.md) or run by a [third-party host](/Deployment/ThirdPartyHosting.md) v1.4.8 or later.
-- [Created BTCPay Server store](CreateStore.md) with [wallet set up](WalletSetup.md)
+- Shopify アカウント
+- BTCPay Server - [self-hosted](/Deployment/) または [third-party host](/Deployment/ThirdPartyHosting.md) で稼働する v1.4.8 以降
+- [Created BTCPay Server store](CreateStore.md) と [wallet set up](WalletSetup.md)
 
 [![BTCPay Server - Shopify Video](https://img.youtube.com/vi/jJjAyvgWVfk/mqdefault.jpg)](https://www.youtube.com/watch?v=jJjAyvgWVfk)
 
 
-## Setting up BTCPay Server with Shopify
+## BTCPay Server を Shopify と連携する
 
-1. In Shopify, click on `Apps >` in the left sidebar
-2. On the modal popped up, click on `App and sales channel settings`
-3. From the page displayed, click on `Develop apps` button
-4. If prompted, click on `Allow custom app development`
-5. `Create an app` and name it, e.g. BTCPay Server
-6. On the app page, in `Overview` tab, click on the `Configure Admin API scopes`
-7. In the filter admin access scopes type in `Orders`
-8. In `Orders` enable `read_orders` and `write_orders` and then click `Save`
-9. Click on the `Install App` in the top right corner and when pop-up window appears click `Install`
-10. Reveal `Admin API access token` and `copy` it
-11. In your BTCPay Server, go to your store and on the left sidebar click on `Shopify`
-12. In the first field, `Shop name` enter the subdomain of your Shopify store e.g. SOME_ID.myshopify.com then enter SOME_ID
-13. In third field, `Admin API access token` paste the `Admin API access token` you just copied from Shopify
-14. In the second field, `API key` paste the `API key` from Shopify - which you can find at the bottom of the same page where you copied the Admin API access token
-15. Click `Save` on BTCPay Shopify settings page
-16. Back on Shopify: On left menu select `Checkout` scroll down to "Order status page" and paste the HTML `<script>` code you see in BTCPay Shopify settings into the "Additional scripts" text field.
-17. Click `Save` and scroll back up to the top
-18. Now click on `Payments` in the left sidebar, scroll down to "Manual payment methods", click on `(+) Manual payment method` and select `Create custom payment method` on the dropdown.
-19. In `Custom payment method name` fill in `Bitcoin with BTCPay Server`, optionally you can fill in other fields, but it's not required.
-20. Hit `Activate` and you've set up Shopify and BTCPay Server successfully.
+1. Shopify で、左サイドバーの `Apps >` をクリックします
+2. 表示されたモーダルで `App and sales channel settings` をクリックします
+3. 表示されたページで `Develop apps` ボタンをクリックします
+4. 求められた場合は `Allow custom app development` をクリックします
+5. `Create an app` を選び、例として BTCPay Server などの名前を付けます
+6. アプリページの `Overview` タブで `Configure Admin API scopes` をクリックします
+7. admin access scopes のフィルターに `Orders` と入力します
+8. `Orders` で `read_orders` と `write_orders` を有効にし、`Save` をクリックします
+9. 右上の `Install App` をクリックし、ポップアップが表示されたら `Install` をクリックします
+10. `Admin API access token` を表示して `copy` します
+11. BTCPay Server 側でストアを開き、左サイドバーの `Shopify` をクリックします
+12. 1つ目のフィールド `Shop name` に Shopify ストアのサブドメイン（例: SOME_ID.myshopify.com の SOME_ID）を入力します
+13. 3つ目のフィールド `Admin API access token` に、Shopify でコピーした `Admin API access token` を貼り付けます
+14. 2つ目のフィールド `API key` に Shopify の `API key` を貼り付けます。これは Admin API access token をコピーした同じページ下部で確認できます
+15. BTCPay の Shopify 設定ページで `Save` をクリックします
+16. Shopify に戻り、左メニューで `Checkout` を選択し、「Order status page」までスクロールして、BTCPay の Shopify 設定に表示される HTML `<script>` コードを「Additional scripts」テキストフィールドに貼り付けます
+17. `Save` をクリックし、ページ上部まで戻ります
+18. 左サイドバーの `Payments` をクリックし、「Manual payment methods」までスクロールして `(+) Manual payment method` をクリックし、ドロップダウンから `Create custom payment method` を選びます
+19. `Custom payment method name` に `Bitcoin with BTCPay Server` を入力します。ほかのフィールドは任意入力で、必須ではありません
+20. `Activate` をクリックすれば、Shopify と BTCPay Server の設定は完了です
 
 :::tip
-"Custom Payment method name" **must** contain at least one of the following words (case-insensitive): `bitcoin`, `btcpayserver`, `btcpay server` or `btc` to work.
+"Custom Payment method name" には、次の単語のいずれかを少なくとも1つ含める必要があります（大文字小文字は区別されません）: `bitcoin`, `btcpayserver`, `btcpay server` または `btc`。
 :::
 
-Below are step by step visuals describing the process outlined above.
+以下は、上記プロセスのステップごとの画面イメージです。
 
 ![BTCPay Server shopify step 1](./img/shopify/btcpayshopify1.png)
 
@@ -98,7 +98,7 @@ Below are step by step visuals describing the process outlined above.
 
 ![BTCPay Server shopify step 14-2](./img/shopify/btcpayshopify14-2.png)
 
-Demo Checkout flow after everything is set up:
+すべての設定完了後のデモ Checkout フロー:
 
 ![BTCPay Server shopify step 15](./img/shopify/btcpayshopify15.png)
 

@@ -1,8 +1,8 @@
-# Community
+# コミュニティ
 
-This project is nothing without its community!
+このプロジェクトはコミュニティなしでは成り立ちません！
 
-Join us:
+参加はこちら:
 
 [![Mattermost](./img/mattermost.png)](https://chat.btcpayserver.org/)
 [![Twitter](./img/twitter.png)](https://twitter.com/BtcpayServer)

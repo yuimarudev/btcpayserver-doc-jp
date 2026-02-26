@@ -1,37 +1,37 @@
-# Coding BTCPay Server
+# BTCPay Server のコーディング
 
 [[toc]]
 
-## Why coding matters
+## なぜコーディングが重要か
 
-By helping the project grow, become more mature, advanced and elaborate, coders working on BTCPay Server are a central component of the project.
+プロジェクトの成長、成熟、高度化、発展を支えるうえで、BTCPay Server に取り組むコーダーは中核的な存在です。
 
-If you have coding skills, be it writing or reviewing code, you can contribute to BTCPay Server.
+コードを書く、コードレビューするなどのスキルがあれば、BTCPay Server に貢献できます。
 
-## Where to start
+## どこから始めるか
 
-If you're a developer looking to help, but you're not sure where to begin, check the [good first issue label](https://github.com/btcpayserver/btcpayserver/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22), which contains small pieces of work that have been specifically flagged as being friendly to new contributors.
+開発者として貢献したいものの何から始めればよいか分からない場合は、[good first issue label](https://github.com/btcpayserver/btcpayserver/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) を確認してください。新しいコントリビューター向けの小さな作業がまとめられています。
 
-Contributors looking to do something a bit more challenging, before opening a pull request, please [create an issue](https://github.com/btcpayserver/btcpayserver/issues/new/choose) or join [our community chat](https://chat.btcpayserver.org/) to get early feedback, discuss best ways to tackle the problem and to ensure there is no work duplication.
+もう少し難しい課題に取り組みたい場合は、プルリクエストを作成する前に、[issue を作成](https://github.com/btcpayserver/btcpayserver/issues/new/choose)するか、[コミュニティチャット](https://chat.btcpayserver.org/)に参加してください。早い段階でフィードバックを得て、最適な進め方を議論し、作業の重複を避けるためです。
 
-We are actively looking for developers who can take on and resolve GitHub issues and help with development. If you would like to help us, but need some guidance, the [#dev channel on Mattermost](https://chat.btcpayserver.org/btcpayserver/channels/dev) is the place to ask questions.
+私たちは、GitHub の issue を引き受けて解決し、開発を支援してくれる開発者を積極的に探しています。協力したいがガイダンスが必要な場合は、[#dev channel on Mattermost](https://chat.btcpayserver.org/btcpayserver/channels/dev) で質問してください。
 
-### Setup Developer Environment
+### 開発環境のセットアップ
 
-If you are interested in getting started as a developer or tester of the software behind BTCPay Server, check out the [Setup Developer Environment](./DevCode.md) guide that will walk you step by step through every software used in development with BTCPay such as Git, GitBash, Github, Docker, Visual Studio, Postgres, etc. If you have never coded before and you are looking to learn something new, start here.
+BTCPay Server の開発者またはテスターとして始めたい場合は、[Setup Developer Environment](./DevCode.md) ガイドを確認してください。Git、GitBash、Github、Docker、Visual Studio、Postgres など、BTCPay 開発で使うソフトウェアをステップごとに説明しています。コーディングが初めてで新しく学びたい場合も、ここから始めるのがおすすめです。
 
-### Local BTCPay Development
+### ローカル BTCPay 開発
 
-If you already have a developer environment setup you can start with the BTCPay specific [Local Development](/Development/LocalDevelopment.md) documentation.
+すでに開発環境のセットアップが完了している場合は、BTCPay 固有の [Local Development](/Development/LocalDevelopment.md) ドキュメントから始められます。
 
-### Local BTCPay Testing
+### ローカル BTCPay テスト
 
-Once you have your development environment tools setup and your local BTCPay Server running, view the [Local Testing](./DevTest.md) guide. This shows you how to use BTCPay in regtest mode for use in development and for users who want to test new features before they are released.
+開発環境ツールのセットアップが完了し、ローカル BTCPay Server が動作しているなら、[Local Testing](./DevTest.md) ガイドを確認してください。開発用途や、リリース前に新機能を試したいユーザー向けに、regtest モードで BTCPay を使う方法を説明しています。
 
-## Requirements
+## 要件
 
-Software requirements (ie. IDE) can also be found in [local development](/Development/LocalDevelopment.md#which-ide).
+ソフトウェア要件（IDE など）は [local development](/Development/LocalDevelopment.md#which-ide) にも記載されています。
 
-## Videos
+## 動画
 
-BTCPay Server development videos can be found [here](/Development/LocalDevelopment.md#videos) or on the [BTCPayServer YouTube](https://www.youtube.com/channel/UCpG9WL6TJuoNfFVkaDMp9ug) channel.
+BTCPay Server 開発動画は [こちら](/Development/LocalDevelopment.md#videos) または [BTCPayServer YouTube](https://www.youtube.com/channel/UCpG9WL6TJuoNfFVkaDMp9ug) チャンネルで確認できます。

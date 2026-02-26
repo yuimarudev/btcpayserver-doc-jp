@@ -1,75 +1,75 @@
-# Hardware Deployment
+# ハードウェアデプロイ
 
-In order for your Bitcoin experience to be truly self-sovereign and trustless you should consider **running nodes on your own hardware** and internet connection.
-**BTCPay Server is an excellent way to run both Bitcoin & Lightning nodes**.
-Not only are you validating transactions you also get the ability to accept base layer Bitcoin and second layer Lightning payments.
-Following are instructions to install and host your very own BTCPay Server.
+Bitcoin を真に自己主権かつトラストレスに運用するには、**自分のハードウェア**とインターネット回線でノードを動かすことを検討してください。
+**BTCPay Server は Bitcoin ノードと Lightning ノードの両方を動かす優れた方法です**。
+トランザクションを検証できるだけでなく、ベースレイヤーの Bitcoin 支払いと第2レイヤーの Lightning 支払いを受け取れるようになります。
+以下は、BTCPay Server を自分でインストールしてホストする手順です。
 
-The process is basically the following:
+プロセスは基本的に次のとおりです。
 
-1. Purchase and assemble hardware.
-2. Install base Operating System and configure networking.
-3. Install BTCPayServer-Docker.
+1. ハードウェアを購入して組み立てる。
+2. ベースとなる OS をインストールし、ネットワーク設定を行う。
+3. BTCPayServer-Docker をインストールする。
 
-**BTCPay Server can be installed on the following hardware**. The end result is a small, quiet node that is fast enough to sync from block zero. The total cost is approximately $300. 
+**BTCPay Server は次のハードウェアでインストールできます**。最終的には、ブロックゼロから同期できる十分な性能を持つ、小型で静かなノードになります。総額はおおよそ $300 です。
 
 1. [BeeLink S12 - Mini PC - $169.00](https://www.amazon.com/dp/B0C89TQ1YF?ref=nb_sb_ss_w_as-reorder-t1_k0_1_4&amp=&crid=SHKYOXZIRAO0&amp=&sprefix=beel)
 3. [WD Blue 2TB SSD - $129.00](https://www.amazon.com/Western-Digital-SA510-Internal-Solid/dp/B0C14TF467/ref=sr_1_3?crid=2WDY52E7ESSEB&dib=eyJ2IjoiMSJ9.MBxkb5ZIvwjKXOzscB0GUvsbhX1rVhilXNFzID6n0xHORsDBPkIxQhIixVuiLY9I16rlFs5COExAAD8761Do-tzuAnZiutbqN-KM9rAL4zCw94kA_ArCJeR_RTDynZbiXf2Phnahw1Gw2dqXVek3p0dpe6_a_fbJrqx4BRaieoYo0zj1mX6YPGaYZAmF2Vf_Quk1TrkARk6s1_wZ0vFUw7EWdjKJ9hmNLxPWMfADML90A1rXk8gSCcRnwV2jdzN7jCfg2_urfJZ3IWOW5X3iwnP7s-vSec88PGmQ3RhS-Rc.sEURveFhiTAHYwZQdwyJX72hpWL5UgD_3tEPet747oE&dib_tag=se&keywords=2tb+ssd+wd+blue&qid=1710685725&s=electronics&sprefix=2tb+ssd+wd+blue%2Celectronics%2C90&sr=1-3)
 
-Other requirements are as follows:
+その他に必要なもの:
 
-1. High speed internet connection.
-2. Static IP
-3. Domain Name
-4. Ability to open ports on your router (optional, BTCPayServer can be accessed over TOR or by Dynamic DNS). 
-5. Tiny Screwdriver
-6. USB Thumb Drive
-7. USB Keyboard, Mouse and Monitor (for initial install only). Can be headless when completed.
+1. 高速インターネット接続。
+2. 固定 IP。
+3. ドメイン名。
+4. ルーターでポートを開放できること（任意。BTCPayServer は TOR や Dynamic DNS 経由でもアクセス可能）。
+5. 小型ドライバー。
+6. USB メモリ。
+7. USB キーボード、マウス、モニター（初回インストール時のみ。完了後はヘッドレス運用可能）。
 
-Assuming you purchased the hardware mentioned above, here are the build instructions.
+上記ハードウェアを購入した前提で、組み立て手順は次のとおりです。
 
-### Configure your domain name.
-It can take several hours for DNS changes to propagate so you should do this step first.
-Login to your domain registrar and point an A record from your domain to the external IP address of your internet connection.
-I suggest that you use a subdomain (ie. btcpay.yourdomain.com).
-To find your external IP address Google "whats my ip".
+### ドメイン名を設定する
+DNS 変更の反映には数時間かかることがあるため、この手順を最初に行ってください。
+ドメインレジストラにログインし、ドメインから自宅回線のグローバル IP アドレスに向けて A レコードを設定します。
+サブドメイン（例: btcpay.yourdomain.com）の利用を推奨します。
+グローバル IP アドレスは Google で "whats my ip" と検索すると確認できます。
 
-### Assemble your Lightning in a Box (LIAB). 
-- Remove back cover with screwdriver.
-- Insert SSD
-- Install hard drive using included cage.
+### Lightning in a Box (LIAB) を組み立てる
+- ドライバーで背面カバーを外す。
+- SSD を挿入する。
+- 付属ケージを使ってドライブを取り付ける。
 
-### Download [Ubuntu 22.04 LTS Server](https://releases.ubuntu.com/jammy/ubuntu-22.04.4-live-server-amd64.iso)
+### [Ubuntu 22.04 LTS Server](https://releases.ubuntu.com/jammy/ubuntu-22.04.4-live-server-amd64.iso) をダウンロードする
 
-### Download and install [Balena Etcher](https://etcher.balena.io/). 
-Etcher is software that is used to flash OS images to SD cards and USB Drives.
-In this case we will be using Etcher to flash our USB Thumb Drive with the Ubuntu OS.
+### [Balena Etcher](https://etcher.balena.io/) をダウンロードしてインストールする
+Etcher は OS イメージを SD カードや USB ドライブへ書き込むソフトウェアです。
+ここでは Etcher を使って、USB メモリに Ubuntu OS を書き込みます。
 
-### Connect your USB keyboard, mouse, monitor and thumb drive. 
-Press the power button to boot your LIAB. Press the "DEL" key to access the bios and change the boot order to use the thumb drive first. 
-The Ubuntu installation process is pretty simple and easy to follow. Here's a tutorial from the Ubuntu website. [Install Ubuntu Server](https://ubuntu.com/tutorials/install-ubuntu-server#1-overview). The BeeLink S12 ships with Windows Pre-Installed so you will have to delete the NVME partitions and install Ubuntu on that drive. 
+### USB キーボード、マウス、モニター、USB メモリを接続する
+電源ボタンを押して LIAB を起動します。`DEL` キーを押して BIOS に入り、USB メモリを最優先で起動するようブート順を変更します。
+Ubuntu のインストールは比較的シンプルで、手順に沿って進めやすいです。Ubuntu 公式チュートリアル: [Install Ubuntu Server](https://ubuntu.com/tutorials/install-ubuntu-server#1-overview)。BeeLink S12 には Windows がプリインストールされているため、NVME パーティションを削除してそのドライブへ Ubuntu をインストールする必要があります。
 
-*During the install process make sure you set the hostname to "btcpay" and enable SSH. 
+*インストール中にホスト名を "btcpay" に設定し、SSH を有効化してください。
 
-### Give your LIAB a static IP address on your local network. 
-There are a few different ways to do this and you will find a ton of articles online. Here's a pretty simple one to follow [How to configure a static IP address on Ubuntu 22.04](https://www.linuxtechi.com/static-ip-address-on-ubuntu-server/). To avoid conflicts with other devices on your network you should also set a "reservation" for your LIAB.
+### ローカルネットワーク上で LIAB に固定 IP を割り当てる
+方法はいくつかあり、オンラインに多くの解説があります。比較的シンプルな記事: [How to configure a static IP address on Ubuntu 22.04](https://www.linuxtechi.com/static-ip-address-on-ubuntu-server/)。ネットワーク内の他デバイスと競合しないよう、LIAB に対して IP "reservation" も設定してください。
 
-### Log into your router and forward ports 80, 443 and 9735 to your LIAB's local IP address. (optional, if using .local, or Tor only)
-Every router is different and you should be able to find instructions for your router by searching for "Port Forward + your router make and model".
+### ルーターにログインし、ポート 80, 443, 9735 を LIAB のローカル IP に転送する（任意。.local や Tor のみを使う場合は不要）
+ルーターごとに手順が異なるため、"Port Forward + ルーターのメーカー名と型番" で検索して確認してください。
 
-### Install Fail2ban, GIT and Avahi-Daemon. 
-- [Fail2ban](https://github.com/fail2ban/fail2ban/wiki/How-to-install-fail2ban-packages) bans IP's that attempt to connect to your server and show malicious signs. GIT allows you to clone and manage repositories on github.com.
-- [Avahi](https://avahi.org/) is a system which facilitates service discovery on a local network via the mDNS/DNS-SD protocol suite. 
-Open a new terminal window and type the following commands:
+### Fail2ban、GIT、Avahi-Daemon をインストールする
+- [Fail2ban](https://github.com/fail2ban/fail2ban/wiki/How-to-install-fail2ban-packages) は、サーバーへの接続を試み悪意ある挙動を示す IP をブロックします。GIT は github.com 上のリポジトリをクローン・管理するために使います。
+- [Avahi](https://avahi.org/) は、mDNS/DNS-SD プロトコル群を通じてローカルネットワーク上のサービス検出を容易にする仕組みです。
+新しいターミナルを開いて次のコマンドを実行してください。
 
 ```bash
 sudo apt update
 sudo apt install -y fail2ban git avahi-daemon
 ```
 
-### Configuring the firewall
+### ファイアウォール設定
 
-Install a firewall and allow SSH, HTTP, HTTPS, Bitcoin, and Lightning:
+ファイアウォールをインストールし、SSH、HTTP、HTTPS、Bitcoin、Lightning を許可します。
 
 ```bash
 apt install -y ufw
@@ -77,7 +77,7 @@ ufw default deny incoming
 ufw default allow outgoing
 ```
 
-This command allows SSH connections from internal networks only:
+次のコマンドは、内部ネットワークからの SSH 接続のみを許可します。
 
 ```bash
 ufw allow from 10.0.0.0/8 to any port 22 proto tcp
@@ -89,7 +89,7 @@ ufw allow from fe80::/10 to any port 22 proto tcp
 ufw allow from ff00::/8 to any port 22 proto tcp
 ```
 
-These ports need to be accessible from anywhere (The default subnet is 'any' unless you specify one):
+次のポートはどこからでもアクセス可能にする必要があります（サブネットを指定しない場合のデフォルトは `any`）。
 
 ```bash
 ufw allow 80/tcp
@@ -104,7 +104,7 @@ ufw enable
 ufw status
 ```
 
-### Install Docker
+### Docker をインストールする
 ```Bash
 sudo apt install apt-transport-https ca-certificates curl software-properties-common
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
@@ -115,7 +115,7 @@ sudo apt install docker-ce
 sudo systemctl status docker
 ```
 
-### Configuring the storage
+### ストレージを設定する
 ```bash
 fdisk /dev/sda
 # type 'p' to list existing partitions
@@ -129,7 +129,7 @@ echo "UUID=$UUID /mnt/usb ext4 defaults,noatime,nofail 0 0" | sudo tee -a /etc/f
 mount -a
 ```
 
-### Create mount for Docker volumes
+### Docker ボリューム用のマウントを作成する
 
 ```bash
 rm -rf /var/lib/docker
@@ -139,9 +139,9 @@ echo "/mnt/docker /var/lib/docker none bind,nobootwait 0 2" >> /etc/fstab
 systemctl restart docker
 ```
 
-### Setup BTCPay Server
+### BTCPay Server をセットアップする
 
-Download BTCPay Server from GitHub:
+GitHub から BTCPay Server をダウンロードします。
 
 ```bash
 cd # ensure we are in root home
@@ -150,7 +150,7 @@ git clone https://github.com/btcpayserver/btcpayserver-docker
 cd btcpayserver-docker
 ```
 
-Configure BTCPay by setting some [environment variables](https://github.com/btcpayserver/btcpayserver-docker#environment-variables):
+いくつかの [environment variables](https://github.com/btcpayserver/btcpayserver-docker#environment-variables) を設定して BTCPay を構成します。
 
 ```bash
 export BTCPAY_HOST="btcpay.local"
@@ -162,30 +162,30 @@ export BTCPAYGEN_REVERSEPROXY="nginx"
 export BTCPAY_ENABLE_SSH=true
 ```
 
-If you want to use multiple hostnames, add them via the optional `BTCPAY_ADDITIONAL_HOSTS` variable:
+複数ホスト名を使いたい場合は、任意の `BTCPAY_ADDITIONAL_HOSTS` 変数で追加します。
 
 ```bash
 export BTCPAY_ADDITIONAL_HOSTS="btcpay.YourDomain.com"
 ```
 
-In case you want to restrict access to your local network only, please note that you need to use a `.local` domain.
+ローカルネットワーク内のみにアクセスを制限したい場合は、`.local` ドメインを使う必要がある点に注意してください。
 
-Run the BTCPay installation:
+BTCPay のインストールを実行します。
 
 ```bash
 . ./btcpay-setup.sh -i
 ```
 
-It should be up and running within a few minutes. Try opening http://btcpay.local in your web browser. If everything is correct, you will see BTCPay Server front page.
+数分で起動するはずです。Web ブラウザで http://btcpay.local を開いてみてください。正しく設定されていれば BTCPay Server のフロントページが表示されます。
 
-Now, you just need to wait a day or so for the Bitcoin blockchain to [sync and full verify](../FAQ/Synchronization.md). The bottom of the BTCPay Server web GUI will show a pop-up dialog box to monitor the progress.
+次に、Bitcoin ブロックチェーンの [sync and full verify](../FAQ/Synchronization.md) が完了するまで1日程度待ちます。進捗は BTCPay Server の Web GUI 下部に表示されるポップアップで確認できます。
 
-### FastSync (optional)
+### FastSync（任意）
 
-Please read very carefully to understand what [FastSync](/Docker/fastsync.md) is and why it is important to verify the UTXO set yourself.
+[FastSync](/Docker/fastsync.md) が何であり、UTXO セットを自分で検証することがなぜ重要なのかを十分理解するため、必ず注意深く読んでください。
 
-By using FastSync, you are exposing yourself to attacks if a [malicious UTXO set snapshot](https://github.com/btcpayserver/btcpayserver-docker/blob/master/contrib/FastSync/README.md#what-are-the-downsides-of-fast-sync) is sent to you.
-If you have another trusted node somewhere else, you can check the validity of the UTXO set gathered by FastSync by following [these instructions](https://github.com/btcpayserver/btcpayserver-docker/blob/master/contrib/FastSync/README.md#dont-trust-verify).
+FastSync を使うと、[malicious UTXO set snapshot](https://github.com/btcpayserver/btcpayserver-docker/blob/master/contrib/FastSync/README.md#what-are-the-downsides-of-fast-sync) が送られた場合に攻撃リスクにさらされます。
+別の信頼できるノードを持っている場合は、[these instructions](https://github.com/btcpayserver/btcpayserver-docker/blob/master/contrib/FastSync/README.md#dont-trust-verify) に従って FastSync で取得した UTXO セットの妥当性を確認できます。
 
 ```bash
 # Stop BTCPay Server
@@ -197,8 +197,8 @@ cd contrib/FastSync
 ./load-utxo-set.sh
 ```
 
-FastSync currently takes about 30 minutes on a high-speed internet connection.
-After FastSync finishes, run the following command to restart BTCPay Server:
+FastSync は高速回線で現在およそ30分かかります。
+FastSync 完了後、次のコマンドで BTCPay Server を再起動します。
 
 ```bash
 cd ../..

@@ -1,55 +1,55 @@
-# Accept Bitcoin payment for your Cal.com bookings
+# Cal.com の予約で Bitcoin 決済を受け付ける
 
-You can now accept Bitcoin payment for all your [Cal.com](https://cal.com/) bookings and appointments. 
-Whether you're offering consultation services or one-on-one meetings, receive Bitcoin payments directly to your wallet - no middlemen, no platform fees, and no hidden costs.
+すべての [Cal.com](https://cal.com/) の予約やアポイントメントで、Bitcoin 決済を受け付けられるようになりました。
+コンサルティングサービスでも 1 対 1 のミーティングでも、Bitcoin をウォレットへ直接受け取れます。仲介者なし、プラットフォーム手数料なし、隠れたコストもありません。
 
 [![Cal.com](https://img.youtube.com/vi/uttN0YILu3s/mqdefault.jpg)](https://www.youtube.com/watch?v=uttN0YILu3s)
 
-## Prerequisites:
+## 前提条件:
 
-Before diving into the setup process, ensure you have the following:
+セットアップを始める前に、以下を準備してください。
 
 - [Cal.com account](https://cal.com/)
-- BTCPay Server - [self-hosted](Deployment.md) or run by a [third-party host](/Deployment/ThirdPartyHosting.md)
-- [Created BTCPay Server store](CreateStore.md) with [wallet set up](WalletSetup.md)
+- BTCPay Server - [self-hosted](/Deployment/) または [third-party host](/Deployment/ThirdPartyHosting.md) で稼働
+- [Created BTCPay Server store](CreateStore.md) と [wallet set up](WalletSetup.md)
 
 
-## Set up Cal.com with BTCPay Server
+## Cal.com を BTCPay Server と接続する
 
-Login to your Cal.com account. Navigate to `Apps` > `App store` > `Payments apps`
+Cal.com アカウントにログインし、`Apps` > `App store` > `Payments apps` に移動します。
 
-Find the `BTCPayServer` app, click `Details`, and then `Install App` button
+`BTCPayServer` アプリを見つけて `Details` をクリックし、続けて `Install App` ボタンをクリックします。
 
 ![Cal.com: image 1](./img/calcom/1_app_install_details.png)
 
-Select the application you want to connect your BTCPay Server instance to
+接続したい BTCPay Server インスタンスのアプリケーションを選択します。
 
 ![Cal.com: image 2](./img/calcom/2_installation_step_one.png)
 
 
-The next step is to fill in your BTCPay credentials. Open your BTCPay Server instance on a new tab
+次のステップでは BTCPay の認証情報を入力します。新しいタブで BTCPay Server インスタンスを開いてください。
 
-**BTCPay Server URL**: your BTCPay instance url e.g. https://example.btcpay.com
+**BTCPay Server URL**: BTCPay インスタンスの URL（例: https://example.btcpay.com）
 
-**BTCPay Store Id**: The store you want connected to Cal.com. On your BTCPay Server instance, select the chosen store, click on `Settings` on the left navigation, then you’d see your storeId displayed.
+**BTCPay Store Id**: Cal.com に接続したいストアです。BTCPay Server インスタンスで対象ストアを選び、左側ナビゲーションの `Settings` をクリックすると `storeId` が表示されます。
 
-Copy the Store Id, and fill in your Cal.com - BTCPay Server installation form
+Store Id をコピーして、Cal.com の BTCPay Server インストールフォームに入力します。
 
-**API Key**: In your BTCPay, go to `Account` > `Manage Account` > `API Keys`
+**API Key**: BTCPay で `Account` > `Manage Account` > `API Keys` に移動します。
 
-Create a new API key by clicking on `Generate Key`. Give it a name under the label field e.g. BTCPay-Calcom.
+`Generate Key` をクリックして新しい API キーを作成します。ラベル欄には例として `BTCPay-Calcom` などの名前を付けてください。
 
-For permissions check the follow:
+権限は次を選択してください:
 - View Invoice (btcpay.store.canviewinvoices)
 - Create Invoice (btcpay.store.cancreateinvoice)
 - Modify store webhook (btcpay.store.webhooks.canmodifywebhooks)
 
-Once done click `Save`. Copy the API key and complete the form in Cal.com installation.
+完了したら `Save` をクリックします。API キーをコピーし、Cal.com のインストール画面でフォーム入力を完了してください。
 
-Now that you have all three fields filled, click on connect button to complete installation. Once all fields are validated,
-your keys should be saved and you'd be redirected back to Cal.com page.
+3 つの項目をすべて入力したら、connect ボタンをクリックしてインストールを完了します。すべての値が検証されると、
+キーが保存され、Cal.com ページへリダイレクトされます。
 
-**Please Note** This installation process creates a webhook in your BTCPay Server.
+**注記** このインストール手順では、BTCPay Server に webhook が作成されます。
 
 
 ![Cal.com: image 3](./img/calcom/3_installation_step_two.png)
@@ -58,30 +58,30 @@ your keys should be saved and you'd be redirected back to Cal.com page.
 ![Cal.com: image 4](./img/calcom/4_btcpay_apikey.png)
 
 
-## Demo 
+## デモ
 
-In your event type page, select any booking and click Edit.
+イベントタイプページで任意の予約を選択し、Edit をクリックします。
 
-Each event in Cal.com is configured individually, so, if you want to accept Bitcoin payments for all events, you'll need to enable it manually for each one.
+Cal.com ではイベントごとに個別設定されるため、すべてのイベントで Bitcoin 決済を受け付けたい場合は、各イベントで手動で有効化する必要があります。
 
 ![Cal.com: image 6](./img/calcom/6_event_types_booking.png)
 
-On the edit page, select Apps on the menu, find and enable the BTCPay Server application.
+編集ページでメニューから Apps を選択し、BTCPay Server アプリケーションを見つけて有効化します。
 
-Choose your selected currency and specify an amount. Click save once done.
+希望する通貨を選び、金額を指定します。完了したら save をクリックします。
 
 ![Cal.com: image 7](./img/calcom/7_event_payment_booking_setup.png)
 
 
-Copy the event link and open in a new tab. Choose your date and time, and click the `Pay to book` button.
+イベントリンクをコピーして新しいタブで開きます。日付と時間を選び、`Pay to book` ボタンをクリックします。
 
-In the next page, you'd need to pay the BTCPay Server invoice. The invoice is displayed in an iFrame, if the view is too small, there is a button
-below the invoice page to open in a new tab, click on it and complete your payment. 
+次のページで BTCPay Server の請求書を支払います。請求書は iFrame 内に表示されます。表示が小さい場合は、
+請求書ページの下に新しいタブで開くボタンがあるので、それをクリックして支払いを完了してください。
 
 
-Once your payment is complete, you're redirected to a new page stating that your meeting is scheduled.
+支払いが完了すると、ミーティングが予約済みであることを示すページへリダイレクトされます。
 
-Congratulations... Now you can accept Bitcoin payments for your bookings.
+これで予約に対して Bitcoin 決済を受け付けられます。
 
 
 ![Cal.com: image 8](./img/calcom/8_booking_flow_1.png)
@@ -106,6 +106,6 @@ Congratulations... Now you can accept Bitcoin payments for your bookings.
 
 
 
-## Support and community
+## サポートとコミュニティ
 
-Feel free to join our support channel over at [Mattermost](https://chat.btcpayserver.org/) or [Telegram](https://t.me/btcpayserver) if you need help or have any further questions.
+サポートが必要な場合や追加の質問がある場合は、[Mattermost](https://chat.btcpayserver.org/) または [Telegram](https://t.me/btcpayserver) のサポートチャンネルに参加してください。

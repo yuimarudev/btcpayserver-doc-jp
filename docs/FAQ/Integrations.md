@@ -1,6 +1,12 @@
+<!-- legacy-anchor-aliases -->
+<span id="how-to-configure-additional-token-support"></span>
+<span id="integrations-general-faq"></span>
+<span id="woocommerce-faq-2"></span>
+<!-- /legacy-anchor-aliases -->
+
 # Integrations FAQ
 
-This page covers questions about BTCPay integrations.
+このページでは、BTCPay の連携に関する質問を扱います。
 
 [[toc]]
 
@@ -9,67 +15,67 @@ This page covers questions about BTCPay integrations.
 ### What e-commerce integrations are available?
 
 - [WooCommerce](../WooCommerce.md)
-- [Drupal](../Drupal.md)
+- [Drupal](../Drupal/)
 - [Magento](../Magento.md)
 - [PrestaShop](../PrestaShop.md)
-- [Custom Integration](../CustomIntegration.md)
+- [カスタム連携](../CustomIntegration.md)
 
-If you're a developer, you can develop your own integration, by following the [custom integration instructions](../CustomIntegration.md).
+開発者であれば、[カスタム連携の手順](../CustomIntegration.md)に従って独自の連携を開発できます。
 
 ### How to use WooCommerce store with BTCPay?
 
-- [BTCPay and WooCommerce](https://www.youtube.com/watch?v=tTH3nLoyTcw)
-- [BTCPay WordPress plugin installation](https://www.youtube.com/watch?v=6QcTWHRKZag)
-- [Connecting your store to a third-party BTCPay host](https://www.youtube.com/watch?v=IT2K8It3S3o)
-- [Connect your wallet to BTCPay](https://www.youtube.com/watch?v=xX6LyQej0NQ)
-- [Test your store checkout when you finish with the setup](https://www.youtube.com/watch?v=Fi3pYpzGmmo)
+- [BTCPay と WooCommerce](https://www.youtube.com/watch?v=tTH3nLoyTcw)
+- [BTCPay WordPress プラグインのインストール](https://www.youtube.com/watch?v=6QcTWHRKZag)
+- [ストアをサードパーティ BTCPay ホストに接続する](https://www.youtube.com/watch?v=IT2K8It3S3o)
+- [ウォレットを BTCPay に接続する](https://www.youtube.com/watch?v=xX6LyQej0NQ)
+- [設定完了後にストアのチェックアウトをテストする](https://www.youtube.com/watch?v=Fi3pYpzGmmo)
 
 ### How to use BTCPay with Drupal?
 
-- [BTCPay and Drupal installation and configuration](https://github.com/btcpayserver/commerce_btcpay#installation-and-configuration)
-- [Drupal Commerce BTCPay module installation walkthrough](https://youtube.com/watch?v=XBZwyC2v48s)
+- [BTCPay と Drupal のインストールと設定](https://github.com/btcpayserver/commerce_btcpay#installation-and-configuration)
+- [Drupal Commerce BTCPay モジュールのインストール手順](https://youtube.com/watch?v=XBZwyC2v48s)
 
 ### How to use BTCPay with Prestashop?
 
-- [Using the BTCPay plugin for Prestashop](../PrestaShop.md)
+- [PrestaShop 用 BTCPay プラグインの利用](../PrestaShop.md)
 
 ### Does BTCPay have a Shopify plugin?
 
-Yes, there is a BTCPay and Shopify integration. To get started, check out our [Shopify Integration Guide](../Shopify.md)
+はい、BTCPay と Shopify の連携があります。開始するには、[Shopify 連携ガイド](../Shopify.md)を確認してください。
 
 ### Can I use BTCPay without an integration?
 
-Yes, you can. While various e-commerce CMS use integrations, you can use BTCPay even if you're not a merchant. For more information about use-cases, see [this page](../UseCase.md)
+はい、可能です。さまざまな e コマース CMS では連携を利用しますが、加盟店でなくても BTCPay を利用できます。ユースケースの詳細は[こちらのページ](../UseCase.md)を参照してください。
 
 ## WooCommerce FAQ
 
 ### How to upgrade to the new BTCPay for WooCommerce V2 plugin?
 
-There is no direct upgrade to the [old BitPay based legacy plugin](https://wordpress.org/plugins/btcpay-for-woocommerce/) to the new [V2 version](https://wordpress.org/plugins/btcpay-greenfield-for-woocommerce/) but you install a completely separate plugin (see installation instructions [here](../WooCommerce.md). While both should work side by side it is strongly recommended that you uninstall the legacy plugin after you followed the installation instructions and made sure it works. Otherwise depending on your setup it could lead to unintended behaviour and confusion.
+[旧 BitPay ベースのレガシープラグイン](https://wordpress.org/plugins/btcpay-for-woocommerce/)から新しい [V2 バージョン](https://wordpress.org/plugins/btcpay-greenfield-for-woocommerce/)への直接アップグレードはありません。代わりに完全に別のプラグインをインストールします（インストール手順は[こちら](../WooCommerce.md)を参照）。両方を並行して動作させることはできますが、インストール手順に従って正常動作を確認した後は、レガシープラグインをアンインストールすることを強く推奨します。そうしないと、構成によっては意図しない挙動や混乱を招く可能性があります。
 
 ### How to configure order status in WooCommerce?
 
-Order status depends on a merchant's business model. To better understand BTCPay order (invoice) status [read this document](../WooCommerce.md#btcpay-order-statuses).
-There's no best way to configure them without trial and error and seeing what works for your business.
+注文ステータスは、加盟店のビジネスモデルに依存します。BTCPay の注文（請求書）ステータスを理解するには、[このドキュメント](../WooCommerce.md#btcpay-order-statuses)を参照してください。
+試行錯誤して自分のビジネスに合う設定を見つける以外に、最適な方法はありません。
 
 ### How to customize e-mail confirmations in WooCommerce?
 
-If you wish to send an e-mail after a certain status to the customer, you need to edit WooCommerce order e-mail templates. This is recommended only if you know what you're doing. [Check out this guide](https://www.cloudways.com/blog/how-to-customize-woocommerce-order-emails/).
+特定のステータスの後に顧客へメールを送信したい場合は、WooCommerce の注文メールテンプレートを編集する必要があります。これは内容を理解している場合にのみ推奨されます。[このガイド](https://www.cloudways.com/blog/how-to-customize-woocommerce-order-emails/)を参照してください。
 
 ### Error: If you use an alternative order numbering system, please see class-wc-gateway-btcpay.php to apply a search filter
 
 :::warning Warning
-This guide is for the now discontinued [legacy plugin](https://wordpress.org/plugins/btcpay-for-woocommerce/) and does not apply for the most recent [V2 of the plugin](https://wordpress.org/plugins/btcpay-greenfield-for-woocommerce/).
+このガイドは現在廃止された[レガシープラグイン](https://wordpress.org/plugins/btcpay-for-woocommerce/)向けであり、最新の[プラグイン V2](https://wordpress.org/plugins/btcpay-greenfield-for-woocommerce/)には適用されません。
 :::
 
-If by any chance you use a different order numbering than standard in WooCommerce, the following error may appear in your BTCPay WooCommerce plugin logs:
+もし WooCommerce で標準とは異なる注文番号方式を使っている場合、BTCPay WooCommerce プラグインのログに次のエラーが表示されることがあります。
 
 > [Error] The BTCPay payment plugin was called to process an IPN message but could not retrieve the order details for order_id: "ON123". If you use an alternative order numbering system, please see class-wc-gateway-btcpay.php to apply a search filter.
 
-Paste the following code at the bottom of your child theme's **functions.php** file:
+以下のコードを子テーマの **functions.php** ファイル末尾に貼り付けてください。
 
 <details>
-  <summary>Click to view code snippet</summary>
+  <summary>コードスニペットを表示</summary>
 
 ```php
 function get_order_id_from_custom_order_style($orderid){
@@ -88,71 +94,71 @@ add_filter('woocommerce_order_id_from_number', 'get_order_id_from_custom_order_s
 ### How to configure Additional Token Support / Separate Payment Gateways
 
 :::warning Warning
-This guide is for the now discontinued [legacy plugin](https://wordpress.org/plugins/btcpay-for-woocommerce/) and does not apply for the most recent [V2 of the plugin](https://wordpress.org/plugins/btcpay-greenfield-for-woocommerce/). On the V2 plugin this is now called "**Separate Payment Gateways**". All the below use cases still apply only difference is that you do **not** need to follow the steps in [Setup your additional tokens](#setup-your-additional-tokens), instead you [now have an option](../WooCommerce.md#41-global-settings) that activates this feature and fetches all supported tokens automatically from your BTCPay Server instance.
+このガイドは現在廃止された[レガシープラグイン](https://wordpress.org/plugins/btcpay-for-woocommerce/)向けであり、最新の[プラグイン V2](https://wordpress.org/plugins/btcpay-greenfield-for-woocommerce/)には適用されません。V2 プラグインではこの機能は現在「**Separate Payment Gateways**」と呼ばれます。以下のユースケースは引き続き有効ですが、[Setup your additional tokens](#setup-your-additional-tokens) の手順に従う必要は**ありません**。代わりに、機能を有効化してサポートされるトークンを BTCPay Server インスタンスから自動取得する[設定項目](../WooCommerce.md#41-global-settings)が利用できます。
 :::
 
 ::: tip Note
-The external WordPress and WooCommerce plugins used in this integration are neither endorsed nor have they been thoroughly verified or vetted by the BTCPay Server team. Use them at your own risks.
+この連携で使用する外部の WordPress / WooCommerce プラグインは、BTCPay Server チームによる推奨や、十分に検証・監査されたものではありません。利用は自己責任で行ってください。
 :::
 
-With using the additional token configuration you will be able to have separate payment methods for each configured Currency, Asset, Altcoin or Token. This means you can have separate payment methods for BTC, Lightning Network, LTC, ETH (and ERC20 tokens), Liquid assets, ... you name it. This allows you to issue and use Liquid Assets as coupons or vouchers, see more details below.
+追加トークン設定を使うと、構成した各通貨・アセット・アルトコイン・トークンごとに個別の支払い方法を持てます。つまり、BTC、Lightning Network、LTC、ETH（および ERC20 トークン）、Liquid アセットなどをそれぞれ別の支払い方法として提供できます。これにより、Liquid アセットをクーポンやバウチャーとして発行して利用することも可能です。詳細は以下を参照してください。
 
 #### Use cases
 
-- give away products for free via promotional tokens
-- allow discounts for certain payment methods (tokens)
-- restrict products to certain payment methods (tokens)
-- restrict payment methods (tokens) on shipping zones
-- and many more, see examples below
+- プロモーショントークンで商品を無料配布する
+- 特定の支払い方法（トークン）に割引を適用する
+- 特定の支払い方法（トークン）に商品の購入を制限する
+- 配送ゾーンごとに利用可能な支払い方法（トークン）を制限する
+- その他多数（以下の例を参照）
 
 #### Requirements
 
-- all tokens you configure on the WooCommerce side need to be available in your store on BTCPay Server side
-- to use promotional tokens you need to have [Liquid Assets plugin](https://github.com/btcpayserver/btcpayserver-plugins) installed on BTCPay Server
+- WooCommerce 側で設定するすべてのトークンは、BTCPay Server 側のストアでも利用可能である必要があります
+- プロモーショントークンを使うには、BTCPay Server に [Liquid Assets plugin](https://github.com/btcpayserver/btcpayserver-plugins) をインストールしておく必要があります
 
 #### Token types
 
 ##### Payment tokens
 
-Payment tokens are what is supported by BTCPay Server out of the box (BTC, Lightning Network, LTC, XMR, etc.). They are used as normal payment currency converted by the current exchange rate vs the fiat currency of your shop.
+支払いトークンは、BTCPay Server が標準でサポートしているもの（BTC、Lightning Network、LTC、XMR など）です。これらはショップの法定通貨に対する現在の為替レートで換算され、通常の支払い通貨として使われます。
 
 ##### Promotional tokens (100% discount)
 
-With the introduction of above mentioned Liquid Assets plugin you now also have the possibility to accept **promotional tokens**. You can think of them like coupons or vouchers that can be used to redeem a product/gift. They are special in the sense that they do not have decimals and you need to always pay 1 token per quantity of a product.
+前述の Liquid Assets plugin の導入により、**プロモーショントークン**も受け付けられるようになります。これは商品やギフトの引き換えに使えるクーポンやバウチャーのようなものです。特徴として小数を持たず、商品数量 1 つあたり常に 1 トークンで支払う必要があります。
 
-You as a store owner can [issue your own Liquid assets](https://docs.blockstream.com/liquid/developer-guide/developer-guide-index.html#issued-assets) for this purpose or accept [existing ones](https://blockstream.info/liquid/assets).
+ストアオーナーとして、この用途向けに[独自の Liquid アセットを発行](https://docs.blockstream.com/liquid/developer-guide/developer-guide-index.html#issued-assets)することも、[既存のもの](https://blockstream.info/liquid/assets)を受け入れることもできます。
 
 #### Configuration
 
-Make sure the tokens you will configure on your WooCommerce store are available and properly configured on your BTCPay Server, otherwise you will get errors on invoice creation during the checkout process. This will change in the future when we have a new woocommerce plugin that directly fetches the needed data via the Greenfield API but for now the data needs to be entered in some comma separated value (CSV) style.
+WooCommerce ストアで設定するトークンが BTCPay Server 側で利用可能かつ正しく設定されていることを確認してください。そうでない場合、チェックアウト時の請求書作成でエラーが発生します。将来的には Greenfield API 経由で必要データを直接取得する新しい WooCommerce プラグインで改善される予定ですが、現時点ではカンマ区切り値（CSV）形式でデータを入力する必要があります。
 
 ##### Preparation
 
-Make sure to have the latest woocommerce plugin installed.
+最新の WooCommerce プラグインがインストールされていることを確認してください。
 
 ##### Setup your additional tokens
 
 ###### Setting: Additional token configuration
 
-In the BTCPay payment method settings you have a new setting **“Additional token configuration”** where you can input the token configuration in a specific CSV format of 4 columns.
+BTCPay の支払い方法設定には、4 列の特定 CSV 形式でトークン設定を入力できる新しい設定 **「Additional token configuration」** があります。
 
 1. **token symbol**:
-   Important: this needs to match the symbol on BTCPay Server, e.g. BTC,
+   重要: これは BTCPay Server 上のシンボル（例: BTC）と一致している必要があります。
 
 2. **display name**:
-   The visible text for the payment method on checkout
+   チェックアウト時に表示される支払い方法のテキストです。
 
 3. **type**:
-   this can be “**payment**” or “**promotion**” [see explanation above](#token-types)
+   これは「**payment**」または「**promotion**」を指定します（[上の説明](#token-types)を参照）。
 
 4. **token icon (optional)**:
-   url to token symbol shown during checkout (can be empty but be sure to include the quotes). You can upload the icon in media manager and copy the url or you can use a link to external site or CDN.
+   チェックアウト時に表示されるトークンシンボルの URL（空でも可。ただし引用符は含めてください）。メディアマネージャーにアイコンをアップロードして URL をコピーするか、外部サイトや CDN へのリンクを使えます。
 
 :::danger
-**Important:** All the columns text needs to be enclosed by double quotes `"` and separated by semicolon `;` each asset has to be put in a new line.
+**重要:** すべての列のテキストは二重引用符 `"` で囲み、セミコロン `;` で区切る必要があります。各アセットは改行して 1 行ごとに記述してください。
 :::
 
-**Example additional token config**
+**追加トークン設定の例**
 
 ```
 "BTC_OFFCHAIN";"Lightning BTC";"payment";""
@@ -160,66 +166,66 @@ In the BTCPay payment method settings you have a new setting **“Additional tok
 "eKr";"eKrona (Liquid Asset)";"promotion";""
 ```
 
-After saving you will see each asset to be available as payment method. You can enable/disable them like any other payment method. They won’t have any settings itself for now though (everything is configured by the CSV data). But you can use them together with e.g. woocommerce payment plugins to allow discounts for certain payment methods etc.
+保存後、各アセットが支払い方法として利用可能になります。他の支払い方法と同様に有効/無効を切り替えられます。現時点では個別設定はありません（すべて CSV データで設定されます）。ただし、WooCommerce の支払い系プラグインなどと組み合わせて、特定の支払い方法に割引を適用するなどの運用ができます。
 
-![Each additional additional token available as payment token](../img/woocommerce/woocommerce_at_payment-methods.png)
+![追加した各トークンが支払い方法として利用可能](../img/woocommerce/woocommerce_at_payment-methods.png)
 
 ###### Setting: Additional tokens: Enforce payment tokens
 
-The default payment method of BTCPay Server (Bitcoin) will **not** enforce any configured Currency, Asset, Altcoin or Token. This means when you have the default payment method "Bitcoin" enabled the user can select all the configured Currency, Asset, Altcoin or Tokens (which have an exchange rate) on the BTCPay Server payment page. You may not want this but enforce/limit which payment options will be available. By selecting this checkbox only the Currency, Asset, Altcoin or Tokens of type "payment" listed in the setting [Setting: Additional token configuration](#setting-additional-token-configuration)
+BTCPay Server のデフォルト支払い方法（Bitcoin）は、設定済みの通貨・アセット・アルトコイン・トークンを**制限しません**。つまり、デフォルトの支払い方法「Bitcoin」を有効化している場合、ユーザーは BTCPay Server の支払いページで、設定済みの通貨・アセット・アルトコイン・トークン（為替レートがあるもの）をすべて選択できます。これを望まない場合は、利用可能な支払いオプションを制限できます。このチェックボックスを選択すると、[Setting: Additional token configuration](#setting-additional-token-configuration) に列挙した type が "payment" の通貨・アセット・アルトコイン・トークンのみに制限されます。
 
 #### Common WooCommerce use-cases using the Additional Token Support feature
 
 ##### Use-case 1: limit product to a region/shipping zone
 
-Free plugin used: [Country Based Restrictions for WooCommerce](https://wordpress.org/plugins/woo-product-country-base-restrictions/)
-After installing and activating the plugin go to a product in “Product data” block there is a new tab “Country restrictions”. You can configure the restrictions you want there.
+使用する無料プラグイン: [Country Based Restrictions for WooCommerce](https://wordpress.org/plugins/woo-product-country-base-restrictions/)
+プラグインをインストールして有効化した後、商品の「Product data」ブロックに新しい「Country restrictions」タブが表示されます。そこで希望する制限を設定できます。
 
-Example configuration:
-![Product restricted to US only](../img/woocommerce/woocommerce_at_product-country-restriction.png)
+設定例:
+![商品を米国のみに制限](../img/woocommerce/woocommerce_at_product-country-restriction.png)
 
 ##### Use-case 2: (Promotion) products should have free shipping
 
-This adds the ability to offer free shipping when a customer pays with a selected Currency, Asset, Altcoin or Token.
-This is doable with woocommerce out of the box (no plugins needed):
+これにより、顧客が特定の通貨・アセット・アルトコイン・トークンで支払った場合に送料無料を提供できます。
+これは WooCommerce の標準機能だけで実現可能です（プラグイン不要）。
 
-1. In shipping settings add a new shipping class e.g. “free-shipping”
-2. On your shipping zones / shipping method config you need to make sure you set the rate to be 0 for that shipping class but also that “cost” is empty or 0. And your “no shipping class cost” is set to the normal rate (using flat-rate as example):
-   ![Flat rate, free shipping example configuration](../img/woocommerce/woocommerce_at_free-shipping-flat-rate-config.png)
-3. In product settings "Product data" block you have a tab "Shipping", there you set the above created "Free-shipping" class and it will taken care during checkout.
-   ![Free shipping class set on product settings](../img/woocommerce/woocommerce_at_free-shipping-product-setting.png)
+1. 配送設定で新しい配送クラス（例: 「free-shipping」）を追加します
+2. 配送ゾーン / 配送方法の設定で、その配送クラスの料金を 0 にし、かつ「cost」を空または 0 に設定してください。また「no shipping class cost」は通常料金に設定します（以下は flat-rate の例）。
+   ![フラットレートでの送料無料設定例](../img/woocommerce/woocommerce_at_free-shipping-flat-rate-config.png)
+3. 商品設定の「Product data」ブロックにある「Shipping」タブで、上で作成した「Free-shipping」クラスを設定すると、チェックアウト時に適用されます。
+   ![商品設定で送料無料クラスを設定](../img/woocommerce/woocommerce_at_free-shipping-product-setting.png)
 
 ##### Use-case 3: limit product payment methods
 
-E.g. allow only a certain Currency, Asset, Altcoin or Token to be used as payment for promotional product(s)
+例: プロモーション商品に対して、特定の通貨・アセット・アルトコイン・トークンだけを支払いとして許可する
 
-Free plugin used: [Conditional Payments for WooCommerce](https://wordpress.org/plugins/conditional-payments-for-woocommerce/)
+使用する無料プラグイン: [Conditional Payments for WooCommerce](https://wordpress.org/plugins/conditional-payments-for-woocommerce/)
 
-This plugin provides a condition rules builder where you can enable/disable available payment methods for products. See example config in the screenshot:
-![Conditional payment rules overview](../img/woocommerce/woocommerce_at_limit-payment-methods-rules.png)
+このプラグインは条件ルールビルダーを提供し、商品ごとに利用可能な支払い方法を有効/無効にできます。設定例はスクリーンショットを参照してください。
+![条件付き支払いルールの概要](../img/woocommerce/woocommerce_at_limit-payment-methods-rules.png)
 
 ##### Use-case 4: discount per payment method
 
-Adds the ability to offer a discount when customer uses a selected Currency, Asset, Altcoin or Token as payment.
+顧客が特定の通貨・アセット・アルトコイン・トークンで支払う場合に、割引を提供できるようになります。
 
-Free plugin used: [Discounts Per Payment Method for WooCommerce](https://wordpress.org/plugins/woo-payment-discounts/)
+使用する無料プラグイン: [Discounts Per Payment Method for WooCommerce](https://wordpress.org/plugins/woo-payment-discounts/)
 
-In the now available “Discount per Payment” setting in your WooCommerce settings you have a list of all payment methods and can give percentage or fixed discounts.
+WooCommerce 設定内の「Discount per Payment」設定で、すべての支払い方法に対して割合または固定額の割引を指定できます。
 
-![Settings for discounts per available payment method](../img/woocommerce/woocommerce_at_payment-method-discount.png)
+![利用可能な支払い方法ごとの割引設定](../img/woocommerce/woocommerce_at_payment-method-discount.png)
 
 ##### Use-case 5: make sure promotional products can only be purchased exclusively
 
-This is needed because payment methods based on a selected Currency, Asset, Altcoin or Token - used as promotional token - need to override the product price with 1 (per quantity) to allow users to pay with 1 promotion token per quantity. Otherwise, a user could mix normal products with promo products during checkout and pay both with the promotional tokens, which you want to avoid.
+これは、特定の通貨・アセット・アルトコイン・トークンに基づく支払い方法（プロモーショントークンとして利用）で、商品価格を 1（数量ごと）に上書きし、ユーザーが数量 1 につきプロモーショントークン 1 で支払えるようにするために必要です。これを行わないと、通常商品とプロモ商品を同一チェックアウトで混在させ、両方をプロモーショントークンで支払えてしまう可能性があり、これは避けたい挙動です。
 
-In product settings on the right sidebar you have “Product tags” enter a new tag “promotion”
+商品設定の右サイドバーにある「Product tags」で、新しいタグ「promotion」を追加します。
 
-![Product edit screen promotion tag set](../img/woocommerce/woocommerce_at_product_promotion_tag.png)
+![商品編集画面で promotion タグを設定](../img/woocommerce/woocommerce_at_product_promotion_tag.png)
 
-Paste the following code at the bottom of your child theme's **functions.php** file:
+以下のコードを子テーマの **functions.php** ファイル末尾に貼り付けてください。
 
 <details>
-  <summary>Click to view code snippet</summary>
+  <summary>コードスニペットを表示</summary>
 
 ```php
 /**
@@ -254,9 +260,9 @@ add_filter('woocommerce_add_to_cart_validation', 'btcpay_check_promotion_product
 
 ##### Use-case 6: Limit the checkout of only 1 piece of a product
 
-Adds the ability to limit the number of a Currency, Asset, Altcoin or Token that can be spent by a customer in a single checkout.
+これにより、1 回のチェックアウトで顧客が使用できる通貨・アセット・アルトコイン・トークンの数量を制限できます。
 
-Useful for coupon-style promotions that are limited to one discount per checkout.
+1 回のチェックアウトにつき 1 回だけ割引を適用したいクーポン型プロモーションに有用です。
 
-This is also solved already by WooCommerce. You can activate this on a per product level in Product settings: Tab “**Inventory**”:
-set the checkbox [x] “_Enable this to only allow one of this item to be bought in a single order_”
+これは WooCommerce ですでに対応可能です。商品ごとに Product settings の「**Inventory**」タブで有効化できます。
+チェックボックス [x] 「_Enable this to only allow one of this item to be bought in a single order_」を設定してください。

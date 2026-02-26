@@ -1,20 +1,20 @@
-# Contribute to the documentation
+# ドキュメントへの貢献
 
-Helping us keep the [Documentation](https://github.com/btcpayserver/btcpayserver-doc) up-to-date is an important contribution because BTCPay Server evolves at each release.
+[Documentation](https://github.com/btcpayserver/btcpayserver-doc) を最新の状態に保つことは重要な貢献です。BTCPay Server はリリースごとに進化していくためです。
 
-Beginners can view the following video on how to contribute to the BTCPay Server documentation:
+初心者の方は、BTCPay Server ドキュメントへの貢献方法について次の動画を参照できます。
 [![Contributing to Documentation](https://img.youtube.com/vi/bSDROcdSSWw/mqdefault.jpg)](https://www.youtube.com/watch?v=bSDROcdSSWw)
 
-The main documentation repository to fork/clone is the following: [BTCPay Server Documentation](https://github.com/btcpayserver/btcpayserver-doc)
+fork/clone する主要ドキュメントリポジトリは次です: [BTCPay Server Documentation](https://github.com/btcpayserver/btcpayserver-doc)
 
-If your Pull Request alters the [Documentation](https://github.com/btcpayserver/btcpayserver-doc/), [Website](https://github.com/btcpayserver/btcpayserver.org/) or [Directory](https://github.com/btcpayserver/directory.btcpayserver.org/) repositories, you can preview the changes directly in your web browser once your Pull Request is posted.
+あなたの Pull Request が [Documentation](https://github.com/btcpayserver/btcpayserver-doc/)、[Website](https://github.com/btcpayserver/btcpayserver.org/) または [Directory](https://github.com/btcpayserver/directory.btcpayserver.org/) リポジトリに変更を加える場合、Pull Request の投稿後にブラウザ上で直接プレビューできます。
 
-Simply click the `details` button as shown in the screenshot below. Then locate the file or section that you edited and verify that everything appears as you intended.
+下のスクリーンショットのように `details` ボタンをクリックしてください。次に、編集したファイルまたはセクションを見つけ、意図どおりに表示されていることを確認します。
 
 ![NetlifyDeploymentPreview](../img/Contribute/Netlify_preview.png)
 
 :::tip
-It's a good idea to use relative URLs instead of absolute URLs when editing links that redirect to pages that are part of the documentation already.
-This helps the contributors setting up documentation locally.
-[More info](https://v1.vuepress.vuejs.org/guide/markdown.html#internal-links/).
+すでにドキュメントに含まれているページへ遷移するリンクを編集する場合は、絶対 URL ではなく相対 URL を使うのがおすすめです。
+これは、ローカル環境でドキュメントをセットアップする貢献者の助けになります。
+[詳細はこちら](https://v1.vuepress.vuejs.org/guide/markdown.html#internal-links/)。
 :::

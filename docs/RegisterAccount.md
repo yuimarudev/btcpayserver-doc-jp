@@ -1,43 +1,42 @@
-# (1) Register account
+# (1) アカウント登録
 
-This page relates to registering an account on a BTCPay Server instance of your own, or using a third-party host.
+このページは、自分の BTCPay Server インスタンスでアカウントを登録する場合、またはサードパーティホストを利用する場合に関する内容です。
 
-To register a demo account, visit the [official demo](https://mainnet.demo.btcpayserver.org/login).
+デモアカウントを登録するには、[official demo](https://mainnet.demo.btcpayserver.org/login) を開いてください。
 
-To deploy an instance of your own, see [choosing a deployment method](/Deployment/README.md).
+自分のインスタンスをデプロイするには、[choosing a deployment method](/Deployment/README.md) を参照してください。
 
-A non-exhaustive list of third-party hosts can be found in the BTCPay Server [directory](https://directory.btcpayserver.org/filter/hosts).
+サードパーティホストの一覧（完全版ではありません）は、BTCPay Server の [directory](https://directory.btcpayserver.org/filter/hosts) で確認できます。
 
-## Account Registration
+## アカウント登録
 
-The first step in setting up your BTCPay Server is creating a user account. The **first created account** on a newly-deployed BTCPay Server is automatically - **admin**.
+BTCPay Server のセットアップ最初の手順は、ユーザーアカウントの作成です。新規デプロイされた BTCPay Server で**最初に作成されたアカウント**は自動的に **admin** になります。
 
-To register, visit your BTCPay Server URL and fill in the account registration form on the right. Input your password, password confirmation, e-mail and click "Register". You will automatically be logged in. If you're using a [third-party host](/Deployment/ThirdPartyHosting.md), you may be asked to verify your e-mail address to confirm the registration.
+登録するには、BTCPay Server の URL を開き、右側の登録フォームに入力します。パスワード、パスワード確認、e-mail を入力して "Register" をクリックしてください。自動的にログインされます。[third-party host](/Deployment/ThirdPartyHosting.md) を利用している場合、登録確認のため e-mail アドレスの確認を求められることがあります。
 
 ![BTCPay Server registration](./img/btcpay-registration-page.png)
 
 
-Once your account is successfully created, you'll be redirected to a new page where you can set up your store. Here, you'll need to provide a store name, select the default currency, and choose a currency rate provider.
+アカウント作成が完了すると、新しいページへリダイレクトされ、ストアを設定できます。ここでは、ストア名の入力、デフォルト通貨の選択、為替レートプロバイダーの選択が必要です。
 
 ![BTCPay Server registration](./img/btcpay-registration-store-creation.png)
 
 ![First Store Creation](./img/FirstStoreCreation.png)
 
 
-Congratulations! You've completed the first step: creating your account and store on BTCPay Server.
+おめでとうございます。最初のステップである、BTCPay Server でのアカウントとストアの作成が完了しました。
 
 Next Step: - [Connecting a Wallet](./WalletSetup.md).
 
-If you need to manage multiple stores on your server instance, refer to [Creating a store](./CreateStore.md) for detailed instructions.
+サーバーインスタンスで複数ストアを管理する必要がある場合は、[Creating a store](./CreateStore.md) を参照してください。
 
 
-### Configuring e-mail
+### e-mail の設定
 
-It's recommended that server admins [configure SMTP settings](./FAQ/ServerSettings.md#how-to-configure-smtp-settings-in-btcpay). E-mail setup enables easier password reset for the instance users in case of forgotten credentials.
+サーバー管理者は [SMTP settings](./FAQ/ServerSettings.md#how-to-configure-smtp-settings-in-btcpay) を設定することを推奨します。e-mail を設定すると、資格情報を忘れた場合にインスタンス利用者が簡単にパスワードをリセットできます。
 
-To allow other users to access your server, you need to enable registration in Server Settings > Policies.
+他のユーザーがサーバーへアクセスできるようにするには、Server Settings > Policies で登録を有効化する必要があります。
 
-### Two-factor authentication
+### 二要素認証
 
-For further enhancing security and protecting your account, it's recommended to enable two-factor authentication (both 2FA and U2F are supported). To enable 2FA or U2F, click on the user settings icon in the header menu.
-
+セキュリティをさらに高めてアカウントを保護するため、二要素認証（2FA と U2F の両方に対応）を有効化することを推奨します。2FA または U2F を有効にするには、ヘッダーメニューのユーザー設定アイコンをクリックしてください。

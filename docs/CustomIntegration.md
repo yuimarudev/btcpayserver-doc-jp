@@ -1,81 +1,81 @@
-# Using the BTCPay API for Custom Integration
+# カスタム連携のために BTCPay API を使う
 
-BTCPay Server provides 2 APIS in order to integrate with it:
+BTCPay Server は、連携のために 2 つの API を提供しています。
 
-- [GreenField API](/Development/GreenFieldExample.md) - A RESTful API that aims to allow you to use BTCPay Server headless. This is the recommended API for projects which do not wish to recycle code from a Bitpay integration.
-- Bitpay Invoice API - BTCPay implements the same API as Bitpay for creating and managing invoices.
+- [GreenField API](/Development/GreenFieldExample.md) - BTCPay Server をヘッドレスで利用できることを目的とした RESTful API です。Bitpay 連携のコードを流用しないプロジェクトには、こちらの API を推奨します。
+- Bitpay Invoice API - BTCPay は、請求書の作成・管理について Bitpay と同じ API を実装しています。
 
-**Migrating from BitPay to BTCPay** normally is as easy as changing a URL.
+**BitPay から BTCPay への移行**は、通常 URL を変更するだけで済みます。
 
-While Bitpay only allows one account for one merchant, BTCPay allows a user to manage multiple stores.
+Bitpay が 1 商人につき 1 アカウントのみ許可しているのに対し、BTCPay では 1 人のユーザーが複数ストアを管理できます。
 
-## Official Client Libraries
+## 公式クライアントライブラリ
 
-BTCPay maintains official client libraries for [C#](https://github.com/MetacoSA/NBitpayClient), [Python](https://github.com/btcpayserver/btcpay-python) and [NodeJS](https://github.com/btcpayserver/node-btcpay).
+BTCPay は [C#](https://github.com/MetacoSA/NBitpayClient)、[Python](https://github.com/btcpayserver/btcpay-python)、[NodeJS](https://github.com/btcpayserver/node-btcpay) の公式クライアントライブラリを提供しています。
 
-In addition, there are forked repositories of Bitpay's [PHP](https://github.com/btcpayserver/btcpayserver-php-client) and [Ruby](https://github.com/bitpay/ruby-client) clients.
+さらに、Bitpay クライアントの [PHP](https://github.com/btcpayserver/btcpayserver-php-client) および [Ruby](https://github.com/bitpay/ruby-client) のフォークリポジトリもあります。
 
-## Accessing the API Manually
+## API へ手動でアクセスする
 
-If not using one of the libraries above, the REST API can be accessed manually.
+上記ライブラリを使わない場合、REST API には手動でアクセスできます。
 
-The authentication mechanism is using `BitId`.
+認証メカニズムには `BitId` を使用します。
 
-With `BitId`, the `client` of the API (like an e-commerce plugin) generates a private key, then informs the `server` (BTCPay) about the `public key`.
+`BitId` では、API の `client`（e コマースプラグインなど）が秘密鍵を生成し、`server`（BTCPay）に公開鍵を通知します。
 
-Every requests to the API sent by the client is signed with the client's `private key`.
+クライアントから API に送るすべてのリクエストは、クライアントの `private key` で署名されます。
 
-We call `pairing` the process to inform BTCPay about your `public key`.
+BTCPay に `public key` を通知するプロセスを `pairing` と呼びます。
 
-## Pairing process
+## ペアリングプロセス
 
-Your first need to create a new store:
+まず新しいストアを作成する必要があります。
 
-1. Log in
-2. Go to Stores menu
-3. Click on `Create a new store`
-4. Enter a friendly name for the store, validate.
+1. ログイン
+2. Stores メニューへ移動
+3. `Create a new store` をクリック
+4. ストアの表示名を入力して確定
 
-There is two method of `pairing`, client side pairing and server side pairing.
+`pairing` には、クライアント側ペアリングとサーバー側ペアリングの 2 つの方法があります。
 
-### Client side pairing
+### クライアント側ペアリング
 
-With client side pairing, the `client` generates a URL from their `public key` which a human user can browse to validate the pairing.
+クライアント側ペアリングでは、`client` が自身の `public key` から URL を生成し、利用者がその URL を開いてペアリングを承認します。
 
-Typically the URL looks like `https://btcpay.example.com/api-access-request?pairingCode=<pairingcode_goes_here>`.
+通常、URL は `https://btcpay.example.com/api-access-request?pairingCode=<pairingcode_goes_here>` のような形式です。
 
-You can find documentation about how to achieve this with [this link](https://support.bitpay.com/hc/en-us/articles/115003001183-How-do-I-pair-my-client-and-create-a-token-).
+この方法の実装方法は [こちらのリンク](https://support.bitpay.com/hc/en-us/articles/115003001183-How-do-I-pair-my-client-and-create-a-token-) を参照してください。
 
-### Server side pairing
+### サーバー側ペアリング
 
-The second way, is to generate your private key via some bitcoin library then:
+もう一つの方法は、何らかの bitcoin ライブラリで秘密鍵を生成したうえで、次を行うことです。
 
-1. Go to the store's settings
-2. Click on `Access tokens`
-3. Click on `Create new Token`
-4. Select merchant's facade and enter your public key,
-5. Click request pairing
-6. Click on Approve
+1. ストア設定へ移動
+2. `Access tokens` をクリック
+3. `Create new Token` をクリック
+4. merchant facade を選択して公開鍵を入力
+5. request pairing をクリック
+6. Approve をクリック
 
-## Note
+## 注記
 
-**BTCPay Server has an API compatible with Bitpay**; changing your e-commerce application **from Bitpay to BTCPay** should take minimal effort.
+**BTCPay Server は Bitpay 互換の API を備えている**ため、e コマースアプリケーションを **Bitpay から BTCPay に切り替える**作業は最小限で済みます。
 
-You can read the full API documentation [on Bitpay's website](https://bitpay.com/api#resource-Invoices).
+完全な API ドキュメントは [Bitpay のウェブサイト](https://bitpay.com/api#resource-Invoices) で確認できます。
 
-There is only one difference: Bitpay only allows one account for one merchant, BTCPay allows a user to manage multiple stores.
+違いは 1 点だけです。Bitpay は 1 商人につき 1 アカウントのみ許可しますが、BTCPay は 1 人のユーザーが複数ストアを管理できます。
 
-## Modal Checkout
+## モーダルチェックアウト
 
-To generate a pop-up modal experience:
+ポップアップモーダルの体験を生成するには次を実行します。
 
-1. Include the btcpay.js script in your html page
+1. HTML ページに btcpay.js スクリプトを含める
 
 ```html
 <script src="https://your.btcpay.url/modal/btcpay.js"></script>
 ```
 
-2. Call the invoice API to generate an invoice (example code). This is sample backend code as it contains an auth token that should not be exposed in your front-end.
+2. Invoice API を呼び出して請求書を生成する（コード例）。これは認証トークンを含むため、フロントエンドへ公開すべきでないバックエンドのサンプルコードです。
 
 ```js
 const axiosClient = axios.create({
@@ -101,13 +101,13 @@ const response = await axiosClient.post('/invoices', invoiceCreation)
 const invoiceId = response.data.data.id
 ```
 
-3. Use the invoiceId to pop up the modal
+3. invoiceId を使ってモーダルを表示する
 
 ```js
 window.btcpay.showInvoice(invoiceId)
 ```
 
-4. You'll often want to do something like refresh the state of your page when the invoice is paid, or note some kind of state before the modal pops up. You can attach event listeners like this:
+4. 請求書が支払われたときにページ状態を更新したり、モーダル表示前後で何らかの状態を記録したりしたい場面はよくあります。次のようにイベントリスナーを追加できます。
 
 ```js
 window.btcpay.onModalWillEnter(yourCallbackFunction)
@@ -115,4 +115,4 @@ window.btcpay.onModalWillLeave(yourCallbackFunction)
 window.btcpay.onModalReceiveMessage(yourCallbackFunction) // available from v1.0.5.6
 ```
 
-`onModalReceiveMessage` will invoke your callback when a new status has been pushed from BTCPay Server to the invoice UI. The data format is `{invoiceId: "x", status: "y" }`
+`onModalReceiveMessage` は、請求書 UI に新しいステータスが BTCPay Server から push されたときにコールバックを呼び出します。データ形式は `{invoiceId: "x", status: "y" }` です。

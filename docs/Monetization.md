@@ -1,63 +1,63 @@
-# Monetization
+# 収益化
 
-Monetization lets a BTCPay Server administrator charge users of their BTCPay Server instance using the built in [Subscriptions](http://docs.btcpayserver.org/Subscriptions) system. It is intended for operators who host BTCPay Server for others and want to charge for server access, maintenance or technical support.
+収益化機能を使うと、BTCPay Server 管理者は組み込みの [Subscriptions](http://docs.btcpayserver.org/Subscriptions) システムを利用して、自身の BTCPay Server インスタンスのユーザーに課金できます。これは、他者向けに BTCPay Server をホスティングし、サーバー利用料・保守・技術サポート費用を請求したい運用者向けの機能です。
 
-Monetization is available starting with **BTCPay Server v2.3.0**.
+収益化は **BTCPay Server v2.3.0** 以降で利用できます。
 
-[![BTCPay Monetization](https://img.youtube.com/vi/THxH6jRrtgQ/mqdefault.jpg)](https://www.youtube.com/watch?v=THxH6jRrtgQ)
+[![BTCPay 収益化](https://img.youtube.com/vi/THxH6jRrtgQ/mqdefault.jpg)](https://www.youtube.com/watch?v=THxH6jRrtgQ)
 
-## Enabling monetization
+## 収益化の有効化
 
-1. Go to **Server Settings > Maintenance**  
-2. Select **Monetization**  
-3. Click **Create a new offering**  
-4. Configure the default store funds will go to  
-5. Configure pricing and trial period  
-6. Optionally, if you have users on your server, you can migrate all non-admin users to the subscription model.  
-7. Click **Proceed**.  
-8. If you haven’t configured email SMTP, you’ll be asked to do so. **Click Configure Server Email and fill in your SMTP details.**  
-9. If you wish to customize your subscription plans at any point, click on **Go to Offering** in the top right corner.
+1. **Server Settings > Maintenance** に移動します  
+2. **Monetization** を選択します  
+3. **Create a new offering** をクリックします  
+4. 資金の入金先となるデフォルトストアを設定します  
+5. 価格とトライアル期間を設定します  
+6. 必要に応じて、サーバー上の管理者以外の全ユーザーをサブスクリプションモデルへ移行できます  
+7. **Proceed** をクリックします  
+8. メール SMTP を未設定の場合は、設定を求められます。**Configure Server Email をクリックし、SMTP の詳細を入力してください。**  
+9. サブスクリプションプランを後からカスタマイズしたい場合は、右上の **Go to Offering** をクリックします。
 
-![Creating an offer](./img/monetization/monetization-1.png)
-![Creating an offer](./img/monetization/monetization-2.png)
-![Creating an offer](./img/monetization/monetization-3.png)
-![Creating an offer](./img/monetization/monetization-4.png)
-![Creating an offer](./img/monetization/monetization-5.png)
-![Creating an offer](./img/monetization/monetization-6.png)
-![Creating an offer](./img/monetization/monetization-7.png)
-![Creating an offer](./img/monetization/monetization-8.png)
+![オファー作成](./img/monetization/monetization-1.png)
+![オファー作成](./img/monetization/monetization-2.png)
+![オファー作成](./img/monetization/monetization-3.png)
+![オファー作成](./img/monetization/monetization-4.png)
+![オファー作成](./img/monetization/monetization-5.png)
+![オファー作成](./img/monetization/monetization-6.png)
+![オファー作成](./img/monetization/monetization-7.png)
+![オファー作成](./img/monetization/monetization-8.png)
 
-## How does monetization work?
+## 収益化はどのように動作しますか？
 
-When monetization is enabled, BTCPay Server automatically:
+収益化を有効にすると、BTCPay Server は自動的に次を実行します。
 
-* Creates a default subscription offering and plan (that can be configured later)  
-* Enables subscription based access control for user accounts  
-* Replaces the standard registration flow with a subscription checkout  
-* Preconfigures basic email notifications (if Server SMTP is configured)
+* デフォルトのサブスクリプションオファーとプランを作成（後から設定可能）  
+* ユーザーアカウントのサブスクリプションベースアクセス制御を有効化  
+* 通常の登録フローをサブスクリプションチェックアウトに置き換え  
+* 基本的なメール通知を事前設定（サーバー SMTP が設定済みの場合）
 
-Users registering to your BTCPay Server, will now first have to go through a subscription checkout. The flow is as following:
+以後、BTCPay Server に登録するユーザーは最初にサブスクリプションチェックアウトを行う必要があります。フローは次のとおりです。
 
-* User registers on BTCPay Server  
-* The user goes to Subscription Checkout where they can select a plan, and add their email.  
-* They’ll receive registration details to their email
+* ユーザーが BTCPay Server に登録する  
+* ユーザーは Subscription Checkout に進み、プラン選択とメールアドレス入力を行う  
+* 登録情報がメールで送信される
 
-![Creating an offer](./img/monetization/monetization-9.png)
+![オファー作成](./img/monetization/monetization-9.png)
 
-## User access and billing
+## ユーザーアクセスと請求
 
-* An active subscription grants access to the BTCPay Server account  
-* An expired or suspended subscription disables access  
-* Users can always access the billing portal to renew or top up, even if their account access is disabled  
-* Automatic emails will be sent to users reminding them about recurring payment  
-* Users manage billing through a **Manage billing** page in their account or a link received through an automatic email
+* 有効なサブスクリプションがあると BTCPay Server アカウントにアクセスできます  
+* サブスクリプションの期限切れまたは停止中はアクセスできません  
+* アカウントアクセスが無効でも、ユーザーは請求ポータルにアクセスして更新やチャージを行えます  
+* 定期支払いをリマインドする自動メールがユーザーに送信されます  
+* ユーザーはアカウント内の **Manage billing** ページ、または自動メール内のリンクから請求情報を管理します
 
-![Creating an offer](./img/monetization/monetization-10.png)
+![オファー作成](./img/monetization/monetization-10.png)
 
-The entire flow is highly customizable. If you’d wish to do beyond what’s pre-configured, check our [subscription documentation](http://docs.btcpayserver.org/Subscriptions).
+この一連のフローは高度にカスタマイズ可能です。事前設定の範囲を超える設定を行いたい場合は、[subscription documentation](http://docs.btcpayserver.org/Subscriptions) を確認してください。
 
-## Notes and limitations
+## 注意事項と制限
 
-* Billing based on revenue is not yet available  
-* Advanced permission controls are planned for future releases  
-* This is beta feature and your feedback is highly welcome into shaping it further
+* 収益ベースの請求はまだ利用できません  
+* 高度な権限コントロールは将来のリリースで予定されています  
+* この機能はベータ版です。今後の改善のため、ぜひフィードバックをお寄せください

@@ -1,31 +1,31 @@
-# BTCPay Server Documentation
+# BTCPay Server ドキュメント
 
 [![Build Status](https://github.com/btcpayserver/btcpayserver-doc/workflows/Build/badge.svg)](https://github.com/btcpayserver/btcpayserver-doc/actions/workflows/build.yml)
 
-## Introduction
+## 紹介
 
-BTCPay Server is an open-source, self-hosted payment processor for Bitcoin and other cryptocurrencies.
+BTCPay Server は、Bitcoin とその他の暗号通貨向けのオープンソースかつセルフホスト型の決済プロセッサです。
 
-If you have trouble using BTCPay Server, consider joining the [communities listed on the official website](https://btcpayserver.org/#communityCTA) to get help from community members.
+BTCPay Server の利用で問題がある場合は、コミュニティメンバーからサポートを受けるために、[公式サイトに掲載されているコミュニティ](https://btcpayserver.org/#communityCTA)への参加を検討してください。
 
-Only file a [Github issue](https://github.com/btcpayserver/btcpayserver/issues) for technical issues you can't resolve through other channels or feature requests you've validated with other members of community.
+ほかのチャネルで解決できない技術的な問題、またはコミュニティの他メンバーと検証済みの機能要望のみを [Github issue](https://github.com/btcpayserver/btcpayserver/issues) に提出してください。
 
-Please check out our [official website](https://btcpayserver.org/), [complete documentation](https://docs.btcpayserver.org/) and [FAQ](https://docs.btcpayserver.org/FAQ/) for more details.
+詳細は、[公式サイト](https://btcpayserver.org/)、[完全なドキュメント](https://docs.btcpayserver.org/)、および [FAQ](https://docs.btcpayserver.org/FAQ/) をご確認ください。
 
-## Contributing
+## 貢献
 
-Pull requests are welcome and appreciated. To contribute to BTCPay Server, first check the [contributing guidelines](docs/Contribute/README.md).
+Pull request は歓迎されており、高く評価されます。BTCPay Server に貢献する前に、まず [contributing guidelines](docs/Contribute/README.md) を確認してください。
 
-If you're a beginner, take a look at the step by step guide on how to contribute to BTCPay Server documentation below.
+初心者の方は、以下の BTCPay Server ドキュメントへの貢献手順ガイドを確認してください。
 
 [![Contributing to Documentation](https://img.youtube.com/vi/bSDROcdSSWw/mqdefault.jpg)](https://www.youtube.com/watch?v=bSDROcdSSWw)
 
-### Build the Documentation Locally
+### ドキュメントをローカルでビルドする
 
-In order to build the website locally, you'll need [Node.js](https://nodejs.org/) >= 12.16 (or basically the latest LTS version).
-A prerequisite for the `setup-deps.sh` script is [jq](https://stedolan.github.io/jq/).
+Web サイトをローカルでビルドするには、[Node.js](https://nodejs.org/) >= 12.16（基本的には最新の LTS 版）が必要です。
+`setup-deps.sh` スクリプトの前提条件として [jq](https://stedolan.github.io/jq/) が必要です。
 
-The setup is straight forward:
+セットアップはシンプルです。
 
 ```bash
 # Install dependencies
@@ -38,11 +38,11 @@ npm install
 npm start
 ```
 
-### Text Highlights
+### テキストハイライト
 
-There are [three types of text highlights](https://vuepress.vuejs.org/guide/markdown.html#custom-containers) that can be used to display different colored boxes.
+異なる色のボックスを表示するために、[3 種類のテキストハイライト](https://vuepress.vuejs.org/guide/markdown.html#custom-containers) を利用できます。
 
-A green box displaying a friendly tip:
+親しみやすいヒントを表示する緑色のボックス:
 
 ```md
 :::tip
@@ -50,7 +50,7 @@ foo
 :::
 ```
 
-A yellow box with a cautious warning:
+注意喚起を表示する黄色のボックス:
 
 ```md
 :::warning
@@ -58,7 +58,7 @@ foo
 :::
 ```
 
-A red box with a clear danger, you can also add a title `foo` to any container:
+明確な危険を示す赤色のボックス。任意のコンテナにはタイトル `foo` を追加できます:
 
 ```md
 :::danger foo
@@ -66,11 +66,11 @@ bar
 :::
 ```
 
-### SEO improvements
+### SEO の改善
 
-We are using the [Vuepress SEO plugin](https://www.npmjs.com/package/vuepress-plugin-seo) to add relevant meta tags to the site and individual pages.
+サイト全体と各ページに関連するメタタグを追加するために、[Vuepress SEO plugin](https://www.npmjs.com/package/vuepress-plugin-seo) を使用しています。
 
-To improve the meta attributes of a specific page, you can add them as YAML frontmatter like this: (see the WooCommerce page for an example)
+特定ページのメタ属性を改善するには、次のように YAML frontmatter を追加できます（例として WooCommerce ページを参照してください）。
 
 ```text
 ---
@@ -86,26 +86,26 @@ tags:
 This document explains how to **integrate BTCPay Server into your WooCommerce store**.
 ```
 
-### Embedding YouTube videos
+### YouTube 動画の埋め込み
 
-To add a YouTube video with a preview, you can do so by linking to it like this:
+プレビュー付きで YouTube 動画を追加するには、次のようにリンクします。
 
 ```md
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/mqdefault.jpg)](https://www.youtube.com/watch?v=YOUTUBE_VIDEO_ID_HERE)
 ```
 
-Note that the link item need to be a preview image (either from YouTube or a custom one) to result in an embedded video.
+埋め込み動画として表示されるには、リンク項目がプレビュー画像（YouTube 由来またはカスタム画像）である必要があります。
 
-### External documentation repos
+### 外部ドキュメントリポジトリ
 
-The build documentation site combines a bunch of docs living in different repositories.
+このドキュメントサイトのビルドでは、複数リポジトリに存在するドキュメントを組み合わせています。
 
-Before the build we check out the other repositories, copy their docs into the right places and link them just as the docs in this repo.
+ビルド前に他リポジトリをチェックアウトし、適切な場所にドキュメントをコピーして、このリポジトリ内のドキュメントと同様にリンクします。
 
-The process for that is defined in the [setup-deps.sh](./setup-deps.sh) script.
+この処理は [setup-deps.sh](./setup-deps.sh) スクリプトで定義されています。
 
-External repos can trigger the docs build whenever they change.
-You can use GitHub's [repository_dispatch](https://help.github.com/en/actions/reference/events-that-trigger-workflows#external-events-repository_dispatch) feature for this, which is exposed via the API:
+外部リポジトリは、変更時にドキュメントビルドをトリガーできます。
+そのために、API 経由で利用できる GitHub の [repository_dispatch](https://help.github.com/en/actions/reference/events-that-trigger-workflows#external-events-repository_dispatch) 機能を使えます。
 
 ```sh
 curl -X POST https://api.github.com/repos/btcpayserver/btcpayserver-doc/dispatches \
@@ -115,11 +115,11 @@ curl -X POST https://api.github.com/repos/btcpayserver/btcpayserver-doc/dispatch
   --data '{"event_type": "build_docs"}'
 ```
 
-The `GH_PAT` needs to be a [personal access token](https://help.github.com/en/actions/reference/events-that-trigger-workflows#triggering-new-workflows-using-a-personal-access-token).
+`GH_PAT` は [personal access token](https://help.github.com/en/actions/reference/events-that-trigger-workflows#triggering-new-workflows-using-a-personal-access-token) である必要があります。
 
-## Supporters
+## サポーター
 
-The BTCPay Server Project is proudly supported by these entities through the [BTCPay Server Foundation](https://foundation.btcpayserver.org/).
+BTCPay Server プロジェクトは、[BTCPay Server Foundation](https://foundation.btcpayserver.org/) を通じて、以下の組織から誇りを持って支援を受けています。
 
 [![Spiral](https://raw.githubusercontent.com/btcpayserver/btcpayserver/master/BTCPayServer/wwwroot/img/readme/supporter_spiral.svg)](https://spiral.xyz)
 [![OpenSats](https://raw.githubusercontent.com/btcpayserver/btcpayserver/master/BTCPayServer/wwwroot/img/readme/supporter_opensats.svg)](https://opensats.org)
@@ -131,4 +131,4 @@ The BTCPay Server Project is proudly supported by these entities through the [BT
 [![IVPN](https://raw.githubusercontent.com/btcpayserver/btcpayserver/master/BTCPayServer/wwwroot/img/readme/supporter_ivpn.svg)](https://ivpn.net/)
 [![Unbank](https://raw.githubusercontent.com/btcpayserver/btcpayserver/master/BTCPayServer/wwwroot/img/readme/supporter_unbank.svg)](https://unbank.com/)
 
-If you'd like to support the project, please visit the [donation page](https://btcpayserver.org/donate/).
+プロジェクトを支援したい場合は、[donation page](https://btcpayserver.org/donate/) をご覧ください。

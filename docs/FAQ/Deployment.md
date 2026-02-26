@@ -1,101 +1,137 @@
-# Deployment FAQ
+<!-- legacy-anchor-aliases -->
+<span id="after-initial-deployment-i-can-t-register-and-i-don-t-have-a-login-yet"></span>
+<span id="are-there-free-hosts-where-i-can-test"></span>
+<span id="can-i-connect-to-my-btcpay-bitcoin-p2p-on-port-8333"></span>
+<span id="can-i-deploy-btcpay-on-my-existing-vps"></span>
+<span id="can-i-run-btcpay-on-my-own-hardware"></span>
+<span id="can-i-run-btcpay-on-my-home-computer"></span>
+<span id="can-i-start-btcpay-only-when-i-m-expecting-a-payment"></span>
+<span id="can-i-use-an-existing-nginx-server-as-a-reverse-proxy-with-ssl-termination"></span>
+<span id="can-i-use-bitcoin-knots-instead-of-bitcoin-core"></span>
+<span id="cause-3-btcpay-is-expecting-you-to-access-this-website-from"></span>
+<span id="cause-4-getting-500-nginx-error-on-a-local-server-https-and-for-http-btcpay-is-expecting-you-to-access-this-website-from"></span>
+<span id="general-deployment-faq"></span>
+<span id="how-can-i-modify-or-deactivate-environment-variables"></span>
+<span id="how-can-i-renew-my-ssl-certificate"></span>
+<span id="how-can-i-run-btcpay-on-testnet"></span>
+<span id="how-do-i-activate-tor-on-my-btcpay-server"></span>
+<span id="how-do-i-completely-uninstall-btcpay-from-a-linux-environment-docker-version"></span>
+<span id="how-do-i-disable-tor-on-my-btcpay-server"></span>
+<span id="how-much-does-it-cost-to-run-btcpay-server"></span>
+<span id="how-to-access-the-onion-address-without-clearnet"></span>
+<span id="how-to-change-domain-name-on-my-lunanode-btcpay"></span>
+<span id="how-to-change-your-btcpay-server-domain-name"></span>
+<span id="how-to-choose-a-proper-deployment-method"></span>
+<span id="how-to-deploy-btcpay-server-alongside-existing-bitcoin-node"></span>
+<span id="how-to-manually-install-btcpay-on-ubuntu-18-04"></span>
+<span id="luna-node-web-deployment-faq"></span>
+<span id="manual-deployment"></span>
+<span id="setting-up-dns-records"></span>
+<span id="web-deployment-faq"></span>
+<span id="what-are-the-minimal-requirements-for-btcpay"></span>
+<span id="what-is-the-easiest-method-to-deploy-a-self-hosted-btcpay-server"></span>
+<span id="why-activate-tor-does-it-mean-that-nobody-knows-who-i-am"></span>
+<span id="with-the-docker-deployment-how-to-use-a-different-volume-for-the-data"></span>
+<!-- /legacy-anchor-aliases -->
 
-This document covers the most common questions, errors, and issues you may encounter prior and during the installation of the software. For a detailed list of deployment methods and instructions for each, please see [Deployment page](../Deployment/README.md).
+# デプロイ FAQ
+
+このドキュメントでは、ソフトウェアのインストール前およびインストール中に遭遇する、最も一般的な質問・エラー・問題を扱います。デプロイ方法の詳細な一覧と各手順については、[デプロイページ](../Deployment/README.md) を参照してください。
 
 [[toc]]
 
-## General Deployment
+## 一般的なデプロイ
 
-### How much does it cost to run BTCPay Server?
+### BTCPay Server の運用にはどれくらい費用がかかりますか？
 
-BTCPay is a 100% free and open-source software. We do not charge you anything.
-However, to run it, you should host it. You can run it as a self-hosted solution on your own local server, or use a cloud hosting provider, which is what a majority of users do. Advanced users can run BTCPay on [their own hardware](/Deployment/Hardware.md). Less technical users can use [Hardware As A Service options](/Deployment/HardwareAsAService.md). If you do not wish to host your own server, you can use a free [Third-Party Host](/Deployment/ThirdPartyHosting.md). Visit our [Deployment Page](/Deployment/README.md) for more information on the various ways in which you can run BTCPay.
+BTCPay は 100% 無料のオープンソースソフトウェアです。私たちが料金を請求することはありません。
+ただし、運用するにはホスティングが必要です。自分のローカルサーバーでセルフホストすることも、クラウドホスティングプロバイダーを利用することもできます（多くのユーザーはこちらを選択しています）。上級ユーザーは [自前ハードウェア](/Deployment/Hardware.md) 上で BTCPay を実行できます。技術的な知識が少ないユーザーは [Hardware as a Service オプション](/Deployment/HardwareAsAService.md) を利用できます。自分でサーバーをホストしたくない場合は、無料の [サードパーティホスト](/Deployment/ThirdPartyHosting.md) も利用できます。BTCPay の実行方法については、[デプロイページ](/Deployment/README.md) で詳しく確認してください。
 
-### What are the minimal requirements for BTCPay?
+### BTCPay の最小要件は何ですか？
 
-If you would like to run Bitcoin and Lightning Network nodes, the minimal requirements are :
+Bitcoin と Lightning Network ノードを実行する場合の最小要件は次のとおりです。
 
-- 2GB Ram
-- 80 GB of storage [with enabled pruning](../Docker/README.md#generated-docker-compose)
+- 2GB RAM
+- 80 GB のストレージ（[pruning を有効化](../Docker/README.md#generated-docker-compose)）
 - Docker
 
-### What is the easiest method to deploy a self-hosted BTCPay Server?
+### セルフホストの BTCPay Server をデプロイする最も簡単な方法は何ですか？
 
-For beginners, we strongly recommend the [web-deployment](/Deployment/LunaNode.md) if you want a self-hosted solution or a [third-party host](/Deployment/ThirdPartyHosting.md).
+初心者には、セルフホストを希望する場合は [Web デプロイ](/Deployment/LunaNode.md)、または [サードパーティホスト](/Deployment/ThirdPartyHosting.md) の利用を強く推奨します。
 
-If you're going to add more than one crypto coin, you need to expand the storage according to that coin(s) blockchain size.
+複数の暗号通貨コインを追加する場合は、それぞれのブロックチェーンサイズに応じてストレージを増やす必要があります。
 
-### How to choose a proper deployment method?
+### 適切なデプロイ方法はどう選べばよいですか？
 
-Please see the [Deployment page](/Deployment/README.md) for comparison of different installation methods and choose the one that suits your needs and skill level the most.
+インストール方法の比較については [デプロイページ](/Deployment/README.md) を参照し、自分のニーズとスキルレベルに最も合う方法を選択してください。
 
-### Can I run BTCPay on my own hardware?
+### BTCPay を自分のハードウェアで動かせますか？
 
-Yes, you can. Check our the [Hardware Deployment page](/Deployment/Hardware.md) for detailed instructions.
+はい、可能です。詳細な手順は [ハードウェアデプロイページ](/Deployment/Hardware.md) を確認してください。
 
-### Can I deploy BTCPay on my existing VPS?
+### 既存の VPS に BTCPay をデプロイできますか？
 
-Yes. BTCPay is not limited to the documented deployment methods. You can use whichever hosting solution you prefer, that fits the minimal requirements.
+はい。BTCPay はドキュメント化されたデプロイ方法に限定されません。最小要件を満たす限り、好みのホスティングソリューションを利用できます。
 
-### Are there free hosts where I can test?
+### 試せる無料ホストはありますか？
 
-On a self-hosted BTCPay, an unlimited amount of users and stores can be attached. Some community users have open registration on their servers for others to use their BTCPay Server mainly for testing and learning. Most of them are community-driven and free. See the [third-party hosts documentation](/Deployment/ThirdPartyHosting.md) for more information.
+セルフホストの BTCPay では、無制限のユーザーとストアを紐付けられます。一部のコミュニティユーザーは、主にテストや学習目的で他の人が使えるよう、サーバーを公開登録にしています。その多くはコミュニティ主導で無料です。詳細は [サードパーティホストのドキュメント](/Deployment/ThirdPartyHosting.md) を参照してください。
 
-### After initial deployment, I can't register and I don't have a login yet?
+### 初回デプロイ後、まだログインがなく登録もできません
 
-When you deploy your BTCPay Server, you should first register a user (during server synchronization). This user is automatically the server admin. If your BTCPay only shows Login in the header menu, and you are unable to register the first user after initial deployment, someone else has registered on your server as the admin. Although this is unlikely to occur (the user would need to know and watch your BTCPay domain name), they had access to your ssh private keys, thus you should redeploy a new server for security reasons.
+BTCPay Server をデプロイしたら、最初にユーザー登録を行う必要があります（サーバー同期中）。この最初のユーザーは自動的にサーバー管理者になります。初回デプロイ後にヘッダーメニューが Login しか表示されず、最初のユーザー登録ができない場合は、すでに別の誰かが管理者として登録した可能性があります。発生確率は高くありませんが（そのユーザーがあなたの BTCPay ドメイン名を知り監視している必要があります）、SSH の秘密鍵にアクセスされた可能性があるため、セキュリティ上の理由で新しいサーバーを再デプロイしてください。
 
-### How do I activate Tor on my BTCPay Server?
+### BTCPay Server で Tor を有効化するには？
 
-Tor is activated by default on the docker deployment.
+Docker デプロイでは Tor はデフォルトで有効です。
 
-### How do I disable Tor on my BTCPay Server?
+### BTCPay Server で Tor を無効化するには？
 
-That's really easy: just log in your instance with SSH, and enter as root the enter following commands:
+非常に簡単です。SSH でインスタンスにログインし、root で次のコマンドを実行してください。
 
 ```bash
 BTCPAYGEN_EXCLUDE_FRAGMENTS="$BTCPAYGEN_EXCLUDE_FRAGMENTS;opt-add-tor"
 . btcpay-setup.sh -i
 ```
 
-Then wait a few minutes for the server to restart, and you're done!
+その後、サーバーが再起動するまで数分待てば完了です。
 
-### Why activate Tor? Does it mean that nobody knows who I am?
+### なぜ Tor を有効化するのですか？ 有効化すると誰にも身元が分からなくなりますか？
 
-Tor for BTCPay server is intended more as an improvement of the setup process, and allows for more flexibility for hosting on one's own device at home or in an office.
+BTCPay Server における Tor は、主にセットアッププロセスを改善する目的で提供されており、自宅やオフィスの自前デバイスでのホスティングに柔軟性をもたらします。
 
-Having Tor activated would allow for simpler, plug-and-play usage of BTCPay, as it suppress the need for the following configuration steps:
+Tor を有効化すると、次の設定手順が不要になり、よりシンプルなプラグアンドプレイで BTCPay を利用できます。
 
-- Opening multiple ports on the firewall
-- Configuring the NAT for port redirection to your device on your local network
-- Setting up a DNS entry to get a HTTPS certificate
-- Having a fixed IP for Lightning
+- ファイアウォールで複数ポートを開放する
+- ローカルネットワーク上のデバイスへポート転送するための NAT を設定する
+- HTTPS 証明書を取得するために DNS エントリを設定する
+- Lightning 用に固定 IP を用意する
 
-While these steps are usually not a problem when BTCPay is hosted on a VPS, it can be difficult to solve for non-technical users on home or office networks.
+これらは通常 VPS で BTCPay をホストする場合は問題になりにくいですが、自宅やオフィスのネットワーク環境では、非技術ユーザーには難しいことがあります。
 
-Tor just solves all these issues in one shot, all you have to do is plug your device on the local network. It is especially useful for POS application.
+Tor はこれらの問題を一度に解決します。必要なのはデバイスをローカルネットワークにつなぐだけです。特に POS アプリケーションで有用です。
 
-But if you're looking for perfect privacy and security, **activating Tor with your BTCPay just won't do it.**
+ただし、完全なプライバシーとセキュリティを求めるなら、**BTCPay で Tor を有効化するだけでは不十分です。**
 
-Tor is a really tricky software to use for developers, as the slightest mistake can tear down the anonymity it provides. As BTCPay is evolving into a rather complex service and adding more and more plugins, even if we tried to route all this traffic through Tor, we couldn't guarantee that there would never be leaks of data in clear.
+Tor は開発者にとって非常に扱いが難しいソフトウェアで、わずかなミスでも匿名性が損なわれる可能性があります。BTCPay はより複雑なサービスへ進化し、プラグインも増え続けているため、すべての通信を Tor 経由にしようとしても、平文データの漏えいが絶対に起こらないとは保証できません。
 
-We think that the illusion of security is more dangerous that no security, or at least security we know is imperfect. So be aware that activating Tor doesn't prevent others to connect to your instance website, your bitcoin or lightning node in clear, **it doesn't make you anonymous at all.**
+私たちは、セキュリティがない状態よりも、あるいは不完全だと分かっているセキュリティよりも、「安全だと思い込むこと」のほうが危険だと考えています。そのため、Tor を有効化しても、他者があなたのインスタンス Web サイトや Bitcoin / Lightning ノードへ平文で接続すること自体は防げず、**匿名にはまったくなりません。**
 
-If you want to know more about the philosophy behind all this, you can read our [article on Medium](https://medium.com/@BtcpayServer/about-tor-and-btcpay-server-2ec1e4bd5e51).
+この背景にある考え方について詳しく知りたい場合は、[Medium の記事](https://medium.com/@BtcpayServer/about-tor-and-btcpay-server-2ec1e4bd5e51) を参照してください。
 
-### How to access the .onion address without clearnet?
+### clearnet を使わずに .onion アドレスへアクセスするには？
 
-To see the .onion address of your BTCPay instance without accessing it through the clearnet and clicking the Tor logo in top left corner, apply the following command:
+clearnet 経由でアクセスして左上の Tor ロゴをクリックしなくても、次のコマンドで BTCPay インスタンスの .onion アドレスを確認できます。
 
 ```bash
 cat /var/lib/docker/volumes/generated_tor_servicesdir/_data/BTCPayServer/hostname
 ```
 
-### How can I modify or deactivate environment variables?
+### 環境変数を変更または無効化するには？
 
-In BTCPay, various options are activated through environment variables. You can modify or delete any of these options using command lines by exporting the new value with `export {environment variable}="{value}"` and then running `. ./btcpay-setup.sh -i` again.
+BTCPay では、さまざまなオプションが環境変数で有効化されています。これらのオプションは、`export {environment variable}="{value}"` で新しい値をエクスポートし、その後 `. ./btcpay-setup.sh -i` を再実行することで、コマンドラインから変更または削除できます。
 
-For example, let's say I want to deactivate Tor for my BTCPay server:
+例えば、BTCPay サーバーの Tor を無効化したい場合は次のとおりです。
 
 ```bash
 # Login as root
@@ -117,18 +153,18 @@ export BTCPAYGEN_ADDITIONAL_FRAGMENTS="opt-save-storage-s"
 exit
 ```
 
-Similarly if you are adding an environment variable, the export command would instead look like this:
+同様に、環境変数を追加する場合は、`export` コマンドは次のようになります。
 
 ```bash
 # Enable Tor in addition to your existing environment variables (such as pruning)
 export BTCPAYGEN_ADDITIONAL_FRAGMENTS="$BTCPAYGEN_ADDITIONAL_FRAGMENTS;opt-add-tor"
 ```
 
-If you need to figure out which environment variable you need to modify, have a look at [this list](https://github.com/btcpayserver/btcpayserver-docker#environment-variables).
+どの環境変数を変更すべきか確認したい場合は、[この一覧](https://github.com/btcpayserver/btcpayserver-docker#environment-variables) を参照してください。
 
-### How can I run BTCPay on testnet?
+### BTCPay を testnet で実行するには？
 
-Building on the section above, this is how you configure BTCPay to use `testnet` instead of the default `mainnet`:
+上のセクションを踏まえると、デフォルトの `mainnet` ではなく `testnet` を使う設定は次のとおりです。
 
 ```bash
 # Export the NBITCOIN_NETWORK variable switching to testnet
@@ -138,44 +174,44 @@ export NBITCOIN_NETWORK="testnet"
 . btcpay-setup.sh -i
 ```
 
-If you just want to test things quickly without deploying everything yourself, have a look at the [Try It Out](../TryItOut.md) section.
-It provides links and explanations for a BTCPay testnet instance hosted by us.
+すべてを自分でデプロイせずに素早く試したい場合は、[試してみる](../TryItOut.md) セクションを確認してください。
+ここには、私たちがホストしている BTCPay の testnet インスタンスへのリンクと説明があります。
 
-### Can I start BTCPay only when I'm expecting a payment?
+### 支払いを受ける予定があるときだけ BTCPay を起動できますか？
 
-No, you need to keep your BTCPay running at all times so that your Bitcoin node stays in sync with the blockchain to verify transactions. If you only start it up every now and then, it would take a long time to catch up on verifying recent blocks, and your payments would not show up until much later.
+いいえ。Bitcoin ノードがブロックチェーンと同期してトランザクションを検証できるよう、BTCPay は常時稼働させる必要があります。ときどき起動するだけだと最新ブロックの検証追従に時間がかかり、支払い反映が大幅に遅れます。
 
-### Can I connect to my BTCPay Bitcoin P2P on port 8333?
+### ポート 8333 で BTCPay の Bitcoin P2P に接続できますか？
 
-BTCPay's Bitcoin core node is not exposed externally by default. For BTCPay purposes, it is typically not in the interest of the user, as it increases the bandwidth requirement. BTCPay is also whitebinding connections to this port, so opening it would expose the node to potential DDoS.
+BTCPay の Bitcoin Core ノードは、デフォルトでは外部公開されていません。BTCPay の用途では帯域要件を増やすため、通常これはユーザーの利益になりません。また BTCPay はこのポートへの接続をホワイトバインドしているため、公開すると DDoS の潜在的リスクにさらされます。
 
-However, we expose a P2P connection to your full node on Tor. You can get the Tor address by running:
+ただし、Tor 経由ではフルノードへの P2P 接続を公開しています。Tor アドレスは次のコマンドで取得できます。
 
 ```bash
 cat /var/lib/docker/volumes/generated_tor_servicesdir/_data/BTC-P2P/hostname
 ```
 
-Or via the `Server Settings` of your BTCPay Server instance, logged as an administrator.
+または、管理者でログインした BTCPay Server インスタンスの `Server Settings` から確認できます。
 
-Please do not share this tor hidden service with untrusted parties. Connections to this hidden service are whitelisted by the bitcoin node, malicious peer would be able to DDoS your node.
+この Tor hidden service は信頼できない相手と共有しないでください。この hidden service への接続は Bitcoin ノード側でホワイトリストされるため、悪意あるピアがノードを DDoS できる可能性があります。
 
-If you need to unsafely expose bitcoind P2P port 8333 (for example if you require P2P for Bisq, DOJO, Esplora, etc.) and you are using a docker deployment, you can use the [opt-unsafe-expose](https://docs.btcpayserver.org/Docker/#generated-docker-compose) additional fragment.
+bitcoind の P2P ポート 8333 を安全性を下げて公開する必要がある場合（例: Bisq、DOJO、Esplora などで P2P が必要な場合）で、Docker デプロイを使用しているなら、追加フラグメント [opt-unsafe-expose](https://docs.btcpayserver.org/Docker/#generated-docker-compose) を利用できます。
 
 :::danger WARNING
-ONLY USE ON TRUSTED LAN OR WITH FIREWALL RULES WHITELISTING SPECIFIC HOSTS
+信頼できる LAN 上、または特定ホストのみを許可するファイアウォールのホワイトリスト設定と併用する場合にのみ使用してください
 :::
 
-### How can I renew my SSL certificate?
+### SSL 証明書を更新するには？
 
-If your SSL certificate has expired for your BTCPay Server, you can manually renew it. For Docker deployments the easiest way to do this is to [restart the container](../Troubleshooting.md#13-restarting-a-service) named `letsencrypt-nginx-proxy-companion` on your server.
+BTCPay Server の SSL 証明書が期限切れになった場合、手動で更新できます。Docker デプロイでは、サーバー上の `letsencrypt-nginx-proxy-companion` という名前の [コンテナを再起動](../Troubleshooting.md#13-restarting-a-service) するのが最も簡単です。
 
-### Can I use an existing Nginx server as a reverse proxy with SSL termination?
+### 既存の Nginx サーバーを SSL 終端付きリバースプロキシとして使えますか？
 
-Yes you can! Just make sure to use the proper configuration.
+はい、可能です。適切な設定を使用してください。
 
-Create an extra config file for your vhost in `/etc/nginx/sites-available/btcpayserver` and create a symlink for this file at `/etc/nginx/sites-enabled/btcpayserver`
+`/etc/nginx/sites-available/btcpayserver` に vhost 用の追加設定ファイルを作成し、`/etc/nginx/sites-enabled/btcpayserver` にこのファイルへのシンボリックリンクを作成します。
 
-The contents of this vhost file should look like this:
+この vhost ファイルの内容は次のようになります。
 
 ```nginx
 server {
@@ -235,7 +271,7 @@ server {
 
 ```
 
-Also, put the following in your main Nginx config file at `/etc/nginx/nginx.conf`:
+また、メインの Nginx 設定ファイル `/etc/nginx/nginx.conf` に次を追加してください。
 
 ```nginx
 http {
@@ -259,20 +295,20 @@ http {
 }
 ```
 
-Now test your Nginx config with `service nginx configtest` and reload the config with `service nginx reload`.
+次に、`service nginx configtest` で Nginx の設定をテストし、`service nginx reload` で設定を再読み込みします。
 
-Then, you need to make sure that BTCPayServer does not try to handle HTTPS on its side, you can do this by disabling it on your BTCPayServer instance.
+続いて、BTCPayServer 側で HTTPS を処理しないようにする必要があります。BTCPayServer インスタンスで無効化してください。
 
 ```bash
 BTCPAYGEN_EXCLUDE_FRAGMENTS="$BTCPAYGEN_EXCLUDE_FRAGMENTS;nginx-https"
 . btcpay-setup.sh -i
 ```
 
-Notice: If your BTCPay Server install has more than one domain (for example `WOOCOMMERCE_HOST` or `BTCPAY_ADDITIONAL_HOSTS`) you will need to modify your config for each domain name. The example above only covers 1 domain name called `btcpay.domain.com`.
+注意: BTCPay Server のインストールで複数ドメイン（例: `WOOCOMMERCE_HOST` や `BTCPAY_ADDITIONAL_HOSTS`）を使用している場合、各ドメイン名ごとに設定を変更する必要があります。上記の例は `btcpay.domain.com` という 1 つのドメインのみを対象にしています。
 
-### Can I use Bitcoin Knots instead of Bitcoin Core?
+### Bitcoin Core の代わりに Bitcoin Knots を使えますか？
 
-That is possible. Just make sure you have recently updated your deployment (`btcpay-update.sh`) and then run the following commands:
+可能です。まずデプロイを最近更新済みであること（`btcpay-update.sh`）を確認し、次のコマンドを実行してください。
 
 ```bash
 export BTCPAYGEN_EXCLUDE_FRAGMENTS="$BTCPAYGEN_EXCLUDE_FRAGMENTS;bitcoin"
@@ -280,92 +316,92 @@ export BTCPAYGEN_ADDITIONAL_FRAGMENTS="$BTCPAYGEN_ADDITIONAL_FRAGMENTS;bitcoinkn
 . btcpay-setup.sh -i
 ```
 
-## How to change your BTCPay Server domain name?
+## BTCPay Server のドメイン名を変更する方法
 
-### Setting up DNS Records
+### DNS レコードを設定する
 
-You bought a domain and now want to connect that to your BTCPay Server.
-The hosting party usually has a page to manage your domain.
-Here you will find the `DNS records` page and add a `CNAME` record.
+ドメインを購入し、それを BTCPay Server に接続したい場合、
+通常はホスティング事業者にドメイン管理ページがあります。
+そこで `DNS records` ページを開き、`CNAME` レコードを追加します。
 
-In this record you will make sure, it points to the provided domain by your VPS hoster.
-You could also do this by IP address, but then instead of a `CNAME record` it would be an `A Record`.
+このレコードでは、VPS ホストから提供されたドメインを指すように設定します。
+IP アドレスで設定することもできますが、その場合は `CNAME record` ではなく `A Record` になります。
 
-This is an example of how this would look at [gandi.net](https://gandi.net/)
+これは [gandi.net](https://gandi.net/) での表示例です。
 
 ![Gandi3](../img/Gandi3.png)
 
-### Change domain name in BTCPay Server settings
+### BTCPay Server の設定でドメイン名を変更する
 
-In BTCPay Server you go to the `Server Settings` menu, and then into the tab `Maintenance`.
-Here you will find a field to replace your old by the new set domain, it might take a few seconds to update.
+BTCPay Server で `Server Settings` メニューを開き、`Maintenance` タブに進みます。
+ここに旧ドメインを新ドメインへ置き換える項目があり、更新には数秒かかる場合があります。
 
 ![Maintenance domain name](../img/changedomain.png)
 
-Now enter the new set domain in the address bar and see if it works!
+次に、アドレスバーへ新しいドメインを入力し、動作するか確認してください。
 
 ![Maintenance2](../img/Maintenance2.png)
 
-### Change domain on command line
+### コマンドラインでドメインを変更する
 
-Connect to your server through SSH.
+SSH 経由でサーバーに接続します。
 
-Example :
+例:
 
 ```bash
 ssh btcpayserver@myawesomedemobtcpay.westeurope.cloudapp.azure.com
 ```
 
-Enter your password and change the domain name.
+パスワードを入力し、ドメイン名を変更します。
 
 ```bash
 sudo su -
 changedomain.sh tothemoon.btcpayserver.com
 ```
 
-Success!
+成功です。
 
-## Web-deployment
+## Web デプロイ
 
-Here you can find common questions and solutions to BTCPay web-deployments.
+ここでは、BTCPay の Web デプロイに関する一般的な質問と解決策を示します。
 
-### Can I run BTCPay on my home computer?
+### BTCPay を自宅のコンピューターで実行できますか？
 
-Similar to the requirements for hosting a website, a web server is required for a BTCPay Server instance. While it is possible to run BTCPay Server locally on your PC, it would have to meet the minimal requirements and also run 24/7 if you don't want interruptions of service. You might also not want to expose your home IP address for the activity related to BTCPay Server payments. For all these reasons, while local hosting is suitable for testing, it's not a viable solution for production. A Virtual Private Server (VPS) is commonly used to address these problems.
+Web サイトをホストする要件と同様に、BTCPay Server インスタンスには Web サーバーが必要です。BTCPay Server をローカル PC で動かすこと自体は可能ですが、最小要件を満たし、サービス中断を避けるため 24 時間 365 日稼働させる必要があります。また、BTCPay Server の支払い関連アクティビティに関して自宅 IP アドレスを公開したくない場合も多いでしょう。これらの理由から、ローカルホスティングはテスト用途には適していますが、本番用途には現実的ではありません。一般的には、これらの問題を解決するために Virtual Private Server (VPS) が使用されます。
 
-### LunaNode web-deployment
+### LunaNode Web デプロイ
 
-#### How to change domain name on my LunaNode BTCPay?
+#### LunaNode の BTCPay でドメイン名を変更するには？
 
-1. In your LunaNode dashboard, click on Virtual Machines > Your Virtual Machine > General Tab > External IP. Copy the external IP.
-2. Go to your DNS provider and create an A record. Paste the external IP.
-3. Go to Server Settings > Maintenance > Change Domain. Paste yourdomain.com without http or https prefix.
+1. LunaNode ダッシュボードで、Virtual Machines > Your Virtual Machine > General Tab > External IP を開き、外部 IP をコピーします。
+2. DNS プロバイダーで A レコードを作成し、外部 IP を貼り付けます。
+3. Server Settings > Maintenance > Change Domain を開き、`http` や `https` のプレフィックスなしで yourdomain.com を貼り付けます。
 
-Additional documentation can be found here: [How to change your BTCPay Server domain name](../FAQ/Deployment.md#how-to-change-your-btcpay-server-domain-name)).
+追加ドキュメント: [BTCPay Server のドメイン名を変更する方法](../FAQ/Deployment.md#how-to-change-your-btcpay-server-domain-name))。
 
-## Manual Deployment
+## 手動デプロイ
 
-#### How to manually install BTCPay on Ubuntu 18.04?
+#### Ubuntu 18.04 に BTCPay を手動インストールするには？
 
-Check this [community guide](https://freedomnode.com/blog/114/how-to-setup-btc-and-lightning-payment-gateway-with-btcpayserver-on-linux-manual-install).
+この [コミュニティガイド](https://freedomnode.com/blog/114/how-to-setup-btc-and-lightning-payment-gateway-with-btcpayserver-on-linux-manual-install) を確認してください。
 
-### How do I completely uninstall BTCPay from a Linux environment (Docker version)
+### Linux 環境（Docker 版）から BTCPay を完全にアンインストールするには
 
-Use the [`btcpay-teardown.sh`](https://github.com/btcpayserver/btcpayserver-docker/blob/master/btcpay-teardown.sh) script like this:
+[`btcpay-teardown.sh`](https://github.com/btcpayserver/btcpayserver-docker/blob/master/btcpay-teardown.sh) スクリプトを次のように実行します。
 
 ```bash
 sudo su -
 . ./btcpay-teardown.sh
 ```
 
-This will completely erase BTCPay Server from your instance and remove the associated Docker containers and volumes.
+これで、インスタンスから BTCPay Server が完全に削除され、関連する Docker コンテナとボリュームも削除されます。
 
-### How to deploy BTCPay Server alongside existing Bitcoin node?
+### 既存の Bitcoin ノードと並行して BTCPay Server をデプロイするには？
 
-The instructions below are valid for Docker deployments:
+以下の手順は Docker デプロイ向けです。
 
-- Run setup as described in [btcpayserver-docker](https://github.com/btcpayserver/btcpayserver-docker#full-installation-for-technical-users) up until `. ./btcpay-setup.sh -i`
-- Create `bitcoin.custom.yml` in the `docker-compose-generator/docker-fragments/` folder.
+- [btcpayserver-docker](https://github.com/btcpayserver/btcpayserver-docker#full-installation-for-technical-users) の説明に従って `. ./btcpay-setup.sh -i` までセットアップを進める
+- `docker-compose-generator/docker-fragments/` フォルダに `bitcoin.custom.yml` を作成する
 
 ```yml
 version: '3'
@@ -386,31 +422,31 @@ services:
       - 'localBitcoinfolder:/root/.bitcoin'
 ```
 
-- Replace: `43782` with your bitcoin node's configured RPC port
-- Replace: `rpc-username` with your bitcoin node's configured RPC username
-- Replace: `rpc-password` with your bitcoin node's configured RPC password
-- Replace: `39388` with your bitcoin node's configured p2p port
-- Replace `localBitcoinfolder` with the path to your bitcoin data folder
+- `43782` を、Bitcoin ノードで設定している RPC ポートに置き換える
+- `rpc-username` を、Bitcoin ノードで設定している RPC ユーザー名に置き換える
+- `rpc-password` を、Bitcoin ノードで設定している RPC パスワードに置き換える
+- `39388` を、Bitcoin ノードで設定している p2p ポートに置き換える
+- `localBitcoinfolder` を、Bitcoin データフォルダのパスに置き換える
 
-If you are running on linux, due to [a limitation of docker](https://github.com/docker/for-linux/issues/264), you will also need to do the following:
+Linux で実行している場合は、[docker の制約](https://github.com/docker/for-linux/issues/264) により次も必要です。
 
-- Run `ip route | grep docker0 | awk '{print $9}'`
-  - Add the following at the end of the `bitcoin.custom.yml` file, replacing `$DOCKER_HOST_IP` with the result of the previous command.
+- `ip route | grep docker0 | awk '{print $9}'` を実行する
+  - `bitcoin.custom.yml` ファイルの末尾に次を追加し、`$DOCKER_HOST_IP` を前のコマンド結果で置き換える
 
 ```yml
 extra_hosts:
   - 'host.docker.internal:$DOCKER_HOST_IP'
 ```
 
-- Run `export BTCPAYGEN_EXCLUDE_FRAGMENTS="bitcoin"`
-- Run `export BTCPAYGEN_ADDITIONAL_FRAGMENTS="$BTCPAYGEN_ADDITIONAL_FRAGMENTS;bitcoin.custom"`
-- Run `. ./btcpay-setup.sh -i`
+- `export BTCPAYGEN_EXCLUDE_FRAGMENTS="bitcoin"` を実行する
+- `export BTCPAYGEN_ADDITIONAL_FRAGMENTS="$BTCPAYGEN_ADDITIONAL_FRAGMENTS;bitcoin.custom"` を実行する
+- `. ./btcpay-setup.sh -i` を実行する
 
-If you are looking for how to deploy alongside existing Lightning node [see this](./LightningNetwork.md#can-i-use-my-existing-ln-node-with-btcpay).
+既存の Lightning ノードと並行デプロイする方法を探している場合は、[こちら](./LightningNetwork.md#can-i-use-my-existing-ln-node-with-btcpay) を参照してください。
 
-### With the docker deployment, how to use a different volume for the data?
+### Docker デプロイで、データ用に別ボリュームを使うには？
 
-First, you need to make sure that btcpayserver and docker is not running
+まず、btcpayserver と docker が動作していないことを確認してください。
 
 ```bash
 sudo su -
@@ -418,7 +454,7 @@ btcpay-down.sh
 systemctl stop docker
 ```
 
-Now, you need to format your drive. If you have already done it, you can skip this step.
+次にドライブをフォーマットします。すでに実施済みならこの手順はスキップできます。
 
 ```bash
 # Step 1: Unplug the drive
@@ -428,10 +464,10 @@ lsblk
 lsblk
 ```
 
-The second `lsblk` should show the drive you just plugged in. (of TYPE `disk`)
-Make sure you don't make a mistake as the next command will erase all data on this disk.
+2 回目の `lsblk` で、今接続したドライブ（TYPE が `disk`）が表示されるはずです。
+次のコマンドはこのディスク上のすべてのデータを消去するため、誤りがないよう注意してください。
 
-For the sake of the example, let's suppose it has the NAME `/dev/sdd`.
+例として、NAME が `/dev/sdd` だとします。
 
 ```bash
 # Save the name in a variable
@@ -440,7 +476,7 @@ DEVICE_NAME="/dev/sdd"
 PARTITION_NAME="/dev/sdd1"
 ```
 
-Now we can partition the disk and format the partition:
+ここからディスクをパーティション分割し、パーティションをフォーマットします。
 
 ```bash
 echo "Partitioning the external drive $DEVICE_NAME..."
@@ -461,7 +497,7 @@ done
 mkfs.ext4 -F "$PARTITION_NAME"
 ```
 
-Then we need to mount the partition on the linux filesystem.
+次に、このパーティションを Linux ファイルシステムへマウントします。
 
 ```bash
 # Mounting the partition
@@ -477,7 +513,7 @@ if ! grep -qF "$MOUNT_DIR" /etc/fstab; then
 fi
 ```
 
-Then, we need to make sure that docker not start before the mount.
+続いて、マウント前に docker が起動しないように設定します。
 
 ```bash
 MOUNT_UNIT="$(systemd-escape --path "$MOUNT_DIR").mount"
@@ -487,7 +523,7 @@ if ! grep -qF "After=$MOUNT_UNIT" "$docker_service"; then
 fi
 ```
 
-Now, imagine you want to put all the docker volume data on the previous partition
+次に、先ほどのパーティションへ Docker ボリュームデータをすべて置く場合を想定します。
 
 ```bash
 DOCKER_VOLUMES="/var/lib/docker/volumes"
@@ -503,20 +539,20 @@ if ! grep -qF "$DOCKER_VOLUMES" /etc/fstab; then
 fi
 ```
 
-Now restart docker and btcpayserver
+最後に docker と btcpayserver を再起動します。
 
 ```bash
 systemctl start docker
 btcpay-up.sh
 ```
 
-Note: We use mount bind instead of symbolic link because docker would complain when running `docker volume rm`.
+注: `docker volume rm` 実行時に docker がエラーを出す可能性があるため、シンボリックリンクではなく mount bind を使用しています。
 
-### I get 503 Service Temporarily Unavailable nginx
+### 503 Service Temporarily Unavailable nginx が表示される
 
-#### Cause 1: Trying to access my BTCPay by IP address
+#### 原因 1: IP アドレスで BTCPay にアクセスしている
 
-When nginx receives a HTTP request, it needs to decide which service is the real destination. If you set `BTCPAY_HOST` to `http://raspberrypi.local/`, then you can only access BTCPay Server via this URL. Trying to access BTCPay with another domain name or with the IP address (for example `http://192.168.0.2`) will result in an HTTP 503 error.
+nginx は HTTP リクエストを受け取ると、どのサービスが実際の宛先かを判断する必要があります。`BTCPAY_HOST` を `http://raspberrypi.local/` に設定している場合、BTCPay Server にはこの URL でしかアクセスできません。別のドメイン名や IP アドレス（例: `http://192.168.0.2`）でアクセスすると HTTP 503 エラーになります。
 
 ```
 503 Service Temporarily Unavailable
@@ -524,8 +560,8 @@ When nginx receives a HTTP request, it needs to decide which service is the real
 nginx
 ```
 
-You can fix this by asking nginx to route such HTTP request to BTCPay Server instead.
-Simply, re-run the setup script like this:
+この問題は、該当 HTTP リクエストを BTCPay Server にルーティングするよう nginx に指示することで解決できます。
+次のようにセットアップスクリプトを再実行してください。
 
 ```bash
 sudo su -
@@ -533,46 +569,46 @@ sudo su -
 REVERSEPROXY_DEFAULT_HOST="$BTCPAY_HOST" && . btcpay-setup.sh -i
 ```
 
-Now browsing to `http://192.168.0.2` should work properly.
+これで `http://192.168.0.2` へのアクセスも正しく動作するはずです。
 
-#### Cause 2: btcpayserver or letsencrypt-nginx-proxy is not running
+#### 原因 2: btcpayserver または letsencrypt-nginx-proxy が起動していない
 
-To check, run:
+確認するには次を実行します。
 
 ```bash
 sudo  docker ps | less -S
 ```
 
-Press "q" to quit out of less.
+`less` を終了するには `q` を押します。
 
-The output should contain:
+出力には次が含まれている必要があります。
 
 - btcpayserver/letsencrypt-nginx-proxy-companion
 - btcpayserver/btcpayserver
 
-And the status should be "Up"
+また、ステータスは `Up` である必要があります。
 
-If the docker container is not running, then check the reason for crash like this:
+Docker コンテナが起動していない場合は、次のようにクラッシュ理由を確認してください。
 
 ```bash
  sudo  docker logs 6a6b9fd75692 --tail 20
 ```
 
-Where 6a6b9fd75692 is the container ID that is having issues.
+ここで `6a6b9fd75692` は問題が起きているコンテナ ID です。
 
-#### Cause 3: BTCPay is expecting you to access this website from
+#### 原因 3: BTCPay がこの Web サイトへのアクセス元を想定している
 
-You might also see the following error: `You access BTCPay Server over an unsecured network`.
+`You access BTCPay Server over an unsecured network` というエラーが表示されることもあります。
 
-You might see this error on the front page of your BTCPay Server since version `1.0.3.73`.
+このエラーは、BTCPay Server のバージョン `1.0.3.73` 以降でフロントページに表示される場合があります。
 
-This is caused by a breaking change made in BTCPay to be able to handle different domain on the same server.
+これは、同一サーバー上で異なるドメインを扱えるようにするため BTCPay に入った破壊的変更が原因です。
 
-It happens because your BTCPay Server is not exposed directly on internet, instead a reverse proxy (like nginx or IIS) receive the request and forward it to BTCPay Server.
+問題が起きるのは、BTCPay Server がインターネットへ直接公開されておらず、代わりにリバースプロキシ（nginx や IIS など）がリクエストを受けて BTCPay Server へ転送している構成です。
 
-Sadly, depending on the configuration of your reverse proxy, either the HTTP HOST header has been replaced, or the reverse proxy did not forwarded the protocol at the front with the http header `X-Forwarded-Proto`.
+残念ながら、リバースプロキシ設定によっては、HTTP HOST ヘッダーが置き換えられているか、または先頭側のプロトコルを示す http ヘッダー `X-Forwarded-Proto` を転送していないことがあります。
 
-If you use NGinx, here is what you need to have at the top level in `/etc/nginx/conf.d/default.conf`:
+NGinx を使っている場合、`/etc/nginx/conf.d/default.conf` のトップレベルに次が必要です。
 
 ```nginx
 map $http_x_forwarded_proto $proxy_x_forwarded_proto {
@@ -590,7 +626,7 @@ client_header_buffer_size 500k;
 large_client_header_buffers 4 500k;
 ```
 
-If your reverse proxy is Apache 2, you need to set those two settings
+リバースプロキシが Apache 2 の場合は、次の 2 つの設定が必要です。
 
 ```
 <VirtualHost *:443>
@@ -600,17 +636,17 @@ If your reverse proxy is Apache 2, you need to set those two settings
 </VirtualHost>
 ```
 
-You will also need those settings in the `apache2.conf` to prevent issues while signing PSBTs.
+PSBT 署名時の問題を防ぐため、`apache2.conf` にも次の設定が必要です。
 
 ```
 LimitRequestLine 500000
 LimitRequestFieldSize 500000
 ```
 
-#### Cause 4: Getting 500 nginx error on a local server https and for http BTCPay is expecting you to access this website from
+#### 原因 4: ローカルサーバーで https は 500 nginx エラー、http は BTCPay is expecting you to access this website from が出る
 
-You need to open port 80 and 443. Once you did that, restart docker `btcpay-restart.sh`
+ポート 80 と 443 を開放する必要があります。開放後、`btcpay-restart.sh` で docker を再起動してください。
 
-#### Cause 5: Other
+#### 原因 5: その他
 
-There could be many causes for 5XX HTTP errors. Please create an [Issue](https://github.com/btcpayserver/btcpayserver-docker/issues) and when cause becomes known add it here in the [Deployment FAQ](/FAQ/Deployment.md) doc.
+5XX HTTP エラーの原因は多数あります。[Issue](https://github.com/btcpayserver/btcpayserver-docker/issues) を作成し、原因が判明したらこの [デプロイ FAQ](/FAQ/Deployment.md) ドキュメントへ追記してください。

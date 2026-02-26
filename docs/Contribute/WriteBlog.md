@@ -1,13 +1,13 @@
-# Contribute to the blog
+# ブログへの貢献
 
-For the time being, the blog is hosted on Wordpress and the contributing process doesn't require Github.
+現時点では、ブログは Wordpress 上で運用されており、貢献プロセスに Github は必要ありません。
 
-Simply hit us in the [chat](https://chat.btcpayserver.org) and we'll discuss the writing proposed.
+[チャット](https://chat.btcpayserver.org)でご連絡いただければ、提案された執筆内容について相談します。
 
-Subjects that are suitable for the blog include:
+ブログに適したトピックの例:
 
-- BTCPay Server updates
-- Tutorials
-- Testimonies of how BTCPay Server helped you
+- BTCPay Server のアップデート
+- チュートリアル
+- BTCPay Server が役立った体験談
 
-Writing articles on our [Blog](https://blog.btcpayserver.org) helps spread the word on new features being implemented, or provides tutorials on how to use them.
+私たちの [Blog](https://blog.btcpayserver.org) に記事を書くことで、新機能の実装情報を広めたり、それらの使い方に関するチュートリアルを提供したりできます。

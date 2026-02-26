@@ -1,56 +1,56 @@
-# BTCPay Server Payjoin Guide
+# BTCPay Server Payjoin ガイド
 
-This document explains how to use BTCPay Server's **Payjoin** feature. For a detailed, technical explanation of how payjoin is implemented, check [BIP78](https://github.com/bitcoin/bips/blob/master/bip-0078.mediawiki)
+このドキュメントでは、BTCPay Server の **Payjoin** 機能の使い方を説明します。payjoin の実装に関する詳細で技術的な説明は [BIP78](https://github.com/bitcoin/bips/blob/master/bip-0078.mediawiki) を参照してください。
 
-You can follow this video to better understand what payjoin is and how to use it.
+以下の動画で、payjoin の概要と使い方を理解できます。
 
-[![How to use Payjoin with BTCPay Server](https://img.youtube.com/vi/-Wrqv6nSmAM/mqdefault.jpg)](https://www.youtube.com/watch?v=-Wrqv6nSmAM)
+[![BTCPay Server で Payjoin を使う方法](https://img.youtube.com/vi/-Wrqv6nSmAM/mqdefault.jpg)](https://www.youtube.com/watch?v=-Wrqv6nSmAM)
 
-## Enabling Payjoin as a merchant
+## 加盟店として Payjoin を有効にする
 
-1. Create a store
-2. Configure a [hot wallet](./CreateWallet.md#hot-wallet) for your derivation scheme. Be sure to use either segwit or segwit wrapped as the address type.
-3. Enable Payjoin/P2EP in the "General Settings" and click "Save"
+1. ストアを作成する
+2. 派生スキーム用の [hot wallet](./CreateWallet.md#hot-wallet) を設定します。アドレスタイプは segwit または segwit wrapped を使用してください。
+3. 「General Settings」で Payjoin/P2EP を有効化し、「Save」をクリックします
 
-It's important to note that you will need at least 1 UTXO for payjoin to work.
+Payjoin を機能させるには、少なくとも 1 つの UTXO が必要である点に注意してください。
 
-![Receive PayJoin in BTCPay Server](./img/payjoin/Payjoin_Guide_Receive_1.png)
+![BTCPay Server で PayJoin を受け取る](./img/payjoin/Payjoin_Guide_Receive_1.png)
 
-![Receive PayJoin in BTCPay Server](./img/payjoin/Payjoin_Guide_Receive_2.png)
+![BTCPay Server で PayJoin を受け取る](./img/payjoin/Payjoin_Guide_Receive_2.png)
 
-![Receive PayJoin in BTCPay Server](./img/payjoin/Payjoin_Guide_Receive_3.png)
+![BTCPay Server で PayJoin を受け取る](./img/payjoin/Payjoin_Guide_Receive_3.png)
 
-## Paying to Payjoin as a user
+## ユーザーとして Payjoin で支払う
 
-The [BTCPay Wallet](./Wallet.md) supports Payjoin.
+[BTCPay Wallet](./Wallet.md) は Payjoin に対応しています。
 
-1. Retrieve the BIP21 payment link from a BTCPay Server invoice which has payjoin enabled by either:
-   - Scan the QR code with the camera scanning feature
-   - Copy the link from the "Open in wallet" button and paste it in the "Parse BIP21" prompt
-2. The send form should be populated with the payment details. You can check if the invoice supports payjoin by expanding "advanced settings" to see if there is a "Payjoin endpoint" input with a url.
-3. Sign your transaction using either BTCPay Server's hardware wallet support via [BTCPay Vault](./HardwareWalletIntegration.md) or the [hot wallet](./CreateWallet.md#hot-wallet) feature.
-4. Once your original transaction is ready, you will be given the option to either `Broadcast (Payjoin)` or to `Broadcast (Simple)`. Choose `Broadcast (Payjoin)`.
-5. The payjoin server will propose a new special transaction, if possible. If the payjoin server is unable to do the payjoin, the original transaction is broadcast instead.
-6. If you are using a hardware wallet, you will be asked to sign the payjoin transaction again (the hot wallet feature signs the transaction for you automatically).
-7. Congratulations, you've just helped improve Bitcoin's fungibility and your financial sovereignty!
+1. Payjoin が有効な BTCPay Server 請求書から BIP21 支払いリンクを取得します。方法は次のいずれかです:
+   - カメラスキャン機能で QR コードを読み取る
+   - 「Open in wallet」ボタンからリンクをコピーし、「Parse BIP21」プロンプトに貼り付ける
+2. 送金フォームに支払い情報が自動入力されるはずです。請求書が payjoin に対応しているかは、「advanced settings」を展開し、URL が入った「Payjoin endpoint」入力欄があるかで確認できます。
+3. [BTCPay Vault](./HardwareWalletIntegration.md) 経由の BTCPay Server ハードウェアウォレット対応、または [hot wallet](./CreateWallet.md#hot-wallet) 機能を使ってトランザクションに署名します。
+4. 元のトランザクションの準備ができると、`Broadcast (Payjoin)` または `Broadcast (Simple)` を選べます。`Broadcast (Payjoin)` を選択してください。
+5. 可能な場合、payjoin サーバーが新しい特別なトランザクションを提案します。payjoin を実行できない場合は、代わりに元のトランザクションがブロードキャストされます。
+6. ハードウェアウォレットを使用している場合は、payjoin トランザクションへの再署名を求められます（hot wallet 機能では自動署名されます）。
+7. これで、Bitcoin の代替可能性と金融主権の向上に貢献できました。
 
-![Receive PayJoin in BTCPay Server](./img/payjoin/Payjoin_Guide_Pay_1.png)
+![BTCPay Server で PayJoin を受け取る](./img/payjoin/Payjoin_Guide_Pay_1.png)
 
-![Receive PayJoin in BTCPay Server](./img/payjoin/Payjoin_Guide_Pay_2.png)
+![BTCPay Server で PayJoin を受け取る](./img/payjoin/Payjoin_Guide_Pay_2.png)
 
-![Receive PayJoin in BTCPay Server](./img/payjoin/Payjoin_Guide_Pay_3.png)
+![BTCPay Server で PayJoin を受け取る](./img/payjoin/Payjoin_Guide_Pay_3.png)
 
-![Receive PayJoin in BTCPay Server](./img/payjoin/Payjoin_Guide_Pay_4.png)
+![BTCPay Server で PayJoin を受け取る](./img/payjoin/Payjoin_Guide_Pay_4.png)
 
-## Why did a payjoin not happen?
+## なぜ payjoin が発生しなかったのですか？
 
-There's multiple reasons for this:
+理由はいくつかあります:
 
-- The store did not have any utxos to contribute towards a payjoin
-- Your wallet does not use the same format as the store's (essential to not raise suspicion to analysis companies)
-- You are not using segwit or p2sh wrapped segwit.
-- The payjoin server is not available
+- ストア側に payjoin に使える utxos がなかった
+- あなたのウォレットがストアと同じフォーマットを使っていない（分析企業に疑いを持たれにくくするために重要）
+- segwit または p2sh wrapped segwit を使っていない
+- payjoin サーバーが利用できない
 
-## Supported wallets
+## 対応ウォレット
 
-Please contact and encourage your wallet developers to add support. The more widespread the **usage of payjoin**, the more broken the heuristics used by blockchain analysis companies become and can effectively trace your financial history. If you are a wallet developer, please [contact us](./Community.md) if you need help or have feedback.
+対応追加をウォレット開発者に依頼し、後押ししてください。**payjoin の利用** が広がるほど、ブロックチェーン分析企業のヒューリスティクスは崩れ、金融履歴の追跡は難しくなります。ウォレット開発者の方で、支援やフィードバックが必要な場合は [contact us](./Community.md) からご連絡ください。

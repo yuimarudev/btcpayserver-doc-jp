@@ -1,13 +1,13 @@
-# Shopware integration
+# Shopware 連携
 
 :::warning
-Please be aware that those two integrations are not maintained by the BTCPay Server team. If you have any questions, please go to their GitHub issues and contact them directly.
+これら2つの連携は BTCPay Server チームによって保守されていない点にご注意ください。質問がある場合は、それぞれの GitHub issues で直接連絡してください。
 :::
 
-## Plugin for Shopware 6
+## Shopware 6 向けプラグイン
 
-Download it on [GitHub](https://github.com/coincharge-io/CoinchargeBTCPayShopware)
+[GitHub](https://github.com/coincharge-io/CoinchargeBTCPayShopware) からダウンロード
 
-## Plugin for Shopware 5
+## Shopware 5 向けプラグイン
 
-Download it on [GitHub](https://github.com/lampsolutions/LampSBtcPayShopware)
+[GitHub](https://github.com/lampsolutions/LampSBtcPayShopware) からダウンロード

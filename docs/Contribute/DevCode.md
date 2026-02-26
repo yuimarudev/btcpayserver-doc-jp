@@ -1,228 +1,235 @@
-# Setup Developer Environment
+# 開発環境のセットアップ
 
 [[toc]]
 
-This guide will help you set up your developer environment to prepare you for later contributions to the BTCPay Server repositories. A variety of beginner tools are used in the guide below to help you get started with development. Once you understand the general setup process, feel free to use any tools that you like.
+このガイドでは、BTCPay Server リポジトリへの今後の貢献に備えて、開発環境をセットアップする方法を説明します。開発を始めやすくするため、以下では初心者向けのさまざまなツールを使います。全体的なセットアップ手順を理解したら、使いやすいツールに置き換えて構いません。
 
-If you are looking for how to make a simple code change such as fixing a typo or copy change, check out the simplified [Write Software](./WriteSoftware.md) tutorial instead. If you are an advanced developer with a local environment already set up for development, you can skip ahead to the [LocalDevelopment](/Development/LocalDevelopment.md) documentation.
+タイポ修正や文言修正のような簡単なコード変更方法を探している場合は、簡略版チュートリアルの [Write Software](./WriteSoftware.md) を参照してください。すでにローカル開発環境を用意している上級開発者は、[LocalDevelopment](/Development/LocalDevelopment.md) のドキュメントに進んでください。
 
-## Developer Resources
+## 開発者向けリソース
 
-- [Github Docs](https://docs.github.com/)
-- [BTCPay Commands and Concepts](/Development/LocalDevelopment.md)
-- [Environment Setup Videos (Linux, Mac, Windows)](/Development/LocalDevelopment.md#videos)
+- [GitHub ドキュメント](https://docs.github.com/)
+- [BTCPay のコマンドと概念](/Development/LocalDevelopment.md)
+- [環境セットアップ動画（Linux, Mac, Windows）](/Development/LocalDevelopment.md#videos)
 
-## Windows Setup Software
+## Windows セットアップ用ソフトウェア
 
-Software to install to follow this guide:
+このガイドを進めるために、以下のソフトウェアをインストールしてください。
 
 1.  [Visual Studio Community Edition](https://visualstudio.microsoft.com/downloads/)
 1.  [.NET Core SDK 8.0+](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
 1.  [Docker Desktop](https://www.docker.com/products/docker-desktop)
-1.  PowerShell (included in Windows OS)
+1.  PowerShell（Windows OS に含まれています）
 1.  [GitBash](https://gitforwindows.org/)
 1.  [GitHub Desktop](https://desktop.github.com/)
-1.  [www.Github.com account](https://github.com/) (sign up)
+1.  [www.Github.com アカウント](https://github.com/)（サインアップ）
 
-Note: _This guide assumes installations in default locations. Take note if you have a different file directory structure._
+注: _このガイドは、各ソフトウェアを既定の場所にインストールしている前提です。フォルダ構成が異なる場合は、適宜読み替えてください。_
 
-## Git Setup
+<a id="git-setup"></a>
+## Git セットアップ
 
-### Fork BTCPay Server Repository
+### BTCPay Server リポジトリをフォークする
 
-- Open a web browser and login to your www.Github.com account.
-- Navigate to the [BTCPay Server Repository](https://github.com/btcpayserver/btcpayserver) and press the `Fork` button to create your own copy of the BTCPay Server repository on Github.
-- Next open Github Desktop and login so that Github Desktop knows about your www.Github.com account and connects to it.
+- Web ブラウザを開き、www.Github.com のアカウントにログインします。
+- [BTCPay Server Repository](https://github.com/btcpayserver/btcpayserver) に移動し、`Fork` ボタンを押して自分用の BTCPay Server リポジトリを GitHub 上に作成します。
+- 続いて GitHub Desktop を開いてログインし、GitHub Desktop が www.Github.com アカウントと接続できるようにします。
 
-### Clone BTCPay Server Repository
+### BTCPay Server リポジトリをクローンする
 
-- In GitHub Desktop, use the `Add` button and see the option clone repository.
-- If you are using your www.Github.com credentials in GitHub Desktop, you will see your BTCPay Server repository that you just forked on www.Github.com. Select it and take note of the local path shown below. (by default it will be something like `C:\Users\SatoshisComputer\Documents\GitHub\btcpayserver` for clarity, lets call it our: _clone local path_) then press clone.
-- Now you will see the BTCPay Server repository has been cloned in your GitHub Desktop and you will be on the _master branch_.
+- GitHub Desktop で `Add` ボタンを使い、リポジトリをクローンするオプションを選びます。
+- GitHub Desktop で www.Github.com の認証情報を使用している場合、先ほど www.Github.com でフォークした BTCPay Server リポジトリが表示されます。それを選び、下に表示されるローカルパスを確認してください。（既定では `C:\Users\SatoshisComputer\Documents\GitHub\btcpayserver` のようなパスになります。以降これを _clone local path_ と呼びます）その後クローンを実行します。
+- GitHub Desktop 上で BTCPay Server リポジトリのクローンが完了し、_master ブランチ_ 上にいる状態になります。
 
-### Create a Development Feature Branch
+### 開発用フィーチャーブランチを作成する
 
-- Next we will practice working with our BTCPay Server repository that we just cloned to our computer using Github Desktop.
-- When developing, you may want to work on different features at once. To do that, we typically want to create multiple feature branches instead of making all changes to the master branch.
-- We're using GitBash and some Git commands, so open GitBash. (If you prefer to only use GitHub desktop instead of GitBash, you can create branches there instead.)
-- Once you have a GitBash terminal open, we need to change directory to our clone of BTCPay Server repository.
-- To do this, navigate to our _clone local path_ with the change directory command: `$ cd Documents/Github/btcpayserver`
-- You can see your clone of BTCPay Server is on the branch called `master`
-- Make a copy of your master branch to do some development on it, with the command: `$ git branch OurNewDevelopmentBranch`
-- Let's view all the branches we have now, with the command: `$ git branch` you can see we have master and OurNewDevelopmentBranch
-- In Git, we now have a copy of our forked BTCPay Server repository (our clone). When we want to switch between branches (copies of our clone), we need to tell Git which branch our development code changes should be assigned to. We do this by checking out our branch, with the command: `$ git checkout OurNewDevelopmentBranch`
-- Now you are on OurNewDevelopmentBranch in GitBash.
-- Open your GitHub Desktop and you can see you are no longer on master and you are now on `OurNewDevelopmentBranch`
-- In the top menu in Github Desktop click: `Repository > Show In Explorer` to see the location of the files.
+- 次に、GitHub Desktop でコンピュータにクローンした BTCPay Server リポジトリを使う練習をします。
+- 開発では、複数の機能を同時に進めることがあります。その場合、すべての変更を master ブランチに入れるのではなく、複数のフィーチャーブランチを作るのが一般的です。
+- ここでは GitBash といくつかの Git コマンドを使うので、GitBash を開きます。（GitBash を使わず GitHub Desktop だけで進めたい場合は、そちらでブランチを作成しても構いません）
+- GitBash ターミナルを開いたら、BTCPay Server リポジトリのクローン先ディレクトリに移動する必要があります。
+- これを行うには、`cd` コマンドで _clone local path_ に移動します: `$ cd Documents/Github/btcpayserver`
+- BTCPay Server のクローンが `master` ブランチにあることを確認できます。
+- master ブランチを開発用に複製するため、次のコマンドを実行します: `$ git branch OurNewDevelopmentBranch`
+- 現在のブランチ一覧を確認します: `$ git branch`。`master` と `OurNewDevelopmentBranch` が表示されます。
+- Git では、フォークした BTCPay Server リポジトリ（クローン）のコピーを扱っています。ブランチ（クローンのコピー）を切り替えるときは、どのブランチに開発中の変更を紐づけるかを Git に伝える必要があります。次のコマンドでブランチを checkout します: `$ git checkout OurNewDevelopmentBranch`
+- これで GitBash で `OurNewDevelopmentBranch` に切り替わりました。
+- GitHub Desktop を開くと、master ではなく `OurNewDevelopmentBranch` にいることを確認できます。
+- GitHub Desktop の上部メニューで `Repository > Show In Explorer` をクリックすると、ファイルの場所を確認できます。
 
-## Local BTCPay Setup
+## ローカル BTCPay セットアップ
 
-### Bitcoin Regtest Network Setup
+<a id="bitcoin-regtest-network-setup"></a>
+### Bitcoin Regtest ネットワークのセットアップ
 
-- For the next step make sure that you have Docker-Compose installed (included with Docker Desktop). Open a PowerShell terminal and navigate to your _clone local path_ and into the BTCPayServer.Tests directory with the command: `$ cd Documents/Github/btcpayserver/BTCPayServer.Tests`
-- The BTCPay Server.Tests project contains the docker files needed to run our docker commands that will start all the project dependencies and create a local Regtest network.
-- In Powershell, start the docker services with the command: `docker-compose up dev`(you must be in the BTCPay Server.Tests to run this command).
-- In your PowerShell terminal you will first see the necessary docker images being pulled, then containers being built. If the build is successful the containers will all show as done.
+- 次の手順に進む前に、Docker-Compose がインストールされていることを確認してください（Docker Desktop に含まれます）。PowerShell ターミナルを開き、_clone local path_ から BTCPayServer.Tests ディレクトリへ移動します: `$ cd Documents/Github/btcpayserver/BTCPayServer.Tests`
+- BTCPay Server.Tests プロジェクトには、プロジェクト依存サービスを起動し、ローカル Regtest ネットワークを作成するための Docker ファイルが含まれています。
+- PowerShell で、次のコマンドを実行して Docker サービスを起動します: `docker-compose up dev`（このコマンドは BTCPay Server.Tests ディレクトリ内で実行する必要があります）。
+- PowerShell ターミナルには、最初に必要な Docker イメージの取得（pull）、その後コンテナのビルドが表示されます。ビルドが成功すると、すべてのコンテナが完了状態になります。
 
-![BTCPayServer.Tests powershell terminal](../img/Contribute/docker-compose-up-dev.png)
+![BTCPayServer.Tests の PowerShell ターミナル](../img/Contribute/docker-compose-up-dev.png)
 
-### Build Local BTCPay Server in Browser Mode
+<a id="build-local-btcpayserver-in-browser-mode"></a>
+### ブラウザーモードでローカル BTCPay Server をビルドする
 
-If you don't want to do any coding and you simply want to create a local BTCPay Server for testing features in the interface, you can start a local BTCPay from the command line.
+コーディングは行わず、インターフェース機能の検証用にローカル BTCPay Server だけを作成したい場合は、コマンドラインから起動できます。
 
-After building your [regtest network](#bitcoin-regtest-network-setup), navigate to your `btcpayserver\BTCPayServer` directory and run the following command:
+[Regtest ネットワーク](#bitcoin-regtest-network-setup) の構築後、`btcpayserver\BTCPayServer` ディレクトリへ移動して次のコマンドを実行します。
 
 ```bash
 dotnet run --launch-profile Bitcoin
 ```
 
-Open a new browser and visit: [http://127.0.0.1:14142](http://127.0.0.1:14142)
+新しいブラウザを開き、[http://127.0.0.1:14142](http://127.0.0.1:14142) にアクセスします。
 
-### Visual Studio Setup
+### Visual Studio のセットアップ
 
-- Open a file explorer to the BTCPay Server repository folder. Without opening any of the folders shown, look for the `btcpayserver.sln` item and right click it to `Open with > Visual Studio`. You may need to choose Open with > Choose another app ... and look for Visual Studio if you have never opened this kind of file before.
-- To get your Visual Studio set up choose `View > Solution Explorer` from the top menu. In this solution explorer you will see all the BTCPay Server files and folders.
-- The top project is BTCPay Server, make sure it's in bold. If it isn't, right click it and choose Set as StartUp Project.
-- Your Visual Studio is now set up and ready.
+- ファイルエクスプローラーで BTCPay Server リポジトリのフォルダを開きます。表示されているフォルダは開かずに、`btcpayserver.sln` を探して右クリックし、`Open with > Visual Studio` を選択します。初めてこの種類のファイルを開く場合は、`Open with > Choose another app ...` から Visual Studio を選ぶ必要があるかもしれません。
+- Visual Studio をセットアップするには、上部メニューで `View > Solution Explorer` を選びます。この Solution Explorer で BTCPay Server のファイルとフォルダを確認できます。
+- 最上位プロジェクトは BTCPay Server です。太字表示になっていることを確認してください。なっていない場合は右クリックして Set as StartUp Project を選択します。
+- これで Visual Studio のセットアップは完了です。
 
-![VS Solution Explorer](../img/Contribute/vs-solution-explorer.png)
+![Visual Studio の Solution Explorer](../img/Contribute/vs-solution-explorer.png)
 
-### Build Local BTCPay Server in Debug Mode
+<a id="build-local-btcpayserver-in-debug-mode"></a>
+### デバッグモードでローカル BTCPay Server をビルドする
 
-- Back in Visual Studio, click: `Build > Build Solution`
-- In the output window, a successful build will look something like this: `========== Build: 6 succeeded, 0 failed, 0 up-to-date, 0 skipped ==========`
-- Next press `Debug > Start Debugging`
-- First a Visual Studio debug console will open which shows information about the status of your local BTCPay Server.
-- Next a local BTCPay Server will be created in a web browser, showing on the home page that it's in `REGTEST` mode.
-- You now will have three windows to view: BTCPay Server browser session, our Visual Studio debug console and our BTCPay Server.Tests powershell terminal.
-- Register a new user in your BTCPay Server and see the registration event is shown in your Visual Studio debug console.
+- Visual Studio に戻り、`Build > Build Solution` をクリックします。
+- Output ウィンドウでは、成功時に次のような表示になります: `========== Build: 6 succeeded, 0 failed, 0 up-to-date, 0 skipped ==========`
+- 次に `Debug > Start Debugging` を押します。
+- まず Visual Studio のデバッグコンソールが開き、ローカル BTCPay Server の状態情報が表示されます。
+- 続いて Web ブラウザでローカル BTCPay Server が起動し、ホーム画面で `REGTEST` モードになっていることが表示されます。
+- この時点で、次の3つの画面を確認できます: BTCPay Server のブラウザセッション、Visual Studio のデバッグコンソール、BTCPay Server.Tests の PowerShell ターミナル。
+- BTCPay Server で新規ユーザーを登録し、その登録イベントが Visual Studio のデバッグコンソールに表示されることを確認します。
 
-![VS Debug Console](../img/Contribute/vs-debug-console.png)
+![Visual Studio のデバッグコンソール](../img/Contribute/vs-debug-console.png)
 
-![Local Regtest BTCPay](../img/Contribute/dashboard-change.jpg)
+![ローカル Regtest の BTCPay](../img/Contribute/dashboard-change.jpg)
 
-### Visual Studio Code Changes In Your Local BTCPay Server
+### ローカル BTCPay Server で Visual Studio からコード変更を確認する
 
-- Make changes to code in Visual Studio (Ex: modify the `This store is ready to accept transactions, good job!` text in the `~\BTCPayServer\Views\UIStores\Dashboard.cshtml` file)
-- Refresh the page to see your text changes on the home page.
-- Some code changes require re-start of Debugging for changes to take effect.
-- Add breakpoints in Visual Studio and see those breakpoints get hit when you try to use a feature in your local BTCPay Server instance.
+- Visual Studio でコードを変更します（例: `~\BTCPayServer\Views\UIStores\Dashboard.cshtml` の `This store is ready to accept transactions, good job!` というテキストを変更する）
+- ページを更新し、ホーム画面にテキスト変更が反映されることを確認します。
+- コード変更によっては、反映のために Debugging の再起動が必要です。
+- Visual Studio でブレークポイントを設定し、ローカル BTCPay Server の機能を操作したときにそのブレークポイントで停止することを確認します。
 
-## Git Maintenance
+## Git メンテナンス
 
-### Sync Forked BTCPay Server Repository
+<a id="sync-forked-btcpayserver-repository"></a>
+<a id="sync-forked-btcpay-server-repository"></a>
+### フォークした BTCPay Server リポジトリを同期する
 
-- With many contributors adding code changes to the Master BTCPay Server Repository, sometimes your forked copy can fall behind, unless you merge new changes into your fork.
-- If you go to your Fork of BTCPay Server on www.Github.com you will see a message saying that your branch is behind by some commits. Example: `This branch is 32 commits behind btcpayserver:master`.
-- To update, you can use GitBash or simply use Github Desktop by clicking through the synchronization prompts.
-- Open a GitBash terminal and update your BTCPay Server repository with the following commands.
-- First always navigate to your _clone local path_ with the command: `$ cd Documents/Github/btcpayserver` and make sure you are on `master` branch.
+- 多くのコントリビューターが BTCPay Server のメインリポジトリにコードを追加するため、新しい変更をフォークへ取り込まないと、自分のフォークが遅れることがあります。
+- www.Github.com 上の自分の BTCPay Server フォークを見ると、ブランチが何コミット遅れているかを示すメッセージが表示されます。例: `This branch is 32 commits behind btcpayserver:master`。
+- 更新には GitBash を使うか、GitHub Desktop の同期プロンプトをたどる方法があります。
+- GitBash ターミナルを開き、以下のコマンドで BTCPay Server リポジトリを更新します。
+- まず _clone local path_ に移動し、`master` ブランチにいることを確認します: `$ cd Documents/Github/btcpayserver`。
 
 ```bash
 $ git fetch upstream
 $ git merge upstream/master
 $ git commit -m <SomeCommitMessage>
 
-Message prompt: ...your branch is ahead of origin master by "X" commits... use git push to publish...
+メッセージ例: ...your branch is ahead of origin master by "X" commits... use git push to publish...
 
 $ git add .
 $ git push origin master
 ```
 
-If you see an error `fatal: 'upstream' does not appear to be a git repository` when running `$ git fetch upstream`, you must first configure a remote that points to the upstream repository in Git. That is needed only once. Just run the following command while you are in your _clone local path_ .
+`$ git fetch upstream` 実行時に `fatal: 'upstream' does not appear to be a git repository` というエラーが出る場合は、先に upstream リポジトリを指す remote を Git に設定する必要があります。これは最初の1回だけ必要です。_clone local path_ にいる状態で次のコマンドを実行してください。
 
 ```bash
 $ git remote add upstream https://github.com/btcpayserver/btcpayserver.git
 
-# check if the upstream repo is added successfully
+# upstream リポジトリが正しく追加されたか確認
 $ git remote -v
 
-# you should see something like this:
+# 次のような表示になります:
 origin	YOUR_FORKED_GITHUB_REPO (fetch)
 origin	YOUR_FORKED_GITHUB_REPO (push)
 upstream	https://github.com/btcpayserver/btcpayserver.git (fetch)
 upstream	https://github.com/btcpayserver/btcpayserver.git (push)
 ```
 
-### Commit Code To Make Pull Request
+### プルリクエスト作成のためにコードをコミットする
 
-- After you have made some code changes on a feature branch (Example: A feature branch called `Fix/BugBranch`) and you want to make a Pull Request to the BTCPay Server Repository. Open a GitBash terminal and navigate to your _clone local path_ with the command: `$ cd Documents/Github/btcpayserver` and make sure you are on the **correct branch** that you want to commit and use git status to check the files changed are the ones you want to commit.
+- フィーチャーブランチ（例: `Fix/BugBranch`）でコード変更を行い、BTCPay Server Repository に Pull Request を作成したい場合は、GitBash ターミナルを開いて _clone local path_ へ移動します: `$ cd Documents/Github/btcpayserver`。その後、コミット対象の **正しいブランチ** にいることを確認し、`git status` で変更ファイルが意図どおりか確認します。
 
 ```bash
 $ git status
 $ git add .
 $ git commit
 
-Text Editor appears to add your commit message...
-Example Commit Message: Fix bug for update button
+テキストエディターが開き、コミットメッセージを入力できます...
+コミットメッセージ例: update button のバグを修正
 
-Accept Changes: Ctrl + x
-Save Changes: Shift + y
-Close Editor with: Enter
+変更を確定: Ctrl + x
+保存: Shift + y
+Enter でエディターを閉じる
 
 $ git push origin Fix/BugBranch
 ```
 
-See your new branch has been created on you www.Github.com BTCPay Server Fork, review changes and create Pull Request.
+www.Github.com 上の BTCPay Server Fork に新しいブランチが作成されたことを確認し、変更内容をレビューして Pull Request を作成します。
 
-### Create a Branch of a Pull Request
+<a id="create-a-branch-of-a-pull-request"></a>
+### プルリクエストのブランチを作成する
 
-A great way to contribute without having to be an advanced developer is by testing other contributor's pull requests. Manual testing is a great way to help other's and ensure that BTCPay Server code changes are working properly. Here is an example of how to make a branch of someone else's pull request, using this previous PoS Pull Request https://github.com/btcpayserver/btcpayserver/pull/454. Open a GitBash terminal and navigate to your _clone local path_ with the command: `$ cd Documents/Github/btcpayserver` and use `git status` to check you don't have any other staged commits (git status is clear).
+高度な開発者でなくても貢献しやすい方法として、他のコントリビューターの Pull Request をテストすることがあります。手動テストは、他の人の変更を検証し、BTCPay Server のコード変更が正しく動作することを確認するのに有効です。ここでは、以前の PoS Pull Request https://github.com/btcpayserver/btcpayserver/pull/454 を例に、他者の Pull Request からブランチを作る方法を示します。GitBash ターミナルを開き、_clone local path_ に移動します: `$ cd Documents/Github/btcpayserver`。`git status` でステージ済みコミットがない（git status が clean）ことを確認してください。
 
 ```bash
 $ git status
 $ git fetch upstream pull/454/head:pos-new-design
-$ git branch (to your new testing branch called pos-new-design)
+$ git branch（新しいテスト用ブランチ pos-new-design が表示されます）
 ```
 
-Note: Be sure to change the /454/ pull request number to the number of the one you would like to test. You can typically leave /head: as is, and add the name of the pull request branch after it.
+注: テストしたい pull request 番号に合わせて `/454/` を変更してください。通常、`/head:` はそのままで問題なく、その後ろに pull request のブランチ名を指定します。
 
-### Delete Local Branch
+### ローカルブランチを削除する
 
-If you delete a branch on your forked BTCPay repository on Github.com, your local copy on your machine will still remain, unless you delete it:
+Github.com のフォーク済み BTCPay リポジトリでブランチを削除しても、ローカルマシン上のコピーは削除されません。必要なら次のように削除します。
 
 ```bash
 $ git checkout master
 $ git branch -D <branch name>
 ```
 
-Note: You can't delete a branch if you have it checked out, so checkout another branch like `master` first, as shown in the example above.
+注: checkout 中のブランチは削除できないため、上記の例のように先に `master` など別ブランチへ切り替えてください。
 
-## Working with Docker Containers
+## Docker コンテナを扱う
 
-If you want to use Docker Commands when developing locally, you can run the following commands in the `BTCPayServer.Tests` directory.
+ローカル開発中に Docker コマンドを使う場合は、`BTCPayServer.Tests` ディレクトリで次のコマンドを実行できます。
 
-- Show running containers `docker ps`
-- Show logs for a container `docker ps logs <container>`
-- Start Docker containers `docker-compose up dev`
-- Stop Docker containers `docker-compose down`
-- Destroy Docker containers `docker-compoose down --v`
+- 実行中コンテナを表示 `docker ps`
+- コンテナのログを表示 `docker ps logs <container>`
+- Docker コンテナを起動 `docker-compose up dev`
+- Docker コンテナを停止 `docker-compose down`
+- Docker コンテナを破棄 `docker-compoose down --v`
 
-## Greenfield API Development
+## Greenfield API 開発
 
-The BTCPay Greenfield API is [currently being developed](../../FAQ/General.md#how-can-i-use-the-btcpay-server-api). You can find a [usage example here](../../Development/GreenFieldExample.md). The official Greenfield [API reference documentation](https://docs.btcpayserver.org/API/Greenfield/v1/) is available for developers who want to develop with the BTCPay REST API.
+BTCPay Greenfield API は [現在も開発中](../FAQ/General.md#how-can-i-use-the-btcpay-server-api) です。利用例は [こちらの例](../Development/GreenFieldExample.md) で確認できます。BTCPay REST API を使って開発したい開発者向けに、公式の Greenfield [API リファレンスドキュメント](https://docs.btcpayserver.org/API/Greenfield/v1/) も用意されています。
 
-Developers who would like to contribute to the Greenfield API should follow the [developer guidelines](https://github.com/btcpayserver/btcpayserver/blob/master/docs/greenfield-development.md) used by the BTCPay project for additions or modifications. If you feel these guidelines are not clear, consider discussing your ideas in the community chat (development channel) or [open a github issue](https://github.com/btcpayserver/btcpayserver/issues/new/choose) to discuss endpoint implementation ideas.
+Greenfield API に貢献したい開発者は、追加や修正時に BTCPay プロジェクトの [開発者ガイドライン](https://github.com/btcpayserver/btcpayserver/blob/master/docs/greenfield-development.md) に従ってください。ガイドラインが不明瞭だと感じる場合は、コミュニティチャット（development channel）で相談するか、エンドポイント実装案を議論するために [GitHub issue を作成](https://github.com/btcpayserver/btcpayserver/issues/new/choose) することを検討してください。
 
-## Working with the Database
+## データベースを扱う
 
-BTCPay uses a PostgreSQL database by default. During development you can easily connect to it. This is helpful if you want to view how data is saved, modify records or use it to find issues during development. You can use the free tool [PgAdmin4](https://www.pgadmin.org/download/) to do this.
+BTCPay は既定で PostgreSQL データベースを使用します。開発中は簡単に接続でき、データ保存の確認、レコード修正、開発時の問題調査に役立ちます。これには無料ツールの [PgAdmin4](https://www.pgadmin.org/download/) を利用できます。
 
-Start your BTCPay in your local environment and view your debug console to find your database connection details:
+ローカル環境で BTCPay を起動し、デバッグコンソールでデータベース接続情報を確認します。
 
-![PostgreSQL Configuration](../img/Contribute/DB-Config.png)
+![PostgreSQL 設定](../img/Contribute/DB-Config.png)
 
-Next, open your PgAdmin and select: `Servers > Create > Server...` to connect to your server. Provide a name for your server and provide your host connection details from your Visual Studio debug console:
+次に PgAdmin を開き、`Servers > Create > Server...` を選んでサーバーに接続します。サーバー名を設定し、Visual Studio のデバッグコンソールに表示されたホスト接続情報を入力します。
 
-![PgAdmin Connection](../img/Contribute/DB-Connect.png)
+![PgAdmin 接続](../img/Contribute/DB-Connect.png)
 
-Save to connect to your development btcpayserver database. In the btcpayserver database look for:
-`Schemas > public > Tables` to see the tables which contain the BTCPay Server data.
+保存して開発用 btcpayserver データベースに接続します。btcpayserver データベースでは、
+`Schemas > public > Tables` を確認すると BTCPay Server データを保持しているテーブルを参照できます。
 
-As an example, you can see all the users registered to your development BTCPay by viewing the rows of the `AspNetUsers` table. Try changing the username of a registered user in the database, then `Save Changes` and `Refresh (F5)`. Now log into your BTCPay using the new username and original password.
+例として、`AspNetUsers` テーブルの行を表示すると、開発用 BTCPay に登録されているユーザーをすべて確認できます。データベース内で登録済みユーザー名を変更し、`Save Changes` と `Refresh (F5)` を実行してみてください。その後、新しいユーザー名と元のパスワードで BTCPay にログインできます。
 
-![PgAdmin Edit](../img/Contribute/DB-Edit.png)
+![PgAdmin での編集](../img/Contribute/DB-Edit.png)
 
-## Questions
+## 質問
 
-If you have questions about the BTCPay Server local development setup, you can join the [community chat](https://chat.btcpayserver.org/). If you have questions about any of the other tools or commands, etc. it's likely you can find answers to your questions by doing a search on the internet or on [StackOverflow](https://stackoverflow.com/).
+BTCPay Server のローカル開発セットアップについて質問がある場合は、[コミュニティチャット](https://chat.btcpayserver.org/) に参加できます。その他のツールやコマンドについての質問は、インターネット検索や [StackOverflow](https://stackoverflow.com/) でも解決策を見つけられることが多いです。

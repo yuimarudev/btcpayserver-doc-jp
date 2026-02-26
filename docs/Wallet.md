@@ -1,128 +1,131 @@
-# BTCPay Server Wallet
+<!-- legacy-anchor-aliases -->
+<span id="rbf-replace-by-fee"></span>
+<span id="signing-with-a-hot-wallet"></span>
+<span id="signing-with-hd-private-key-or-mnemonic-seed"></span>
+<!-- /legacy-anchor-aliases -->
 
-BTCPay Server has a built in, **full-node reliant wallet** that allows for easy funds management.
+# BTCPay Server ウォレット
 
-Each [store](./CreateStore.md)'s configured cryptocurrency has a separate wallet displayed under Wallets in the menu bar.
+BTCPay Server には、**フルノードに依存した内蔵ウォレット**があり、資金を簡単に管理できます。
 
-## Wallet features
+各 [store](./CreateStore.md) で設定された暗号通貨ごとに、メニューバーの Wallets 配下へ個別ウォレットが表示されます。
 
-The wallet contains the following features:
+## ウォレット機能
+
+ウォレットには次の機能があります。
 
 1. Transactions
 2. Send
 3. Receive
 4. Rescan
 5. Pull payments
-6. Payouts 
+6. Payouts
 7. PSBT
 8. Settings
 
 ### Transactions
 
-An overview of the incoming (green), outgoing (red) and unconfirmed (grayed out) **transactions** displayed together with timestamps and balances, sorted by date. You can click on the transaction ID to view the transaction details on the block explorer.
+着金（緑）、送金（赤）、未承認（グレー）の**トランザクション**が、タイムスタンプと残高とともに日付順で表示されます。トランザクション ID をクリックすると、ブロックエクスプローラーで詳細を確認できます。
 
 ![Individual Wallet](./img/wallet/WalletTransactions.png)
 
 #### Transaction Labels
 
-The table below lists the various **transaction labels used by BTCPay**.
+以下の表は、**BTCPay が使用する各種トランザクションラベル**を示しています。
 
-| Transaction Type | Description                                          |
-| ---------------- | ---------------------------------------------------- |
-| app              | Payment was received through an app created invoice  |
-| invoice          | Payment was received through an invoice              |
-| payjoin          | Not paid, invoice timer still has not expired        |
-| payjoin-exposed  | UTXO was exposed through an invoice payjoin proposal |
-| payment-request  | Payment was received through a payment request       |
-| payout           | Payment was sent through a payout or refund          |
+| Transaction Type | Description |
+| ---------------- | ----------- |
+| app              | アプリ作成の請求書経由で支払いを受領 |
+| invoice          | 請求書経由で支払いを受領 |
+| payjoin          | 未払い。請求書タイマーはまだ期限切れではない |
+| payjoin-exposed  | 請求書の payjoin 提案を通じて UTXO が露出 |
+| payment-request  | 支払いリクエスト経由で支払いを受領 |
+| payout           | 出金または返金で支払いを送信 |
 
-You can also create your own [custom transaction labels and comments](./FAQ/Wallet.md#how-to-add-custom-labels-and-comments-to-transactions).
+独自の [custom transaction labels and comments](./FAQ/Wallet.md#how-to-add-custom-labels-and-comments-to-transactions) も作成できます。
 
 ### Send
 
-The Send function allows **spending of the funds from the BTCPay wallet**.
+Send 機能では、**BTCPay ウォレット内の資金を使用**できます。
 
 ![Send from the Wallet](./img/wallet/WalletSend.png)
 
-
 #### Advanced Settings
 
-Certain wallet features are available for advanced users. Toggle the `Advanced Settings` within the `Send` tab to preview them.
+一部のウォレット機能は上級ユーザー向けです。`Send` タブ内の `Advanced Settings` を有効化すると確認できます。
 
-##### Don't create UTXO change
+##### UTXO のおつりを作成しない
 
-This option is available in the `Advanced mode` of the `Send` page.
+このオプションは `Send` ページの `Advanced mode` で利用できます。
 
-It is a privacy enhancing feature which is useful when you're sending funds to another wallet of yours or to an exchange. It makes sure that no change UTXO is created by **rounding up** the amount sent.
+これはプライバシー強化機能で、別の自分のウォレットや取引所へ送金する際に有用です。送金額を**切り上げる**ことで、おつり UTXO が作られないようにします。
 
-By default this feature is disabled, so if your wallet has a UTXO of `1.1 BTC` and you input an amount equal to `1.0 BTC`, the resulting transaction will have two outputs `0.1 BTC` of change, and `1.0 BTC` to your destination.
+既定ではこの機能は無効です。たとえばウォレットに `1.1 BTC` の UTXO があり、`1.0 BTC` を入力すると、結果のトランザクションは `0.1 BTC` のおつりと、宛先への `1.0 BTC` の 2 出力になります。
 
-Blockchain analysis will understand that those `0.1 BTC` of change belong to the same entity which controlled `1.1 BTC` before, and can track the future purchase you make under the same pattern.
+ブロックチェーン分析では、その `0.1 BTC` のおつりが以前 `1.1 BTC` を管理していた同一主体に属すると判断でき、同様のパターンで将来の支出を追跡される可能性があります。
 
-By enabling this feature, BTCPay Server wallet will round up the amount sent to `1.1 BTC` such that no change output is sent back to you.
+この機能を有効にすると、BTCPay Server ウォレットは送金額を `1.1 BTC` に切り上げ、おつり出力を自分に返さないようにします。
 
-Warning: Despite the fact, in this example, that you entered `1.0` in the amount field, the amount that will really be sent to your destination will be `1.1 BTC`.
+警告: この例では金額欄に `1.0` と入力していても、実際に宛先へ送られる金額は `1.1 BTC` になります。
 
-##### Other features
+##### その他の機能
 
-###### Camera QR scan
+###### カメラ QR スキャン
 
-Scan option in wallet (camera icon in send screen) lets you **use your device’s camera to scan a QR code containing an address or BIP21 payment link**. It auto-populates the sending information so that you don’t have to manually copy-paste an address and amount.
+ウォレットのスキャン機能（送金画面のカメラアイコン）を使うと、**アドレスまたは BIP21 支払いリンクを含む QR コードを端末カメラで読み取れます**。送金情報が自動入力されるため、アドレスと金額を手動でコピー＆ペーストする必要がありません。
 
+###### BIP21 アドレスを貼り付け
 
-###### Paste BIP21 address
+このオプションは **BIP21 支払いリンクをデコード**します。[Payjoin](./Payjoin.md) 請求書を支払う際に便利です。
 
-This option **decodes a BIP21 payment link**. It's useful when you're trying to pay a [Payjoin](./Payjoin.md) invoice.
+#### トランザクションへの署名（支出）
 
-#### Signing a transaction (spending)
-
-To spend the funds, you are required to **sign** the transaction. Transactions can be signed with:
+資金を使うには、トランザクションに**署名**する必要があります。署名は次の方法で行えます。
 
 - Hardware Wallet
-- Wallet supporting PSBT
-- HD private key or recovery seed
+- PSBT をサポートするウォレット
+- HD 秘密鍵またはリカバリーシード
 - Hot Wallet
 
-##### Signing with HD Private Key or mnemonic seed
+##### HD 秘密鍵またはニーモニックシードで署名
 
-If you set up an [existing wallet with your BTCPay Server](./WalletSetup.md#use-an-existing-wallet), you can spend the funds by inputting your private key into an appropriate field. Make sure to set a proper `AccountKeyPath` in Wallet > Settings otherwise you won't be able to spend.
+[既存ウォレットを BTCPay Server に設定](./WalletSetup.md#use-an-existing-wallet)した場合、適切な入力欄へ秘密鍵を入力して資金を使えます。Wallet > Settings で `AccountKeyPath` を正しく設定しないと支出できません。
 
-##### Signing with a wallet supporting PSBT
+##### PSBT 対応ウォレットで署名
 
-PSBT (**Partially Signed Bitcoin Transactions**) is an interchange format for Bitcoin transactions that are not fully signed yet.
-PSBT is supported in BTCPay Server and can be signed with compatible hardware and software wallets.
+PSBT（**Partially Signed Bitcoin Transactions**）は、まだ完全に署名されていない Bitcoin トランザクションの交換フォーマットです。
+PSBT は BTCPay Server でサポートされており、互換性のあるハードウェア/ソフトウェアウォレットで署名できます。
 
-The construction of a fully signed Bitcoin transaction goes through the following steps:
+完全署名済み Bitcoin トランザクションの作成は、次の手順で進みます。
 
-- A PSBT gets constructed with certain inputs and outputs, but no signatures
-- The exported PSBT can be imported by a wallet that supports this format
-- The transaction data can be inspected and signed using the wallet
-- The signed PSBT file gets exported from the wallet and imported with BTCPay Server
-- BTCPay Server produces the final Bitcoin transaction
-- You verify the result and broadcast it to the network
+- 特定の入力と出力を持つ PSBT を作成（署名なし）
+- エクスポートした PSBT を対応ウォレットへインポート
+- ウォレットでトランザクションデータを確認して署名
+- 署名済み PSBT ファイルをウォレットからエクスポートし、BTCPay Server へインポート
+- BTCPay Server が最終的な Bitcoin トランザクションを生成
+- 結果を検証してネットワークへブロードキャスト
 
-Tutorials:
-- [Sign a PSBT transaction with ColdCard Hardware Wallet](./ColdCardWallet.md#spending-from-btcpay-server-wallet-with-coldcard-psbt) (completely offline/air-gapped)
+チュートリアル:
+- [Sign a PSBT transaction with ColdCard Hardware Wallet](./ColdCardWallet.md#spending-from-btcpay-server-wallet-with-coldcard-psbt)（完全オフライン/エアギャップ）
 - [Create and sign a PSBT transaction with Sparrow wallet](./Sign-PSBT-with-sparrow-wallet.md)
 
-##### Signing with a hardware wallet
+##### ハードウェアウォレットで署名
 
-BTCPay Server has built-in hardware wallet support allowing you to **use your hardware wallet with BTCPay**, without leaking information to third-party apps or servers.
+BTCPay Server はハードウェアウォレットを内蔵サポートしており、第三者アプリやサーバーに情報を漏らさず **BTCPay でハードウェアウォレットを使用**できます。
 
-[Check instructions](HardwareWalletIntegration.md) on how to set up and sign with a [compatible hardware wallet](https://github.com/bitcoin-core/HWI#device-support).
+[手順](HardwareWalletIntegration.md)を確認して、[互換性のあるハードウェアウォレット](https://github.com/bitcoin-core/HWI#device-support)で設定・署名してください。
 
-##### Signing with a hot wallet
+##### ホットウォレットで署名
 
-If you [created a new wallet](./CreateWallet.md) when setting up your store and enabled it as a [hot wallet](./CreateWallet.md#hot-wallet), since version 1.2.0, we've added an option that when a [hot wallet](./CreateWallet.md#hot-wallet) is created, it'll automatically use the seed stored on a server to sign.
+ストア設定時に [新規ウォレットを作成](./CreateWallet.md)し、それを [hot wallet](./CreateWallet.md#hot-wallet) として有効化した場合、バージョン 1.2.0 以降では、[hot wallet](./CreateWallet.md#hot-wallet) 作成時にサーバーへ保存されたシードを自動使用して署名するオプションが追加されています。
 
 :::danger
-Using the hot wallet feature comes with security implications; please be sure to read and understand them over at the [Hot Wallet documentation](./CreateWallet.md#security-implications)
+ホットウォレット機能にはセキュリティ上の影響があります。必ず [Hot Wallet documentation](./CreateWallet.md#security-implications) を読み、内容を理解してください。
 :::
-
 
 ### Receive
 
-The Receive tab **generates an unused address which can be used to receive payments**. The same can be achieved by generating an invoice (Invoices > Create new invoice).
+Receive タブでは、**支払い受け取りに使える未使用アドレス**を生成します。同じことは請求書の作成（Invoices > Create new invoice）でも行えます。
 
 ![Wallet Receive](./img/wallet/WalletReceive.png)
 
@@ -130,66 +133,58 @@ The Receive tab **generates an unused address which can be used to receive payme
 
 ### Pull Payments
 
-This feature gives you the ability to **create a Pull Payment**, so that an outside individual may request to `pull` funds from your wallet.
+この機能を使うと、**Pull Payment** を作成でき、外部の個人があなたのウォレットから資金を `pull` できるようリクエストできます。
 
-For more information, see [Pull Payments](./PullPayments.md).
+詳細は [Pull Payments](./PullPayments.md) を参照してください。
 
 ### Payouts
 
-This section lets you manage Pull Payments and gives you the ability to **accept or decline payouts requested by outside individuals**.
+このセクションでは Pull Payments を管理し、**外部の個人から要求された出金を承認または拒否**できます。
 
-For more information, see [Payouts](./PullPayments.md#approve-and-pay-a-payout).
+詳細は [Payouts](./PullPayments.md#approve-and-pay-a-payout) を参照してください。
 
 ### Settings
 
-In the top right corner of your `wallet` you will find the `wallet settings`.
-In the wallet settings tab you can adjust certain settings. If you've configured your wallet by [creating a new wallet](./CreateWallet.md) or using an existing wallet via the [hardware wallet integration](./HardwareWalletIntegration.md) these settings will be pre-configured.
-Here, you have the options to perform several actions on your wallet, such Rescanning wallet for missing transactions, prunning old transactions, view wallet phrase, remove wallet among features.
-
-
+`wallet` の右上に `wallet settings` があります。
+wallet settings タブでは、各種設定を調整できます。[新しいウォレットを作成](./CreateWallet.md)した場合、または [hardware wallet integration](./HardwareWalletIntegration.md) で既存ウォレットを使用した場合、これらの設定は事前構成されています。
+ここでは、欠落トランザクションの再スキャン、古いトランザクションの剪定、ウォレットフレーズの表示、ウォレット削除など、複数の操作を実行できます。
 
 ![Wallet Rescan](./img/wallet/WalletSetting.png)
 
+外部ウォレットの拡張公開鍵を手動で追加した場合、BTCPay Wallet から支出するには、外部ウォレットで確認できる `AccountKeyPath`（例: `m/84'/0'/0'`）に調整する必要があります。
 
-
-If you manually added the extended public key from an external wallet, you'd need to adjust `AccountKeyPath` that you can find in your external wallet, for example `m/84'/0'/0'` to be able to spend from the BTCPay Wallet.
-
-
-In `wallet settings` you will also find the `speed policy` for the specific store.
-There are 2 main settings under `Payment`, [Payment invalid if transaction fails to confirm in ... after invoice creation](./FAQ/Stores.md#payment-invalid-if-transactions-fails-to-confirm--minutes-after-invoice-expiration) and [Consider the invoice confirmed when the payment transaction...](./FAQ/Stores/#consider-the-invoice-confirmed-when-the-payment-transaction). The latter lets you set the number of confirmations required to be recognized as settled.
-
+`wallet settings` には、該当ストア用の `speed policy` もあります。
+`Payment` 配下には主に 2 つの設定があり、[Payment invalid if transaction fails to confirm in ... after invoice creation](./FAQ/Stores.md#payment-invalid-if-transactions-fails-to-confirm--minutes-after-invoice-expiration) と [Consider the invoice confirmed when the payment transaction...](./FAQ/Stores.md#consider-the-invoice-confirmed-when-the-payment-transaction) です。後者では、決済完了と見なすのに必要な承認数を設定できます。
 
 ![Wallet settings](./img/wallet/WalletSettingTwo.png)
 
-
 ### Re-scan
 
-The Rescan relies on Bitcoin Core 0.17.0's `scantxoutset` to **scan the current state of the blockchain** (called UTXO Set) for coins belonging to the configured derivation scheme.
+Rescan は Bitcoin Core 0.17.0 の `scantxoutset` を使って、設定された導出スキームに属するコインを**ブロックチェーンの現在状態**（UTXO Set）からスキャンします。
 
 ![Wallet Rescan](./img/wallet/WalletRescan.png)
 
-Wallet re-scan solves two critical problems for BTCPay users:
+ウォレット再スキャンは、BTCPay ユーザーにとって重要な 2 つの問題を解決します。
 
 1. [Gap limit](./FAQ/Wallet.md#missing-payments-in-my-software-or-hardware-wallet)
-2. Importing a previously used wallet
+2. 過去に使用されたウォレットのインポート
 
-**Gap limit**: Most wallets typically have the address gap limit set to 20. This means that if a merchant receives 21 or more consecutive unpaid invoices, those wallets show the incorrect balance and some transactions may not be visible.
+**Gap limit**: 多くのウォレットはアドレスのギャップリミットが 20 に設定されています。つまり、加盟店が連続して 21 件以上の未払い請求書を受け取ると、それらのウォレットで残高表示が不正確になり、一部トランザクションが見えなくなる場合があります。
 
-**Wallet import**: When users add a derivation scheme of a wallet that had transactions in the past (previously used wallet), BTCPay won't be able to show the balance and transactions from the past.
+**Wallet import**: 過去に取引履歴のあるウォレット（既使用ウォレット）の導出スキームを追加した場合、BTCPay では過去の残高とトランザクションを表示できません。
 
 ![Wallet rescan progress](./img/wallet/WalletRescanProgress.png)
 
-Re-scan is a feature that solves both of these problems. Once the scan is complete, BTCPay Server will show the correct balance, along with the past transactions of the wallet.
+Re-scan はこの両方を解決する機能です。スキャン完了後、BTCPay Server は過去のトランザクションを含めて正しい残高を表示します。
 
-Wallet re-scan requires access to the full node which means that this function is only available for server owners.
+ウォレット再スキャンにはフルノードへのアクセスが必要なため、この機能はサーバー所有者のみ利用できます。
 
-Users who use a third-party host should use a newly generated xpub key and also use an external wallet like Electrum which allows them to increase the gap limit.
+第三者ホストを利用しているユーザーは、新しく生成した xpub キーを使い、ギャップリミットを増やせる Electrum などの外部ウォレットを併用してください。
 
 ### Labels
 
-At the bottom of your wallet settings, you can manage your `custom transaction label`.
+wallet settings の最下部で、`custom transaction label` を管理できます。
 
-Clicking on the link would take you to a page where you can view all custom labels associated to all transaction. You can remove any or all custom labels given the required 
-permission.
+リンクをクリックすると、すべてのトランザクションに関連付けられたカスタムラベル一覧ページへ移動します。必要な権限があれば、任意またはすべてのカスタムラベルを削除できます。
 
 ![Wallet settings](./img/wallet/ManageLabel.png)

@@ -1,135 +1,144 @@
-# Third-party hosting
+<!-- legacy-anchor-aliases -->
+<span id="security-concerns"></span>
+<span id="btcpay-のサードパーティホスト一覧はどこにありますか"></span>
+<span id="サードパーティホストになるには"></span>
+<span id="サードパーティホスト利用時に機能制限はありますか"></span>
+<span id="自分の-lightning-network-ノードを他ユーザーに使わせることはできますか"></span>
+<span id="信頼したサードパーティホストはユーザーの何を知ることができますか"></span>
+<!-- /legacy-anchor-aliases -->
 
-A **third-party host** is an individual or a business which **self-hosts a BTCPay Server instance and enables other users to register and use the server**. On a self-hosted server, the owner can add an unlimited amount of users and stores and allow those users to manage their stores independently and receive payments to their own wallets.
+# サードパーティホスティング
 
-While this feature in BTCPay Server exists for complex multi-store business management, community enthusiasts use it to help other users (mostly beginners), sometimes skip an overwhelming step of **deploying a self-hosted BTCPay server**. Users who want to test or develop applications on top of BTCPay Server also use **instances hosted by third-parties**. Some hosts try to spread the adoption of cryptocurrencies by allowing their local merchants to receive payments for free or for a small sign-up fee.
+**サードパーティホスト**とは、BTCPay Server インスタンスを**自前でホストし、他のユーザーが登録してそのサーバーを利用できるようにする**個人または事業者のことです。セルフホストされたサーバーでは、オーナーはユーザーとストアを無制限に追加でき、各ユーザーが独立してストアを管理し、自分のウォレットで支払いを受け取れるようにできます。
 
-In layman words, think of this feature as a payment processor factory which allows anyone to deploy a server and help others receive payments which are validated via the server owners' [full Bitcoin node](https://en.bitcoin.it/wiki/Full_node).
+BTCPay Server のこの機能は複雑なマルチストア運用のために存在しますが、コミュニティの愛好家たちは、他のユーザー（主に初心者）が**BTCPay Server のセルフホスト導入**という大きなハードルを一部スキップできるように活用しています。BTCPay Server 上でアプリを試したり開発したりしたいユーザーも、**サードパーティがホストするインスタンス**を利用します。ホストの中には、地元の加盟店が無料または少額の登録料で支払いを受け取れるようにして、暗号資産の普及を進めようとする人もいます。
 
-**Third-party hosts** play an important role in the ecosystem since they provide an easy and cost-effective **way for users to try and use BTCPay Server**. The role of honest hosts who provide free service to others is essential in the early phase of BTCPay Server adoption. However, users should be familiar with the pros, cons and potential risks involved when using a trusted third-party. Find the optimal balance between your use-case, cost, and privacy/security trade-offs.
+平たく言えば、この機能は「決済代行工場」のようなものです。誰でもサーバーを立て、サーバーオーナーの [full Bitcoin node](https://en.bitcoin.it/wiki/Full_node) で検証された支払いを、他の人が受け取れるように支援できます。
 
-Some of the hosts are entirely free to use and maintain the server cost from donations of their users. If you've been using a reliable free host for a while, you should consider donating to them to support them.
+**サードパーティホスト**は、ユーザーが BTCPay Server を試して使い始めるための、簡単で費用対効果の高い**手段**を提供するため、エコシステムで重要な役割を担います。特に BTCPay Server 普及の初期段階では、他者に無料サービスを提供する誠実なホストの存在が不可欠です。一方で、信頼できるサードパーティを利用する際のメリット・デメリット・潜在的リスクを理解しておく必要があります。用途、コスト、プライバシー/セキュリティのトレードオフのバランスを最適化してください。
 
-- [Third-party hosting](#third-party-hosting)
-  - [Advantages and disadvantages](#advantages-and-disadvantages)
-    - [Pros](#pros)
-    - [Cons](#cons)
-  - [Concerns For Use](#concerns-for-use)
-    - [Security Concerns](#security-concerns)
-    - [Privacy Concerns](#privacy-concerns)
-    - [Trust Concerns](#trust-concerns)
-  - [Third Party Hosting FAQ](#third-party-hosting-faq)
-  - [Where is the list of BTCPay third-party hosts?](#where-is-the-list-of-btcpay-third-party-hosts)
-  - [How can one become a third-party host?](#how-can-one-become-a-third-party-host)
-  - [Are there any limitations in features when using a third-party host?](#are-there-any-limitations-in-features-when-using-a-third-party-host)
-  - [Can I enable the use of my Lightning Network node to others?](#can-i-enable-the-use-of-my-lightning-network-node-to-others)
-  - [What does the trusted third-party host know about their users?](#what-does-the-trusted-third-party-host-know-about-their-users)
+一部のホストは完全無料で、ユーザーからの寄付でサーバー費用を賄っています。信頼できる無料ホストを長く使っているなら、支援のために寄付を検討してください。
 
-## Advantages and disadvantages
+- [サードパーティホスティング](#サードパーティホスティング)
+  - [メリットとデメリット](#メリットとデメリット)
+    - [メリット](#メリット)
+    - [デメリット](#デメリット)
+  - [利用時の懸念事項](#利用時の懸念事項)
+    - [セキュリティ上の懸念](#セキュリティ上の懸念)
+    - [プライバシー上の懸念](#プライバシー上の懸念)
+    - [信頼に関する懸念](#信頼に関する懸念)
+  - [サードパーティホスティング FAQ](#サードパーティホスティング-faq)
+  - [BTCPay のサードパーティホスト一覧はどこにありますか？](#btcpay-のサードパーティホスト一覧はどこにありますか)
+  - [サードパーティホストになるには？](#サードパーティホストになるには)
+  - [サードパーティホスト利用時に機能制限はありますか？](#サードパーティホスト利用時に機能制限はありますか)
+  - [自分の Lightning Network ノードを他ユーザーに使わせることはできますか？](#自分の-lightning-network-ノードを他ユーザーに使わせることはできますか)
+  - [信頼したサードパーティホストはユーザーの何を知ることができますか？](#信頼したサードパーティホストはユーザーの何を知ることができますか)
 
-### Pros
+## メリットとデメリット
 
-- Easy and quicker setup
-- Cheaper and in most cases free (depending if the host is premium or free)
-- Receive payments directly to your wallet
-- Private key never required (if it is, it's a scam!)
+### メリット
 
-### Cons
+- セットアップが簡単で速い
+- 安価で、多くの場合は無料（ホストが有料か無料かによる）
+- 支払いを自分のウォレットで直接受け取れる
+- 秘密鍵は不要（要求されたら詐欺です）
 
-- Security concerns
-- Privacy concerns
-- Limitation of features
-- No control over a server
-- Have to trust the owner of the server
+### デメリット
 
-## Concerns For Use
+- セキュリティ上の懸念
+- プライバシー上の懸念
+- 機能制限
+- サーバーを自分で制御できない
+- サーバー所有者を信頼する必要がある
 
-### Security Concerns
+## 利用時の懸念事項
 
-[Trusted third parties are security holes](https://nakamotoinstitute.org/trusted-third-parties/#selection-7.6-6.2). By relying on someone else to manage a server for you, you are potentially exposing yourself to a certain attack vector.
+### セキュリティ上の懸念
 
-The most significant attack vector when using a third-party host is the chance that this host will gain access to the management of your funds. This can occur in two ways.
+[Trusted third parties are security holes](https://nakamotoinstitute.org/trusted-third-parties/#selection-7.6-6.2)。サーバー管理を他者に依存すると、特定の攻撃ベクトルにさらされる可能性があります。
 
-First, a host may allow you to create [hot wallets](https://en.bitcoin.it/wiki/Hot_wallet) on their server. This gives the host complete access to your funds. They will act as a custodian of your private keys and thus your funds. This means you must trust they will not spend your funds. This type of wallet is NOT recommended for use with third-party hosts.
+サードパーティホスト利用時の最大の攻撃ベクトルは、そのホストがあなたの資金管理へアクセスを得る可能性です。これは主に2通りで起こりえます。
 
-Secondly, a malicious and technically skilled host can create a forked version of BTCPay Server and modify it to be able to either spy on your transactions or replace your [extended public key](https://en.bitcoin.it/wiki/Deterministic_wallet_tools#Risks_of_Sharing_an_Extended_Public_Key_.28xpub.29) with their own. This means that future payments made to you may end up in this malicious party's wallet.
+1つ目は、ホストがサーバー上で [hot wallets](https://en.bitcoin.it/wiki/Hot_wallet) を作成できるようにしている場合です。これにより、ホストはあなたの資金へ完全にアクセスできます。ホストが秘密鍵を管理する保管者となるため、資金を勝手に使わないと信頼する必要があります。このタイプのウォレットは、サードパーティホストでは**推奨されません**。
 
-While a wallet connected with an extended public key IS recommended for use with third-party hosts, It's impossible to know for certain, if the third party host is using a malicious fork. If you don't trust the third party host it is best to do the following:
+2つ目は、悪意があり技術力のあるホストが BTCPay Server のフォーク版を作成し、あなたの取引を監視したり、[extended public key](https://en.bitcoin.it/wiki/Deterministic_wallet_tools#Risks_of_Sharing_an_Extended_Public_Key_.28xpub.29) を自分のものに置き換えたりする場合です。そうなると、今後あなた宛ての支払いが悪意ある第三者のウォレットに入る可能性があります。
 
-- Do not use hot wallet on the third party server, use an extended public key
-- Use it mainly for testing, learning and getting started with BTCPay
-- Do not use it with high volume payments or extremely valuable transactions
+拡張公開鍵で接続したウォレットはサードパーティホスト利用時に**推奨**されますが、そのホストが悪意あるフォークを使っていないと断定することはできません。サードパーティホストを信頼できない場合は、次を実施してください。
 
-In BTCPay Server, a private key is never _required_. This means that funds are safe even if the server is hacked, but a malicious host can intercept future payments and steal those funds. If you follow your transactions via a watch-only wallet, you should be able to detect such attack quickly and notice that your orders are being marked as paid, whereas you don't see the transactions in your wallet.
+- サードパーティサーバーで hot wallet を使わず、拡張公開鍵を使う
+- 主にテスト、学習、BTCPay の導入初期用途に使う
+- 大量決済や高額取引には使わない
+
+BTCPay Server では秘密鍵は決して _必須_ ではありません。つまり、サーバーがハッキングされても資金自体は安全ですが、悪意あるホストは将来の支払いを横取りして盗む可能性があります。watch-only wallet で取引を追跡していれば、そのような攻撃は比較的早く検知でき、注文は支払い済みなのにウォレットに着金が見えない、といった異常に気づけるはずです。
 
 :::danger
-If a third-party host asks for your private key or pre-generates one for you, be sure it's a scam. Never share your private key with anyone. It's called private for a reason.
+サードパーティホストが秘密鍵を要求したり、あらかじめ秘密鍵を生成して渡したりする場合は、詐欺だと判断してください。秘密鍵は誰にも共有してはいけません。private と呼ばれるのには理由があります。
 :::
 
-An extended public key replacement attack applies to a self-hosted server as well. A malicious hacker can try to hack your server and try to replace an extended public key.
+拡張公開鍵の置換攻撃は、セルフホストサーバーでも起こりえます。悪意あるハッカーがサーバーに侵入し、拡張公開鍵を差し替えようとする可能性があります。
 
-### Privacy Concerns
+### プライバシー上の懸念
 
-BTCPay Server does not allow server hosts to view the stores of other users nor have access to any personal data (except for registration email address). The extended public key and even balances of other users can't be seen. However, as mentioned, a malicious third-party could modify that by creating a fork that can look like BTCPay Server on the front but be something completely different in reality.
+BTCPay Server は、サーバーホストが他ユーザーのストアを閲覧したり、個人データ（登録メールアドレスを除く）へアクセスしたりできないようになっています。他ユーザーの拡張公開鍵や残高も見えません。ただし前述の通り、悪意あるサードパーティがフォークを作れば、見た目は BTCPay Server でも実体は全く別物に改変できてしまいます。
 
-The biggest concern, which happens when using a third-party host (even if the owner of a self-hosted server is not malicious) comes from the nature of the Bitcoin itself. If a user is not running a full node but instead relies on someone else's node, his transactions can be listened to by the owner of that node. Running a full node is not just a convenience that gives you features and enables privacy, it gives you better security and the right to "vote" and validate all the transactions yourself. Don't trust, verify.
+サードパーティホスト利用時の最大の懸念は（セルフホストのオーナーが悪意を持たない場合でも）Bitcoin の性質そのものに起因します。ユーザーがフルノードを動かさず他人のノードに依存すると、そのノード所有者に取引を傍受される可能性があります。フルノード運用は、機能やプライバシーのためだけではなく、より高いセキュリティと、自分で全取引を検証して「投票」する権利を与えてくれます。Don't trust, verify.
 
-Here are some good resources where you learn more about the importance of full nodes
+フルノードの重要性を学べる良い資料:
 
 - [Why Your Business Should Use a Full Node to Accept Bitcoin](https://en.bitcoin.it/wiki/Why_Your_Business_Should_Use_a_Full_Node_to_Accept_Bitcoin)
 - [Clearing Up Misconceptions About Full Nodes](https://en.bitcoin.it/wiki/Clearing_Up_Misconceptions_About_Full_Nodes)
 
-### Trust Concerns
+### 信頼に関する懸念
 
-Third-party hosts have the ability to enable specific features for their non-admin users which require users to place some level of trust in the third-party host, if such features are used.
+サードパーティホストは、非管理者ユーザー向けに特定機能を有効化できます。これらの機能を使う場合、ユーザーは一定レベルでサードパーティホストを信頼する必要があります。
 
-Specifically, third-party hosts should not enable the following policies without understanding that users will be using hot wallets on the server. These features are disabled by default for non-admins to reduce the risk considerations for both third-party hosts and their users:
+特に、以下のポリシーは、ユーザーがサーバー上の hot wallet を使うことを理解せずに有効化すべきではありません。これらはサードパーティホストとユーザー双方のリスクを抑えるため、非管理者向けにはデフォルトで無効です。
 
-- Allow non-admins to create hot wallets for their stores
-- Allow non-admins to import their hot wallets to the node wallet
-- Allow non-admins to use the internal lightning node in their stores
+- 非管理者が自身のストア用に hot wallet を作成できるようにする
+- 非管理者が自身の hot wallet をノードウォレットにインポートできるようにする
+- 非管理者が自身のストアで内部 lightning ノードを使えるようにする
 
-Third-party users who are granted access to an internal lightning node or hot wallet functionality to enable features such as Payjoin, should understand the risk and trust associated with [using hot wallets](../CreateWallet.md#hot-wallet) before choosing to use it. Use one of the [recommended wallets](../WalletSetup.md) which provide an extended public key to use in your store, if you are unsure which wallet type to use.
+内部 lightning ノードや hot wallet 機能へのアクセス権を与えられたサードパーティユーザーは、Payjoin などの機能を使う前に、[using hot wallets](../CreateWallet.md#hot-wallet) のリスクと信頼関係を理解する必要があります。どのウォレット種別を使うべきか迷う場合は、ストアで使える拡張公開鍵を提供する [recommended wallets](../WalletSetup.md) のいずれかを使ってください。
 
-## Third Party Hosting FAQ
+## サードパーティホスティング FAQ
 
-## Where is the list of BTCPay third-party hosts?
+## BTCPay のサードパーティホスト一覧はどこにありますか？
 
-Feel free to chat with the [Community](../Community.md) to find the appropriate host for your needs, but also make sure to choose one that is trustworthy. Read the rest of this document to better understand the pros and cons of using a third-party host.
+用途に合うホストを見つけるには [Community](../Community.md) で相談できますが、信頼性の確認も必ず行ってください。サードパーティホスト利用のメリットとデメリットをより深く理解するために、このドキュメントの残りも読んでください。
 
 :::tip
-The BTCPay Server [Directory](https://directory.btcpayserver.org/filter/hosts) lists multiple free or paid third-party hosts that you can register to, to start exploring BTCPay Server.
+BTCPay Server の [Directory](https://directory.btcpayserver.org/filter/hosts) には、登録して BTCPay Server を試せる無料/有料のサードパーティホストが複数掲載されています。
 :::
 
-## How can one become a third-party host?
+## サードパーティホストになるには？
 
-To become a third-party host, you need to self-host a BTCPay Server and enable registration for other users.
-Go to Server Settings > Policies > Disable registration, unmark the checkbox. You may also want to configure the [SMTP settings](../FAQ/ServerSettings.md#how-to-configure-smtp-settings-in-btcpay) to allow them to reset their password if they forget it.
+サードパーティホストになるには、BTCPay Server をセルフホストし、他ユーザー向け登録を有効化する必要があります。
+`Server Settings > Policies > Disable registration` に進み、チェックを外してください。必要に応じて、ユーザーがパスワードを忘れた際にリセットできるよう [SMTP settings](../FAQ/ServerSettings.md#how-to-configure-smtp-settings-in-btcpay) も設定してください。
 
-Alternatively you may keep public registration disabled on your homepage and only invite specific users to create a new account by [invitation link](../FAQ/ServerSettings.md#how-to-add-a-new-user-by-invite).
+または、ホームページで公開登録を無効のままにし、[invitation link](../FAQ/ServerSettings.md#how-to-add-a-new-user-by-invite) で特定ユーザーだけを招待することもできます。
 
-## Are there any limitations in features when using a third-party host?
+## サードパーティホスト利用時に機能制限はありますか？
 
-Yes. Here are some restrictions.
+あります。主な制限は以下です。
 
-- No [Lightning Network](../LightningNetwork.md) by default. Can be enabled by the third-party host but at the cost of a security risk for registrants using that third-party. [More information](#can-i-enable-the-use-of-my-lightning-network-node-to-others)
-- No [wallet re-scan](../FAQ/Wallet.md#what-is-wallet-re-scan-in-btcpay)
-- No [Server Settings](../Walkthrough.md#server-settings) access
+- 既定では [Lightning Network](../LightningNetwork.md) を使えない。サードパーティホスト側で有効化は可能だが、利用者に対するセキュリティリスクが増える。[詳細](#自分の-lightning-network-ノードを他ユーザーに使わせることはできますか)
+- [wallet re-scan](../FAQ/Wallet.md#what-is-wallet-re-scan-in-btcpay) は不可
+- [Server Settings](../Walkthrough.md#server-settings) へアクセス不可
 
-The limitations happen for technical reasons, mostly because these features require a user to run a full node to use them.
+この制限は主に技術的理由によるもので、多くの機能が利用者自身のフルノード運用を前提としているためです。
 
-## Can I enable the use of my Lightning Network node to others?
+## 自分の Lightning Network ノードを他ユーザーに使わせることはできますか？
 
-Yes, you can enable users that have registered on your BTCPay Server instance to use your Lightning Network node.
-[See how](../FAQ/LightningNetwork.md#how-many-users-can-use-lightning-network-in-btcpay)
+はい、あなたの BTCPay Server インスタンスに登録したユーザーに、あなたの Lightning Network ノードを使わせることは可能です。
+[設定方法を見る](../FAQ/LightningNetwork.md#how-many-users-can-use-lightning-network-in-btcpay)
 
-## What does the trusted third-party host know about their users?
+## 信頼したサードパーティホストはユーザーの何を知ることができますか？
 
-Third party hosts (non-malicious) can see the following:
+サードパーティホスト（非悪意の場合）が見られる情報:
 
-- Total number of users
-- The email and username of those users
+- ユーザー総数
+- 各ユーザーのメールアドレスとユーザー名
 
-Note: If additional features are enabled such as non-admin lightning wallet or hot wallets, the server admin can see additional information related to those features. Since it's impossible to know if the third party host is using a malicious fork, it's best to assume they may know all details about your BTCPay Server usage.
+注: 非管理者向け lightning wallet や hot wallet などの追加機能を有効にした場合、サーバー管理者はそれらに関する追加情報も確認できます。また、サードパーティホストが悪意あるフォークを使っているかは判別困難なため、BTCPay Server の利用に関するあらゆる詳細を把握される可能性がある前提で考えるべきです。
 
-If you are worried about the information a third party host knows about you, please consider [deploying your own](./README.md) self-hosted server.
+サードパーティホストが把握できる情報が心配な場合は、[自分で構築する](./README.md) セルフホストサーバーを検討してください。

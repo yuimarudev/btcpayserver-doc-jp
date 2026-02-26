@@ -1,31 +1,31 @@
-# Dynamic DNS Service
+# Dynamic DNS サービス
 
-## Motivation
+## 背景
 
-**Dynamic DNS** is needed if:
+次の場合は **Dynamic DNS** が必要です。
 
-- You are running BTCPay Server with a hosting provider that does not provide a default domain for your server
-- You don't want to buy your own domain name (e.g. `mybusiness.com`)
-- You need to access your BTCPay Server over internet via HTTPS. (Your BTCPayServer is accessed by other internet users)
+- デフォルトドメインを提供しないホスティングプロバイダーで BTCPay Server を運用している
+- 独自ドメイン（例: `mybusiness.com`）を購入したくない
+- BTCPay Server にインターネット経由で HTTPS アクセスする必要がある（他のインターネット利用者が BTCPayServer にアクセスする）
 
-Then you want to use **BTCPayServer Dynamic DNS service**.
+この場合、**BTCPayServer Dynamic DNS service** の利用を推奨します。
 
-You **don't need** Dynamic DNS Service if:
+次の場合は Dynamic DNS Service は **不要** です。
 
-- You host BTCPay Server at home and only access it via the local network (just using HTTP locally or using Tor is fine)
-- Your BTCPay Server should be only accessed by yourself (just use Tor browser and the Tor address of you instance)
-- Your hosting provider provides a domain name for your server by default (i.e. Lunanode for example provides a subdomain of `.lndyn.com` for free, and Azure provides for `.azurewebsites.net`)
+- 自宅で BTCPay Server をホストし、ローカルネットワーク経由でのみアクセスする（ローカル HTTP または Tor 利用で十分）
+- BTCPay Server を自分だけが利用する（Tor Browser とインスタンスの Tor アドレスを使用）
+- ホスティングプロバイダーがデフォルトでドメイン名を提供する（例: Lunanode は `.lndyn.com` のサブドメインを無料提供、Azure は `.azurewebsites.net` を提供）
 
-A **Dynamic DNS Providers** allows you to have a free domain like `example.ddns.net` for your server.
-Additionally Dynamic DNS Providers expose a simple API to update the DNS record automatically when your BTCPay Server instance changes its external IP address.
+**Dynamic DNS Providers** を使うと、サーバー用に `example.ddns.net` のような無料ドメインを持てます。
+さらに Dynamic DNS Providers は、BTCPay Server インスタンスの外部 IP が変わったときに DNS レコードを自動更新するための簡単な API を提供します。
 
-BTCPay Server, when configured to use Dynamic DNS, will periodically check and update the DNS record if an external IP change is detected.
+Dynamic DNS を設定した BTCPay Server は、外部 IP 変更を検知すると定期的に DNS レコードを確認し、更新します。
 
-## How to use
+## 使い方
 
-### Step 1: Create the domain
+### ステップ 1: ドメインを作成する
 
-First, create an account on a Dynamic DNS provider, the most popular providers are:
+まず Dynamic DNS プロバイダーでアカウントを作成します。代表的なプロバイダーは次のとおりです。
 
 - [noip](https://www.noip.com/) (free)
 - [duckdns](https://www.duckdns.org/) (free)
@@ -34,27 +34,27 @@ First, create an account on a Dynamic DNS provider, the most popular providers a
 - [google](https://domains.google.com/) (not free)
 - [easydns](https://www.easydns.com/) (not free)
 
-Once you've created an account, you can create a free domain name through their website.
+アカウント作成後、各プロバイダーのウェブサイトから無料ドメイン名を作成できます。
 
-### Step 2: Configure Dynamic DNS on BTCPay Server
+### ステップ 2: BTCPay Server で Dynamic DNS を設定する
 
-You need to be administrator of your instance.
-Go to Server Settings > Services > Dynamic DNS.
+この操作にはインスタンス管理者権限が必要です。
+Server Settings > Services > Dynamic DNS に移動します。
 
-- Add a Dynamic DNS
-- Select your Dynamic DNS provider
-- Enter the domain you created in step 1
-- Add the login and password you created in step 1
-- Check the `enabled` box and save
+- Dynamic DNS を追加
+- Dynamic DNS プロバイダーを選択
+- ステップ 1 で作成したドメインを入力
+- ステップ 1 で作成したログイン情報とパスワードを追加
+- `enabled` ボックスにチェックして保存
 
-### Step 3: Configure your BTCPay docker install to provide HTTPS certificates
+### ステップ 3: HTTPS 証明書を提供するよう BTCPay の docker インストールを設定する
 
-If you are using a docker deployment, you also need to update your BTCPayServer install.
-Connect via SSH to your instance and run:
+docker デプロイを使用している場合は、BTCPayServer インストール側も更新する必要があります。
+SSH でインスタンスに接続し、次を実行します。
 
 ```bash
 BTCPAY_ADDITIONAL_HOSTS="example.ddns.net"
 . btcpay-setup.sh -i
 ```
 
-If you have any other hosts in `BTCPAY_ADDITIONAL_HOSTS`, just separate them with `,`.
+`BTCPAY_ADDITIONAL_HOSTS` に他のホストがある場合は、`,` で区切って追加してください。

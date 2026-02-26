@@ -1,262 +1,262 @@
-# Subscriptions
+# サブスクリプション
 
-Subscriptions allow you to manage recurring payments for services you provide, such as newsletters, SaaS products, memberships or recurring donations.
+サブスクリプションを使うと、ニュースレター、SaaS 製品、メンバーシップ、継続寄付など、提供するサービスの定期支払いを管理できます。
 
-[![Bitcoin Subscriptions](https://img.youtube.com/vi/CV5wckX7x80/mqdefault.jpg)](https://www.youtube.com/watch?v=CV5wckX7x80)
+[![Bitcoin サブスクリプション](https://img.youtube.com/vi/CV5wckX7x80/mqdefault.jpg)](https://www.youtube.com/watch?v=CV5wckX7x80)
 
-Because Bitcoin does not provide a unified way to automatically charge customers on a schedule, and because BTCPay Server supports multiple payment methods, subscriptions cannot rely on a single “auto debit” mechanism. Instead, BTCPay Server provides a unified subscription system that supports recurring payments in two ways:
+Bitcoin にはスケジュールに沿って顧客へ自動請求する統一的な仕組みがなく、また BTCPay Server は複数の支払い方法に対応しているため、サブスクリプションは単一の「自動引き落とし」方式に依存できません。代わりに BTCPay Server は、次の 2 つの方法で定期支払いをサポートする統一サブスクリプションシステムを提供します。
 
-1. **Manual recurring payments**, where the customer pays each billing period after receiving a reminder.  
-2. **Automatic recurring payments**, using a **credit balance model** where customers prepay and renewals are deducted automatically.
+1. **手動の定期支払い**: 顧客はリマインダーを受け取った後、各請求期間ごとに支払います。  
+2. **自動の定期支払い**: 顧客が事前入金し、更新時に自動で差し引かれる **クレジット残高モデル** を使用します。
 
-Both approaches use the same subscription and plan configuration, enabling merchants to offer predictable recurring billing while giving customers flexibility in how they choose to pay and manage their subscriptions.
+どちらの方式も同じサブスクリプションおよびプラン設定を使用するため、マーチャントは予測可能な定期課金を提供しつつ、顧客は支払い方法やサブスクリプション管理方法を柔軟に選択できます。
 
-## **How it works**
+## **仕組み**
 
-Subscriptions are built from a small set of core components that work together:
+サブスクリプションは、連携して動作する少数のコアコンポーネントで構成されます。
 
-* **Offering**: represents what you are selling, such as newsletter access, SaaS access, or a recurring donation.  
-* **Plan**: a tier under an offering, for example Basic, Pro, or Enterprise. A plan defines pricing, billing interval, renewal behavior, and access rules  
-* **Subscriber**: a specific customer enrolled in a plan. Merchants can manage subscribers by suspending access, adding credits, applying manual charges, or marking them as test users.  
-* **Customer portal**: a public facing page where subscribers can manage their subscription, top up credits, upgrade or downgrade plans, and view billing and transaction history.  
-* **Plan Checkout:** A customer-facing page used to start or renew subscription  
-* **Emails (optional)**: rule based emails such as payment reminders and subscription state notifications, available when server email is configured.
+* **Offering（オファリング）**: 販売する対象（ニュースレターへのアクセス、SaaS へのアクセス、継続寄付など）を表します。  
+* **Plan（プラン）**: オファリング配下のティアです（例: Basic、Pro、Enterprise）。プランでは価格、請求間隔、更新動作、アクセスルールを定義します。  
+* **Subscriber（購読者）**: プランに登録された特定の顧客です。マーチャントは、アクセス停止、クレジット追加、手動課金、テストユーザー指定などで購読者を管理できます。  
+* **Customer portal（カスタマーポータル）**: 購読者がサブスクリプション管理、クレジット追加、プランのアップグレード/ダウングレード、請求履歴や取引履歴の確認を行える公開ページです。  
+* **Plan checkout（プランチェックアウト）**: サブスクリプションの開始または更新に使用する顧客向けページです。  
+* **メール（任意）**: 支払いリマインダーやサブスクリプション状態通知などのルールベースメールで、サーバーメールが設定されている場合に利用できます。
 
-### 1. Creating an offering
+### 1. オファリングの作成
 
-![Creating an offer](./img/Subscriptions/Sub-create-offering.png)
+![オファーの作成](./img/Subscriptions/Sub-create-offering.png)
 
-An **offering** represents the service or product you sell on a recurring basis. It is the top level container for one or more subscription plans. It groups related plans under a single product and defines shared metadata, such as:
+**Offering（オファリング）** は、継続的に販売するサービスまたは商品を表します。1 つ以上のサブスクリプションプランを含む最上位コンテナです。関連するプランを 1 つの商品としてまとめ、次のような共通メタデータを定義します。
 
-* The name shown to customers  
-* An optional success redirect URL after checkout  
-* A set of features that can be assigned to individual plans
+* 顧客に表示される名前  
+* チェックアウト後の任意の成功時リダイレクト URL  
+* 各プランに割り当て可能な機能セット
 
-To create your first offering:
+最初のオファリングを作成するには:
 
-1. To create an offering, in the sidebar click on **Subscriptions**.   
-2. Enter a name for your offering e.g. My Product 
-3. Click the Create button in the top right corner.
+1. オファリングを作成するには、サイドバーで **Subscriptions** をクリックします。   
+2. オファリング名を入力します（例: My Product）。
+3. 右上の Create ボタンをクリックします。
 
-Once an offering is created, you add one or more plans to it to define pricing, billing intervals, and subscription behavior.
+オファリングを作成したら、1 つ以上のプランを追加して、価格、請求間隔、サブスクリプション動作を定義します。
 
-### 2. Creating a plan
+### 2. プランの作成
 
-A **plan** defines how a subscription behaves. It controls pricing, billing frequency, access rules, and how subscribers move through the subscription lifecycle.
+**Plan（プラン）** はサブスクリプションの動作を定義します。価格、請求頻度、アクセスルール、購読者がたどるサブスクリプションライフサイクルを制御します。
 
-Plans allow you to segment your users, for example into Basic, Pro, or Enterprise tiers, while giving you fine grained control over billing and access. Each offering can contain multiple plans.
+プランを使うと、ユーザーを Basic、Pro、Enterprise などのティアに分けつつ、課金とアクセスをきめ細かく制御できます。各オファリングには複数のプランを含められます。
 
-To create a plan:
+プランを作成するには:
 
-1. Click on the **Subscriptions** > **Offering**  
-2. Go to **Plans** tab  
-3. Click **Add Plan** button
+1. **Subscriptions** > **Offering** をクリックします。  
+2. **Plans** タブに移動します。  
+3. **Add Plan** ボタンをクリックします。
 
-![Creating a plan](./img/Subscriptions/Sub-Plans.png)
+![プランの作成](./img/Subscriptions/Sub-Plans.png)
 
-### Plan configuration
+### プラン設定
 
-When creating or editing a plan, you can configure the following options:
+プランを作成または編集する際、次の項目を設定できます。
 
-#### Price and currency
+#### 価格と通貨
 
-Defines how much the plan costs per billing period and which currency is used.
+各請求期間あたりのプラン料金と使用通貨を定義します。
 
-#### Recurring interval
+#### 定期間隔
 
-Defines how often the plan renews. Supported intervals include:
+プランがどの頻度で更新されるかを定義します。対応する間隔は次のとおりです。
 
-* Daily  
-* Weekly  
-* Monthly  
-* Lifetime
+* 日次（Daily）  
+* 週次（Weekly）  
+* 月次（Monthly）  
+* 買い切り（Lifetime）
 
-A lifetime plan is paid once and does not renew.
+買い切り（Lifetime）プランは一度だけ支払われ、更新されません。
 
-![Creating a plan](./img/Subscriptions/Sub-Edit-Plan.png)
+![プランの作成](./img/Subscriptions/Sub-Edit-Plan.png)
 
-#### Trial period
+#### トライアル期間
 
-The trial period grants subscribers free access to the plan for a defined number of days.
+トライアル期間では、定義した日数のあいだ購読者に無料アクセスを付与できます。
 
-During the trial:
+トライアル中:
 
-* No payment is required  
-* The subscriber is treated as active  
-* Billing starts only after the trial ends
+* 支払いは不要です。  
+* 購読者はアクティブとして扱われます。  
+* 課金はトライアル終了後にのみ開始されます。
 
-#### Grace period
+#### 猶予期間
 
-The grace period defines how long a subscriber keeps access after a plan expires.
+猶予期間は、プランの有効期限切れ後に購読者がアクセスを維持できる期間を定義します。
 
-If the subscriber does not have sufficient funds at renewal time:
+更新時点で購読者の残高が不足している場合:
 
-* The subscription enters the grace period  
-* Access may continue during this time  
-* The subscriber can pay or top up without immediate loss of access
+* サブスクリプションは猶予期間に入ります。  
+* この期間中はアクセスが継続される場合があります。  
+* 購読者はアクセスを即時に失うことなく支払いまたはチャージできます。
 
-Once the grace period ends, the subscription expires and access is revoked.
+猶予期間が終了すると、サブスクリプションは失効し、アクセスは取り消されます。
 
-#### Optimistic activation
+#### 楽観的アクティベーション
 
-Optimistic activation allows on-chain payments to activate the subscription immediately, before confirmations are completed.
+楽観的アクティベーションを有効にすると、オンチェーン支払いは承認完了前でも即座にサブスクリプションを有効化します。
 
-This improves user experience but introduces risk:
+これはユーザー体験を向上させますが、次のリスクがあります。
 
-* If the payment later fails or is cancelled, the subscription is deactivated  
-* Manual intervention may be required
+* 後で支払いが失敗または取り消された場合、サブスクリプションは無効化されます。  
+* 手動対応が必要になる場合があります。
 
-This option should be enabled only if you understand the tradeoffs.
+このオプションは、トレードオフを理解したうえでのみ有効化してください。
 
-#### Renewable
+#### 更新可否
 
-Plans can be marked as non renewable.
+プランは更新不可（non-renewable）として設定できます。
 
-This is useful for:
+これは次の用途で有効です。
 
-* Introductory or promotional plans  
-* Fixed duration access  
-* One time onboarding plans
+* 導入向けまたはプロモーション向けプラン  
+* 固定期間アクセス  
+* 一度限りのオンボーディングプラン
 
-Once a non renewable plan expires, it cannot be renewed.
+更新不可プランは、有効期限が切れると更新できません。
 
-#### Upgrades and downgrades
+#### アップグレードとダウングレード
 
-You can control whether subscribers are allowed to upgrade or downgrade between plans.
+購読者にプラン間のアップグレードまたはダウングレードを許可するかを制御できます。
 
-This allows you to:
+これにより次のことが可能です。
 
-* Define allowed plan transitions  
-* Prevent unsupported downgrades  
-* Guide users through predefined upgrade paths
+* 許可するプラン遷移を定義する。  
+* 非対応のダウングレードを防ぐ。  
+* 定義済みのアップグレード経路へユーザーを誘導する。
 
-#### Features
+#### 機能
 
-Plans can define **features** that describe what access or capabilities a subscriber receives.
+プランには、購読者が受け取るアクセス内容や機能を表す **機能（features）** を定義できます。
 
-BTCPay Server stores these values but does not enforce them. Your application or service is responsible for interpreting and applying features.
+BTCPay Server はこれらの値を保存しますが、強制はしません。機能をどのように解釈して適用するかは、あなたのアプリケーションまたはサービスの責任です。
 
-Examples include usage limits, enabled modules, or support tiers.
+例として、利用上限、有効化モジュール、サポートティアなどがあります。
 
-### 3. Creating a subscriber
+### 3. 購読者の作成
 
-A **subscriber** represents a customer enrolled in one of your subscription plans. Subscribers are created through a plan checkout, which allows the customer to complete payment and start their subscription.
+**Subscriber（購読者）** は、あなたのサブスクリプションプランのいずれかに登録された顧客を表します。購読者はプランチェックアウトを通じて作成され、顧客は支払いを完了してサブスクリプションを開始します。
 
-![Creating a subscriber](./img/Subscriptions/Sub-create-subscriber.png)
+![購読者の作成](./img/Subscriptions/Sub-create-subscriber.png)
 
-To create a subscriber:
+購読者を作成するには:
 
-1. Open your **Offering**.  
-2. Navigate to the **Subscribers** tab.  
-3. Click **Create** in the top right corner.  
-4. Select the plan you want the subscriber to enroll in.  
-5. Optionally enter the subscriber’s email address.  
-   * If left empty, the customer will be prompted to provide it during checkout.  
-6. If the plan includes a trial period, choose whether to enable it.  
-7. Click **Create**.
+1. **Offering** を開きます。  
+2. **Subscribers** タブに移動します。  
+3. 右上の **Create** をクリックします。  
+4. 購読者を登録するプランを選択します。  
+5. 必要に応じて購読者のメールアドレスを入力します。  
+   * 空欄のままにすると、チェックアウト中に顧客へ入力が求められます。  
+6. プランにトライアル期間が含まれる場合、有効化するか選択します。  
+7. **Create** をクリックします。
 
-BTCPay Server generates a **plan checkout page**. The subscriber is created only after the checkout is completed.
+BTCPay Server は **プランチェックアウトページ** を生成します。購読者はチェックアウト完了後にのみ作成されます。
 
-You can share the checkout link with the customer or integrate it into your application. 
+チェックアウトリンクを顧客に共有することも、アプリケーションに組み込むこともできます。 
 
-### 4. Plan Checkout page
+### 4. プランチェックアウトページ
 
-A **plan checkout** is the payment page used to start or renew a subscription.  
-It can be created through the UI or programmatically through the API. When a plan checkout is created, the subscriber is created only after the checkout is completed.
+**プランチェックアウト** は、サブスクリプションの開始または更新に使用する支払いページです。  
+UI から作成することも、API を通じてプログラムから作成することもできます。プランチェックアウトが作成されると、購読者はチェックアウト完了後にのみ作成されます。
 
-![Creating a subscriber](./img/Subscriptions/Sub-plan-checkout.png)
+![プランチェックアウト](./img/Subscriptions/Sub-plan-checkout.png)
 
-### 5.Subscription management through customer portal
+### 5. カスタマーポータルによるサブスクリプション管理
 
-Each subscriber has access to a **subscription management portal**, a public facing page where customers can manage their subscription without merchant involvement.
+各購読者は **サブスクリプション管理ポータル**（公開ページ）にアクセスでき、マーチャントの関与なしに自分のサブスクリプションを管理できます。
 
-The customer portal allows subscribers to:
+カスタマーポータルでは次のことができます。
 
-* View their current plan and subscription status  
-* See upcoming renewals and expiration dates  
-* Top up their credit balance  
-* Pay for upcoming billing periods  
-* Upgrade or downgrade their plan, if allowed  
-* View billing history and transaction details
+* 現在のプランとサブスクリプション状態を確認する。  
+* 次回更新日や有効期限を確認する。  
+* クレジット残高をチャージする。  
+* 今後の請求期間分を支払う。  
+* 許可されている場合にプランをアップグレード/ダウングレードする。  
+* 請求履歴と取引詳細を確認する。
 
-The portal provides a place for customers to manage recurring payments and understand their subscription state.
+このポータルは、顧客が定期支払いを管理し、サブスクリプション状態を把握するための場所を提供します。
 
-Access to the portal is typically provided by your application or service, for example through a **Manage subscription** or **Billing** link. The link can be shared directly with the subscriber or generated programmatically.
+ポータルへのアクセスは通常、アプリケーションまたはサービス側で提供します（例: **Manage subscription** や **Billing** リンク）。リンクは購読者へ直接共有することも、プログラムから生成することもできます。
 
-### 6.Subscriber management
+### 6. 購読者管理
 
-BTCPay Server provides tools for merchants to manage subscribers and handle exceptional cases without modifying plans.
+BTCPay Server は、プランを変更せずに購読者を管理し、例外ケースへ対応するためのツールをマーチャントに提供します。
 
-From the subscriber detail view, you can perform the following actions.
+購読者詳細ビューから、次の操作を実行できます。
 
-![Creating a subscriber](./img/Subscriptions/Sub-Management.png)
+![購読者管理](./img/Subscriptions/Sub-Management.png)
 
-#### Suspend and unsuspend subscribers
+#### 購読者の停止と停止解除
 
-You can suspend a subscriber to temporarily disable access to the service.
+購読者を停止して、サービスへのアクセスを一時的に無効化できます。
 
-* Suspension immediately blocks access, regardless of subscription state  
-* You can optionally provide a suspension reason (The reason can be displayed to the subscriber in the customer portal)  
-* Suspended subscriptions can be unsuspended at any time
+* 停止すると、サブスクリプション状態に関係なく即座にアクセスがブロックされます。  
+* 必要に応じて停止理由を設定できます（この理由はカスタマーポータルで購読者に表示できます）。  
+* 停止したサブスクリプションはいつでも停止解除できます。
 
-#### Add credits
+#### クレジット追加
 
-You can manually add credits to a subscriber’s balance.
+購読者の残高にクレジットを手動で追加できます。
 
-This is useful for:
+これは次の用途で有効です。
 
-* Customer support gestures  
-* Service credits  
-* Manual balance adjustments
+* カスタマーサポート対応としての付与  
+* サービスクレジット  
+* 手動での残高調整
 
-Added credits are immediately available for renewals.
+追加したクレジットは、更新時に即座に利用できます。
 
-#### Apply manual charges
+#### 手動課金の適用
 
-You can manually charge a subscriber for additional usage or one off fees.
+追加利用分や単発料金について、購読者へ手動課金できます。
 
-Manual charges deduct from the subscriber’s credit balance and appear in the subscription history.
+手動課金は購読者のクレジット残高から差し引かれ、サブスクリプション履歴に表示されます。
 
-#### Test subscribers
+#### テスト購読者
 
-Subscribers can be marked as test subscribers.
+購読者はテスト購読者として指定できます。
 
-Test subscribers behave like regular subscribers but are intended for development and testing, allowing you to validate integrations without affecting production data.
+テスト購読者は通常の購読者と同様に動作しますが、開発およびテスト用途を意図しており、本番データへ影響を与えずに連携を検証できます。
 
-### 7. Automated emails
+### 7. 自動メール
 
-BTCPay Server can send automated emails to subscribers based on subscription events, if server email is configured.
+サーバーメールが設定されている場合、BTCPay Server はサブスクリプションイベントに基づいて購読者へ自動メールを送信できます。
 
-Email rules allow you to notify subscribers about important changes and upcoming actions without manual intervention.
+メールルールを使うと、重要な変更や今後必要な対応を手動介入なしで購読者へ通知できます。
 
-#### Email rules
+#### メールルール
 
-You can define email rules that trigger on events such as:
+次のようなイベントでトリガーされるメールルールを定義できます。
 
-* Upcoming subscription expiration  
-* Trial ending  
-* Subscription state changes  
-* Payment required notifications
+* サブスクリプション有効期限の接近  
+* トライアル終了  
+* サブスクリプション状態の変更  
+* 支払いが必要である旨の通知
 
-Rules are evaluated automatically and emails are sent when the configured conditions are met.
+ルールは自動的に評価され、設定条件を満たすとメールが送信されます。
 
-Email templates support variables, allowing you to include subscription specific information such as:
+メールテンプレートは変数に対応しているため、次のようなサブスクリプション固有情報を含められます。
 
-* Plan name  
-* Expiration date  
-* Subscriber details
+* プラン名  
+* 有効期限日  
+* 購読者情報
 
-This allows you to create highly customized messages that match your service and communication style.
+これにより、サービスやコミュニケーションスタイルに合わせた高度にカスタマイズされたメッセージを作成できます。
 
-A common use case is sending a payment reminder to a subscriber **3 days before plan expiration**, giving them time to top up credits or pay for the next billing period.
+一般的なユースケースは、**プラン有効期限の 3 日前** に購読者へ支払いリマインダーを送ることです。これにより、顧客は次回請求期間のためにクレジットをチャージしたり支払いを行ったりする時間を確保できます。
 
-### 8. Subscription API access
+### 8. サブスクリプション API アクセス
 
-Subscriptions can be managed programmatically using the BTCPay Server **Greenfield API**.
+サブスクリプションは BTCPay Server の **Greenfield API** を使用してプログラムから管理できます。
 
-If your BTCPay Server instance is running **v2.3.0 or later**, you can explore and interact with the subscription endpoints in two ways:
+BTCPay Server インスタンスが **v2.3.0 以降** で稼働している場合、次の 2 つの方法でサブスクリプションエンドポイントを確認して利用できます。
 
-* Public documentation:  
+* 公開ドキュメント:  
   [https://docs.btcpayserver.org/API/Greenfield/v1/](https://docs.btcpayserver.org/API/Greenfield/v1/)  
-* Your own instance documentation:  
-  Visit `/docs` on your BTCPay Server instance (for example `https://yourbtcpayserver.com/docs`)
+* 自身のインスタンスのドキュメント:  
+  BTCPay Server インスタンスの `/docs` にアクセスしてください（例: `https://yourbtcpayserver.com/docs`）

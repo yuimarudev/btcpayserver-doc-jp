@@ -1,11 +1,11 @@
-# EasyWebshop integration
+# EasyWebshop 統合
 
-[EasyWebshop](https://easywebshop.com/) is hosted e-commerce platform. They will run the shop infrastructure for you for a monthly fee. 
+[EasyWebshop](https://easywebshop.com/) はホスト型の e-commerce プラットフォームです。月額料金でショップ基盤を運用してくれます。 
 
 :::warning
-Please be aware that this integration is not maintained by the BTCPay Server team. If you have any questions, please contact [EasyWebshop](https://easywebshop.com/software/contact) directly.
+この統合は BTCPay Server チームによって保守されていない点に注意してください。質問がある場合は [EasyWebshop](https://easywebshop.com/software/contact) へ直接問い合わせてください。
 :::
 
-## How to install BTCPay for EasyWebshop
+## EasyWebshop へ BTCPay をインストールする方法
 
-Please follow their [installation guide](https://ews.wiki/payment-providers/btcpay-server)
+[installation guide](https://ews.wiki/payment-providers/btcpay-server) に従ってください。

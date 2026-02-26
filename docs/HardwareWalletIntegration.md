@@ -1,23 +1,23 @@
-# Hardware Wallet Integration
+# ハードウェアウォレット連携
 
-For optimal balance between ease of use, security and privacy, it's recommended to use [BTCPay Server Wallet](Wallet.md) with a hardware wallet.
+使いやすさ・セキュリティ・プライバシーの最適なバランスのため、[BTCPay Server Wallet](Wallet.md) とハードウェアウォレットを組み合わせて使うことを推奨します。
 
-The hardware wallet integration within BTCPay Server allows you to import your hardware wallet and spend the incoming funds with a simple confirmation on your device. Your private keys never leave the device and all funds are being validated against your own full node and no data leakage.
+BTCPay Server のハードウェアウォレット連携では、ハードウェアウォレットをインポートし、デバイス上で簡単に確認して受け取った資金を使用できます。秘密鍵はデバイス外へ出ることはなく、すべての資金は自分のフルノードに対して検証され、データ漏えいも防げます。
 
-## Getting Started
+## はじめに
 
 [![BTCPay Server Vault](https://img.youtube.com/vi/s4qbGxef43A/mqdefault.jpg)](https://www.youtube.com/watch?v=s4qbGxef43A)
 
-1. [Download the BTCPay Vault app](https://github.com/btcpayserver/BTCPayServer.Vault/releases)
-2. Install the Vault on your PC (Windows, MacOS or Linux)
-3. Open the BTCPay Vault app
-4. Plug in the hardware wallet into your PC and make sure it’s in a wake up state
-5. Do you have an existing store? Skip ahead to step 7.
-6. Connect existing wallet and then click on the Connect a hardware wallet.
-7. Now you will see BTCPay Server searching for your hardware wallet, this step requires you to run BTCPay Server Vault.
-8. Click accept on your BTCPay Vault application. Vault is now searching for your device, it will now ask for your pin on the device.
-9. After device was found and accepted, select your address type and click confirm. BTCPay Server will show your public key information from your hardware wallet.
-10. Once you've confirmed the public key is correct, BTCPay Server now shows the address to validate on your device. If they are correct click confirm to complete the setup.
+1. [BTCPay Vault アプリをダウンロード](https://github.com/btcpayserver/BTCPayServer.Vault/releases)
+2. PC（Windows、MacOS、Linux）に Vault をインストール
+3. BTCPay Vault アプリを起動
+4. ハードウェアウォレットを PC に接続し、スリープ解除状態であることを確認
+5. 既存ストアがありますか？ある場合は手順 7 へ進んでください。
+6. 既存ウォレットを接続し、`Connect a hardware wallet` をクリック
+7. BTCPay Server がハードウェアウォレットの検索を開始します。この手順では BTCPay Server Vault を実行している必要があります。
+8. BTCPay Vault アプリで承認をクリックします。Vault がデバイスを検索し、デバイス上で PIN の入力を求めます。
+9. デバイスが見つかって承認されたら、アドレスタイプを選択して確認します。BTCPay Server にハードウェアウォレットの公開鍵情報が表示されます。
+10. 公開鍵が正しいことを確認すると、BTCPay Server がデバイス上で検証するアドレスを表示します。正しければ確認してセットアップを完了します。
 
 ![BTCPay Server Vault configuration](./img/hww-setup/1-store-created.png)
 
@@ -35,17 +35,17 @@ The hardware wallet integration within BTCPay Server allows you to import your h
 
 ![BTCPay Server Vault configuration](./img/hww-setup/8-wallet-setup-complete.png)
 
-### Spending funds
+### 資金を送る
 
-Once you’ve received funds to your wallet and you decide to spend them, you can sign the transaction with your hardware wallet, all inside BTCPay Server.
+ウォレットに資金を受け取り、送金したい場合は、BTCPay Server 内からハードウェアウォレットでトランザクション署名できます。
 
-1. Open BTCPay Vault app on your PC
-2. Plug in the hardware wallet and make sure it’s in wake up state
-3. In BTCPay Server, go to your Bitcoin Wallet and click on send
-4. Fill in the Destination address and the Amount
-5. Select Sign with a hardware wallet
-6. Verify the transaction on your hardware wallet and confirm it
-7. Broadcast the transaction
+1. PC で BTCPay Vault アプリを開く
+2. ハードウェアウォレットを接続し、スリープ解除状態であることを確認
+3. BTCPay Server で Bitcoin Wallet に移動し、`send` をクリック
+4. 宛先アドレスと金額を入力
+5. `Sign with a hardware wallet` を選択
+6. ハードウェアウォレットでトランザクションを確認して承認
+7. トランザクションをブロードキャスト
 
 ![Send Bitcoin via BTCPay Vault](./img/hww-setup/9-send-btc.png)
 
@@ -53,18 +53,18 @@ Once you’ve received funds to your wallet and you decide to spend them, you ca
 
 ![Send Bitcoin via BTCPay Vault](./img/hww-setup/11-sign-transaction.png)
 
-## Advanced Settings
+## 詳細設定
 
-Additional transaction settings can be found by clicking on the [Advanced Settings](Wallet.md#advanced-settings) button. If you are not familiar with these types of settings, you may leave them as is to use the default settings.
+追加のトランザクション設定は [Advanced Settings](Wallet.md#advanced-settings) ボタンから開けます。これらの設定に慣れていない場合は、既定値のままで利用できます。
 
-If you are experiencing issues sending transactions from a Trezor wallet, you may need to enable [this advanced setting](FAQ/Wallet.md#why-is-sending-a-transaction-using-trezor-failing).
+Trezor ウォレットからの送信で問題がある場合は、[この詳細設定](FAQ/Wallet.md#why-is-sending-a-transaction-using-trezor-failing) を有効にする必要があることがあります。
 
 ![Send Bitcoin via BTCPay Vault](./img/hotwallet/BroadcastConfirm.png)
 
-## Supported Hardware Wallets
+## 対応ハードウェアウォレット
 
-The list of supported hardware wallets is available at [this link](https://github.com/bitcoin-core/HWI#device-support).
+対応デバイス一覧は [こちらのリンク](https://github.com/bitcoin-core/HWI#device-support) を参照してください。
 
 :::warning
-The hardware wallet integration in BTCPay Server only supports Bitcoin. [Altcoin](/Development/Altcoins.md) wallets enabled on your server won't work.
+BTCPay Server のハードウェアウォレット連携は Bitcoin のみ対応です。サーバーで有効化した [Altcoin](/Development/Altcoins.md) ウォレットは利用できません。
 :::

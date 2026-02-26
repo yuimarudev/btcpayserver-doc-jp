@@ -1,41 +1,41 @@
-# Contributing to BTCPay Server in other ways
+# そのほかの方法で BTCPay Server に貢献する
 
 [[toc]]
 
-## Create Videos & Graphics
+## 動画とグラフィックを作成する
 
-Making videos that promote some features or that show how BTCPay Server works is a great way to help.
-Video tutorials also help new users navigate around what BTCPay Server can offer them.
+機能を紹介したり、BTCPay Server の使い方を示す動画を作成することは、非常に有益な貢献です。
+動画チュートリアルは、新規ユーザーが BTCPay Server でできることを理解し、操作に慣れる助けにもなります。
 
-You can see examples of videos that are already on the Official BTCPay Server [YouTube channel](https://www.youtube.com/channel/UCpG9WL6TJuoNfFVkaDMp9ug/) for inspiration.
+参考として、公式 BTCPay Server [YouTube channel](https://www.youtube.com/channel/UCpG9WL6TJuoNfFVkaDMp9ug/) にある既存動画の例を確認できます。
 
-## Hosting Providers
+## ホスティングプロバイダー
 
-The BTCPay Server community is looking for more VPS hosting providers to implement [1-Click BTCPay Server deployment](/Deployment/LunaNode.md) and make the deployment of software more accessible, decentralized and widely-available.
+BTCPay Server コミュニティは、[1-Click BTCPay Server deployment](/Deployment/LunaNode.md) を実装する VPS ホスティングプロバイダーをさらに求めています。これにより、ソフトウェアの導入をより身近にし、分散化と普及を進められます。
 
-## Contribute to the Directory
+## Directory への貢献
 
-The Directory has been created to showcase the possibilities of BTCPay Server for merchant checkouts, donations, fundraisers, or any other use-case users come up with.
+Directory は、加盟店チェックアウト、寄付、資金調達、その他ユーザーのさまざまなユースケースにおける BTCPay Server の可能性を紹介するために作成されました。
 
-It contains a non-exhaustive list of websites that use the software.
+このソフトウェアを利用している Web サイトの網羅的ではない一覧が含まれています。
 
-Anyone can [add a person or an organisation](https://directory.btcpayserver.org/newentry) to the [Directory](https://directory.btcpayserver.org/).
-If you know how to use Github, you can directly create a Pull Request and add an entry by editing the `.vuepress/list.js` file.
+誰でも [add a person or an organisation](https://directory.btcpayserver.org/newentry) から [Directory](https://directory.btcpayserver.org/) に追加できます。
+GitHub の使い方が分かる場合は、`.vuepress/list.js` を編集して直接プルリクエストでエントリーを追加することもできます。
 
-Please note that only websites that use BTCPay Server are accepted in the Directory and entries are expected to be in English language.
+Directory に受け付けられるのは BTCPay Server を利用している Web サイトのみで、エントリーは英語であることが求められる点に注意してください。
 
-## Project Discussions
+## プロジェクトディスカッション
 
-Check out the [BTCPay Discussions Page](https://github.com/btcpayserver/btcpayserver/discussions) and provide feedback on new feature ideas and other project topics. Features that may be good ideas for the project but aren't ready for development yet, can be found here.
+[BTCPay Discussions Page](https://github.com/btcpayserver/btcpayserver/discussions) を確認し、新機能のアイデアやその他のトピックにフィードバックを提供してください。アイデアとしては有望だが、まだ開発段階ではない機能はここで扱われます。
 
-## Community
+## コミュニティ
 
-You can help BTCPay Server even if you're not a developer.
+開発者でなくても BTCPay Server を支援できます。
 
-The easiest way is to use the software as a business or individual, provide feedback and [report any bugs or issues](https://github.com/btcpayserver/btcpayserver/issues) you or your customers encounter. Another great way is to join the [community](../Community.md) and help others troubleshoot by sharing information you may have from your experience using BTCPay Server.
+もっとも簡単なのは、個人または事業としてソフトウェアを使い、フィードバックを提供し、自分または顧客が遭遇した [バグや問題を報告](https://github.com/btcpayserver/btcpayserver/issues) することです。もう一つの有効な方法は [community](../Community.md) に参加し、BTCPay Server の利用経験から得た情報を共有して、他の人のトラブルシューティングを手助けすることです。
 
-Consider helping newcomers like the community helped you.
+コミュニティがあなたを助けてくれたように、新しく参加する人を助けることも検討してください。
 
-## Spreading the word
+## 情報を広める
 
-You like BTCPay Server, what it stands for and what it offers? Spread the word! It's the easiest way to contribute and help the community.
+BTCPay Server の理念や提供価値が好きなら、ぜひ広めてください。もっとも簡単で効果的な貢献の一つです。

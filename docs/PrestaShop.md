@@ -1,70 +1,71 @@
-# Prestashop integration
+# PrestaShop 連携
 
-This document explains how to **integrate BTCPay Server into your PrestaShop store**.
-If you do not have a store yet, follow [this step by step article](https://blog.templatetoaster.com/how-to-install-prestashop/) to create one from scratch.
+このドキュメントでは、**BTCPay Server を PrestaShop ストアに連携する方法**を説明します。  
+まだストアがない場合は、[このステップバイステップの記事](https://blog.templatetoaster.com/how-to-install-prestashop/)に従ってゼロから作成してください。
 
-To integrate BTCPay Server into an existing PrestaShop store, follow the steps below.
+既存の PrestaShop ストアに BTCPay Server を連携するには、以下の手順に従ってください。
 
 :::tip
-This document only applies to the latest _v6_ version of the module. Other versions:
+このドキュメントはモジュールの最新 _v6_ バージョンにのみ適用されます。その他のバージョン:
 - [_v4_ module documentation](https://github.com/btcpayserver/btcpayserver-doc/blob/cba96292ceea9483711ab53c479a98357383f857/docs/PrestaShop.md)
 - [_v5_ module documentation](https://github.com/btcpayserver/btcpayserver-doc/blob/b1432054e147836d7286e1bae2f98e62f2752363/docs/PrestaShop.md)
 :::
 
-## Server Requirements
+## サーバー要件
 
-Please ensure that you meet the following requirements before installing this plugin.
+このプラグインをインストールする前に、以下の要件を満たしていることを確認してください。
 
-- You are using PHP 8.0 or higher
-- Your PrestaShop is version 8.0 or higher.
-  - Your store must have HTTPS enabled and be publicly accessible.
-- Your BTCPay Server is version 1.7.0 or higher
-- The PDO, curl, gd, intl, json, and mbstring PHP extensions are available
-- You have a BTCPay Server, either [self-hosted](/Deployment/README.md) or [hosted by a third-party](/Deployment/ThirdPartyHosting.md)
-  - The BTCPay Server instance must have HTTPS enabled and be publicly accessible.
-- [You've a registered account on the instance](./RegisterAccount.md)
-- [You've a BTCPay store on the instance](./CreateStore.md)
-- [You've a wallet connected to your store](./WalletSetup.md)
+- PHP 8.0 以上を使用している
+- PrestaShop が 8.0 以上である
+  - ストアで HTTPS が有効になっており、公開アクセス可能であること
+- BTCPay Server が 1.7.0 以上である
+- PHP 拡張の PDO、curl、gd、intl、json、mbstring が利用可能である
+- [セルフホスト](/Deployment/README.md) または [サードパーティホスト](/Deployment/ThirdPartyHosting.md) の BTCPay Server を用意している
+  - BTCPay Server インスタンスで HTTPS が有効になっており、公開アクセス可能であること
+- [インスタンスに登録済みアカウントがある](./RegisterAccount.md)
+- [インスタンスに BTCPay ストアがある](./CreateStore.md)
+- [ストアにウォレットが接続されている](./WalletSetup.md)
 
-## Install BTCPay Plugin
+## BTCPay プラグインをインストールする
 
-1. [Download the latest BTCPay Server plugin](https://github.com/btcpayserver/prestashop-plugin/releases)
+1. [最新の BTCPay Server プラグインをダウンロード](https://github.com/btcpayserver/prestashop-plugin/releases)
 2. PrestaShop > Modules > Module Manager > Upload a module
-3. Upload the `.zip`-file you just downloaded
-4. Click on `configure` to setup the module
+3. 先ほどダウンロードした `.zip` ファイルをアップロード
+4. `configure` をクリックしてモジュールを設定
 
 ![BTCPay Server PrestaShop plugin installation](./img/prestashop/module-install.jpg)
 
-## Connecting the store
+## ストアを接続する
 
-The Prestashop BTCPay Server module is a **bridge between your server (the payment processor) and your e-commerce store**.
-No matter if you're using a self-hosted or third-party solution from step 2, the setup process is identical.
+Prestashop の BTCPay Server モジュールは、**あなたのサーバー（決済プロセッサ）と EC ストアをつなぐブリッジ**です。  
+手順 2 でセルフホストかサードパーティホストのどちらを選んでも、設定手順は同じです。
 
-1. In the `BTCPay Server URL`-field, enter the full URL of your host (including the https) – for example https://testnet.demo.btcpayserver.org
-2. Select the default transaction speed (this will change how much BTCPay recommends as transaction fee).
-3. _Optional: Select the relevant order mode for your store (order is created before or after payment)._
-   - Only relevant if you use a version **before** v5.1.0 as this logic has been removed.
-4. Select if you want to send customer metadata to your BTCPay server instance for bookkeeping.
-5. Press `Connect` to save your settings and be redirected to your BTCPay Server instance to create an API key.
-6. When creating the API key, make sure to give the permissions to a specific store (multiple stores are not supported).
+1. `BTCPay Server URL` フィールドにホストの完全 URL（https を含む）を入力します。例: https://testnet.demo.btcpayserver.org
+2. デフォルトのトランザクション速度を選択します（BTCPay が推奨する手数料額に影響します）。
+3. _任意: ストアに適した注文モード（支払い前に注文作成 / 支払い後に注文作成）を選択します。_
+   - この項目は、該当ロジックが削除された v5.1.0 **以前**を使用している場合のみ関係します。
+4. 記帳用途のために、顧客メタデータを BTCPay Server インスタンスへ送信するかどうかを選択します。
+5. `Connect` を押して設定を保存し、BTCPay Server インスタンスへリダイレクトして API キーを作成します。
+6. API キー作成時は、必ず特定の 1 ストアに対して権限を付与してください（複数ストアは未対応です）。
 
 ![BTCPay Server PrestaShop API key setup](./img/prestashop/api-key-setup.jpg)
 
-7. Press the `Authorize app`-button after which you will be redirected back to your Prestashop store. If you get an "Invalid Token"-popup, please make sure that PrestaShop and BTCPay Server both use HTTPS and have proper hostnames (see [Server Requirements](#server-requirements)).
+7. `Authorize app` ボタンを押すと Prestashop ストアへ戻ります。"Invalid Token" ポップアップが出る場合は、PrestaShop と BTCPay Server の両方で HTTPS が有効で、正しいホスト名を使っているか確認してください（[Server Requirements](#サーバー要件) を参照）。
 
 ![Invalid Token](./img/prestashop/invalid-token-popup.jpg)
 
-8. Prestashop will try and create a connection to your BTCPay Server instance. 9. A message will be shown if the connection was successful (but it is smart to make a test purchase).
+8. Prestashop が BTCPay Server インスタンスへの接続を試みます。
+9. 接続に成功するとメッセージが表示されます（ただし、テスト購入を行うことをおすすめします）。
 
 ![BTCPay Server PrestaShop setup finished](./img/prestashop/success.jpg)
 
 :::tip
-Redirecting back from BTCPay Server sometimes fails due to PrestaShop weirdness. If it does, you can still use this plugin by copying the API key from `/account/apikeys` and pasting it in the form.
+BTCPay Server からのリダイレクトは、PrestaShop 側の挙動により失敗することがあります。その場合でも、`/account/apikeys` から API キーをコピーしてフォームに貼り付ければ、このプラグインを利用できます。
 :::
 
-### Create the API key yourself
+### API キーを手動で作成する
 
-If preferred, you can also make an API key yourself by creating it at `/account/addapikey`. If you are going to make an API key yourself, make sure that it has the following permissions for a _singluar_ store:
+必要に応じて、`/account/addapikey` で API キーを手動作成することもできます。手動で作成する場合は、_単一_ のストアに対して次の権限を持つようにしてください。
 
 - `btcpay.store.canmodifystoresettings`
 - `btcpay.store.webhooks.canmodifywebhooks`
@@ -73,16 +74,15 @@ If preferred, you can also make an API key yourself by creating it at `/account/
 - `btcpay.store.canviewinvoices`
 - `btcpay.store.canmodifyinvoices`
 
-## 3. Contribute
+## 3. 貢献
 
-BTCPay is built and maintained entirely by volunteer contributors around the internet. We welcome and appreciate new contributions.
+BTCPay は世界中のボランティアコントリビューターによって構築・保守されています。新しい貢献を歓迎し、感謝しています。
 
-Contributors looking to help out, before opening a pull request, please [create an issue](https://github.com/btcpayserver/prestashop-plugin/issues/new/choose)
-or join [our community chat](https://chat.btcpayserver.org) to get early feedback, discuss the best ways to tackle the problem and to ensure there is no work duplication.
+貢献したい方は、プルリクエストを開く前に、まず [issue を作成](https://github.com/btcpayserver/prestashop-plugin/issues/new/choose) するか、[コミュニティチャット](https://chat.btcpayserver.org) に参加してください。早い段階でフィードバックを得たり、最適な進め方を議論したり、作業重複を防げます。
 
-## PrestaShop Support
+## PrestaShop サポート
 
-PrestaShop support can be found through its official channels.
+PrestaShop のサポートは公式チャネルで提供されています。
 
 - [Homepage](https://www.prestashop.com)
 - [Documentation](https://doc.prestashop.com)

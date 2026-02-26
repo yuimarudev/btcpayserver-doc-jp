@@ -1,52 +1,58 @@
-# (4) What's Next?
+<!-- legacy-anchor-aliases -->
+<span id="connecting-your-btcpay-store-to-your-e-commerce-platform"></span>
+<span id="creating-the-pay-button"></span>
+<span id="creating-the-point-of-sale-app"></span>
+<!-- /legacy-anchor-aliases -->
 
-After you've connected your wallet to your BTCPay, you can explore various built in tools in the software. See the full list of Use Cases [here](./UseCase.md).
+# (4) 次は？
 
-## Creating the Point of Sale App
+ウォレットを BTCPay に接続したら、ソフトウェア内蔵のさまざまなツールを試せます。Use Cases の全一覧は [here](./UseCase.md) を参照してください。
 
-BTCPay has a PoS app which you can use to receive payments from your customers directly or to receive donations. To **create the POS app**, you need to have a store created in BTCPay. View PoS instructions [here](./Apps.md#point-of-sale-app).
+## Point of Sale アプリの作成
 
-## Creating the Crowdfund App
+BTCPay には、顧客からの支払いや寄付の受け取りに使える PoS アプリがあります。**POS アプリを作成**するには、BTCPay にストアが作成済みである必要があります。PoS の手順は [here](./Apps.md#point-of-sale-app) を参照してください。
 
-Create a **crowdfunding campaign using BTCPay**. Unlike traditional crowdfunding platforms, the creator of the campaign is the owner of the platform. Funds go directly to the creator’s wallet without any fees. View Crowdfund instructions [here](./Apps.md#crowdfunding-app).
+## Crowdfund アプリの作成
 
-## Creating the Payment Request
+**BTCPay を使ったクラウドファンディングキャンペーン**を作成できます。従来のクラウドファンディングプラットフォームと異なり、キャンペーン作成者自身がプラットフォームの所有者です。資金は手数料なしで作成者のウォレットへ直接送られます。Crowdfund の手順は [here](./Apps.md#crowdfunding-app) を参照してください。
 
-Create **custom invoices which can be shared with others**, by sending a link to your payment request. Users can pay the request at any time. BTCPay automatically updates the BTC exchange rate at the time of payment. View Payment Request instructions [here](./PaymentRequests.md).
+## Payment Request の作成
 
-## Creating the Pay Button
+支払いリクエストへのリンクを送ることで、**他者と共有できるカスタム請求書**を作成できます。ユーザーは好きなタイミングで支払えます。BTCPay は支払い時点の BTC 為替レートを自動更新します。Payment Request の手順は [here](./PaymentRequests.md) を参照してください。
 
-**Pay buttons** are great when you have a fixed amount for a product or a donation. You can easily embed the button into HTML. When the customer or a visitor clicks on the button, BTCPay displays a checkout page and an invoice for them. View Pay Button instructions [here](./Apps.md#payment-button).
+## Pay Button の作成
 
-## Connecting your BTCPay store to your e-commerce platform
+**Pay button** は、商品や寄付の金額が固定の場合に便利です。ボタンは簡単に HTML に埋め込めます。顧客や訪問者がボタンをクリックすると、BTCPay はチェックアウトページと請求書を表示します。Pay Button の手順は [here](./Apps.md#payment-button) を参照してください。
 
-Depending on the CMS you're using, you can easily connect BTCPay to your online store. Currently, BTCPay offers following integrations :
+## BTCPay ストアを e コマースプラットフォームへ接続する
+
+利用している CMS に応じて、BTCPay をオンラインストアへ簡単に接続できます。現在、BTCPay は次の連携を提供しています:
 
 - [WooCommerce](./WooCommerce.md)
 - [Shopify](./Shopify.md)
-- [Drupal](./Drupal.md)
+- [Drupal](./Drupal/)
 - [Magneto](./Magento.md)
 - [PrestaShop](./PrestaShop.md)
 - [Custom integration](./CustomIntegration.md)
-- [Wix](./Wix.md)
-- [Odoo](./Odoo.md)
-- [Big Commerce](./BigCommerce.md)
+- [Wix](./Wix/)
+- [Odoo](./Odoo/)
+- [Big Commerce](./BigCommerce/)
 - [Invoice Ninja](./InvoiceNinja.md)
 e.t.c
 
-## Extending BTCPay Server: Plugins
+## BTCPay Server の拡張: プラグイン
 
-BTCPay Server is more than just a payment processor -  It can be personalized to your preference. Plugins allows you customize your BTCPay Server application,and tailor your instance to suit your specific needs.
+BTCPay Server は単なる決済プロセッサーではありません。好みに合わせてパーソナライズできます。プラグインにより BTCPay Server アプリケーションをカスタマイズし、インスタンスを特定のニーズに合わせられます。
 
-Every project is unique. Whether you're a freelancer, running a physical store, an online store, managing a creative project, or building, there's a good chance a plugin exists to solve your specific workflow challenge. 
+プロジェクトごとに要件は異なります。フリーランス、実店舗やオンラインストアの運営、クリエイティブプロジェクトの管理、開発など、ワークフロー上の課題を解決するプラグインが見つかる可能性があります。
 
-Need something custom? Click on the `Manage Plugin` section on your BTCPay instance and find what plugin works for you. 
+独自機能が必要ですか？BTCPay インスタンスの `Manage Plugin` セクションを開き、自分に合うプラグインを探してください。
 
 
-## Join The BTCPay Community
+## BTCPay コミュニティに参加する
 
-BTCPay Server is an open-source project, not a company. We rely on a network of diverse contributors and users to provide support for numerous use-cases. Join us in improving, learning, and building BTCPay.
+BTCPay Server は企業ではなく、オープンソースプロジェクトです。多数のユースケースに対するサポートは、多様なコントリビューターとユーザーのネットワークに支えられています。BTCPay の改善、学習、構築にぜひ参加してください。
 
-If you have questions, try searching our [FAQ Section](./FAQ/readme.md) or join the [BTCPay Community](./Community.md) and share questions and ideas for improvement.
+質問がある場合は、まず [FAQ Section](./FAQ/) を検索するか、[BTCPay Community](./Community.md) に参加して質問や改善アイデアを共有してください。
 
-If you are a developer take a look at the [Local Development](../Development/LocalDevelopment.md) guide and help us with any [open issues](https://github.com/btcpayserver/btcpayserver/issues) on Github. If you would like to contribute to BTCPay in other ways, check out the [Contribution Guide](./Contribute.md) for ideas.
+開発者の方は [Local Development](./Development/LocalDevelopment.md) ガイドを確認し、Github の [open issues](https://github.com/btcpayserver/btcpayserver/issues) への対応に協力してください。ほかの形で貢献したい場合は、[Contribution Guide](./Contribute/) を参照してください。

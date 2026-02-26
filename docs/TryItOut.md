@@ -1,51 +1,51 @@
-# Try out BTCPay server
+# BTCPay server を試してみる
 
-Before you start using BTCPay Server in production, you can try it and see if it fits your needs.
+BTCPay Server を本番利用する前に、試用してニーズに合うか確認できます。
 
-On this page you will see various ways to test out the software on mainnet and testnet.
+このページでは、mainnet と testnet でソフトウェアを試すさまざまな方法を紹介します。
 
-## Our mainnet demo server
+## mainnet デモサーバー
 
-We host our server on [mainnet.demo.btcpayserver.org](https://mainnet.demo.btcpayserver.org/login).
+私たちは [mainnet.demo.btcpayserver.org](https://mainnet.demo.btcpayserver.org/login) でサーバーを公開しています。
 
-Feel free to register to it, create a store and a wallet and play around.
+自由に登録して、ストアとウォレットを作成し、いろいろ試してください。
 
-This instance should only be used for testing things out. We do not guarantee uptime.
+このインスタンスはテスト用途でのみ使用してください。稼働率は保証されません。
 
-## Our Testnet demo server
+## testnet デモサーバー
 
-If you're familiar with testnet and want to test BTCPay through it, check [testnet.demo.btcpayserver.org](https://testnet.demo.btcpayserver.org/).
+testnet に慣れていて BTCPay を testnet で試したい場合は、[testnet.demo.btcpayserver.org](https://testnet.demo.btcpayserver.org/) を確認してください。
 
-For more information see [testnet documentation](/Development/TestnetDemo.md).
+詳細は [testnet documentation](/Development/TestnetDemo.md) を参照してください。
 
-## Third-party hosts
+## サードパーティホスト
 
-[Third-party hosts](./Deployment/ThirdPartyHosting.md) provide hosted solutions, in most cases free of charge, in case you don't want to self-host a server.
+セルフホストしたくない場合は、[Third-party hosts](./Deployment/ThirdPartyHosting.md) が、ほとんどの場合無料でホスト型ソリューションを提供しています。
 
-While most of them can be used in-production, you can also use them to try things out. They're similar to our demo server, but provide better uptime and reliability.
+多くは本番利用にも対応していますが、試用目的でも利用できます。私たちのデモサーバーに近い使い方で、より高い稼働率と信頼性を提供します。
 
-For full lists of third-party hosts to pick from, [see our hosts directory](https://directory.btcpayserver.org/filter/hosts).
+選択できるサードパーティホストの一覧は、[see our hosts directory](https://directory.btcpayserver.org/filter/hosts) を参照してください。
 
-## Start testing
+## テスト開始
 
-Once you pick up a server to use, the steps are the same, regardless of which option you've opted for.
+利用するサーバーを決めたら、どの選択肢でも手順は同じです。
 
-Click on the following links for detailed instructions on how to:
+以下のリンクから詳細手順を確認してください:
 
 - [Register an account](./RegisterAccount.md)
 - [Create a store](./CreateStore.md)
 - [Create a wallet](./WalletSetup.md)
 - [Start exploring](./WhatsNext.md)
 
-### BTCPay Server in action
+### BTCPay Server の動作例
 
-Below, you will find options to see the BTCPay server in action. Through our own POS on our demo or through the eyes of actual merchants in the wild!
+以下では、BTCPay server が実際に動作している様子を確認できます。デモ上の私たちの POS、または実際に運用している加盟店の事例です。
 
 - [Point of Sale Demo](https://mainnet.demo.btcpayserver.org/apps/87kj5yKay8mB4UUZcJhZH5TqDKMD3CznjwLjiu1oYZXe/pos)
 - [In-production stores](https://directory.btcpayserver.org)
 
-## Questions
+## 質問
 
-If you have questions about BTCPay Server, check our documentation, [Frequently asked questions page](./FAQ.md).
+BTCPay Server に関する質問がある場合は、ドキュメントと [Frequently asked questions page](./FAQ/) を確認してください。
 
-Join the [community chat](https://chat.btcpayserver.org/) on Mattermost by downloading [Mattermost app](https://mattermost.com/download/), or on [Telegram](https://t.me/btcpayserver) in case you need further help or help or want to hang around with like-minded people.
+さらに支援が必要な場合や、同じ関心を持つ人たちと交流したい場合は、[Mattermost app](https://mattermost.com/download/) をダウンロードして Mattermost の [community chat](https://chat.btcpayserver.org/) に参加するか、[Telegram](https://t.me/btcpayserver) に参加してください。

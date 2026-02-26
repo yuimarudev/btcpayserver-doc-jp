@@ -1,57 +1,71 @@
+<!-- legacy-anchor-aliases -->
+<span id="how-can-i-use-btcpay-in-a-physical-store"></span>
+<span id="how-to-create-a-pay-button-with-a-custom-amount"></span>
+<span id="how-to-customize-the-appearance-of-point-of-sale-app-in-btcpay"></span>
+<span id="how-to-customize-the-appearance-of-Point-of-Sale-App-in-BTCPay"></span>
+<span id="how-to-integrate-woocommerce-store-into-a-btcpay-crowdfund-app"></span>
+<span id="how-to-map-a-domain-name-to-an-app"></span>
+<span id="how-to-redirect-to-another-site-after-payment"></span>
+<span id="is-there-a-limit-on-the-number-of-apps-i-can-create"></span>
+<span id="is-there-a-point-of-sale-feature-in-btcpay"></span>
+<span id="what-are-the-apps-in-btcpay"></span>
+<span id="what-is-a-payment-button"></span>
+<!-- /legacy-anchor-aliases -->
+
 # Apps FAQ
 
-This document covers frequently asked questions about the BTCPay Server Apps.
+このドキュメントでは、BTCPay Server の Apps に関するよくある質問を扱います。
 
 [[toc]]
 
-## What are the Apps in BTCPay?
+## BTCPay の Apps とは何ですか？
 
-Apps are features you can use to expand the use case of your BTCPay. See the [apps doc](../Apps.md) for more information.
+Apps は、BTCPay のユースケースを拡張するために使える機能です。詳細は [apps ドキュメント](../Apps.md) を参照してください。
 
-## Is there a limit on the number of Apps I can create?
+## 作成できる Apps の数に上限はありますか？
 
-Apps are added on the store level. To create one, you need to have a store already setup. There is no limit to the number of apps that can be assigned to a store.
+Apps はストア単位で追加されます。作成するには、事前にストアをセットアップしておく必要があります。1つのストアに割り当てられる apps の数に上限はありません。
 
-## Is there a Point of Sale feature in BTCPay?
+## BTCPay に Point of Sale 機能はありますか？
 
-Yes. Please read our [guide on creating the POS app](../WhatsNext.md#creating-the-pay-button).
+はい。 [POS app の作成ガイド](../WhatsNext.md#creating-the-pay-button) をご覧ください。
 
-## How can I use BTCPay in a physical store?
+## 実店舗で BTCPay を使うにはどうすればよいですか？
 
-You can use our Point of Sale (PoS) app. When you create a PoS app within BTCPay Server, it will be publicly accessible via a URL where checkout buttons for products you’ve created for your PoS will be displayed.
-To have a physical PoS, the easiest solution (currently) is to create a PoS App in BTCPay and display it on any web device such as a phone, tablet or pc.
+Point of Sale (PoS) app を利用できます。BTCPay Server 内で PoS app を作成すると、公開 URL でアクセスできるようになり、作成した商品のチェックアウトボタンが表示されます。
+実店舗で PoS を使う最も簡単な方法（現時点）は、BTCPay で PoS App を作成し、スマートフォン、タブレット、PC などの Web 端末に表示することです。
 
-Please follow our detailed guide on how to use our [PoS App on a mobile device](https://blog.btcpayserver.org/bitcoin-pos/). Also note that Section 2.3 Connecting a Wallet is covered much more in-depth here in the [wallet section](../WalletSetup.md).
+詳しくは [モバイル端末での PoS App 利用ガイド](https://blog.btcpayserver.org/bitcoin-pos/) を参照してください。なお、セクション 2.3 の Connecting a Wallet は [ウォレットセクション](../WalletSetup.md) でより詳しく説明されています。
 
-## How to customize the appearance of Point of Sale App in BTCPay
+## BTCPay の Point of Sale App の見た目をカスタマイズする方法
 
-It is very easy to customize the look of the Point of Sale app. [Follow this guide](../Development/Theme.md) to learn how to change the theme.
+Point of Sale app の見た目は簡単にカスタマイズできます。テーマ変更方法は [このガイド](../Development/Theme.md) を参照してください。
 
-## What is a Payment Button?
+## Payment Button とは何ですか？
 
-The Payment Button is a simple and customizable HTML button you can create and embed into your website. To create a payment button, [follow this guide](../WhatsNext.md#creating-the-point-of-sale-app).
+Payment Button は、作成して Web サイトに埋め込める、シンプルでカスタマイズ可能な HTML ボタンです。作成方法は [このガイド](../WhatsNext.md#creating-the-point-of-sale-app) を参照してください。
 
-## How to create a Pay Button with a custom amount?
+## カスタム金額の Pay Button を作るには？
 
-The BTCPay Server Pay Button which can be found in Store Settings > Pay Button, currently does not support custom amounts.
-However, you can use a work-around:
+Store Settings > Pay Button にある BTCPay Server Pay Button は、現在カスタム金額をサポートしていません。
+ただし、回避策があります。
 
-- [Create Point of sale app](../WhatsNext.md#creating-the-point-of-sale-app)
-- Enable `user can input a custom amount` field
-- Remove all the products from the automatically generated template.
-- Save settings.
-- Click on the `Embed payment button linking to PoS item` at the bottom of the page and copy the expanded code. Paste it into html page of your website.
-- Remove the extra fields you do not need, especially `<input name="price" type="hidden" value="10" />` so that button redirects to the point of sale.
+- [Point of sale app を作成](../WhatsNext.md#creating-the-point-of-sale-app)
+- `user can input a custom amount` フィールドを有効化
+- 自動生成されたテンプレートから商品をすべて削除
+- 設定を保存
+- ページ下部の `Embed payment button linking to PoS item` をクリックして展開されたコードをコピーし、Web サイトの html ページに貼り付け
+- 不要な追加フィールド、特に `<input name="price" type="hidden" value="10" />` を削除し、ボタンが point of sale にリダイレクトするようにする
 
-![Custom Amount Pay Button](../img/BTCPayPayButtonDynamic2.png)
-![Custom Amount Pay Button](../img/BTCPayPayButtonDynamic.png)
+![カスタム金額 Pay Button](../img/BTCPayPayButtonDynamic2.png)
+![カスタム金額 Pay Button](../img/BTCPayPayButtonDynamic.png)
 
-## How to map a domain name to an app?
+## ドメイン名を app にマッピングするには？
 
-BTCPay Server Apps can have a domain name that's different from the servers domain. Let's assume you have BTCPay Server at mybtcpayserver.com and want to display your PoS app on mybtcpaypos.com instead mybtcpayserver.com/apps/pos/abc123
-First, [configure DNS settings](../FAQ/Deployment.md#setting-up-dns-records)) of mypointofsale.com and make sure it's pointing to the external ip of your BTCPay Server.
+BTCPay Server Apps には、サーバー本体のドメインとは異なるドメイン名を設定できます。たとえば、BTCPay Server が `mybtcpayserver.com` で動作していて、PoS app を `mybtcpayserver.com/apps/pos/abc123` ではなく `mybtcpaypos.com` に表示したい場合を考えます。
+まず、`mypointofsale.com` の [DNS 設定](../FAQ/Deployment.md#setting-up-dns-records)) を行い、BTCPay Server の外部 IP を向くようにしてください。
 
-Next, add additional domain or subdomain name(s) by adding a new environment variable through ssh:
+次に、ssh 経由で新しい環境変数を追加し、追加ドメインまたはサブドメイン名を設定します。
 
 ```bash
 sudo su -
@@ -59,7 +73,7 @@ export BTCPAY_ADDITIONAL_HOSTS="mybtcpaypos.com"
 . btcpay-setup.sh -i
 ```
 
-If you want to add multiple domains, you just need to update the env variables again:
+複数ドメインを追加する場合は、env 変数を再度更新します。
 
 ```bash
 sudo su -
@@ -67,88 +81,88 @@ export BTCPAY_ADDITIONAL_HOSTS="mybtcpaypos.com,subdomain.domain2.com,domain3.co
 . btcpay-setup.sh -i
 ```
 
-Finally, in Server Settings > Policies click on the `Map specific domains to specific apps`
+最後に、Server Settings > Policies で `Map specific domains to specific apps` をクリックします。
 
-![App domain mapping](../img/domainmapping1.png)
+![App ドメインマッピング](../img/domainmapping1.png)
 
-Enter domain name, select a previously created app from the drop down menu and click `save` to map the app to specific domain.
+ドメイン名を入力し、ドロップダウンから事前に作成した app を選択して `save` をクリックすると、そのドメインに app をマッピングできます。
 
-![App domain mapping](../img/domainmapping2.png)
+![App ドメインマッピング](../img/domainmapping2.png)
 
-If any of the additionally added hosts do not have a properly configured DNS, Let's Encrypt will not be able to renew the certificate for any of the domains, including the main domain. If you're using additional hosts and facing https issues with the main domain, try removing a domain from the `BTCPAY_ADDITIONAL_HOSTS` and re-run the setup. The https issue also occurs if [Dynamic DNS](/Deployment/DynamicDNS.md) has not been renewed and is configured as an additional host.
+追加したホストのいずれかで DNS が正しく設定されていないと、Let's Encrypt がメインドメインを含むすべてのドメインの証明書を更新できなくなります。追加ホストを使っていてメインドメインで https の問題が出る場合は、`BTCPAY_ADDITIONAL_HOSTS` からドメインを1つ削除し、セットアップを再実行してください。 [Dynamic DNS](/Deployment/DynamicDNS.md) の更新が切れていて追加ホストとして設定されている場合も、https の問題が発生します。
 
-If for any reason, you want an app to be on the same domain as your BTCPay Server homepage, you can select to display it on the root. In that case, no DNS configuration is needed, since your domain is already pointing properly. Using an app on the root domain of BTCPay Server means you'll have to access the login and other pages manually. The easiest way is to append a page route such as `/apps` or `/stores` to your root domain. (Ex: `mybtcpayserver.com/apps`). This will make navigation to your root displayed app easier, but navigation to other pages (such as Login) more challenging for users.
+何らかの理由で app を BTCPay Server ホームページと同じドメインに置きたい場合は、ルートに表示する設定を選べます。この場合、ドメインはすでに正しく向いているため DNS 設定は不要です。BTCPay Server のルートドメインで app を使うと、ログインやその他のページに手動でアクセスする必要があります。最も簡単なのは、ルートドメインに `/apps` や `/stores` などのページルートを付ける方法です（例: `mybtcpayserver.com/apps`）。これによりルート表示 app への移動は簡単になりますが、他ページ（ログインなど）への移動は利用者にとって難しくなる可能性があります。
 
-## How to redirect to another site after payment?
+## 支払い後に別サイトへリダイレクトするには？
 
-Point of Sale apps allow redirecting customers to any URL after an invoice is paid. Modify the redirect functionality in Apps > Settings
+Point of Sale app では、請求書が支払済みになった後に任意の URL へ顧客をリダイレクトできます。Apps > Settings でリダイレクト機能を変更してください。
 
-![Set Point of Sale Redirects](../img/point-of-sale/AppRedirect.png)
+![Point of Sale リダイレクト設定](../img/point-of-sale/AppRedirect.png)
 
-In PoS settings these are the following options for redirects on paid invoices:
+PoS 設定における支払済み請求書のリダイレクトオプションは次のとおりです。
 
 - **No** - _Without_ Redirect URL
-  - Invoice displays a prompt for the user to return to the PoS App (Default setting).
+  - 請求書に、ユーザーを PoS App に戻すための案内が表示されます（デフォルト設定）。
 - **No** - _With_ Redirect URL
-  - Invoice displays a prompt for the user to return to the provided App Redirect URL.
+  - 請求書に、指定した App Redirect URL に戻るための案内が表示されます。
 - **Yes** - _Without_ Redirect URL
-  - Paid invoice automatically redirects to the PoS App.
+  - 支払済み請求書が自動的に PoS App にリダイレクトされます。
 - **Yes** - _With_ Redirect URL
-  - Paid invoice automatically redirects to the provided App Redirect URL.
+  - 支払済み請求書が指定した App Redirect URL に自動リダイレクトされます。
 - **Use Store Settings**
-  - Enable/disable automatic redirect to the PoS App on the [store level](../FAQ/Stores.md#how-to-redirect-store-invoices-after-payment).
+  - [ストアレベル](../FAQ/Stores.md#how-to-redirect-store-invoices-after-payment) で、PoS App への自動リダイレクトを有効化/無効化します。
 
-Notes:
+補足:
 
-1. Provide the Redirect URL in the App Settings (above the redirect option).
-2. Expired or partially paid [invoices](../Invoices.md#invoice-statuses) will not redirect, even if the setting is enabled. This feature is for paid invoices only.
-3. Alternatively, redirect URLs can be specified via the API (i.e. Embedded PoS).
+1. Redirect URL は App Settings（リダイレクトオプションの上）で設定してください。
+2. 期限切れまたは一部支払い済みの [invoices](../Invoices.md#invoice-statuses) は、設定が有効でもリダイレクトされません。この機能は支払済み請求書専用です。
+3. 代わりに API（例: Embedded PoS）経由で redirect URL を指定することもできます。
 
-## How to integrate WooCommerce Store into a BTCPay Crowdfund app?
+## WooCommerce ストアを BTCPay の Crowdfund app に統合するには？
 
-If you want to provide a way for your backers to receive digital files and physical products, you can embed WooCommerce store into your Crowdfunding app.
+支援者にデジタルファイルや物理商品を提供したい場合、WooCommerce ストアを Crowdfunding app に埋め込めます。
 
-![Crowdfunding WooCommerce Integration Preview](../img/CrowdfundingWoo.gif)
+![Crowdfunding WooCommerce 統合プレビュー](../img/CrowdfundingWoo.gif)
 
-The following tutorial assumes you have a semi-advanced understanding of BTCPay, WordPress and WooCommerce.
+以下のチュートリアルは、BTCPay、WordPress、WooCommerce について中級程度の理解があることを前提としています。
 
-### Requirements
+### 要件
 
 1. Wordpress Website
 2. [WooCommerce Plugin](https://wordpress.org/plugins/woocommerce/)
 3. [BTCPay for WooCommerce Plugin](https://wordpress.org/plugins/btcpay-for-woocommerce/)
-4. [Storefront Theme](https://wordpress.org/themes/storefront/) (if you're using another theme, you may need to modify the CSS code to fit your theme.
+4. [Storefront Theme](https://wordpress.org/themes/storefront/)（別テーマを使っている場合、CSS をテーマに合わせて調整する必要がある場合があります）
 5. BTCPay Server
 
-**Important Note** Make sure that both your WooCommerce store and BTCPay Server **are on a same domain**. Some browsers have aggressive way of blocking the cross-domain embedded content. Quite specifically, Safari on iOS will destroy the cookie when the item is added, which will lead to empty cart. There's no other way to fix this besides having BTCPay and Woo on a same domain as subdomains at least.
+**重要** WooCommerce ストアと BTCPay Server が **同一ドメイン上** にあることを確認してください。ブラウザによってはクロスドメイン埋め込みコンテンツを強くブロックします。特に iOS の Safari では、商品追加時に cookie が破棄され、カートが空になることがあります。これを回避するには、少なくともサブドメインを含めて BTCPay と Woo を同一ドメインに配置する必要があります。
 
-#### Optional WordPress Plugins
+#### 任意の WordPress プラグイン
 
-The following plugins are recommended, but not required. You don't have to use them if you're an advanced WordPress user.
+以下のプラグインは推奨ですが必須ではありません。WordPress の上級ユーザーであれば使用しなくても構いません。
 
-- [Flexible Checkout Fields](https://wordpress.org/plugins/flexible-checkout-fields/) (to edit checkout and remove redundant checkout fields in Woo)
-- [WooCommerce Direct Checkout](https://wordpress.org/plugins/woocommerce-direct-checkout/) (remove redundant steps in the checkout process and make pledging quicker)
-- [Header and Footer Scripts](https://wordpress.org/plugins/header-and-footer-scripts/) (place `<script>` code here)
+- [Flexible Checkout Fields](https://wordpress.org/plugins/flexible-checkout-fields/)（Woo のチェックアウト編集や不要フィールド削除）
+- [WooCommerce Direct Checkout](https://wordpress.org/plugins/woocommerce-direct-checkout/)（チェックアウトの冗長ステップを減らし、支援を素早くする）
+- [Header and Footer Scripts](https://wordpress.org/plugins/header-and-footer-scripts/)（`<script>` コードをここに配置）
 
-### Instructions
+### 手順
 
-#### 1. Connecting two stores to a single wallet
+#### 1. 2つのストアを1つのウォレットに接続する
 
-In your BTCPay Server, create two separate stores:
+BTCPay Server で、次の2つのストアを別々に作成します。
 
-1. Store for WooCommerce
-2. Store for Crowdfunding app
+1. WooCommerce 用ストア
+2. Crowdfunding app 用ストア
 
-Add the **same extended public key derivation scheme**, so that both stores remain in sync.
+両方のストアが同期状態を保てるように、**同じ extended public key derivation scheme** を追加します。
 
-#### 2. Modifying CSS in WordPress
+#### 2. WordPress の CSS を変更する
 
-In the first step, you need to remove all the redundancies from the WordPress store and make it clean and simple, so that it embeds smoothly into the crowdfund app.
+最初のステップでは、WordPress ストアから冗長な要素を取り除き、crowdfund app にスムーズに埋め込めるよう、シンプルに整える必要があります。
 
-Place the following custom CSS code into WordPress. Appearance > Customize > **Custom CSS**
+以下のカスタム CSS を WordPress に追加します。Appearance > Customize > **Custom CSS**
 
 <details>
-  <summary>Click to view CSS</summary>
+  <summary>CSS を表示</summary>
 
 CSS file:
 
@@ -204,15 +218,15 @@ ul.products li.product .button {
 
 </details>
 
-The code above removes and hides all the unnecessary things from your store (headers, footers, breadcrumbs, and sorting). If you're not using the Storefront theme, you may need to modify it slightly. Besides removing, the bottom part of the code adds a bit of different styling which improves the checkout experience and makes it more KickStarter like. Feel free to modify colors. You should also remove the sidebar.
+上記コードは、ストア内の不要要素（ヘッダー、フッター、パンくず、ソート）を削除・非表示にします。Storefront テーマを使っていない場合は、少し調整が必要な場合があります。削除に加えて、コード後半では少し異なるスタイリングを追加し、チェックアウト体験を改善して KickStarter 風にしています。色は自由に変更してください。サイドバーも削除することを推奨します。
 
-To remove the redundant fields in WooCommerce checkout, use [Flexible Checkout Fields](https://wordpress.org/plugins/flexible-checkout-fields/).
+WooCommerce チェックアウトの不要フィールド削除には [Flexible Checkout Fields](https://wordpress.org/plugins/flexible-checkout-fields/) を使用してください。
 
-To speed up the checkout process use [WooCommerce Direct Checkout](https://wordpress.org/plugins/woocommerce-direct-checkout/) (remove redundant steps in the checkout process and make pledging quicker)
+チェックアウトを高速化するには [WooCommerce Direct Checkout](https://wordpress.org/plugins/woocommerce-direct-checkout/) を使います（冗長な手順を削減し、支援をより速く行えるようにします）。
 
-#### 2. Modifying WordPress functions
+#### 2. WordPress の functions を変更する
 
-Insert the following code at the bottom of your child theme's **functions.php** file.
+子テーマの **functions.php** ファイル末尾に次のコードを追加します。
 
 ```php
 // Code goes in theme functions.php
@@ -224,11 +238,11 @@ function wc_remove_frame_options_header() {
 }
 ```
 
-If you add the php code directly into Appearance>Editor>functions.php, next time you update the theme, the changes will be wiped. So, use either use a custom function plugin of some sort, or [create a child theme](https://docs.woocommerce.com/document/set-up-and-use-a-child-theme/) and always place the code at the bottom.
+`Appearance>Editor>functions.php` に直接 php コードを追加すると、次回テーマ更新時に変更が消えます。カスタム function プラグインを使うか、[子テーマを作成](https://docs.woocommerce.com/document/set-up-and-use-a-child-theme/) して、必ずその末尾にコードを配置してください。
 
-#### 3. Adding script to WordPress
+#### 3. WordPress にスクリプトを追加する
 
-Install [Header and Footer Scripts](https://wordpress.org/plugins/header-and-footer-scripts/) plugin. Add the following code to your header or footer. Settings > Headers and Footers Script, paste the code and save changes.
+[Header and Footer Scripts](https://wordpress.org/plugins/header-and-footer-scripts/) プラグインをインストールします。次のコードを header または footer に追加してください。Settings > Headers and Footers Script でコードを貼り付けて保存します。
 
 ```html
 <script>
@@ -243,21 +257,21 @@ Install [Header and Footer Scripts](https://wordpress.org/plugins/header-and-foo
 </script>
 ```
 
-This piece of code makes sure that each click on the product area adds it to cart and prevents users from viewing product description, which is completely unnecessary for our use-case.
+このコードにより、商品エリアのクリックでカート追加が行われ、今回の用途では不要な商品説明ページの表示を防げます。
 
-#### 4. Modifying the Crowdfunding app
+#### 4. Crowdfunding app を変更する
 
-In your BTCPay, Apps > Create New App > Crowdfunding.
+BTCPay で Apps > Create New App > Crowdfunding を開きます。
 
-In the description of your app, toggle the code and paste the following code and add `<iframe src="http://yourdomain/shop/"></iframe>`
-Replace it with the URL of your WooCommerce Store page.
+app の説明欄でコード表示を有効化し、次のコードを貼り付けて `<iframe src="http://yourdomain/shop/"></iframe>` を追加します。
+`yourdomain` は WooCommerce ストアページの URL に置き換えてください。
 
 ![EmbedIframeCrowdfund](../img/CrowdfundCodeEmbed.png)
 
-Next, paste the following code into the **Custom CSS Code** section of your crowdfunding app:
+次に、crowdfunding app の **Custom CSS Code** セクションに以下のコードを貼り付けます。
 
 <details>
-  <summary>Click to view CSS</summary>
+  <summary>CSS を表示</summary>
 
 CSS file:
 
@@ -301,5 +315,5 @@ CSS file:
 
 </details>
 
-One final thing, make sure to check (enable) **Count all invoices created on the store as part of the crowdfunding goal**
-Save the changes and preview the app.
+最後に、**Count all invoices created on the store as part of the crowdfunding goal** に必ずチェック（有効化）してください。
+変更を保存し、app をプレビューします。

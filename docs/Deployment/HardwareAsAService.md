@@ -1,19 +1,19 @@
 # Hardware As A Service
 
-Multiple entities or companies in the Bitcoin space provide **preinstalled hardware that include BTCPay Server**.
-Installed for example on Raspberry Pi or Rock64 devices, the BTCPay Server instance sits besides other software stacks.
+Bitcoin 領域の複数の団体や企業が、**BTCPay Server を含むプリインストール済みハードウェア**を提供しています。
+Raspberry Pi や Rock64 デバイスなどにインストールされ、BTCPay Server インスタンスは他のソフトウェアスタックと並んで動作します。
 
-This **Hardware As A Service** can be free or paid, and is mostly open-sourced for peer-review.
+この **Hardware As A Service** は無料または有料で提供され、ほとんどがピアレビュー可能なオープンソースです。
 
-They are suitable for technical users to speed up the installation and initial syncing process.
-Less-technical users will find the 1-click or plug-and-play systems of these services incredibly practical.
+技術的なユーザーにとっては、インストールと初期同期を高速化できるため有用です。
+技術に不慣れなユーザーにとっても、1-click や plug-and-play 方式は非常に実用的です。
 
 :::warning Please note:
-Hardware-as-a-Service products consist of multiple software tied together.
-The BTCPay Server community has no knowledge of how BTCPay Server integrates into these services, and cannot provide any support for these types of [Manual Deployments](./ManualDeployment.md). Please report bugs and issues directly to the entity that provided you with BTCPay Server inside their product.
+Hardware-as-a-Service 製品は、複数のソフトウェアを組み合わせた構成です。
+BTCPay Server コミュニティは、これらサービスで BTCPay Server がどのように統合されているかを把握しておらず、これらの [Manual Deployments](./ManualDeployment.md) 形式にはサポートを提供できません。バグや問題は、製品内で BTCPay Server を提供した事業者へ直接報告してください。
 :::
 
-Here you can find a non-exhaustive list of companies that provide such a service:
+このようなサービスを提供している企業の非網羅的なリストは次のとおりです。
 
 - [Nodl](https://www.nodl.it/)
 - [Hack0](https://www.dglab.com/en/works/hack0/)
@@ -24,5 +24,5 @@ Here you can find a non-exhaustive list of companies that provide such a service
 - [Citadel](https://runcitadel.space/)
 - [BitcoinpayBox](https://bitcoinpaybox.es/)
 
-Do you provide Hardware As A Service and are not listed here?
-Open an issue to [get added to this list](https://github.com/btcpayserver/btcpayserver-doc/issues)
+あなたが Hardware As A Service を提供していて、ここに掲載されていませんか？
+[このリストに追加](https://github.com/btcpayserver/btcpayserver-doc/issues)するために issue を作成してください。

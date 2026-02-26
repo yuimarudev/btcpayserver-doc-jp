@@ -1,52 +1,52 @@
-# Payouts
+# 払い出し (Payouts)
 
-The payout functionality is tied into the [Pull Payments](./PullPayments.md). This feature allows you to create payouts within your BTCPay.
-This feature allows you to process pull payment (refunds, salary payouts, or withdrawals).
+払い出し機能は [Pull Payments](./PullPayments.md) と連動しています。この機能を使うと、BTCPay 内で払い出しを作成できます。
+この機能により、pull payment（返金、給与払い出し、出金）を処理できます。
 
-## How does it work?
+## どのように動作しますか？
 
-We will go through two examples, one will be a Refund, and the other will be a salary payout.
+ここでは 2 つの例を見ていきます。1 つは返金、もう 1 つは給与払い出しです。
 
-### Example
+### 例
 
-Let's start with the refund example.
-The customer has bought an item in your store but sadly has to return the item. They want a refund.
-Within BTCPay, you can create a [Refund](./Refund.md) and provide the customer with the link to claim their funds.
-Whenever the customer has given their address and claimed the funds, it will be shown in the `Payouts`.
+まず返金の例から始めます。
+顧客があなたのストアで商品を購入したものの、残念ながら返品することになり、返金を希望しているとします。
+BTCPay では [Refund](./Refund.md) を作成し、顧客に資金受け取り用リンクを提供できます。
+顧客がアドレスを入力して資金を請求すると、その内容が `Payouts` に表示されます。
 
-The first status it has is `Awaiting Approval`.
-Store clerks can check if multiple ones are waiting, and after making the selection, you use the `Actions` button.
+最初のステータスは `Awaiting Approval` です。
+ストア担当者は待機中の項目を確認し、選択後に `Actions` ボタンを使用します。
 
-Options on the action button
+`Actions` ボタンのオプション
 
-- Approve selected payouts
-- Approve & send selected payouts
-- Cancel selected payouts
+- 選択した払い出しを承認 (`Approve selected payouts`)
+- 選択した払い出しを承認して送信 (`Approve & send selected payouts`)
+- 選択した払い出しをキャンセル (`Cancel selected payouts`)
 
-The next step is to `Approve & send selected payouts` as we want to refund the customer.
-Check the Customer's Address, shows the amount and if we want fees to be subtracted from the refund or not.
-Once you've done the checks, only signing the transaction is left.
+返金したいので、次の手順は `Approve & send selected payouts` です。
+顧客アドレス、金額、手数料を返金額から差し引くかどうかを確認します。
+確認が終われば、残る作業はトランザクションへの署名だけです。
 
-The customer now gets updated on the Claiming page. He can follow the transaction as he's provided with a link to a block explorer and his transaction.
-Once the transaction has been confirmed, and the status changes to Completed.
+顧客側の Claiming ページも更新されます。ブロックエクスプローラーへのリンクと取引情報が表示されるため、トランザクションを追跡できます。
+トランザクションが承認されると、ステータスは Completed に変わります。
 
-Now let's get into Salary payout, as this is driven from inside the store and not per the Customer's request.
-The underlying is the same; it uses the Pull payments. But instead of creating a refund, we will make a [Pull Payment](./PullPayments.md).
+次に給与払い出しの例です。これは顧客リクエスト起点ではなく、ストア内部から開始します。
+基本は同じで Pull payments を利用します。ただし返金を作成する代わりに [Pull Payment](./PullPayments.md) を作成します。
 
-Goto the `Pull Payments` tab in your BTCPay server.
-In the top right, click the `Create Pull Payment` Button.
+BTCPay Server の `Pull Payments` タブに移動します。
+右上の `Create Pull Payment` ボタンをクリックします。
 
-Now we are in the creation of the Payout, give it a name and the desired amount in desired currency, fill out the Description, so the employee knows what it's about.
-The next portion is similar to refunds. The employee fills out the Destination address and the amount he wants to claim from this Payout. He might decide to make it 2 separate claims, to different addresses, or even partly claim over lightning.
+払い出し作成画面で、名前、希望金額、希望通貨を入力し、説明を記入します。これで従業員は内容を把握できます。
+次の部分は返金と同様です。従業員は送金先アドレスと、この払い出しから請求したい金額を入力します。2 回に分けて別アドレスに請求したり、一部を Lightning で請求したりすることもできます。
 
-If there are multiple waiting Payouts, you can batch these to be signed and sent out. Once signed, the payouts move to the `In progress` tab and show the Transaction.
-When accepted by the network, the payout moves to the Completed tab.
-The completed tab is purely for historical purposes. It holds the processed Payouts and the transaction that belongs to it.
+待機中の Payouts が複数ある場合は、まとめて署名・送信できます。署名後、払い出しは `In progress` タブに移動し、トランザクションが表示されます。
+ネットワークに受理されると、払い出しは Completed タブへ移動します。
+Completed タブは履歴目的です。処理済み Payouts と、それに対応するトランザクションが保存されます。
 
-![BTCPay Server Payouts tab](./img/refunds/batch-payouts.jpg)
+![BTCPay Server の Payouts タブ](./img/refunds/batch-payouts.jpg)
 
-## Using Greenfield API
+## Greenfield API の利用
 
-As described in the [Pull Payments](./PullPayments.md#greenfield-api) Greenfield API allows for broader use of `Pull Payments`.
-The payout request will always go to the Payouts tab in your BTCPay server whenever the concept is used.
-By using the Greenfield API you could automate these requests, a future release of BTCPay server presumably will have automation options for payouts.
+[Pull Payments](./PullPayments.md#greenfield-api) で説明されているように、Greenfield API を使うと `Pull Payments` をより広く活用できます。
+この仕組みを使うと、払い出しリクエストは常に BTCPay Server の Payouts タブに表示されます。
+Greenfield API を使えば、これらのリクエストを自動化できます。将来の BTCPay Server リリースでは、払い出し自動化オプションが追加される可能性があります。

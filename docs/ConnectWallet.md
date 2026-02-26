@@ -1,50 +1,64 @@
-## Connect an existing wallet
+<!-- legacy-anchor-aliases -->
+<span id="connect-an-existing-wallet"></span>
+<!-- /legacy-anchor-aliases -->
+
+## 既存のウォレットを接続する
 
 ![Import Existing Wallet](./img/createwallet/ImportWallet.png)
 
-By using an existing wallet, you can receive payments to the external wallet, without BTCPay Server knowing the wallet's private key. If a malicious attacker hacked your server and obtained the xpub, they could observe your transaction history, but cannot access the funds.
+既存ウォレットを使うと、BTCPay Server にウォレットの秘密鍵を渡さずに外部ウォレットで支払いを受け取れます。悪意ある攻撃者がサーバーを侵害して xpub を取得した場合、取引履歴は観測できても資金にはアクセスできません。
 
-- [Connect hardware wallet (Recommended)](#connect-hardware-wallet)
-- [Import Wallet file (Recommended)](#import-wallet-file)
-- [Enter extended public key](#enter-extended-public-key)
-- [Scan wallet QR code](#scan-wallet-qr-code)
-- [Enter wallet seed (Not Recommended)](#enter-wallet-seed)
+- [ハードウェアウォレットを接続する（推奨）](#connect-hardware-wallet)
+- [ウォレットファイルをインポートする（推奨）](#import-wallet-file)
+- [拡張公開鍵を入力する](#enter-extended-public-key)
+- [ウォレットの QR コードをスキャンする](#scan-wallet-qr-code)
+- [ウォレットシードを入力する（非推奨）](#enter-wallet-seed)
 
-### Connect hardware wallet
+<a id="connect-hardware-wallet"></a>
 
-Hardware wallets provide a good balance between security and ease of use. If you already have a hardware wallet set up, you can easily use it with your BTCPay Server. Thanks to built-in [hardware wallet integration](HardwareWalletIntegration.md) the xpub key from the hardware wallet is automatically added to your BTCPay Server. The integration further allows you to spend funds received to your store within BTCPay's [internal wallet](./Wallet.md).
+### ハードウェアウォレットを接続する
+
+ハードウェアウォレットは、安全性と使いやすさのバランスが優れています。すでにセットアップ済みなら、BTCPay Server と簡単に連携できます。組み込みの [hardware wallet integration](HardwareWalletIntegration.md) により、ハードウェアウォレットの xpub キーが自動で BTCPay Server に追加されます。この連携により、BTCPay の [internal wallet](./Wallet.md) 内でストアに入金された資金を利用することもできます。
 
 :::tip
-If you own a hardware wallet, follow the instructions on how to [use a an existing hardware wallet with your BTCPay Server](HardwareWalletIntegration.md)
+ハードウェアウォレットをお持ちの場合は、[既存のハードウェアウォレットを BTCPay Server で使う手順](HardwareWalletIntegration.md) に従ってください。
 :::
 
-### Import Wallet file
+<a id="import-wallet-file"></a>
 
-Using an existing software wallet assumes that you already have an external wallet created and backed up. In theory, any mobile/desktop wallet that provides an extended public key should work, however, most wallets have technical limitations [(gap-limit)](./FAQ/Wallet.md#missing-payments-in-my-software-or-hardware-wallet) that may cause serious user-experience problems for you later on.
+### ウォレットファイルをインポートする
 
-For that reason, we recommend that you only use software wallets listed below.
+既存のソフトウェアウォレットを使う方法は、外部ウォレットがすでに作成・バックアップ済みであることを前提とします。理論上は拡張公開鍵を提供できるモバイル/デスクトップウォレットなら利用できますが、多くのウォレットには技術的制約（[(gap-limit)](./FAQ/Wallet.md#missing-payments-in-my-software-or-hardware-wallet)）があり、後で深刻なユーザー体験上の問題になる可能性があります。
+
+そのため、以下に挙げるソフトウェアウォレットのみの使用を推奨します。
 
 - [Electrum Wallet](./ElectrumWallet.md)
 - [Wasabi Wallet](./WasabiWallet.md)
 
-Click on the links above and you will be redirected to a step by step tutorial on how to set up each particular software wallet with BTCPay Server.
+上記リンク先には、それぞれのソフトウェアウォレットを BTCPay Server と連携する手順がステップごとに記載されています。
 
-To spend and manage the funds received to your external software wallet, you can use the [internal BTCPay Wallet](./Wallet.md) and sign a transaction with your private key or simply manage the funds in that external wallet itself.
+外部ソフトウェアウォレットで受け取った資金を使う・管理するには、[internal BTCPay Wallet](./Wallet.md) でトランザクションを作成し、秘密鍵で署名する方法か、外部ウォレット側でそのまま管理する方法が使えます。
 
-### Enter extended public key
+<a id="enter-extended-public-key"></a>
 
-This option can be useful if you want to modify [legacy wallet addresses](./FAQ/General.md#what-if-i-have-a-problem-paying-an-invoice) or if your wallet type is not compatible with the Hardware Wallet Integration (Vault).
+### 拡張公開鍵を入力する
 
-This method requires you to configure your wallet connection manually and should only be used if you have a good understanding of wallet extended public keys, account key paths and master fingerprints.
+この方法は、[レガシーウォレットアドレス](./FAQ/General.md#what-if-i-have-a-problem-paying-an-invoice) を調整したい場合や、ウォレット種別が Hardware Wallet Integration (Vault) に対応していない場合に有用です。
 
-### Scan wallet QR code
+この方法ではウォレット接続を手動で設定する必要があり、ウォレットの拡張公開鍵、アカウントキーパス、マスターフィンガープリントについて十分な理解がある場合にのみ使用してください。
 
-Some wallets allow you to create a wallet and export the extended public key (xPub) using a QR Code. You can easily connect your BTCPay Server to these types of wallets with the scan QR code option. The common [(gap-limit)](./FAQ/Wallet.md#missing-payments-in-my-software-or-hardware-wallet) issue is likely to occur using any xPub, unless the wallet provider has a way to adjust it.
+<a id="scan-wallet-qr-code"></a>
 
-To spend and manage the funds in your [internal BTCPay Wallet](./Wallet.md) you will need to provide the private key (used to generate the xpub QR Code) during transaction signing or simply receive funds through your BTCPay and manage the funds in the external wallet.
+### ウォレットの QR コードをスキャンする
 
-### Enter wallet seed
+一部のウォレットでは、ウォレットを作成して拡張公開鍵（xPub）を QR コードでエクスポートできます。スキャン QR コードオプションを使うことで、これらのウォレットを BTCPay Server に簡単に接続できます。ただし、ウォレット提供者側に調整手段がない限り、一般的な [(gap-limit)](./FAQ/Wallet.md#missing-payments-in-my-software-or-hardware-wallet) の問題はどの xPub でも発生する可能性があります。
 
-This option is useful if you have **no other way** of spending funds in a certain wallet. Such as an altcoin wallet that was previously compatible with the hardware wallet integration but no longer is. In general you should never type wallet seed words on any internet connected device.
+[internal BTCPay Wallet](./Wallet.md) で資金を使って管理するには、トランザクション署名時に（xpub QR コード生成に使った）秘密鍵が必要です。あるいは BTCPay で受け取った資金を外部ウォレット側で管理することもできます。
 
-This method requires you to configure your wallet connection manually and should only be used if you have a good understanding of wallet formats, extended public keys, account key paths and master fingerprints.
+<a id="enter-wallet-seed"></a>
+
+### ウォレットシードを入力する
+
+この方法は、特定のウォレットで資金を使う手段が**他にない場合**に有効です。例えば、以前はハードウェアウォレット連携に対応していたが現在は非対応のアルトコインウォレットなどです。一般に、インターネット接続されたデバイスへウォレットシード語を入力するべきではありません。
+
+この方法ではウォレット接続を手動で設定する必要があり、ウォレット形式、拡張公開鍵、アカウントキーパス、マスターフィンガープリントについて十分な理解がある場合にのみ使用してください。

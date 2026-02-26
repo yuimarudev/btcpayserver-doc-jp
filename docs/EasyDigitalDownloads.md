@@ -1,112 +1,112 @@
-# Easy Digital Downloads (EDD) integration
+# Easy Digital Downloads (EDD) 統合
 
 :::warning
-Please be aware that this integration is not maintained by the BTCPay Server team. If you have any feature requests or bug reports, please do so on [coinsnap repository](https://github.com/Coinsnap/Coinsnap-for-EasyDigitalDownloads) directly.
+この統合は BTCPay Server チームによって保守されていない点に注意してください。機能要望やバグ報告は、[coinsnap repository](https://github.com/Coinsnap/Coinsnap-for-EasyDigitalDownloads) に直接投稿してください。
 :::
 [![Easy Digital Downloads Bitcoin](https://img.youtube.com/vi/qAenGKJYM8I/mqdefault.jpg)](https://www.youtube.com/watch?v= qAenGKJYM8I)
-## Requirements
+## 要件
 
-Please ensure that you meet the following requirements before installing this plugin.
+このプラグインをインストールする前に、次の要件を満たしていることを確認してください。
 
 - PHP version 8.0 or newer
 - The cURL, gd, intl, json, and mbstring PHP extensions are available
-- A WordPress site with Easy Digital Downloads (EDD) installed ([installation instructions](https://easydigitaldownloads.com/docs/quickstart-guide/))
-  Note: you don't need the Pro version of EDD to get started
-- You have a BTCPay Server version 2.0.0 or later, either [self-hosted](/Deployment/README.md) or [hosted by a third-party](/Deployment/ThirdPartyHosting.md)
-- [You've a registered account on the instance](./RegisterAccount.md)
-- [You've a BTCPay store on the instance](./CreateStore.md)
-- [You've a wallet connected to your store](./WalletSetup.md)
+- Easy Digital Downloads (EDD) がインストールされた WordPress サイト（[installation instructions](https://easydigitaldownloads.com/docs/quickstart-guide/)）
+  注: 開始に EDD の Pro 版は不要です
+- [self-hosted](/Deployment/README.md) または [hosted by a third-party](/Deployment/ThirdPartyHosting.md) の BTCPay Server バージョン 2.0.0 以降を利用していること
+- [インスタンスに登録済みアカウントがあること](./RegisterAccount.md)
+- [インスタンス上に BTCPay ストアがあること](./CreateStore.md)
+- [ストアにウォレットが接続されていること](./WalletSetup.md)
 
-## 1. Install Bitcoin for Easy Digital Downloads Plugin
+## 1. Bitcoin for Easy Digital Downloads プラグインをインストール
 
-Thanks to [Coinsnap](https://coinsnap.io), with their **Bitcoin for Easy Digital Downloads** plugin you can also connect it to BTCPay Server.
+[Coinsnap](https://coinsnap.io) の **Bitcoin for Easy Digital Downloads** プラグインにより、BTCPay Server へ接続できます。
 
-There are three ways to install the plugin:
+プラグインのインストール方法は3つあります。
 
-- From within WordPress via the Admin Dashboard (recommended, see below)
+- WordPress の Admin Dashboard からインストール（推奨、以下参照）
 - [WordPress plugin directory](https://wordpress.org/plugins/coinsnap-for-easy-digital-downloads/)
 - [GitHub Repository](https://github.com/Coinsnap/Coinsnap-for-EasyDigitalDownloads)
 
-### 1.1 Install plugin from WordPress Admin Dashboard (recommended)
+### 1.1 WordPress Admin Dashboard からインストール（推奨）
 
-1. On left sidebar click _Plugins_ -> _Add New_.
-2. In Search, type "easy digital downloads btcpay".
-3. Click _Install now_ and then _Activate_.
+1. 左サイドバーで _Plugins_ -> _Add New_ をクリックします。
+2. Search に「easy digital downloads btcpay」と入力します。
+3. _Install now_ をクリックし、その後 _Activate_ をクリックします。
 
 ![Bitcoin for EDD: Plugin installation](./img/edd/edd-search-and-install-plugin.png)
 
-### 1.2 Download and install plugin from GitHub
+### 1.2 GitHub からダウンロードしてインストール
 
-Alternatively, you can download the plugin from GitHub and install it manually:
+別の方法として、GitHub からプラグインをダウンロードして手動でインストールできます。
 
-1. [Go to the plugin repository](https://github.com/Coinsnap/Coinsnap-for-EasyDigitalDownloads).
-2. Download the .zip by clicking on _Code_ -> _Download ZIP_.
-3. On WordPress admin dashboard click on _Plugins_ -> _Add Plugin_.
-4. Click on _Upload Plugin_ button and select the .zip file you just downloaded.
-5. Click _Install Now_ and then _Activate_.
+1. [プラグインリポジトリを開きます](https://github.com/Coinsnap/Coinsnap-for-EasyDigitalDownloads)。
+2. _Code_ -> _Download ZIP_ をクリックして .zip をダウンロードします。
+3. WordPress admin dashboard で _Plugins_ -> _Add Plugin_ をクリックします。
+4. _Upload Plugin_ ボタンをクリックし、先ほどダウンロードした .zip ファイルを選択します。
+5. _Install Now_ をクリックし、その後 _Activate_ をクリックします。
 
-## 2. Connecting EDD and BTCPay Server
+## 2. EDD と BTCPay Server を接続
 
-Bitcoin for EDD plugin is a **bridge between your BTCPay Server (payment processor) and your EDD store**.
-No matter if you're using a self-hosted or third-party solution, the connection process is identical.
+Bitcoin for EDD プラグインは、**BTCPay Server（決済プロセッサ）と EDD ストアをつなぐブリッジ**です。
+self-hosted でも第三者ホスティングでも、接続手順は同じです。
 
-### 2.1 Enable Bitcoin support in EDD
+### 2.1 EDD で Bitcoin サポートを有効化
 
 :::info
-After the installation above the payment gateway will be listed as "Coinsnap" in the EDD payment gateways.
+上記インストール後、EDD の payment gateways に「Coinsnap」として表示されます。
 :::
 
-1. In WordPress admin UI: click on _[Settings]_ inside your EDD (Downloads) section on the left sidebar
-2. Click on _"Payments"_ tab at the top
-3. Switch _Coinsnap_ toggle to enable it.
-4. Click _[Save Changes]_ button at the bottom.
+1. WordPress 管理 UI で、左サイドバーの EDD（Downloads）セクション内にある _[Settings]_ をクリックします。
+2. 上部の _"Payments"_ タブをクリックします。
+3. _Coinsnap_ のトグルを有効化します。
+4. 下部の _[Save Changes]_ ボタンをクリックします。
 
 ![Bitcoin for EDD: Enable payment gateway](./img/edd/edd-setup-enable-gateway.png)
 
-### 2.2 Configure Coinsnap gateway
+### 2.2 Coinsnap ゲートウェイを設定
 
-1. Make sure you are on the Coinsnap settings form, if not click on the _"Coinsnap" tab at the top.
-2. On the field "Payment provider" make sure you select _"BTCPay Server"_.
-3. You will see the _"BTCPay Server URL"_ input field, enter the URL to your BTCPay Server instance (e.g., `https://btcpay.example.com`).
-4. Now you can click on the _[Generate API key]_ button.
+1. Coinsnap 設定フォームを開いていることを確認します。違う場合は上部の _"Coinsnap"_ タブをクリックします。
+2. "Payment provider" フィールドで _"BTCPay Server"_ を選択します。
+3. _"BTCPay Server URL"_ 入力欄に、BTCPay Server インスタンスの URL（例: `https://btcpay.example.com`）を入力します。
+4. _[Generate API key]_ ボタンをクリックします。
 
-You will get redirected to the BTCPay Server instance and follow the steps below:
+BTCPay Server インスタンスへリダイレクトされるので、以下の手順に従います。
 
 ![Bitcoin for EDD: Start setup wizard](./img/edd/edd-setup-configure.png)
 
-### 2.3 On BTCPay Server: Authorize the plugin access
+### 2.3 BTCPay Server 側: プラグインアクセスを認可
 
-On your BTCPay Server instance:
+BTCPay Server インスタンスで次を実施します。
 
-1. You will see an authorization page where you need to select your store, in our case "EDD". Click on _[Continue]_.
+1. 認可ページでストアを選択します。ここでは「EDD」を選び、_[Continue]_ をクリックします。
    ![Bitcoin for EDD: Authorize select store](./img/edd/edd-setup-authorize-select-store.png)
-2. On the next screen you will see the permissions required by the plugin. Enter a label and click on _[Authorize app]_ button at the bottom.
+2. 次の画面でプラグインに必要な権限が表示されます。ラベルを入力し、下部の _[Authorize app]_ ボタンをクリックします。
    ![Bitcoin for EDD: Authorize plugin access](./img/edd/edd-setup-authorize-permissions.png)
-3. You will get redirected back to the EDD settings form. You should now see that the "Connection status" says BTCPay Server is connected and the "Store ID" and "API key" fields are filled already.
+3. EDD 設定フォームへ戻ります。"Connection status" が BTCPay Server 接続済みとなり、"Store ID" と "API key" フィールドが自動入力されているはずです。
    ![Bitcoin for EDD: Configure completed](./img/edd/edd-setup-completed.png)
-4. To be sure all has beens saved, click on _[Save Changes]_ button at the bottom.
+4. 保存を確実にするため、下部の _[Save Changes]_ ボタンをクリックします。
 
-Congratulations, you are now ready to sell your downloads for Bitcoin via BTCPay Server!
+これで、BTCPay Server 経由でダウンロード商品を Bitcoin 決済できるようになります。
 
-## 3. Testing the checkout
+## 3. チェックアウトのテスト
 
-Making a small test-payment from your store will give you peace of mind.
-Always make sure that everything is set up correctly before going live.
+ストアで少額のテスト決済を行うと安心です。
+本番公開前に、すべてが正しく設定されていることを必ず確認してください。
 
-On Checkout place your order:
+Checkout で注文を作成します。
 ![Bitcoin for EDD: Test purchase](./img/edd/edd-checkout.png)
 
-You will get redirected to BTCPay Server and qr-code for the invoice will be shown:
+BTCPay Server にリダイレクトされ、請求書の qr-code が表示されます。
 ![Bitcoin for EDD: Test purchase invoice](./img/edd/edd-checkout-invoice.png)
 
-After you paid the invoice you can go back to your site:
+請求書を支払った後、サイトへ戻れます。
 ![Bitcoin for EDD: Test purchase invoice paid](./img/edd/edd-checkout-invoice-paid.png)
 
-You will see the order confirmation page, with a completed payment satus:
+支払い完了ステータス付きの注文確認ページが表示されます。
 ![Bitcoin for EDD: Test purchase redirect order confirmation](./img/edd/edd-checkout-invoice-paid.png)
 
-On admin backend under "_Downloads_" -> _"Orders"_ you will also see the order is completed:
+管理画面の "_Downloads_" -> _"Orders"_ でも、注文が完了していることを確認できます。
 ![Bitcoin for EDD: Test purchase redirect order confirmation](./img/edd/edd-admin-order-completed.png)
 
-## Get support
-You can open an issue on [Coinsnap Github repository](https://github.com/Coinsnap/Coinsnap-for-EasyDigitalDownloads) or reach us on [Telegram](https://t.me/btcpayserver) or [Mattermost chat](http://chat.btcpayserver.org/).
+## サポート
+[Coinsnap Github repository](https://github.com/Coinsnap/Coinsnap-for-EasyDigitalDownloads) で issue を作成するか、[Telegram](https://t.me/btcpayserver) または [Mattermost chat](http://chat.btcpayserver.org/) で連絡できます。

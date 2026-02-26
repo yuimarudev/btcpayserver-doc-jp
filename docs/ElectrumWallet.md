@@ -1,115 +1,119 @@
-# Connecting Electrum Wallet to BTCPay Server
+<!-- legacy-anchor-aliases -->
+<span id="configuring-the-gap-limit-in-electrum"></span>
+<!-- /legacy-anchor-aliases -->
 
-This document explains **how to connect a desktop [Electrum Wallet](https://electrum.org/) to a BTCPay Server**.
+# ElectrumウォレットをBTCPay Serverに接続する
 
-**Word of caution** Electrum wallet relies on Electrum servers that are controlled by third-parties. Information, like public addresses, balances and the transacted amount can _potentially_ be leaked.
+このドキュメントでは、**デスクトップ版の[Electrum Wallet](https://electrum.org/)をBTCPay Serverに接続する方法**を説明します。
 
-To protect yourself against such leaks, set up [ElectrumX Server](./ElectrumX.md) or [Electrum Personal Server - EPS](https://github.com/chris-belcher/electrum-personal-server).
+**注意:** Electrumウォレットは、サードパーティが管理するElectrumサーバーに依存しています。公開アドレス、残高、取引金額などの情報が _漏洩する可能性_ があります。
 
-You can read about the differences between EPS and ElectrumX [here](https://www.reddit.com/r/Electrum/comments/7xb0lz/whats_the_difference_between_electrumx_server_and/).
+このような漏洩から身を守るには、[ElectrumX Server](./ElectrumX.md) または [Electrum Personal Server - EPS](https://github.com/chris-belcher/electrum-personal-server) をセットアップしてください。
 
-1. Create a Store in BTCPay Server
-2. [Download](https://electrum.org/#download) and install Electrum Wallet
+EPS と ElectrumX の違いは[こちら](https://www.reddit.com/r/Electrum/comments/7xb0lz/whats_the_difference_between_electrumx_server_and/)で確認できます。
 
-## Electrum Wallet Setup
+1. BTCPay Serverでストアを作成する
+2. [Electrum Wallet](https://electrum.org/#download)をダウンロードしてインストールする
 
-After the installation, open **Electrum Wallet** by clicking on the icon on your desktop.
+## Electrumウォレットのセットアップ
 
-### Quick Setup
+インストール後、デスクトップ上のアイコンをクリックして **Electrum Wallet** を開きます。
 
-The easiest way to setup your Electrum wallet with BTCPay is to import an a wallet file backup to your BTCPay Server.
+### クイックセットアップ
 
-1. Create a new Electrum Wallet
-2. In Electrum, File > Save Backup > Save in folder
-3. In BTCPay Server, Store > Settings > Setup > Import Wallet File > Choose File > Continue
-4. Go to Receive tab in Electrum.
-5. Compare the addresses in Electrum and BTCPay Server, they should match.
-6. Confirm the address match in BTCPay.
+BTCPayでElectrumウォレットを設定する最も簡単な方法は、ウォレットのバックアップファイルをBTCPay Serverにインポートすることです。
 
-## Step by Step
+1. 新しいElectrumウォレットを作成する
+2. Electrumで `File > Save Backup > Save in folder` を選ぶ
+3. BTCPay Serverで `Store > Settings > Setup > Import Wallet File > Choose File > Continue` を選ぶ
+4. Electrumの `Receive` タブを開く
+5. ElectrumとBTCPay Serverのアドレスを比較し、一致していることを確認する
+6. BTCPayでアドレスの一致を確認する
 
-The following setup guides you through setting up an entirely new Bech32(SegWit) Wallet in Electrum. If you already have a wallet skip to the Extended Public Key copying.
+## ステップバイステップ
 
-Firstly, give your wallet a name, for example, `BTCPay Server Wallet` and click `Next`.
+以下の手順では、Electrumでまったく新しい Bech32(SegWit) ウォレットを作成します。すでにウォレットをお持ちの場合は、Extended Public Key のコピー手順まで進んでください。
+
+まず、ウォレット名を入力します。例: `BTCPay Server Wallet`。その後 `Next` をクリックします。
 
 ![ElectrumWallet](./img/ElectrumWallet1.png)
 
-Choose `Standard wallet` and proceed by clicking the `Next`button.
+`Standard wallet` を選び、`Next` ボタンをクリックして進みます。
 
 ![ElectrumWallet](./img/ElectrumWallet2.png)
 
-Since we're creating a brand-new wallet,choose `Create a new seed` and `Next`
+今回は新規ウォレットを作成するため、`Create a new seed` を選択して `Next` をクリックします。
 
 ![ElectrumWallet](./img/ElectrumWallet3.png)
 
-From the multiple choice menu, select `SegWit` and `Next`
+選択メニューで `SegWit` を選び、`Next` をクリックします。
 
 ![ElectrumWallet](./img/ElectrumWallet4.png)
 
-**IMPORTANT NOTE:** If you're a merchant, instead of SegWit (Bech32), it's recommended to use SegWit wrapped (P2SH) format. [This guide](https://www.youtube.com/watch?v=-1DBJWwA2Cw) explains how to create P2SH wallet in Electrum that's more suited for merchants, due to compatability with legacy wallets customers use.
+**重要:** マーチャントの場合、SegWit (Bech32) ではなく SegWit wrapped (P2SH) 形式の利用を推奨します。[このガイド](https://www.youtube.com/watch?v=-1DBJWwA2Cw)では、顧客が使用するレガシーウォレットとの互換性の観点から、マーチャント向けのP2SHウォレット作成方法を説明しています。
 
-**IMPORTANT NOTE 2:** Write down your recovery words in the order you see them on the screen. Write them down a piece of paper and store it somewhere secure. Take your time and triple check each word. Do not store your seed in a digital format (photograph, text document). Whoever has the access to your seed can access your funds. Confirm that the seed has been properly backed up by re-entering it in the same order. Once the seed is validated, proceed to the next step.
+**重要 2:** 画面に表示された順番どおりにリカバリーワードを書き留めてください。紙に書き、必ず安全な場所に保管してください。時間をかけて各単語を3回確認してください。シードをデジタル形式（写真、テキストファイルなど）で保存しないでください。シードにアクセスできる人はあなたの資金にもアクセスできます。同じ順番で再入力し、バックアップが正しくできていることを確認してください。シードの検証が完了したら次の手順に進みます。
 
-Copy and paste your seed words to complete your wallet creation in Electrum. Your wallet must be unencrypted to import it into your BTCPay Server. Once you have completed the setup of your wallet in BTCPay you can always add password encryption later in Electrum.
+Electrumでウォレット作成を完了するために、シード語を入力します。BTCPay Serverにインポートするにはウォレットが暗号化されていない必要があります。BTCPayでのセットアップ完了後、必要に応じてElectrum側で後からパスワード暗号化を設定できます。
 
-Follow along in the video below on how to import into BTCPay Server.
+BTCPay Serverへのインポート手順は以下の動画でも確認できます。
 
 [![BTCPay Server - How to import wallet file](https://img.youtube.com/vi/kf3BHaQWSAc/mqdefault.jpg)](https://www.youtube.com/watch?v=kf3BHaQWSAc)
 
-### Alternative Setup
+### 代替セットアップ
 
-Instead of importing a wallet file you can instead transfer the public key to your BTCPay Server. This can be useful if your wallet is encrypted and you do not want to unencrypt it.
+ウォレットファイルをインポートする代わりに、公開鍵をBTCPay Serverへ転送する方法もあります。ウォレットが暗号化されており、復号したくない場合に便利です。
 
-1. Create a new Electrum Wallet
-2. In Electrum, Wallet > Wallet Information - copy the **Master Public Key**.
-3. In BTCPay Server, Store > Settings > Setup > Connect an existing wallet > Enter extended public key
-4. Go to Receive tab in Electrum.
-5. Compare the addresses in Electrum and BTCPay Server, they should match.
-6. Confirm the address match in BTCPay.
+1. 新しいElectrumウォレットを作成する
+2. Electrumで `Wallet > Wallet Information` を開き、**Master Public Key** をコピーする
+3. BTCPay Serverで `Store > Settings > Setup > Connect an existing wallet > Enter extended public key` を選ぶ
+4. Electrumの `Receive` タブを開く
+5. ElectrumとBTCPay Serverのアドレスを比較し、一致していることを確認する
+6. BTCPayでアドレスの一致を確認する
 
-When the wallet loads (it may take few moments), in the top menu, click on the `Wallet` and then`Information` .
+ウォレットの読み込み後（数秒かかる場合があります）、上部メニューの `Wallet` をクリックし、次に `Information` をクリックします。
 
 ![ElectrumWallet](./img/ElectrumWallet9.png)
 
-Select and **copy** the `Master Public Key`. This is the **public** key from which BTCPay will derive addresses.
+`Master Public Key` を選択して**コピー**します。これはBTCPayがアドレスを導出するための**公開**鍵です。
 
 ![ElectrumWallet](./img/ElectrumWallet10.png)
 
-Return to your BTCPay Server. Click on the `Bitcoin` in the left menu or `Set up a wallet` on your new dashboard.
+BTCPay Serverに戻ります。左側メニューの `Bitcoin` か、新しいダッシュボード上の `Set up a wallet` をクリックします。
 
 ![ElectrumWallet](./img/electrum/btcpayWalletImport1.jpg)
 
-Click `Connect an existing wallet`
+`Connect an existing wallet` をクリックします。
 
 ![ElectrumWallet](./img/electrum/btcpayWalletImport2.jpg)
 
-Now click on the `Enter extended public key` option to import your key.
+次に `Enter extended public key` をクリックして鍵をインポートします。
 
 ![ElectrumWallet](./img/electrum/btcpayWalletImport3.jpg)
 
-Paste the `Master Public Key` into derivation scheme field as it is, without adding anything else. Make sure that `Enabled` checkbox is ticked and click `Continue`.
+`Master Public Key` を derivation scheme フィールドへそのまま貼り付け、他は追加しないでください。`Enabled` チェックボックスがオンになっていることを確認して `Continue` をクリックします。
 
 ![ElectrumWallet](./img/createwallet/SetupWalletXpub.png)
 
-Return to the **Electrum Wallet**. Go to `Receive tab` which shows your wallet receiving address.
+**Electrum Wallet** に戻り、受取アドレスが表示される `Receive tab` を開きます。
 
-**Compare the address you see in Electrum Wallet to Addresses shown in BTCPay Server**. If there's a match, `continue`. If there is no match, double-check that you're actually pasting `Master Public Key`.
+**Electrum Walletで表示されるアドレスとBTCPay Serverに表示されるアドレスを比較してください**。一致していれば `continue` します。一致しない場合は、`Master Public Key` を正しく貼り付けているか再確認してください。
 
 ![ElectrumWallet](./img/ElectrumWallet11.png)
 
-### Configuring the Gap Limit in Electrum
+### ElectrumでGap Limitを設定する
 
-In the top menu, click on the `View` and then`Show Console` .
+上部メニューで `View` をクリックし、次に `Show Console` をクリックします。
 
 ![ElectrumWallet](./img/ElectrumWallet11a.png)
 
-Enter following commands in Electrum console and press `enter`on your keyboard.
+Electrumのコンソールで次のコマンドを入力し、キーボードの `enter` を押します。
 
 ```
  wallet.change_gap_limit(100)
 ```
 
-If you are running a version older than Electrum 4, also enter the following command and press 'enter'
+Electrum 4より古いバージョンを使用している場合は、次のコマンドも入力して `enter` を押してください。
 
 ```
 wallet.storage.write()
@@ -117,14 +121,14 @@ wallet.storage.write()
 
 ![ElectrumWallet](./img/ElectrumWallet12.png)
 
-Restart your Electrum and verify that the newly set gap limit is correct by entering in the console:
+Electrumを再起動し、コンソールで次を入力して新しい gap limit が正しく設定されていることを確認します。
 
 ```
 wallet.gap_limit
 ```
 
-There's no good answer to how much you should set the gap limit to. Most merchants set 100-200. If you're a big merchants with high transaction volume, you can try with even higher gap limit.
+gap limit をいくつに設定すべきかに絶対的な正解はありません。多くのマーチャントは 100-200 を設定します。取引量が多い大規模マーチャントであれば、さらに高い値を試すこともできます。
 
-For more details about the [Gap Limit, check the FAQ](./FAQ/Wallet.md#missing-payments-in-my-software-or-hardware-wallet).
+[Gap Limitの詳細はFAQ](./FAQ/Wallet.md#missing-payments-in-my-software-or-hardware-wallet)を確認してください。
 
-**Electrum and BTCPay Server are now connected**. Any payments received to your BTCPay will be visible in Electrum, where you can further spend them.
+**これでElectrumとBTCPay Serverの接続は完了です**。BTCPayで受け取った支払いはElectrumに表示され、そこから支出できます。

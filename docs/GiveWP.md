@@ -1,101 +1,101 @@
-# GiveWP donations integration
+# GiveWP 寄付連携
 
-## Requirements
+## 要件
 
-Please ensure that you meet the following requirements before installing this plugin.
+このプラグインをインストールする前に、次の要件を満たしていることを確認してください。
 
-- PHP version 8.0 or newer
-- The cURL, gd, intl, json, and mbstring PHP extensions are available
-- A WordPress site with GiveWP installed ([Installation instructions](https://givewp.com/getting-started/intro-to-givewp/)
-- You have a BTCPay Server version 2.0.0 or later, either [self-hosted](/Deployment/README.md) or [hosted by a third-party](/Deployment/ThirdPartyHosting.md)
-- [You've a registered account on the instance](./RegisterAccount.md)
-- [You've a BTCPay store on the instance](./CreateStore.md)
-- [You've a wallet connected to your store](./WalletSetup.md)
+- PHP バージョン 8.0 以上
+- cURL、gd、intl、json、mbstring の PHP 拡張が利用可能
+- GiveWP がインストールされた WordPress サイト（[インストール手順](https://givewp.com/getting-started/intro-to-givewp/)）
+- BTCPay Server バージョン 2.0.0 以降を使用していること（[セルフホスト](/Deployment/README.md) または [サードパーティホスト](/Deployment/ThirdPartyHosting.md)）
+- [インスタンスに登録済みアカウントがあること](./RegisterAccount.md)
+- [インスタンス上に BTCPay ストアがあること](./CreateStore.md)
+- [ストアにウォレットが接続されていること](./WalletSetup.md)
 
-## 1. Install BTCPay for GiveWP Plugin
+## 1. BTCPay for GiveWP プラグインをインストールする
 
-There are three ways to install the **BTCPay for GiveWP** plugin:
+**BTCPay for GiveWP** プラグインのインストール方法は3つあります。
 
-- From within WordPress via the Admin Dashboard (recommended, see below)
-- [WordPress plugin directory](https://wordpress.org/plugins/btcpay-for-givewp/)
+- WordPress 管理ダッシュボードから（推奨。以下参照）
+- [WordPress プラグインディレクトリ](https://wordpress.org/plugins/btcpay-for-givewp/)
 - [GitHub Repository](https://github.com/btcpayserver/givewp/releases)
 
-### 1.1 Install plugin from WordPress Admin Dashboard (recommended)
+### 1.1 WordPress 管理ダッシュボードからプラグインをインストール（推奨）
 
-1. On left sidebar click _Plugins_ -> _Add New_.
-2. In Search, type "BTCPay for GiveWP".
-3. Click _Install now_ and then _Activate_.
+1. 左サイドバーで _Plugins_ -> _Add New_ をクリックします。
+2. 検索欄で "BTCPay for GiveWP" と入力します。
+3. _Install now_ をクリックし、その後 _Activate_ をクリックします。
 
 ![BTCPay for GiveWP: Plugin installation](./img/givewp/givewp-install.png)
 
-### 1.2 Download and install plugin from GitHub
+### 1.2 GitHub からプラグインをダウンロードしてインストール
 
-Alternatively, you can download the plugin from GitHub and install it manually:
+別の方法として、GitHub からプラグインをダウンロードして手動でインストールできます。
 
-1. [Download the latest BTCPay plugin](https://github.com/btcpayserver/givewp/releases).
-2. On WordPress admin dashboard click on _Plugins_ -> _Add Plugin_.
-3. Click on _Upload Plugin_ button and select the .zip file you just downloaded.
-4. Click _Install Now_ and then _Activate_.
+1. [最新の BTCPay プラグインをダウンロード](https://github.com/btcpayserver/givewp/releases) します。
+2. WordPress 管理ダッシュボードで _Plugins_ -> _Add Plugin_ をクリックします。
+3. _Upload Plugin_ ボタンをクリックし、先ほどダウンロードした .zip ファイルを選択します。
+4. _Install Now_ をクリックし、その後 _Activate_ をクリックします。
 
-## 2. Connecting GiveWP and BTCPay Server
+## 2. GiveWP と BTCPay Server を接続する
 
-BTCPay for GiveWP plugin is a **bridge between your BTCPay Server (payment processor) and your donation forms**.
-No matter if you're using a self-hosted or third-party solution, the connection process is identical.
+BTCPay for GiveWP プラグインは、**BTCPay Server（決済プロセッサ）と寄付フォームをつなぐブリッジ**です。
+セルフホストでもサードパーティホストでも、接続手順は同じです。
 
-### 2.1 Create API key
+### 2.1 API キーを作成する
 
-On your BTCPay Server instance (ideally on a separate browser tab):
+BTCPay Server インスタンス側で（できれば別タブで）以下を実施します。
 
-1. Click on _[Account]_ -> _Manage Account_ on the bottom left
-2. Click on _"API Keys"_
-3. Click _[Generate Key]_ to select permissions.
-4. Click on the _"Select specific stores"_ link and select the GiveWP store you want to connect - for the following permissions: `View invoices`, `Create invoice`, `Modify invoices`, `Modify stores webhooks`, `View your stores`, `Create non-approved pull payments` (used for refunds (not implemented yet))
+1. 左下の _[Account]_ -> _Manage Account_ をクリック
+2. _"API Keys"_ をクリック
+3. _[Generate Key]_ をクリックして権限を選択
+4. _"Select specific stores"_ リンクをクリックし、GiveWP ストアを選択して次の権限を設定: `View invoices`, `Create invoice`, `Modify invoices`, `Modify stores webhooks`, `View your stores`, `Create non-approved pull payments`（返金用途。未実装）
    ![BTCPay for GiveWP: API Keys Permissions](./img/givewp/btcpay-api-key-1of2.png)
    ![BTCPay for GiveWP: API Keys Permissions](./img/givewp/btcpay-api-key-2of2.png)
-5. Click on the _[Generate API Key]_ button in the top right corner.
-6. Copy the generated API Key and Store ID to a safe place. You will need them in the next steps.
+5. 右上の _[Generate API Key]_ をクリック
+6. 生成された API Key と Store ID を安全な場所に保存します。次の手順で使用します。
    ![BTCPay for GiveWP: API Keys Save](./img/givewp/btcpay-api-key-success.png)
 
-### 2.2 Copy Store ID
+### 2.2 Store ID をコピーする
 
-Still on your BTCPay Server instance:
+引き続き BTCPay Server 側で:
 
-1. In the left sidebar, in the stores dropdown, select the store you want to connect to GiveWP.
-2. Still, in the left sidebar, click on _[Settings]_.
-3. You will see the _Store ID_ at the top of the page.
+1. 左サイドバーのストアドロップダウンで、GiveWP に接続したいストアを選択
+2. 同じく左サイドバーの _[Settings]_ をクリック
+3. ページ上部に _Store ID_ が表示されます。
    ![BTCPay for GiveWP: Copy Store ID](./img/givewp/btcpay-store-id.png)
-4. Copy the Store ID to a safe place. You will need it in the next steps.
+4. Store ID を安全な場所に保存します。次の手順で使用します。
 
-### 2.3 Enter API key and store ID in GiveWP settings
+### 2.3 GiveWP 設定に API キーと Store ID を入力する
 
-Back on your WordPress site:
+WordPress サイト側に戻って:
 
-1. Go to your WordPress dashboard.
-2. In the sidebar _GiveWP_ -> _Settings_ -> _Payment Gateways_.
-3. Click on the _BTCPay Gateway_ tab.
-4. Fill in the _BTCPay Server URL_ with your BTCPay Server instance URL (e.g., `https://btcpay.example.com`).
-5. Copy the store ID to your GiveWP _BTCPay Settings_
-6. Copy the generated API Key to your GiveWP _BTCPay Settings_ 
+1. WordPress ダッシュボードを開きます。
+2. サイドバーの _GiveWP_ -> _Settings_ -> _Payment Gateways_ へ移動します。
+3. _BTCPay Gateway_ タブをクリックします。
+4. _BTCPay Server URL_ に BTCPay Server の URL（例: `https://btcpay.example.com`）を入力します。
+5. GiveWP の _BTCPay Settings_ に Store ID を入力します。
+6. GiveWP の _BTCPay Settings_ に生成した API Key を入力します。
    ![BTCPay for GiveWP: Copy API Key](./img/givewp/givewp-settings.png)
-7. Click on _[Save changes]_ at the bottom of the page
-8. Make sure you see the notification "_BTCPay for GiveWP: BTCPay Server API credentials verified successfully." and "BTCPay for GiveWP: Webhook created successfully." at the top of the page.
+7. ページ下部の _[Save changes]_ をクリックします。
+8. ページ上部に "_BTCPay for GiveWP: BTCPay Server API credentials verified successfully._" と "BTCPay for GiveWP: Webhook created successfully." の通知が表示されることを確認します。
    ![BTCPay for GiveWP: Save BTCPay Settings form saved](./img/givewp/givewp-settings-success.png)
-9. Now click on the [Gateways] link/tab at the top of the page to return to the gateways overview.
+9. ページ上部の [Gateways] リンク/タブをクリックしてゲートウェイ一覧に戻ります。
 
-10. In the gateways overview, you should see the _BTCPay Server Gateway_ listed as an available payment gateway.
-11. Make sure to put a checkmark in the "Enabled" column to enable the BTCPay Server Gateway. You can also make it the default gateway by checking the "Default" column.   
+10. ゲートウェイ一覧に _BTCPay Server Gateway_ が利用可能な支払い方法として表示されているはずです。
+11. "Enabled" 列にチェックを入れて BTCPay Server Gateway を有効化します。"Default" 列にチェックを入れると既定ゲートウェイにもできます。
     ![BTCPay for GiveWP: Gateways Overview](./img/givewp/givewp-settings-gateway-default.png)
 
-Congratulations, you are now ready to accept donations via BTCPay Server on your GiveWP donation forms!
+これで GiveWP 寄付フォームで BTCPay Server による寄付受付の準備が完了です。
 
-## 3. Testing the donation payment
+## 3. 寄付決済をテストする
 
-Making a small test-donation from your store will give you peace of mind.
-Always make sure that everything is set up correctly before going live.
+ストアで少額のテスト寄付を行うと安心です。
+本番公開前には、設定が正しいことを必ず確認してください。
 
 ![BTCPay for GiveWP: Test Donation](./img/givewp/givewp-bitcoin-payment-option.png)
 ![BTCPay for GiveWP: Test Donation payment page](./img/givewp/givewp-payment-page.png)
 ![BTCPay for GiveWP: Test Donation](./img/givewp/givewp-donation-paid.png)
 
-## Get support
-You can open an issue on [our repository](https://github.com/btcpayserver/givewp) or reach us on [Telegram](https://t.me/btcpayserver) or [Mattermost chat](http://chat.btcpayserver.org/).
+## サポート
+[リポジトリ](https://github.com/btcpayserver/givewp) で issue を作成するか、[Telegram](https://t.me/btcpayserver) または [Mattermost chat](http://chat.btcpayserver.org/) でご連絡ください。

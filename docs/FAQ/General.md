@@ -3,199 +3,220 @@ tags:
   - refund
   - merchant refund
 ---
+<!-- legacy-anchor-aliases -->
+<span id="do-i-need-to-have-an-online-store-to-use-btcpay-server"></span>
+<span id="does-btcpay-need-myprivate-key"></span>
+<span id="does-btcpay-server-support-crypto-to-fiat-conversion"></span>
+<span id="how-can-i-backup-my-btcpay-server"></span>
+<span id="how-can-i-charge-for-using-my-btcpay-server-instance"></span>
+<span id="how-can-i-contribute-to-btcpay"></span>
+<span id="how-can-i-use-the-btcpay-server-api"></span>
+<span id="how-does-btcpay-create-a-new-address-for-each-invoice"></span>
+<span id="how-to-install-btcpay-server"></span>
+<span id="what-if-i-have-a-problem-paying-an-invoice"></span>
+<span id="what-if-i-have-a-problem-with-a-paid-invoice"></span>
+<span id="what-is-btcpay-server"></span>
+<span id="where-can-i-get-help-and-support"></span>
+<span id="where-to-find-btcpay-video-tutorials"></span>
+<span id="who-can-use-btcpay"></span>
+<span id="why-cant-i-just-give-my-bitcoin-address-to-a-buyer"></span>
+<span id="why-is-everyone-so-excited-about-btcpay"></span>
+<span id="why-should-i-choose-btcpay-over-other-processors"></span>
+<!-- /legacy-anchor-aliases -->
 
-# General FAQ
 
-This page contains general questions and answers about BTCPay Server. What it is, how it works, how to install it.
+# 一般 FAQ
+
+このページには、BTCPay Server に関する一般的な質問と回答をまとめています。何であるか、どのように動作するか、どのようにインストールするかを扱います。
 
 [[toc]]
 
-## What is BTCPay Server?
+## BTCPay Server とは何ですか？
 
-BTCPay Server is a free and open-source cryptocurrency payment processor which allows you to receive payments in Bitcoin (on-chain and via the Lightning Network) and altcoins directly, with no fees, transaction cost or a middleman.
+BTCPay Server は、無料かつオープンソースの暗号資産決済プロセッサです。仲介者なし、手数料なし、取引コストなしで、Bitcoin（オンチェーンおよび Lightning Network）とアルトコインの支払いを直接受け取れます。
 
-BTCPay is a non-custodial invoicing system which eliminates the involvement of a third-party. Payments with BTCPay go directly to your wallet, which increases the privacy and security. Your private keys are never required to receive payments to your BTCPay Server. There is [no address re-use](#how-does-btcpay-create-a-new-address-for-each-invoice) since each invoice uses a new address for receiving payments to your wallet.
+BTCPay はノンカストディアルな請求システムであり、第三者の関与を排除します。BTCPay の支払いはあなたのウォレットに直接届くため、プライバシーとセキュリティが向上します。BTCPay Server で支払いを受け取るために秘密鍵は不要です。各請求書で新しい受取アドレスを使用するため、[アドレスの再利用はありません](#how-does-btcpay-create-a-new-address-for-each-invoice)。
 
-## Why should I choose BTCPay over other processors?
+## 他の決済プロセッサではなく BTCPay を選ぶべき理由は？
 
-The most significant advantage of BTCPay over other processors is that it is entirely free and open-source, non-custodial software, created by the community. While most of the other processors hold your Bitcoins, BTCPay allows you to receive payments P2P, directly to your software or hardware wallet.
+BTCPay の最も大きな利点は、コミュニティによって作られた、完全に無料でオープンソースかつノンカストディアルなソフトウェアであることです。多くの他社プロセッサがあなたの Bitcoin を保管する一方で、BTCPay ではソフトウェアウォレットまたはハードウェアウォレットへ P2P で直接支払いを受け取れます。
 
-BTCPay is a self-hosted software. This means that you are your own payment processor. There are no subscriptions, no transaction fees. There's no third-party involvement which significantly increases the censorship-resistance, privacy, and security for you and your customers. Furthermore, BTCPay enables you to become a processor yourself, so that you can offer different packages and help spread the adoption locally or globally.
+BTCPay はセルフホスト型ソフトウェアです。つまり、あなた自身が決済プロセッサになります。サブスクリプションは不要で、取引手数料もありません。第三者の関与がないため、あなたと顧客の検閲耐性・プライバシー・セキュリティが大きく向上します。さらに BTCPay により、あなた自身がプロセッサとして異なるプランを提供し、ローカルまたはグローバルで普及を後押しできます。
 
-With BTCPay, you are your own bank.
+BTCPay では、あなた自身が銀行です。
 
-## Why is everyone so excited about BTCPay?
+## なぜ BTCPay にこれほど注目が集まっているのですか？
 
-The community is excited about BTCPay and often recommends it to merchants or content creators because it offers a direct way for store-owners and charities to receive Bitcoin payments, which significantly improves the privacy of the customers/donors.
+コミュニティが BTCPay に注目し、加盟店やコンテンツクリエイターに推奨する理由は、店舗オーナーや慈善団体が Bitcoin 支払いを直接受け取れるためであり、顧客や寄付者のプライバシーが大幅に向上するからです。
 
-BTCPay doesn't compromise on censorship-resistance, which is one of the main features of Bitcoin. Besides that, being free and open-source it gives an excellent opportunity for developers to build things and integrations on top of BTCPay.
+BTCPay は Bitcoin の主要な特性のひとつである検閲耐性を損ないません。さらに無料かつオープンソースであることから、開発者にとって BTCPay 上で開発や連携を行う優れた機会になります。
 
-## Who can use BTCPay?
+## BTCPay は誰が使えますか？
 
-BTCPay server is a feature-rich software with plenty of use-cases that can solve problems for different types of users. Merchants, content creators, lightning network users, exchanges, hosting providers and many others can find it useful. See the [Use Case page](../UseCase.md) for detailed breakdown of BTCPay use-cases.
+BTCPay Server は機能が豊富で、さまざまな利用者タイプの課題を解決できる多くのユースケースがあります。加盟店、コンテンツクリエイター、Lightning Network ユーザー、取引所、ホスティング事業者など、多くの人に有用です。詳細は [ユースケースページ](../UseCase.md) を参照してください。
 
-BTCPay is licensed under the [MIT License](https://github.com/btcpayserver/btcpayserver/blob/master/LICENSE).
+BTCPay は [MIT License](https://github.com/btcpayserver/btcpayserver/blob/master/LICENSE) の下で提供されています。
 
-## How to install BTCPay Server?
+## BTCPay Server をインストールするには？
 
-First take a look at the various deployment options and consider which one best suits your specific needs.
+まず、さまざまなデプロイオプションを確認し、自分の要件に最も合うものを検討してください。
 
-- [See all deployments](/Deployment/README.md)
+- [すべてのデプロイ方法を見る](/Deployment/README.md)
 
-If you still have questions, visit the [Deployment FAQ](/FAQ/Deployment.md)
+まだ質問がある場合は、[Deployment FAQ](/FAQ/Deployment.md) を参照してください。
 
-## Where to find BTCPay video tutorials?
+## BTCPay の動画チュートリアルはどこで見つかりますか？
 
-BTCPay Server instructional video guides can be found on the official BTCPay Server YouTube channel:
+BTCPay Server の解説動画は、公式 BTCPay Server YouTube チャンネルで確認できます。
 
-- [BTCPay YouTube channel](https://www.youtube.com/channel/UCpG9WL6TJuoNfFVkaDMp9ug/videos)
-- [Assorted playlist of all BTCPay YouTube videos](https://www.youtube.com/playlist?list=PL7b9Wt9shK2r-WXS6ysG4tafVQRu80biZ)
+- [BTCPay YouTube チャンネル](https://www.youtube.com/channel/UCpG9WL6TJuoNfFVkaDMp9ug/videos)
+- [BTCPay の YouTube 動画をまとめたプレイリスト](https://www.youtube.com/playlist?list=PL7b9Wt9shK2r-WXS6ysG4tafVQRu80biZ)
 
-## Do I need to have an online store to use BTCPay Server?
+## BTCPay Server を使うにはオンラインストアが必要ですか？
 
-You can use BTCPay even if you don't have an e-commerce store. You can launch your BTCPay Server and be the payment processor for your friends or local market. Another use-case is to accept donations through the POS (Point of Sale) app or payment buttons which can be copy-pasted as HTML snippets into any website.
+eコマースストアがなくても BTCPay は利用できます。BTCPay Server を立ち上げて、友人や地域マーケット向けの決済プロセッサとして運用できます。別のユースケースとして、POS（Point of Sale）アプリや支払いボタンを使って寄付を受け付けることもできます。これらは HTML スニペットとして任意のウェブサイトにコピー＆ペースト可能です。
 
-## Why can't I just give my Bitcoin address to a buyer?
+## なぜ購入者に自分の Bitcoin アドレスを渡すだけではだめなのですか？
 
-Re-using an address for receiving payments is a privacy issue. Providing a different address manually to each customer is not an optimal solution. Imagine having to send a unique e-mail to everyone that wants to pay you with cryptocurrency.
+受取アドレスの再利用はプライバシー上の問題です。顧客ごとに異なるアドレスを手動で渡すのは最適ではありません。暗号資産で支払いたい全員に、毎回一意のメールを送る状況を想像してください。
 
-BTCPay solves the address re-use issue. It automates the checkout process for the merchant by creating a new invoice with a unique address created from the merchant's wallet, each time a customer pays using BTCPay. If you are using an integration with an e-commerce store, BTCPay Server integrates into your checkout process, and customers can pay you in Bitcoin or altcoins in a few clicks, just like any other traditional payment option.
+BTCPay はアドレス再利用の問題を解決します。顧客が BTCPay で支払うたびに、加盟店のウォレットから作成した一意アドレス付きの新しい請求書を生成し、チェックアウト処理を自動化します。eコマース連携を使っている場合、BTCPay Server はチェックアウトに組み込まれ、顧客は通常の決済手段と同じように数クリックで Bitcoin やアルトコインで支払えます。
 
-After a customer makes a payment, the BTCPay Server software notifies your store that the order has been paid/completed. Depending on the e-commerce software you're using, it can also change the order status. All you have to worry about is getting items shipped, leave the invoicing and payment processing to BTCPay.
+顧客が支払いを行うと、BTCPay Server は注文が支払い済み／完了であることをストアに通知します。利用している eコマースソフトウェアによっては注文ステータスも変更されます。あなたは商品の発送に集中し、請求と決済処理は BTCPay に任せられます。
 
-## How does BTCPay create a new address for each invoice?
+## BTCPay は請求書ごとに新しいアドレスをどのように作成しますか？
 
-BTCPay Server includes an important feature which eliminates the known privacy issue of address re-use. It does this by providing a new address each time an invoice is requested for payment. This is all done automatically and the merchant does not need to keep track of which addresses belong to which wallet, store, etc. BTCPay Server organizes all the payment information in a detailed invoicing system for the merchant.
+BTCPay Server には、既知のプライバシー問題であるアドレス再利用を解消する重要な機能があります。支払い用の請求書が要求されるたびに新しいアドレスを提供することで実現します。これはすべて自動で行われ、加盟店がどのアドレスがどのウォレットやストアに属するかを管理する必要はありません。BTCPay Server は支払い情報を、加盟店向けの詳細な請求システムで整理します。
 
-The way it works is fairly simple. Merchants connect a wallet to each of their stores that they want to receive payments to. The invoices produced for store payments are linked directly to the merchant's connected wallet. The invoice addresses are derived from the [xpubkey](https://bitcointalk.org/index.php?topic=2828777.0) of the wallet associated with the store. The software only needs your extended public key of a wallet to produce new addresses for each payment. These addresses are monitored by BTCPay Server as they move through the blockchain. The status of the payments to those addresses are detailed in the merchant's invoice page for each store.
+仕組みは比較的シンプルです。加盟店は支払いを受けたい各ストアにウォレットを接続します。ストア支払い用に発行される請求書は、加盟店が接続したウォレットに直接紐づきます。請求書アドレスは、ストアに関連付けられたウォレットの [xpubkey](https://bitcointalk.org/index.php?topic=2828777.0) から導出されます。ソフトウェアが新しい受取アドレスを生成するために必要なのは、ウォレットの拡張公開鍵のみです。これらのアドレスは、ブロックチェーン上での移動を BTCPay Server が監視します。各ストアの請求書ページには、これらアドレスへの支払い状況が詳細に表示されます。
 
-## Does BTCPay need my private key?
+## BTCPay は秘密鍵を必要としますか？
 
-Private keys are not required for using BTCPay with an existing wallet. The fact that BTCPay Server does not require access to your master private key for on-chain transactions is a huge security advantage. Even if your server gets hacked, your funds from the on-chain transactions are always safe. Securing your on-chain funds comes down to [securing your wallet](https://btcinformation.org/en/secure-your-wallet). Using an [existing wallet with BTCPay Server](../WalletSetup.md#use-an-existing-wallet) only requires the public key from your wallet.
+既存ウォレットで BTCPay を使う場合、秘密鍵は不要です。オンチェーン取引のためにマスター秘密鍵へのアクセスを BTCPay Server が要求しないことは、大きなセキュリティ上の利点です。仮にサーバーが侵害されても、オンチェーン取引の資金は常に安全です。オンチェーン資金の保護は、最終的には [ウォレットの保護](https://btcinformation.org/en/secure-your-wallet) にかかっています。 [既存ウォレットを BTCPay Server で使う](../WalletSetup.md#use-an-existing-wallet) 場合は、ウォレットの公開鍵のみが必要です。
 
-It is possible to generate new wallets using BTCPay Server which are hot wallets stored on the server. If you have a lightning node, BTCPay technically has access to the keys (macaroons) of your Lightning funds as well. If these are features that you would like to use, be sure to understand the [security implications and the risks](../CreateWallet.md#security-implications) associated with these experimental features.
+BTCPay Server で新しいウォレットを生成することも可能で、これはサーバーに保管されるホットウォレットになります。Lightning ノードがある場合、BTCPay は技術的には Lightning 資金の鍵（macaroons）にもアクセスできます。これらの機能を使いたい場合は、実験的機能に伴う [セキュリティ上の影響とリスク](../CreateWallet.md#security-implications) を十分に理解してください。
 
-If you're using a Third-Party BTCPay host, you should be familiar with the [security concerns](../Deployment/ThirdPartyHosting.md#security-concerns) associated with private keys.
+Third-Party BTCPay ホストを利用している場合は、秘密鍵に関する [セキュリティ上の懸念](../Deployment/ThirdPartyHosting.md#security-concerns) を理解しておく必要があります。
 
-## Does BTCPay Server support crypto to fiat conversion?
+## BTCPay Server は暗号資産から法定通貨への換算に対応していますか？
 
-Fiat conversion is available through various BTCPay Server [plugins](https://plugin-builder.btcpayserver.org/public/plugins). Explore the available plugins to find solutions that meet your needs.
+法定通貨換算は、さまざまな BTCPay Server の [plugins](https://plugin-builder.btcpayserver.org/public/plugins) を通じて利用できます。利用要件に合うソリューションを、利用可能なプラグインから探してください。
 
-## What if I have a problem paying an invoice?
+## 請求書の支払いで問題がある場合は？
 
-If you have an issue paying a BTCPay Server invoice, it is likely do to one of the following reasons:
+BTCPay Server の請求書支払いで問題が発生する場合、主に以下の原因が考えられます。
 
-1. You are trying to pay using a non-segwit wallet and the merchant's invoices use Bech32 format.
+1. SegWit 非対応ウォレットで支払おうとしており、加盟店の請求書が Bech32 形式を使っている。
 
-This is a fairly common issue but can be confusing to the user who will likely receive wallet errors similar to `invalid address` when making a payment to an invoice. The solution for this (by the customer) is to use a [SegWit compatible wallet](https://en.bitcoin.it/wiki/Bech32_adoption) which supports sending to Bech32 addresses.
+これは比較的よくある問題ですが、支払い時に `invalid address` のようなエラーが表示されるため、利用者には分かりにくい場合があります。この場合（購入者側）の解決策は、Bech32 アドレス送金をサポートする [SegWit 対応ウォレット](https://en.bitcoin.it/wiki/Bech32_adoption) を使うことです。
 
-The solution for this (by the merchant) is to modify your extended public key (xPub) you are providing in your BTCPay Server store. To do this, you can append your xPub with `-[p2sh]` which will automatically modify your invoice addresses to allow both SegWit and non-SegWit wallets to make payments to your addresses. The BTCPay Server wallet will do this by wrapping the xPub's addresses with a Pay to Script Hash (p2sh) which produces more widely accepted addresses. It's important to understand how this can affect your wallet and the payments received before and after implementing this solution in your BTCPay Server store. Modifying your store's xPub will generate an entirely new wallet from the perspective of your BTCPay Server store. Please understand the following before blindly implementing the solution:
+この場合（加盟店側）の解決策は、BTCPay Server ストアで設定する拡張公開鍵（xPub）を変更することです。具体的には、xPub の末尾に `-[p2sh]` を付けると、請求書アドレスが自動的に変更され、SegWit／非 SegWit の両ウォレットが支払えるようになります。BTCPay Server ウォレットは、xPub のアドレスを Pay to Script Hash（p2sh）でラップすることで、より広く受け入れられるアドレスを生成します。この対策を導入する前後でウォレットや受取支払いにどのような影響があるかを理解することが重要です。ストアの xPub を変更すると、BTCPay Server ストアの観点では完全に新しいウォレットが生成されます。以下を理解したうえで実施してください。
 
-- If you are using a hot wallet generated by your BTCPay Server, modifying the xpub will not create new seed words and your previous hot wallet seed words will **no longer be stored** on the server.
-  - As a result, you will not be able to spend your new funds. Instead, create a new store and a new BTCPay Server hot wallet and select the option `Segwit wrapped (Compatible with old wallets)` address type, and migrate funds to this new store's wallet.)
-- If you imported your xPub from another wallet (such as a hardware or software wallet) your external wallet will not detect the payments after modifying your xPub.
-  - As a result, you will still be able to spend the funds using your BTCPay Server internal wallet using the Hardware Wallet Integration (Vault, recommended) or by signing with seed (not recommended).
-- Older funds and transactions which were previously displayed in your store's wallet will not appear anymore.
-  - As a result, you may want to consider creating a second store with the modified xpub, to retain the previous transaction history of your transactions.
+- BTCPay Server が生成したホットウォレットを使っている場合、xpub を変更しても新しいシードワードは作成されず、以前のホットウォレットのシードワードはサーバーに **保存されなくなります**。
+  - その結果、新しい資金を使えなくなります。代わりに新しいストアと新しい BTCPay Server ホットウォレットを作成し、`Segwit wrapped (Compatible with old wallets)` のアドレスタイプを選択して、新しいストアのウォレットへ資金を移行してください。）
+- 別のウォレット（ハードウェア／ソフトウェアウォレットなど）から xPub をインポートした場合、xPub 変更後は外部ウォレットが支払いを検出できなくなります。
+  - その結果、Hardware Wallet Integration（Vault、推奨）またはシード署名（非推奨）を使い、BTCPay Server 内部ウォレット経由で資金を使うことになります。
+- 以前ストアウォレットに表示されていた過去の資金や取引は表示されなくなります。
+  - その結果、変更後 xpub を使う2つ目のストアを作成し、過去の取引履歴を保持することを検討するとよいでしょう。
 
-Learn more about xpub formats and how to modify them [here](./Wallet.md#what-is-a-derivation-scheme). If you do not understand the options listed above, ask for clarification in the [community on Mattermost](https://chat.btcpayserver.org/).
+xpub 形式と変更方法の詳細は [こちら](./Wallet.md#what-is-a-derivation-scheme) を参照してください。上記オプションが不明な場合は、[Mattermost コミュニティ](https://chat.btcpayserver.org/) で確認してください。
 
-2. The invoice receives payment, but it is not paid in full.
+2. 請求書への支払いは受信しているが、全額が支払われていない。
 
-Users may try to pay an invoice from an exchange or other custodial service where part of the payment is deducted as a fee from the payment. A solution is to pay the amount due (provided that the invoice has not expired) or contact the merchant for a refund or a way to pay the remainder of payment due.
+取引所や他のカストディアルサービスから支払う場合、支払い額の一部が手数料として差し引かれることがあります。解決策は、不足分を支払う（請求書が期限切れでない場合）か、返金または不足分の支払い方法について加盟店へ連絡することです。
 
-## What if I have a problem with a paid invoice?
+## 支払い済み請求書で問題がある場合は？
 
 :::tip
-To request a refund from a merchant, you must contact the merchant directly! BTCPay Server has no relationship to the merchant you purchased the product or service from.
+加盟店に返金を依頼するには、加盟店へ直接連絡してください。BTCPay Server は、商品やサービスを購入した加盟店とは関係がありません。
 :::
 
-BTCPay Server is an open-source self-hosted software stack, not a company. The community and contributors behind BTCPay Server have no control over who uses the software or how they use it.
-If you paid an invoice to a merchant and have a problem with your order, you must contact the merchant directly to see what happened.
+BTCPay Server はオープンソースのセルフホスト型ソフトウェアスタックであり、企業ではありません。BTCPay Server のコミュニティとコントリビューターは、誰がソフトウェアを使うか、どのように使うかを制御できません。
+加盟店に請求書を支払い、注文に問題がある場合は、何が起きたのかを確認するため加盟店へ直接連絡する必要があります。
 
-Each merchant running the software controls their own store and the connected wallets that receive funds. The BTCPay Server community does not hold or have access to any funds of a store using the BTCPay Server software, only the merchant does.
+ソフトウェアを運用する各加盟店は、自分のストアと受取ウォレットを自ら管理します。BTCPay Server コミュニティは BTCPay Server を使うストア資金を保持せず、アクセスもできません。アクセスできるのは加盟店のみです。
 
-## Where can I get help and support?
+## どこでヘルプやサポートを受けられますか？
 
-BTCPay is an open-source project. It is not a company; there is no e-mail, live-chat or phone support. The software relies on a network of contributors and users to provide support.
+BTCPay はオープンソースプロジェクトです。企業ではないため、メール・ライブチャット・電話サポートはありません。ソフトウェアのサポートは、コントリビューターとユーザーのネットワークによって提供されています。
 
-If you encountered an issue or have a feature request, please [open an issue on GitHub](https://github.com/btcpayserver/btcpayserver/issues). For more general questions, join our [community on Mattermost](https://chat.btcpayserver.org/). Certain community members offer [premium (paid) support](../Support.md).
+問題に遭遇したり機能要望がある場合は、[GitHub で issue を作成](https://github.com/btcpayserver/btcpayserver/issues) してください。一般的な質問については、[Mattermost コミュニティ](https://chat.btcpayserver.org/) に参加してください。一部コミュニティメンバーは [有償サポート](../Support.md) を提供しています。
 
-## How can I contribute to BTCPay?
+## BTCPay に貢献するには？
 
-There are many ways in which you can contribute to an open-source project like BTCPay.
+BTCPay のようなオープンソースプロジェクトへの貢献方法は数多くあります。
 
-The easiest way is to use the software, provide feedback and report any bugs or issues you or your customers encounter. If you're a developer, you can help us develop and improve the software by contributing in any of the BTCPay Server [GitHub repositories](https://github.com/btcpayserver). Translating BTCPay into your native language on [Transifex](https://www.transifex.com/btcpayserver/btcpayserver/), helping us with documentation and writing are ways in which you can help us out, even if you're not a developer or tech-savvy. We appreciate every contributor to the project.
+最も簡単なのは、ソフトウェアを使い、フィードバックを提供し、あなたや顧客が遭遇したバグや問題を報告することです。開発者であれば、BTCPay Server の [GitHub リポジトリ](https://github.com/btcpayserver) でのコントリビュートを通じて開発・改善に参加できます。[Transifex](https://www.transifex.com/btcpayserver/btcpayserver/) で BTCPay を母国語へ翻訳すること、ドキュメントや執筆を手伝うことも、開発者や技術者でなくてもできる貢献です。すべてのコントリビューターに感謝しています。
 
-Check out the [contribute section](../Contribute/README.md) for all the ways to contribute and help improve the project.
+貢献方法の全体像は [contribute セクション](../Contribute/README.md) を確認してください。
 
-## How can I use the BTCPay Server API?
+## BTCPay Server API はどのように利用できますか？
 
-The original BTCPay Server API is compatible for the most part with [BitPay's API](https://bitpay.com/api/) to allow merchants to smoothly transition to using BTCPay if they prefer a free, open source, payment processing alternative.
+従来の BTCPay Server API は、主に [BitPay の API](https://bitpay.com/api/) と互換性があり、無料かつオープンソースの決済処理代替として BTCPay へ移行しやすくなっています。
 
-In 2020, BTCPay Server started releasing a new Greenfield API. This new API will co-exist with the original API and allow full usage of all BTCPay Server features, without requiring the UI. You can view the current [Greenfield API documentation](https://docs.btcpayserver.org/API/Greenfield/v1/).
+2020年に BTCPay Server は新しい Greenfield API の提供を開始しました。この API は従来 API と共存し、UI を使わずに BTCPay Server の全機能を利用できるようにします。現在の [Greenfield API ドキュメント](https://docs.btcpayserver.org/API/Greenfield/v1/) を参照してください。
 
-A BTCPay Server functionality that is not found in the Greenfield API documentation means it isn't fully implemented yet in the new API and users should use the original API instead. The discussion on the development of the new Greenfield API can be found [here](https://github.com/btcpayserver/btcpayserver/issues/1320).
+Greenfield API ドキュメントに存在しない BTCPay Server 機能は、新 API でまだ完全実装されていないことを意味します。その場合は従来 API を利用してください。新しい Greenfield API の開発議論は [こちら](https://github.com/btcpayserver/btcpayserver/issues/1320) で確認できます。
 
-## How to create a webhook ?
+## webhook を作成するには？
 
-Within BTCPay Server, it's reasonably easy to make a new `Webhook`
-While in the BTCPay Server Dashboard, go to `Store settings` and then click on the `Webhooks` tab.
+BTCPay Server では、新しい `Webhook` の作成は比較的簡単です。
+BTCPay Server ダッシュボードで `Store settings` に移動し、`Webhooks` タブをクリックします。
 
-![Create new Webhook](../img/FAQ/btcpayWebhookFAQ1.jpg)
+![新しい Webhook の作成](../img/FAQ/btcpayWebhookFAQ1.jpg)
 
-You're now in the view for creating a `Webhook`.
-Make sure you know your `Payload` URL and paste this into your BTCPay Server.
-While you pasted the `payload` URL, underneath it shows the `webhook` secret.
+`Webhook` 作成画面が開きます。
+`Payload` URL を把握したうえで、BTCPay Server に貼り付けてください。
+`payload` URL を貼り付けると、その下に `webhook` secret が表示されます。
 
-Copy the `webhook` secret and provide it on the endpoint.
-When everything has been set, you can toggle in BTCPay Server to `Automatical redelivery`.
-We will try to redeliver any failed delivery after 10 seconds, 1 minute, and up to 6 times after 10 minutes.
-You can toggle between every event or specify the events for your needs.
+`webhook` secret をコピーし、エンドポイント側に設定します。
+設定が完了したら、BTCPay Server で `Automatical redelivery` を切り替えられます。
+配信に失敗した場合は、10秒後、1分後、その後10分ごとに最大6回まで再配信を試みます。
+すべてのイベントを対象にするか、必要なイベントだけを指定できます。
 
-Be sure to enable the webhook and hit the `Add webhook` to save it.
+webhook を有効化し、`Add webhook` をクリックして保存してください。
 
-![Create new Webhook](../img/FAQ/btcpayWebhookFAQ2.jpg)
+![新しい Webhook の作成](../img/FAQ/btcpayWebhookFAQ2.jpg)
 
-## Webhook format is not BitPay compatible?
+## Webhook 形式は BitPay 互換ではないのですか？
 
-Webhooks are not meant to be compatible with bitpay API.
-There's two separate IPNs (in BitPay terms: "Instant Payment Notifications") in BTCPay Server.
+Webhooks は bitpay API との互換を目的としていません。
+BTCPay Server には、2種類の IPN（BitPay 用語では「Instant Payment Notifications」）があります。
 
 - Webhooks
 - notifications
 
-Where `Webhooks` are the Greenfield Events and `Notifications` are Bitpay events.
-Use `Notification URL` when creating an invoice through Bitpay.
+`Webhooks` は Greenfield Events で、`Notifications` は Bitpay events です。
+Bitpay 経由で請求書を作成する場合は `Notification URL` を使用してください。
 
-To read more on this question ; [Source](https://github.com/btcpayserver/btcpayserver/discussions/2282)
+この質問の詳細は [Source](https://github.com/btcpayserver/btcpayserver/discussions/2282) を参照してください。
 
-To read more on [Greenfield API ](https://docs.btcpayserver.org/API/Greenfield/v1/)
+[Greenfield API ](https://docs.btcpayserver.org/API/Greenfield/v1/) の詳細はこちらです。
 
-For guidance on how to process a `Webhook` in PHP, check out the following [example script](https://github.com/btcpayserver/btcpayserver-greenfield-php/blob/master/examples/webhook.php)
+PHP で `Webhook` を処理する方法は、次の [example script](https://github.com/btcpayserver/btcpayserver-greenfield-php/blob/master/examples/webhook.php) を参照してください。
 
-## How can I backup my BTCPay Server?
+## BTCPay Server をバックアップするには？
 
-It's possible to [create backups of your BTCPay Server](https://docs.btcpayserver.org/Docker/backup-restore/) instance and it's data. Please keep in mind that the backup scripts have not been thoroughly tested for all types of BTCPay Server setups and custom deployments. Be sure to use your backup to verify it properly recreates your setup, before relying on it.
+BTCPay Server インスタンスとそのデータは [バックアップ作成](https://docs.btcpayserver.org/Docker/backup-restore/) が可能です。ただしバックアップスクリプトは、すべての BTCPay Server 構成やカスタムデプロイで十分に検証されているわけではありません。本番運用で依存する前に、バックアップから正しく環境を再現できることを必ず確認してください。
 
-## How can I charge for using my BTCPay Server instance?
+## BTCPay Server インスタンスの利用に対して課金できますか？
 
-Currently charging users for using your BTCPay Server instance, whether it's a percentage of transactions or a registration fee, is not supported natively.
-Enabling such a feature could be possible, using the [Greenfield API](https://docs.btcpayserver.org/API/Greenfield/v1/) but will require moderate to extensive technical knowledge.
+現在、取引割合での課金や登録料など、BTCPay Server インスタンス利用者に課金する機能はネイティブではサポートされていません。
+[Greenfield API](https://docs.btcpayserver.org/API/Greenfield/v1/) を使えば実現できる可能性はありますが、中程度から高度な技術知識が必要です。
 
-## Stuck synching: "NBXplorer is synchronizing"
+## 同期が止まる: 「NBXplorer is synchronizing」
 
-In some cases, you may encounter NBXplorer getting stuck. The first thing to try in such a situation is to update it. If you are using the Docker deployment, simply run `./btcpay-update.sh` or go to `Server settings / Maintenance / Update`.
+場合によっては NBXplorer が停止したように見えることがあります。まず最初に試すべきは更新です。Docker デプロイを使っている場合は、`./btcpay-update.sh` を実行するか、`Server settings / Maintenance / Update` に進んでください。
 
-If, despite restarting, the problem persists and NBXplorer remains stuck, you may notice that the synch dialog appears as shown below, and the height does not change such as in this screenshot:
+再起動しても問題が続き NBXplorer が停止したままの場合、以下のように同期ダイアログが表示され、高さ（height）がこのスクリーンショットのように変化しないことがあります。
 
 ![NBXplorer-stuck](./../img/NBXplorer-stuck.png)
 
-This issue generally occurs when your server has been offline for an extended period, and your Bitcoin full node is pruned, which is the default setting in BTCPay Server Docker deployments.
+この問題は、サーバーが長期間オフラインだった場合に発生しやすく、かつ BTCPay Server Docker デプロイのデフォルト設定である pruned な Bitcoin フルノードを使っていると起こります。
 
-When the server restarts, the Bitcoin full node syncs before allowing NBXplorer to sync. However, after the full node has synced, it may have pruned the blocks that NBXplorer requires for syncing.
+サーバー再起動後、Bitcoin フルノードの同期が完了してから NBXplorer が同期を開始します。しかしフルノード同期後に、NBXplorer が必要とするブロックが prune されてしまう場合があります。
 
-The only way to resolve this situation is to force NBXplorer to skip the affected blocks. This means that it will not be able to see any transactions that occurred during that period. Nevertheless, your BTCPay Server will be back online.
+この状況を解消する唯一の方法は、NBXplorer に問題のブロックをスキップさせることです。これにより、その期間に発生した取引は表示できなくなりますが、BTCPay Server 自体はオンラインに復帰します。
 
 ```bash
 docker stop generated_nbxplorer_1
@@ -205,4 +226,4 @@ docker exec -ti generated_postgres_1 psql -U postgres -d nbxplorermainnet -c "DE
 docker start generated_nbxplorer_1
 ```
 
-Your server should now be synced and ready for use.
+サーバーは同期済みとなり、利用可能になるはずです。

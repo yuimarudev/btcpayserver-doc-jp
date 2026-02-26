@@ -1,27 +1,27 @@
-# Reverse proxy to Tor
+# Tor へのリバースプロキシ
 
-## Advantages
+## 利点
 
-- no port forwarding needed on the LAN of the host
-- encrypted connection
-- hides the IP of the host
+- ホストの LAN 側でポートフォワーディングが不要
+- 接続が暗号化される
+- ホストの IP を隠せる
 
-## Requirements
+## 要件
 
-- a Virtual Private Server (VPS) - eg. a minimal package on Lunanode for ~3.5$/month
-- root access on the VPS - you need to set up webserver and install packages
-- a domain or subdomain - this will be setup on the proxy webserver
+- Virtual Private Server (VPS) - 例: Lunanode の最小プランで約 3.5$/month
+- VPS の root 権限 - Web サーバーの設定とパッケージのインストールが必要
+- ドメインまたはサブドメイン - プロキシ Web サーバーに設定します
 
-Get the Tor `.onion` address of your BTCPay Server via the `Server settings > Services` page.
-See information in the "HTTP-based TOR hidden services" section.
+BTCPay Server の Tor `.onion` アドレスは `Server settings > Services` ページで取得します。
+"HTTP-based TOR hidden services" セクションの情報を参照してください。
 
-Note: There is also a [Docker version](#do-all-this-in-a-docker-container) of this setup.
+注: この構成には [Docker version](#do-all-this-in-a-docker-container) もあります。
 
-## VPS Setup
+## VPS セットアップ
 
-You will create a nginx reverse proxy and a `socat` service, which forwards requests to your BTCPay Server.
+`nginx` のリバースプロキシと、BTCPay Server へリクエストを転送する `socat` サービスを作成します。
 
-Login as root and install the required dependencies: (example assumes a Debian based system)
+root でログインし、必要な依存関係をインストールします（以下は Debian 系システムを想定）。
 
 ```bash
 # switch to root user (if not logged in as root)
@@ -32,9 +32,9 @@ apt update
 apt install -y certbot nginx socat tor
 ```
 
-### Socat setup
+### Socat のセットアップ
 
-Create the service file `/etc/systemd/system/http-to-socks-proxy@.service`:
+サービスファイル `/etc/systemd/system/http-to-socks-proxy@.service` を作成します。
 
 ```ini
 [Unit]
@@ -49,7 +49,7 @@ ExecStart=/usr/bin/socat tcp4-LISTEN:${LOCAL_PORT},reuseaddr,fork,keepalive,bind
 WantedBy=multi-user.target
 ```
 
-Create the configuration for the service in `/etc/http-to-socks-proxy/btcpayserver.conf`:
+`/etc/http-to-socks-proxy/btcpayserver.conf` にサービス設定を作成します。
 
 ```bash
 # create the directory
@@ -59,7 +59,7 @@ mkdir -p /etc/http-to-socks-proxy/
 nano /etc/http-to-socks-proxy/btcpayserver.conf
 ```
 
-Replace the `REMOTE_HOST` and adapt the ports if needed:
+`REMOTE_HOST` を置き換え、必要に応じてポートを調整します。
 
 ```conf
 PROXY_HOST=127.0.0.1
@@ -69,7 +69,7 @@ REMOTE_HOST=heregoesthebtcpayserverhiddenserviceaddress.onion
 REMOTE_PORT=80
 ```
 
-Create a symlink in `/etc/systemd/system/multi-user.target.wants` to enable the service and start it:
+`/etc/systemd/system/multi-user.target.wants` にシンボリックリンクを作成してサービスを有効化し、起動します。
 
 ```bash
 # enable
@@ -87,13 +87,13 @@ netstat -tulpn | grep socat
 # tcp        0      0 127.0.0.1:9081          0.0.0.0:*               LISTEN      951/socat
 ```
 
-### Webserver setup
+### Web サーバーのセットアップ
 
-#### Point domain to the VPS
+#### ドメインを VPS に向ける
 
-Create the A record on the DNS server of your domain/subdomain and point it to your VPS IP address.
+ドメイン/サブドメインの DNS サーバーで A レコードを作成し、VPS の IP アドレスを指定します。
 
-#### Prepare SSL and Let's Encrypt
+#### SSL と Let's Encrypt の準備
 
 ```bash
 # generate 4096 bit DH params to strengthen the security, may take a while
@@ -105,9 +105,9 @@ chgrp www-data /var/lib/letsencrypt
 chmod g+s /var/lib/letsencrypt
 ```
 
-#### nginx configuration: http
+#### nginx 設定: http
 
-Create a variable mapping to forward the correct protocol setting and check if the Upgrade header is sent by the client, e.g. `/etc/nginx/conf.d/map.conf`:
+正しいプロトコル設定を転送する変数マッピングを作成し、クライアントから Upgrade ヘッダーが送られているか確認します。例: `/etc/nginx/conf.d/map.conf`
 
 ```nginx
 map $http_x_forwarded_proto $proxy_x_forwarded_proto {
@@ -121,7 +121,7 @@ map $http_upgrade $connection_upgrade {
 }
 ```
 
-Create a config file for the domain, e.g. `/etc/nginx/sites-available/btcpayserver.conf`:
+ドメイン用の設定ファイルを作成します。例: `/etc/nginx/sites-available/btcpayserver.conf`
 
 ```nginx
 server {
@@ -143,9 +143,9 @@ server {
 }
 ```
 
-We will configure the https server part in the same config file once we obtained the SSL certificate.
+SSL 証明書を取得した後、同じ設定ファイル内で https サーバー部分を設定します。
 
-Enable the web server config by creating a symlink and restarting nginx:
+シンボリックリンクを作成して Web サーバー設定を有効化し、nginx を再起動します。
 
 ```bash
 ln -s /etc/nginx/sites-available/btcpayserver.conf /etc/nginx/sites-enabled/btcpayserver.conf
@@ -153,17 +153,17 @@ ln -s /etc/nginx/sites-available/btcpayserver.conf /etc/nginx/sites-enabled/btcp
 systemctl restart nginx
 ```
 
-#### Obtain SSL certificate via Let's Encrypt
+#### Let's Encrypt で SSL 証明書を取得
 
-Run the following command with adapted email and domain parameters:
+メールアドレスとドメインを調整して、次のコマンドを実行します。
 
 ```bash
 certbot certonly --agree-tos --email admin@mydomain.com --webroot -w /var/lib/letsencrypt/ -d btcpayserver.mydomain.com
 ```
 
-#### nginx configuration: https
+#### nginx 設定: https
 
-Now that we have a valid SSL certificate, add the https server part at the end of `/etc/nginx/sites-available/btcpayserver.conf`:
+有効な SSL 証明書を取得できたので、`/etc/nginx/sites-available/btcpayserver.conf` の末尾に https サーバー部分を追加します。
 
 ```nginx
 server {
@@ -208,16 +208,16 @@ server {
 }
 ```
 
-Restart nginx once more:
+もう一度 nginx を再起動します。
 
 ```bash
 systemctl restart nginx
 ```
 
-Now, visiting `btcpayserver.mydomain.com` should show your BTCPay Server instance.
+`btcpayserver.mydomain.com` にアクセスして、BTCPay Server インスタンスが表示されれば成功です。
 
 :::tip
-If you see an nginx error of "503 Service Temporarily Unavailable" or similar but your BTCPay Server is reachable otherwise, you need to make BTCPay Server aware of your new domain. You can do so by using environment variables (Docker based setup), log into your BTCPay Server via SSH:
+`503 Service Temporarily Unavailable` などの nginx エラーが表示される一方で BTCPay Server 自体には到達できる場合、新しいドメインを BTCPay Server に認識させる必要があります。環境変数（Docker ベースの構成）で設定できます。SSH で BTCPay Server にログインして次を実行してください。
 
 ```bash
 sudo su -
@@ -230,24 +230,24 @@ export BTCPAY_ADDITIONAL_HOSTS="btcpayserver.mydomain.com"
 
 ## Do all this in a Docker container
 
-Ready made [Docker image](https://hub.docker.com/r/cloudgenius/socator) ([Code](https://github.com/beacloudgenius/socator))
+準備済みの [Docker image](https://hub.docker.com/r/cloudgenius/socator)（[Code](https://github.com/beacloudgenius/socator)）
 
 ### SocaTor = SOCAT + TOR
 
-Based on [Docker-Socator](https://github.com/Arno0x/Docker-Socator)
+[Docker-Socator](https://github.com/Arno0x/Docker-Socator) ベース
 
-It uses socat to listen on a given TCP port (5000 in this example) and to redirect incoming traffic to a Tor hidden service specified through environment variables.
-It acts as a relay between the standard web and a hidden service on the Tor network.
-You can optionally restrict the IP addresses that are allowed to connect to this service by specifying an `ALLOWED_RANGE` environment variable and using CIDR notation.
+このイメージは、指定した TCP ポート（この例では 5000）で待ち受けるために socat を使い、環境変数で指定した Tor hidden service へ受信トラフィックを転送します。
+通常の Web と Tor ネットワーク上の hidden service の間を中継します。
+`ALLOWED_RANGE` 環境変数に CIDR 記法で指定すると、このサービスへ接続できる IP アドレスを制限することも可能です。
 
-Please note:
+注意:
 
-This container does not have any nginx component because Kubernetes provides for it.
+このコンテナには nginx コンポーネントは含まれていません。Kubernetes 側で提供されるためです。
 
-### Usage
+### 使い方
 
-Break free from cloud services providers limitations, secure and protect your bitcoin full node, connect that with a BTC Pay server, all behind TOR.
-Selectively expose the BTCPay Server payment gateway and API to clearnet using socat+tor running on the Internet.
+クラウドサービスプロバイダーの制約から解放され、Bitcoin フルノードを安全に保護し、BTCPay Server と接続し、すべてを TOR の背後で運用できます。
+インターネット上で稼働する socat+tor を使い、BTCPay Server の決済ゲートウェイと API を選択的にクリーンネットへ公開できます。
 
 ---
 
@@ -263,7 +263,7 @@ docker build -t cloudgenius/socator .
 docker push cloudgenius/socator
 ```
 
-#### Start the image in background (_daemon mode_) with IP address restriction
+#### IP アドレス制限付きでバックグラウンド（_daemon mode_）起動
 
 ```sh
 docker run -d \
@@ -275,7 +275,7 @@ docker run -d \
         cloudgenius/socator
 ```
 
-#### Start the image in foreground
+#### フォアグラウンド起動
 
 ```sh
 docker run --rm -ti \
@@ -286,11 +286,11 @@ docker run --rm -ti \
         cloudgenius/socator
 ```
 
-Now `http://localhost:5000` should show you the tor hidden service you specified in the above command.
+`http://localhost:5000` にアクセスすると、上記コマンドで指定した Tor hidden service が表示されるはずです。
 
-## Use that Docker container in a Kubernetes Cluster using these manifests
+## これらのマニフェストを使って Kubernetes クラスターでこの Docker コンテナを利用する
 
-These manifest assumes a typical Kubernetes cluster that exposes internal services (like socator running internallly at port 5000) to the clearnet/public internet via [Nginx Ingress](https://github.com/kubernetes/ingress-nginx) and provide automated Let's Encrypt TLS/SSL certificates via [cert-manager](https://github.com/jetstack/cert-manager).
+これらのマニフェストは、典型的な Kubernetes クラスターを想定しています。内部サービス（例: ポート 5000 で内部稼働する socator）を [Nginx Ingress](https://github.com/kubernetes/ingress-nginx) 経由でクリーンネット/パブリックインターネットへ公開し、[cert-manager](https://github.com/jetstack/cert-manager) により Let's Encrypt の TLS/SSL 証明書を自動発行します。
 
 Deployment manifest
 
@@ -366,7 +366,7 @@ spec:
       secretName: socator-tls
 ```
 
-## Resources
+## リソース
 
 - [nginx reverse proxy to .onion site in Tor network](https://itgala.xyz/nginx-reverse-proxy-to-onion-site-in-tor-network/)
 - [Tor-to-IP tunnel service](https://github.com/openoms/bitcoin-tutorials/blob/master/tor2ip_tunnel.md)

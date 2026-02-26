@@ -1,54 +1,54 @@
-# Introduction to Web Deployments
+# Web デプロイメントの概要
 
-We will take you through possible `Web Deployments` on this page and update the list as more providers offer BTCPay Server as a service.
-But what is a `Web deployment`?
-In short, a third-party hosted environment.
+このページでは、利用可能な `Web Deployments` を紹介します。BTCPay Server をサービスとして提供する事業者が増えたら、この一覧も更新していきます。
+では、`Web deployment` とは何でしょうか。
+簡単に言うと、サードパーティがホストする環境です。
 
-What do they do? They offer you the user, storage space, and compute power.
-And in particular, for this page, they offer hosted Bitcoin nodes.
+何をしてくれるのでしょうか。利用者にストレージ容量と計算リソースを提供します。
+特にこのページで扱うのは、ホスト型の Bitcoin ノードです。
 
-Now you don't have to buy, host and maintain your own hardware. The service provider takes care of this.
-This comes with the risk factor of trusting someone to host your bitcoin node and BTCPay Server on top of that.
-Every hoster comes with its own pros and cons. One might be cheaper, and the other maybe has better support levels.
-However, we will guide you through the ones we've listed and offer BTCPay Server solutions.
+これで、自分でハードウェアを購入・ホスト・保守する必要はありません。これらはサービス提供者が担います。
+その一方で、自分の bitcoin ノードとその上で動く BTCPay Server のホスティングを他者に任せるという信頼リスクがあります。
+各ホスティング事業者にはそれぞれ長所と短所があります。価格が安いところもあれば、サポート品質が高いところもあります。
+ここでは、掲載している各サービスと BTCPay Server ソリューションを順に案内します。
 
-Below you will find a short introduction to each service and a detailed guide on each of them.
+以下では、各サービスの簡単な紹介と個別の詳細ガイドを確認できます。
 
-## Known web deployments
+## 既知の Web デプロイメント
 
 ### LunaNode web-wizard
 
-[LunaNode](https://www.lunanode.com/) is a Canadian-based hosting provider that accepts Bitcoin payments and requires no personal identification except for a phone number verification.
+[LunaNode](https://www.lunanode.com/) はカナダ拠点のホスティング事業者で、Bitcoin 支払いに対応しており、本人確認は電話番号認証のみで利用できます。
 
-Their web wizard is one of the easiest ways to **deploy BTCPay Servers from a very user-friendly interface**.
-LunaNode will provide you with a generic domain for your server to get you started.
+同社の web wizard は、**非常に使いやすい UI から BTCPay Server をデプロイする最も簡単な方法の1つ**です。
+LunaNode は、開始時にサーバー用の汎用ドメインを提供します。
 
-For more details on `LunaNode` click [here](./LunaNode.md)
+`LunaNode` の詳細は [こちら](./LunaNode.md)
 
 ### Voltage Cloud
 
-[Voltage](https://www.voltage.cloud) is an infrastructure provider for Bitcoin.
-By focusing on Bitcoin exclusively, they can offer quality services to their clients.
-Automatically connect your Voltage Lightning node.
+[Voltage](https://www.voltage.cloud) は Bitcoin 向けのインフラプロバイダーです。
+Bitcoin に特化しているため、顧客に高品質なサービスを提供できます。
+Voltage の Lightning ノードを自動接続できます。
 
-For more details on `Voltage Cloud` click [here](./voltagecloud.md)
+`Voltage Cloud` の詳細は [こちら](./voltagecloud.md)
 
 ### Clovyr
 
-[Clovyr](https://clovyr.app/) is an application deployment service.
-They allow deploying services, including BTCPay Server, either to their own servers, or to a variety of other VPS providers, such as Digital Ocean, AWS, and Linode.
-For more details on `Clovyr` click [here](./Clovyr.md)
+[Clovyr](https://clovyr.app/) はアプリケーションデプロイサービスです。
+BTCPay Server を含む各種サービスを、自社サーバーまたは Digital Ocean、AWS、Linode など複数の VPS 事業者へデプロイできます。
+`Clovyr` の詳細は [こちら](./Clovyr.md)
 
 ## Elestio
 
-[Elestio](https://elest.io/) is a fully managed DevOps platform to deploy your code and open-source software. 
-They allow you to choose the cloud service provider of your choice such as Digital Ocean,  AWS, Linode and many others. Elestio takes care of the migrations, backups, version changes and security to help you deploy your BTCPay Server easily.
+[Elestio](https://elest.io/) は、コードやオープンソースソフトウェアをデプロイするためのフルマネージド DevOps プラットフォームです。 
+Digital Ocean、AWS、Linode など多数のクラウドサービスプロバイダーから選択できます。Elestio は移行、バックアップ、バージョン変更、セキュリティ対応を担い、BTCPay Server を簡単にデプロイできるよう支援します。
 
-For more details on `Elestio` click [here](https://elest.io/open-source/btcpay)
+`Elestio` の詳細は [こちら](https://elest.io/open-source/btcpay)
 
-## Missing deployments?
+## デプロイメントが不足していませんか？
 
-As we are a FOSS project, we might miss certain deployments.
-Found a deployment that is missing, and do you want it added or notified us?
-Join the [community chat](https://chat.btcpayserver.org/) on Mattermost by downloading [Mattermost app](https://mattermost.com/download/), or on [Telegram](https://t.me/btcpayserver) and tell us about it.
-You can also create an issue in the BTCPay server Documents on [Github](https://github.com/btcpayserver/btcpayserver-doc/issues).
+私たちは FOSS プロジェクトのため、取りこぼしているデプロイメントがあるかもしれません。
+未掲載のデプロイメントを見つけた場合、追加してほしい・通知したい場合はぜひ知らせてください。
+[Mattermost app](https://mattermost.com/download/) をダウンロードして Mattermost の [community chat](https://chat.btcpayserver.org/) に参加するか、[Telegram](https://t.me/btcpayserver) で連絡できます。
+また、BTCPay server Documents の [Github](https://github.com/btcpayserver/btcpayserver-doc/issues) で issue を作成することもできます。

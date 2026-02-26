@@ -1,14 +1,14 @@
-# BTCPay Magento Integration
+# BTCPay Magento 連携
 
-If you're using **Magento**, an open-source e-commerce platform written in PHP, you can **integrate BTCPay Server and use it as a payment processor**.
+**Magento**（PHP で書かれたオープンソースの e コマースプラットフォーム）を利用している場合、**BTCPay Server を統合して決済プロセッサーとして使用**できます。
 
 ## Magento 1
 
-1. Download [BTCPay Magento Plugin](https://github.com/btcpayserver/magento-plugin)
-2. Follow the [quick-start guide here](https://github.com/btcpayserver/magento-plugin/blob/master/GUIDE.md)
+1. [BTCPay Magento Plugin](https://github.com/btcpayserver/magento-plugin) をダウンロードします
+2. [こちらのクイックスタートガイド](https://github.com/btcpayserver/magento-plugin/blob/master/GUIDE.md) に従ってください
 
 ## Magento 2
 
-We recommend using the **Magento 2 module** developed by [Storefront.be](https://www.storefront.be), since it is the most feature-complete and robust. Storefront is also committed to maintaining the module as newer Magento versions are released.
+機能の充実度と堅牢性の観点から、[Storefront.be](https://www.storefront.be) が開発した **Magento 2 module** の利用を推奨します。Storefront は、新しい Magento バージョンの公開に合わせてこのモジュールを継続的にメンテナンスすることにもコミットしています。
 
-The Magento 2 module is available for free at [our Github repository](https://github.com/btcpayserver/magento2-plugin)
+Magento 2 module は [GitHub リポジトリ](https://github.com/btcpayserver/magento2-plugin) で無料で利用できます。

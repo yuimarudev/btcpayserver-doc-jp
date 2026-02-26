@@ -1,24 +1,28 @@
+<!-- legacy-anchor-aliases -->
+<span id="asset"></span>
+<!-- /legacy-anchor-aliases -->
+
 # Plugins
 
-BTCPay Server Plugins are written in C#.
-They extend the core functionality and run in the same context as the BTCPay Server code.
-As a prerequisite for developing a plugin, you should be familiar with the [local development](./LocalDev.md) process.
+BTCPay Server プラグインは C# で記述されます。
+これらはコア機能を拡張し、BTCPay Server のコードと同じコンテキストで実行されます。
+プラグイン開発の前提として、[ローカル開発](./LocalDev.md) の流れに慣れておく必要があります。
 
 [[toc]]
 
-## Setup of a new plugin
+## 新しいプラグインのセットアップ
 
-Create a folder for the BTCPay Server projects. It will contain at least:
+BTCPay Server 関連プロジェクト用のフォルダを作成します。最低でも次を含めます。
 
-- Your plugin repository
-- Your fork of the BTCPay Server repository
+- あなたのプラグインリポジトリ
+- BTCPay Server リポジトリのあなたの fork
 
-You can get started by cloning the [plugin template](https://github.com/btcpayserver/btcpayserver-plugin-template) or taking a look at [existing plugins](#resources).
-This tutorial uses the plugin template as an example — substitute the references with your own plugin or simply follow along with the template.
+まずは [plugin template](https://github.com/btcpayserver/btcpayserver-plugin-template) をクローンするか、[既存のプラグイン](#resources) を確認すると始めやすいです。
+このチュートリアルでは plugin template を例として使います。必要に応じて、参照箇所をあなた自身のプラグインに置き換えてください。
 
-The plugin repository should have BTCPay Server as a submodule.
-This way you are able to reference BTCPay Server as a dependency, so that you can use the existing core classes and modules.
-Start by first building BTCPay Server and then your plugin to check that the references are working:
+プラグインリポジトリには BTCPay Server をサブモジュールとして含める必要があります。
+これにより、BTCPay Server を依存関係として参照でき、既存のコアクラスやモジュールを利用できます。
+まず BTCPay Server、次にプラグインをビルドして、参照が正しく機能していることを確認します。
 
 ```bash
 # Clone the plugin template to a new directory called btcpayserver-my-plugin + make sure we get the contents of the submodule too
@@ -34,10 +38,10 @@ dotnet build btcpayserver
 dotnet build BTCPayServer.Plugins.Template
 ```
 
-To develop your plugin you will need the BTCPay Server solution as the context:
-Fork the [main repository](https://github.com/btcpayserver/btcpayserver) to your personal GitHub account and clone it onto your computer.
+プラグインを開発するには、BTCPay Server のソリューションを文脈として使える状態が必要です。
+[main repository](https://github.com/btcpayserver/btcpayserver) をあなたの GitHub アカウントに fork し、ローカルにクローンしてください。
 
-The folder structure should now look like this:
+この時点でフォルダ構成は次のようになります。
 
 ```bash
 |_ btcpayserver # your fork
@@ -46,10 +50,10 @@ The folder structure should now look like this:
   |_ BTCPayServer.Plugins.Template
 ```
 
-Before starting, rename `BTCPayServer.Plugins.Template` to the name of your plugin.
-Also rename the `BTCPayServer.Plugins.Template/BTCPayServer.Plugins.Template.csproj` file.
+開始前に `BTCPayServer.Plugins.Template` をあなたのプラグイン名に変更します。
+また、`BTCPayServer.Plugins.Template/BTCPayServer.Plugins.Template.csproj` ファイル名も変更してください。
 
-In the csproj file, customize the plugin information, for example:
+csproj ファイルでは、次のようにプラグイン情報をカスタマイズできます。
 
 ```xml
   <PropertyGroup>
@@ -59,9 +63,9 @@ In the csproj file, customize the plugin information, for example:
   </PropertyGroup>
 ```
 
-### Plugin reference
+### プラグイン参照
 
-In the forked repository you can [include your plugin in the solution](https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-sln#add) inside the [`Plugins` subdirectory](https://github.com/btcpayserver/btcpayserver/tree/master/Plugins/):
+fork したリポジトリ側では、[`Plugins` サブディレクトリ](https://github.com/btcpayserver/btcpayserver/tree/master/Plugins/) 内で [ソリューションにプラグインを追加](https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-sln#add) できます。
 
 ```bash
 # Enter the forked BTCPay Server repository
@@ -71,15 +75,16 @@ cd btcpayserver
 dotnet sln add ../btcpayserver-plugin-template/BTCPayServer.Plugins.Template -s Plugins
 ```
 
-This references the plugin project in the folder, that sits right next to your BTCPay Server fork.
+これにより、BTCPay Server の fork と同じ階層にあるプラグインプロジェクトを参照できます。
 
-:::tip The BTCPay Server dependency
-Your plugin is part of the BTCPay Server solution then, but keep the following in mind:
-The BTCPay Server version your plugin has as a dependency is the submodule in the plugin repository — not the one in the forked repository.
-You will need to update the submodule to access the latest version of BTCPay Server.
+:::tip BTCPay Server 依存関係について
+これであなたのプラグインは BTCPay Server ソリューションの一部になりますが、次の点に注意してください。
+プラグインが依存する BTCPay Server のバージョンは、fork 側ではなく、プラグインリポジトリにあるサブモジュールです。
+最新の BTCPay Server を利用するには、サブモジュールを更新する必要があります。
 :::
 
-To have the main project include the plugin whenever you run the app in development mode, you need to add the file `BTCPayServer/appsettings.dev.json`. It is ignored in the repository and references the local and built version of your plugin for debugging:
+開発モードでアプリを起動した際に常にメインプロジェクトへプラグインを読み込ませるには、`BTCPayServer/appsettings.dev.json` ファイルを追加します。
+このファイルはリポジトリでは無視され、デバッグ用にローカルでビルドしたプラグインを参照します。
 
 ```bash
 {
@@ -87,25 +92,25 @@ To have the main project include the plugin whenever you run the app in developm
 }
 ```
 
-You need to reference the built DLL file with the absolute path of the build version of your plugin on your local file system.
-If you want to reference multiple plugins, separate them using a semicolon.
+ローカルファイルシステム上の、プラグインのビルド済み DLL への絶対パスを指定する必要があります。
+複数のプラグインを参照したい場合は、セミコロンで区切ってください。
 
-Once that is set up, you should be able to build and run the app — see the startup message for potential problems.
-Your plugin should be included and also be ready for debugging.
+ここまで設定できればアプリをビルド・起動できるはずです。問題があれば起動メッセージを確認してください。
+プラグインが読み込まれ、デバッグ可能な状態になります。
 
-:::tip Building the whole solution
-You might want to setup a pre-build step in the solution, so that your plugins gets rebuild whenever you run the app.
-Do so by editing the run/debug configuration and choose the build the whole solution, instead of just the BTCPay Server project.
+:::tip ソリューション全体のビルド
+アプリ起動時にプラグインを毎回再ビルドしたい場合は、ソリューションに pre-build ステップを設定すると便利です。
+run/debug 設定を編集し、BTCPay Server プロジェクト単体ではなくソリューション全体をビルドするように設定してください。
 :::
 
-## Coding a plugin
+## プラグインの実装
 
-More information on the following topics will be provided soon.
-For now, these are the basics you should know about …
+以下のトピックについては、今後さらに情報を追加予定です。
+現時点では、最低限押さえておくべきポイントを説明します。
 
 ### Assets
 
-In order to reference assets (CSS, JavaScript and images), the plugin project needs to [embed a `Resources` folder](https://github.com/btcpayserver/btcpayserver-plugin-template/blob/master/BTCPayServer.Plugins.Template/BTCPayServer.Plugins.Template.csproj#L32) like this:
+アセット（CSS、JavaScript、画像）を参照するには、プラグインプロジェクト側で [`Resources` フォルダを埋め込み](https://github.com/btcpayserver/btcpayserver-plugin-template/blob/master/BTCPayServer.Plugins.Template/BTCPayServer.Plugins.Template.csproj#L32) 設定する必要があります。
 
 ```xml
 <ItemGroup>
@@ -114,7 +119,7 @@ In order to reference assets (CSS, JavaScript and images), the plugin project ne
 </ItemGroup>
 ```
 
-Then you can reference the assets in your views like this:
+その後、ビュー内では次のようにアセットを参照できます。
 
 ```html
 <img src="~/Resources/img/my.png" asp-append-version="true" />
@@ -126,12 +131,12 @@ Then you can reference the assets in your views like this:
 />
 ```
 
-A good example of this is the [Bitcoin Whitepaper plugin](https://github.com/Kukks/BTCPayServerPlugins/tree/master/Plugins/BTCPayServer.Plugins.BitcoinWhitepaper) which exposes the bitcoin whitepaper PDF on your BTCPay Server using embedded resources.
+良い実例として、埋め込みリソースを使って BTCPay Server 上で Bitcoin whitepaper PDF を公開する [Bitcoin Whitepaper plugin](https://github.com/Kukks/BTCPayServerPlugins/tree/master/Plugins/BTCPayServer.Plugins.BitcoinWhitepaper) があります。
 
 ### Database
 
-The main BTCPay Server database tables are part of the public schema.
-Plugins have their own database context and schema, named after the plugin:
+BTCPay Server のメインデータベーステーブルは public schema の一部です。
+プラグインは、プラグイン名に基づく独自のデータベースコンテキストと schema を持ちます。
 
 ```csharp
 public class MyPluginDbContextFactory : BaseDbContextFactory<MyPluginDbContext>
@@ -141,7 +146,7 @@ public class MyPluginDbContextFactory : BaseDbContextFactory<MyPluginDbContext>
 }
 ```
 
-Plugins can have their own data models and migrations:
+プラグイン側で独自のデータモデルと migration を持つこともできます。
 
 ```bash
 # Add a new migration once you defined a new model or updates
@@ -151,8 +156,8 @@ dotnet ef migrations add MoreData -p BTCPayServer.Plugins.Template -c PluginDbCo
 dotnet ef database update -p BTCPayServer.Plugins.Template -c PluginDbContext
 ```
 
-When inspecting the database (with `psql`), only the tables of the public schema are shown by default.
-If you want to also see and select the plugin tables, you need to extend the search path:
+データベースを（`psql` で）確認する際、デフォルトでは public schema のテーブルのみ表示されます。
+プラグインテーブルも表示・選択したい場合は、search path を拡張する必要があります。
 
 ```sql
 # list plugin schemas
@@ -167,9 +172,9 @@ SET search_path TO "BTCPayServer.Plugins.Template", public;
 
 ### UI Extension Points
 
-The extension points offer you ways to add your plugin views and partials to the UI.
-They get defined in the plugin base class.
-The following snippet shows how you can add a link to your plugin to the main navigation:
+extension point を使うと、プラグインのビューや partial を UI に追加できます。
+これらはプラグインのベースクラス内で定義します。
+以下の例では、メインナビゲーションにプラグインへのリンクを追加しています。
 
 ```csharp
 public class Plugin : BaseBTCPayServerPlugin
@@ -181,29 +186,29 @@ public class Plugin : BaseBTCPayServerPlugin
 }
 ```
 
-In this case, `header-nav` is the name of the extension point.
-You can find the available extension points by searching for the `vc:ui-extension-point` references inside the main app.
-For the `header-nav` the reference looks like this:
+この例では、`header-nav` が extension point の名前です。
+利用可能な extension point は、メインアプリ内で `vc:ui-extension-point` を検索すると確認できます。
+`header-nav` の参照は次のようになっています。
 
 ```csharp
 <vc:ui-extension-point location="header-nav" model="@Model" />
 ```
 
-The views and partials (i.e. `TemplatePluginHeaderNav.cshtml`) need to be located in the `Shared` folder of your `Views` or `Pages` directory, so that the main app can find and include them.
+ビューや partial（例: `TemplatePluginHeaderNav.cshtml`）は、メインアプリが検出して読み込めるよう、`Views` または `Pages` ディレクトリ内の `Shared` フォルダに配置する必要があります。
 
-:::tip Missing extension points
-If you would like to extend the UI but an extension point is not available yet, feel free to open an issue with a request to add it.
-We extend them as we move along, same with [actions and filters](#actions-and-filters) …
+:::tip extension point がない場合
+UI を拡張したいのに extension point がまだない場合は、追加リクエストとして issue を作成してください。
+[actions and filters](#actions-and-filters) と同様、必要に応じて順次拡張しています。
 :::
 
 ### Actions and Filters
 
-In addition to the extension points which hook into the UI, you can also use the following hooks to modify and extend behaviour:
+UI に差し込む extension point に加えて、次のフックを使って挙動を変更・拡張することもできます。
 
-- [Action](https://github.com/btcpayserver/btcpayserver/blob/master/BTCPayServer.Abstractions/Contracts/IPluginHookAction.cs): Extend the core functionality
-- [Filters](https://github.com/btcpayserver/btcpayserver/blob/master/BTCPayServer.Abstractions/Contracts/IPluginHookFilter.cs): Do something and also return data
+- [Action](https://github.com/btcpayserver/btcpayserver/blob/master/BTCPayServer.Abstractions/Contracts/IPluginHookAction.cs): コア機能を拡張する
+- [Filters](https://github.com/btcpayserver/btcpayserver/blob/master/BTCPayServer.Abstractions/Contracts/IPluginHookFilter.cs): 処理を実行しつつデータを返す
 
-As with the UI extension points, you can define them within the `Execute` method of the plugin base class:
+UI extension point と同様に、これらはプラグインベースクラスの `Execute` メソッド内で定義できます。
 
 ```csharp
 public class Plugin : BaseBTCPayServerPlugin
@@ -216,11 +221,11 @@ public class Plugin : BaseBTCPayServerPlugin
 }
 ```
 
-Find the available hooks by searching for `ApplyAction` and `ApplyFilter` calls inside the main app.
+利用可能なフックは、メインアプリ内で `ApplyAction` と `ApplyFilter` の呼び出しを検索すると見つけられます。
 
 ### Authorization and Permissions
 
-You can reuse the `AuthenticationSchemes` and `Policies` of the main app:
+メインアプリの `AuthenticationSchemes` と `Policies` を再利用できます。
 
 ```csharp
 // Authorize users via their cookie login
@@ -244,15 +249,15 @@ public class UIPluginController : Controller
 }
 ```
 
-To show certain parts of the UI depending on the permissions the user has, you can use the `permissions` view tag helper:
+ユーザーの権限に応じて UI の一部を出し分けるには、`permissions` ビュータグヘルパーを利用できます。
 
 ```html
 <li class="nav-item" permission="@Policies.CanModifyProfile"></li>
 ```
 
-#### Customizing Authorization
+#### Authorization のカスタマイズ
 
-You can also define your own `AuthenticationSchemes` and `Policies` within the `Execute` method of the plugin base class:
+独自の `AuthenticationSchemes` と `Policies` を、プラグインベースクラスの `Execute` メソッド内で定義することもできます。
 
 ```csharp
 public class Plugin : BaseBTCPayServerPlugin
@@ -277,7 +282,7 @@ public class Plugin : BaseBTCPayServerPlugin
 }
 ```
 
-The custom policies might look like this:
+カスタムポリシーは、例えば次のようになります。
 
 ```csharp
 public class PluginPolicies
@@ -298,7 +303,7 @@ public class PluginPolicies
 
 ### API
 
-In case your plugin has an API and you want to add its OpenAPI documentation, add a class inheriting from our `ISwaggerProvider`:
+プラグインに API があり、その OpenAPI ドキュメントも追加したい場合は、`ISwaggerProvider` を継承したクラスを追加してください。
 
 ```csharp
 public class PluginSwaggerProvider : ISwaggerProvider
@@ -322,45 +327,48 @@ public class PluginSwaggerProvider : ISwaggerProvider
 }
 ```
 
-As you can see it references the Swagger files in `Resources/swagger/v1` — you can add them just like other [assets](#asset).
-Once that is done, your plugin API documentation should appear on the instance `/docs` path alongside the [Greenfield API documentation](https://docs.btcpayserver.org/API/Greenfield/v1/).
+このとおり、`Resources/swagger/v1` の Swagger ファイルを参照します。これは他の [assets](#asset) と同じように追加できます。
+設定後は、プラグイン API ドキュメントが [Greenfield API documentation](https://docs.btcpayserver.org/API/Greenfield/v1/) と並んで、インスタンスの `/docs` パスに表示されるはずです。
 
-## Publishing the plugin
+## プラグインの公開
 
-The plugins are published via the [plugin builder](https://plugin-builder.btcpayserver.org/).
-You can sign up, build and submit new versions of your plugin using this web UI.
+プラグインは [plugin builder](https://plugin-builder.btcpayserver.org/) から公開されます。
+この Web UI を使ってサインアップし、プラグインの新バージョンをビルド・提出できます。
 
 ![Plugin Builder: Create a new plugin](../img/plugins/plugin-builder-create-plugin.png)
 
-Once you have a new version ready, you can create a new build.
-To do so, you will need to reference the Git repository of your plugin, as well as the branch and path of your plugin.
+新しいバージョンの準備ができたら、新しいビルドを作成できます。
+その際、プラグインの Git リポジトリ、ブランチ、プラグインのパスを指定する必要があります。
 
 ![Plugin Builder: Create a new build](../img/plugins/plugin-builder-create-build.png)
 
-The result will be a packaged version of your plugin in `prerelease` state.
-A version in prerelease can be modified just by rebuilding your plugin in the plugin builder.
+結果として、`prerelease` 状態のパッケージ版プラグインが生成されます。
+prerelease のバージョンは、plugin builder 上で再ビルドすることで更新できます。
 
-You can browse the prereleased plugin list on any BTCPay Server by going to `Server Settings > Policies`, check `Show plugins in pre-release` and `Save`.
+任意の BTCPay Server で `Server Settings > Policies` に移動し、`Show plugins in pre-release` を有効にして `Save` すると、prerelease プラグイン一覧を参照できます。
 
-Once you click the `Release` button on the build page, the package won't be in prerelease anymore and it is visible to everyone. Once the package is released, you won't be able to publish a new build with the same version number. So you will need to bump the `<Version>` of your plugin in the csproj before publishing any new adjustment to your plugin.
+ビルドページで `Release` ボタンを押すと、パッケージは prerelease ではなくなり、全員に表示されます。
+一度リリースしたパッケージは、同じバージョン番号では新しいビルドを公開できません。
+そのため、プラグインに調整を加えて再公開する前に、csproj の `<Version>` を上げる必要があります。
 
-## Important notice about plugins
+## プラグインに関する重要なお知らせ
 
-Plugins are developed by third parties. They need to be updated and maintained regularly, in addition to the BTCPay Server.
+プラグインは第三者によって開発されています。
+BTCPay Server 本体に加えて、継続的な更新と保守が必要です。
 
-**Use at Your Own Risk**: Plugins in this store are developed by independent third parties. These plugins have not undergone review by the BTCPay Server team.
+**自己責任で利用してください**: このストアのプラグインは、独立した第三者が開発したものです。これらのプラグインは BTCPay Server チームによるレビューを受けていません。
 
-**Disclaimer of Responsibility**: BTCPay Server contributors or Foundation are not liable for any harm, loss, or damage resulting from the installation or use of the plugins. Users assume full responsibility for their installation, use, familiarity with licensing and terms of service and maintenance.
+**責任の免責**: BTCPay Server のコントリビューターまたは Foundation は、プラグインの導入または利用により生じたいかなる損害・損失についても責任を負いません。インストール、利用、ライセンスや利用規約の理解、および保守についての責任は、すべてユーザーが負います。
 
-**No Official Endorsement**: Inclusion in the list of BTCPay Server plugins does not constitute an endorsement or guarantee of quality, safety, or compatibility.
+**公式な推奨ではありません**: BTCPay Server プラグイン一覧に含まれていることは、品質・安全性・互換性を保証または推奨するものではありません。
 
-**Due Diligence Advised**: We recommend users exercise caution and conduct their own research or consult the community before installing any plugin.
+**事前調査を推奨します**: プラグインを導入する前に、十分に注意し、独自に調査するかコミュニティへ相談することを推奨します。
 
-**Feedback and Reporting**: Should you experience issues with a plugin, please provide feedback or report concerns directly to the respective plugin developers.
+**フィードバックと報告**: プラグインで問題が発生した場合は、該当プラグインの開発者へ直接フィードバックまたは報告を行ってください。
 
 ## Resources
 
-For more information check out these repositories with existing plugins:
+詳細は、既存プラグインを提供している次のリポジトリを参照してください。
 
 - [kukks' plugins](https://github.com/Kukks/BTCPayServerPlugins)
 - [rockstardev's plugins](https://github.com/rockstardev/BTCPayServerPlugins.RockstarDev)
