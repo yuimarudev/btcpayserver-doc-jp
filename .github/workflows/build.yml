@@ -47,6 +47,5 @@ jobs:
         with:
           publish_dir: ./docs/.vuepress/dist
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          cname: docs.btcpayserver.org
           user_name: 'github-actions[bot]'
           user_email: 'github-actions[bot]@users.noreply.github.com'
